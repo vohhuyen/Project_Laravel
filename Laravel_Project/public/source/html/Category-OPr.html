@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <title>Design</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="/css/Category-OPr.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="style_full">
+        <nav class="nav_bar grid">
+          <ul class="nav_bar-item-left">
+              <li class="p-3 disnone-sm">
+                  <a href="#">
+                      <span>Become a Paint Seller</span>
+                  </a>
+              </li>
+              <li class="navbar-separate1 disnone-sm"></li>
+              <li class="p-3">
+                  <a href="#">
+                      <span>Connect</span>
+                      <i class="fa-brands fa-facebook-f"></i>
+                      <i class="fa-brands fa-twitter"></i>
+                  </a>
+              </li>
+          </ul>
+          <ul class="nav_bar-item-right">
+              <li class="p-3">
+                  <a href="#">
+                      <i class="fa-solid fa-bell"></i>
+                      <span class="disnone-sm">Notification</span>
+                  </a>
+              </li>
+              <li class="navbar-separate2 pt-3 disnone-sm"></li>
+              <li class="p-3">
+                  <a href="#">
+                      <i class="fa-sharp fa-regular fa-circle-question"></i>
+                      <span class="disnone-sm">Support</span>
+                  </a>
+              </li>
+              <li class="p-3 icon-user">
+                  <i class="fa-solid fa-user"></i>
+              </li>
+              <li class="navbar-separate1 disnone-sm"></li>
+              <li class="p-3 disnone-sm">
+                  <a href="./SIGNUP.html"><span>Register</span></a>
+              </li>
+              <li class="navbar-separate2 pt-3 disnone-sm"></li>
+              <li class="p-3 disnone-sm">
+                  <a href="./SIGNIN.html"><span>Login</span></a>
+              </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header_body grid">
+        <div class="image_logo">
+            <img src="/img/logo-removebgsmall.png" alt="logoPaint" class="logo">
+        </div>
+        <div class="search">
+            <i class="icon_search fa-solid fa-magnifying-glass"></i>
+            <input class="input_search" type="text" placeholder="   What do you need? ">
+        </div>
+        <div class="header_heard_cart">
+            <div>
+                <a href="#"><i class="icon_header_body fa-solid fa-heart" style="color: white;"></i></a>
+            </div>
+            <div>
+                <a href="./CART.html"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+        <div class="bar">
+            <button onclick="openListbar()"><i class="fa-solid fa-bars"></i></button>
+            <div class="listbar" id="listbar">
+                <li class="d-flex justify-content-between">
+                    <a href="#"><span class="icon_header_body fa-solid fa-heart" style="color: white;"></span>Storage</a>
+                    <button class="btn-close" onclick="closeListbar()"></button>
+                </li>
+                <li>
+                    <a href="./CART.html"><span class="icon_header_body fa-solid fa-cart-shopping"></span> Cart</a>
+                </li>
+                <li class="icon-user">
+                    <a href="#"><span class="icon_header_body fa-solid fa-user"></span>Login </a>
+                </li>
+            </div>
+        </div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="category my-5">
+        <b class="category_name">Men's Clothing</b>
+        <div class="category_infor">
+            <p>
+            Fashion and character meet personalization in essential pieces for every man's wardrobe
+            </p>
+            <p>
+                From causal tees and <a href="#">all-over-print sweatshirts</a> to workout gear and more - custom men's clothing offers a variety in color, shape, style, and form. 
+                Unleash your creativity with the top printing mathods like DTG anf sublimation on popular items like <a href="#">puffer jackets</a> for colder nights or
+                <a href="#">Hawaiian shirts</a> for summer vibes. Design print-on-demand men's clothing, and youf custom products will be a hit all year round - as wardrobe staples and online bestsellers.
+            </p>
+         </div>
+        <div class="category-opr">
+
+            <!-- btn1 -->
+            <button class="category-item" data-toggle="modal" data-target="#btn1">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <div class="modal fade" id="btn1" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">T-Shirts</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body row">
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+        </div>
+    </div>
+
+
+    <div class="category my-5">
+        <b class="category_name">Women's Clothing</b>
+        <div class="category_infor">
+            <p>
+                From everyday tees and sublimation <a href="#">sweatshirts</a> to skirts, <a href="#">bikinis</a>, 
+                workout gear, and more - custom women's clothing has a variety of items to choose from for every life event,
+                occasion, or daily use. Design and sell print-on-demand women's clothing to attract an audience all year round - with
+                cozy <a href="#">pajama pants</a>, custom dresses for bachelorettes, or stylish crop tops to pair with comfy jeans. 
+                Our Catalog has everything you need to create a unique collection of custom women's clothing to sell worldwide.
+            </p>
+         </div>
+         <div class="category-opr">
+
+            <!-- btn1 -->
+            <button class="category-item" data-toggle="modal" data-target="#btn2">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <div class="modal fade" id="btn2" tabindex="-1" role="dialog" aria-labelledby="btn2Title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">T-Shirts</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body row">
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                        <a href="#" class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-xs-2">
+                            <div class="OPr">
+                                <img src="/image/OPR.png" alt="#">
+                                <p class="nameOPr">Unisex Jersey Short Sleeve Tee</p>
+                                <p class="nameProvider">By Bella_Canvas</p>
+                                <p class="priceOPr">From USD 9.89</p>
+                                <p class="inforOPr">9 sizes . 108 colors . 21 print providers</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+        </div>
+    </div>
+
+    <div class="category my-5">
+        <b class="category_name">Kids' Clothing</b>
+        <div class="category_infor">
+            <p>Discover everything you need to create your own custom kids' clothing line. T-shirt, baby clothing, pants, sportwear, sweatshirts, baby swaddle blankets,
+                and footwear await your playful and whimsical designs. Ready to make print-on-demand kids' clothing that delights parents and makes little ones smile wide? Dive right in.
+            </p>
+         </div>
+        <div class="category-opr">
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+        </div>
+    </div>
+
+    <div class="category my-5">
+        <b class="category_name">Accessories</b>
+        <div class="category_infor">
+            <p>
+                Custom accessories are merchant favorites - they come in uniform sizes and fit everyone. You cam quickly design and sell custom accessories to fit any style or jump
+                on a rapidly emerging fashion trend.
+            </p>
+         </div>
+        <div class="category-opr">
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+        </div>
+    </div>
+
+
+    <div class="category my-5">
+        <b class="category_name">Home & Living</b>
+        <div class="category_infor">
+            <p>
+                Find function and fresh aesthetics with-customizable pieces made for everyday living
+            </p>
+         </div>
+        <div class="category-opr">
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+
+            <button class="category-item">
+                <b>T-Shirts</b>
+                <img class="img-category-item" src="/image/category-item.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Hoodie</b>
+                <img class="img-category-item" src="/image/category-item2.avif" alt="category-item">
+            </button>
+            <button class="category-item">
+                <b>Sweatshirts</b>
+                <img class="img-category-item" src="/image/category-item3.avif" alt="category-item">
+            </button>
+        </div>
+    </div>
+  </div>
+
+
+
+  <div class="footer">
+    <div class="footer_left">
+        <div class="follow">
+            <b>Subscribe to our newsletter !</b>
+            <input type="email" class="footer_email" placeholder="Email">
+            <input type="submit" value="Send" class="send">
+        </div>
+        <div class="language">
+            <b>language / currency</b>
+            <br>
+            <div class="language_select">
+                <input type="email" class="footer_language" placeholder="Vietnamese | VND">
+            </div>
+        </div>
+    </div>
+    <div class="down-line">
+      <div class="footer_middle1">
+          <b>Service</b>
+          <table class="service_footer">
+              <tr class="service_item">
+                  <td class="fa-solid fa-cart-shopping"></td>
+                  <td>Your order</td>
+              </tr>
+              <tr class="service_item">
+                  <td class="fa-light fa-question"></td>
+                  <td>Help</td>
+              </tr>
+              <tr class="service_item">
+                  <td class="fa-regular fa-envelope"></td>
+                  <td>Contact</td>
+              </tr>
+          </table>
+          <b>
+              <span>More</span>
+              <i class="fa-solid fa-chevron-down"></i>
+          </b>
+      </div>
+      <div class="footer_middle2">
+          <b>Company</b>
+          <table class="service_footer">
+              <tr class="service_item">
+                  <td>About Us</td>
+              </tr>
+              <tr class="service_item">
+                  <td>Sustainability</td>
+              </tr>
+              <tr class="service_item">
+                  <td>History</td>
+              </tr>
+          </table>
+          <b>
+              <span>More</span>
+              <i class="fa-solid fa-chevron-down"></i>
+          </b>
+      </div>
+      <div class="footer_right">
+          <b>Follow us on:</b>
+          <table class="service_footer">
+              <tr class="service_item">
+                  <td class="fa-brands fa-square-facebook"></td>
+                  <td>Facebook</td>
+              </tr>
+              <tr class="service_item">
+                  <td class="fa-brands fa-twitter"></td>
+                  <td>Twitter</td>
+              </tr>
+              <tr class="service_item">
+                  <td class="fa-brands fa-instagram"></td>
+                  <td>Instagram</td>
+              </tr>
+          </table>
+          <b>
+              <span>More</span>
+              <i class="fa-solid fa-chevron-down"></i>
+          </b>
+      </div>
+    </div>
+</div>
+<script>
+  var Listbar = document.getElementById("listbar");
+  function openListbar(){
+      Listbar.style = "display: block";
+  }
+  function closeListbar(){
+      Listbar.style = "display: none";
+  }
+
+
+</script>
+  </body>
+</html>
