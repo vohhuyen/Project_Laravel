@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <link rel="stylesheet" href="/css/CART.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="header">
+      <div class="style_full">
+        <nav class="nav_bar grid">
+          <ul class="nav_bar-item-left">
+              <li class="p-3 disnone-sm">
+                  <a href="#">
+                      <span>Become a Paint Seller</span>
+                  </a>
+              </li>
+              <li class="navbar-separate1 disnone-sm"></li>
+              <li class="p-3">
+                  <a href="#">
+                      <span>Connect</span>
+                      <i class="fa-brands fa-facebook-f"></i>
+                      <i class="fa-brands fa-twitter"></i>
+                  </a>
+              </li>
+          </ul>
+          <ul class="nav_bar-item-right">
+              <li class="p-3">
+                  <a href="#">
+                      <i class="fa-solid fa-bell"></i>
+                      <span class="disnone-sm">Notification</span>
+                  </a>
+              </li>
+              <li class="navbar-separate2 pt-3 disnone-sm"></li>
+              <li class="p-3">
+                  <a href="#">
+                      <i class="fa-sharp fa-regular fa-circle-question"></i>
+                      <span class="disnone-sm">Support</span>
+                  </a>
+              </li>
+              <li class="p-3 icon-user">
+                  <i class="fa-solid fa-user"></i>
+              </li>
+              <li class="navbar-separate1 disnone-sm"></li>
+              <li class="p-3 disnone-sm">
+                  <a href="./SIGNUP.html"><span>Register</span></a>
+              </li>
+              <li class="navbar-separate2 pt-3 disnone-sm"></li>
+              <li class="p-3 disnone-sm">
+                  <a href="./SIGNIN.html"><span>Login</span></a>
+              </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header_body grid">
+        <div class="image_logo">
+            <img src="/img/logo-removebgsmall.png" alt="logoPaint" class="logo">
+        </div>
+        <div class="search">
+            <i class="icon_search fa-solid fa-magnifying-glass"></i>
+            <input class="input_search" type="text" placeholder="   What do you need? ">
+        </div>
+        <div class="header_heard_cart">
+            <div>
+                <a href="#"><i class="icon_header_body fa-solid fa-heart" style="color: white;"></i></a>
+            </div>
+            <div>
+                <a href="./CART.html"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+        <div class="bar">
+            <button onclick="openListbar()"><i class="fa-solid fa-bars"></i></button>
+            <div class="listbar" id="listbar">
+                <li class="d-flex justify-content-between">
+                    <a href="#"><span class="icon_header_body fa-solid fa-heart" style="color: white;"></span>Storage</a>
+                    <button class="btn-close" onclick="closeListbar()"></button>
+                </li>
+                <li>
+                    <a href="./CART.html"><span class="icon_header_body fa-solid fa-cart-shopping"></span> Cart</a>
+                </li>
+                <li class="icon-user">
+                    <a href="#"><span class="icon_header_body fa-solid fa-user"></span>Login </a>
+                </li>
+            </div>
+        </div>
+    </div>
+  </header>
+
+      <section class="section grid">
+        <div class="section_left">
+          <div class="section_header">
+            <ul class="nav_bar-item-left">
+              <li>
+                <b class="title">YOUR CART</b>
+              </li>
+              <li>
+                <span class="title_item">4 products</span>
+              </li>
+              <li class="navbar-separate3"></li>
+              <li>
+                <span class="title_item">$107,91</span>
+              </li>
+            </ul>
+            <div class="box_message">Free shipping when buying from 5 products - and many other offers</div>
+            <div class="cart_separate1"></div>
+          </div>
+
+          <div class="section_article">
+            <table>
+              <tbody>
+                <tr class="section_article-item">
+                    <td class="img_item"><img src="/img/product2.jpg" alt="product" /></td>
+                    <td class="infor_item">
+                      <b class="namePr">High quality men's and women's t-shirts</b>
+                      <p class="if_item">Size M, cotton</p>
+                      <div class="sale">30% off</div>
+                    </td>
+                    <td><button class="button_item1">-</button></td>
+                    <td><div class="quantity_item">1</div></td>
+                    <td><button class="button_item2">+</button></td>
+                    <td class="price1"><p>$ 26,70</p></td>
+                    <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+                <tr class="section_article-item">
+                  <td class="img_item"><img src="/img/product2.jpg" alt="product" /></td>
+                  <td class="infor_item">
+                    <b class="namePr">High quality men's and women's t-shirts</b>
+                    <p class="if_item">Size M, cotton</p>
+                    <div class="sale">30% off</div>
+                  </td>
+                  <td><button class="button_item1">-</button></td>
+                  <td><div class="quantity_item">1</div></td>
+                  <td><button class="button_item2">+</button></td>
+                  <td class="price1"><p>$ 27,30</p></td>
+                  <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+                <tr class="section_article-item">
+                  <td class="img_item"><img src="/img/product2.jpg" alt="product" /></td>
+                  <td class="infor_item">
+                    <b class="namePr">High quality men's and women's t-shirts</b>
+                    <p class="if_item">Size M, cotton</p>
+                    <div class="sale">30% off</div>
+                  </td>
+                  <td><button class="button_item1">-</button></td>
+                  <td><div class="quantity_item">1</div></td>
+                  <td><button class="button_item2">+</button></td>
+                  <td class="price1"><p>$ 23,70</p></td>
+                  <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+                <tr class="section_article-item">
+                  <td class="img_item"><img src="/img/product2.jpg" alt="product" /></td>
+                  <td class="infor_item">
+                    <b class="namePr">High quality men's and women's t-shirts</b>
+                    <p class="if_item">Size M, cotton</p>
+                    <div class="sale">30% off</div>
+                  </td>
+                  <td><button class="button_item1">-</button></td>
+                  <td><div class="quantity_item">1</div></td>
+                  <td><button class="button_item2">+</button></td>
+                  <td class="price1"><p>$ 30,21</p></td>
+                  <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="section_article-xs">
+            <table>
+              <tbody>
+                <tr class="section_article-item-xs">
+                    <td class="img_item-xs"><img src="/img/product2.jpg" alt="product" /></td>
+                    <td class="infor_item-xs">
+                      <b class="namePr-xs">High quality men's and women's t-shirts</b>
+                      <p class="if_item-xs">Size M, cotton</p>
+          
+                      <div class="d-flex">
+                        <button class="button_item1-xs">-</button>
+                        <div class="quantity_item-xs">1</div>
+                        <button class="button_item2-xs">+</button>
+                      </div>
+                    </td>
+      
+                    <td class="price1-xs">
+                      <p>$ 26,70</p>
+                      <div class="sale-xs">30% off</div>
+                    </td>
+                    <td class="button-xs"><button class="delete-xs"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+                <tr class="section_article-item-xs">
+                  <td class="img_item-xs"><img src="/img/product2.jpg" alt="product" /></td>
+                  <td class="infor_item-xs">
+                    <b class="namePr-xs">High quality men's and women's t-shirts</b>
+                    <p class="if_item-xs">Size M, cotton</p>
+        
+                    <div class="d-flex">
+                      <button class="button_item1-xs">-</button>
+                      <div class="quantity_item-xs">1</div>
+                      <button class="button_item2-xs">+</button>
+                    </div>
+                  </td>
+    
+                  <td class="price1-xs">
+                    <p>$ 26,70</p>
+                    <div class="sale-xs">30% off</div>
+                  </td>
+                  <td class="button-xs"><button class="delete-xs"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+                <tr class="section_article-item-xs">
+                <td class="img_item-xs"><img src="/img/product2.jpg" alt="product" /></td>
+                <td class="infor_item-xs">
+                  <b class="namePr-xs">High quality men's and women's t-shirts</b>
+                  <p class="if_item-xs">Size M, cotton</p>
+      
+                  <div class="d-flex">
+                    <button class="button_item1-xs">-</button>
+                    <div class="quantity_item-xs">1</div>
+                    <button class="button_item2-xs">+</button>
+                  </div>
+                </td>
+  
+                <td class="price1-xs">
+                  <p>$ 26,70</p>
+                  <div class="sale-xs">30% off</div>
+                </td>
+                <td class="button-xs"><button class="delete-xs"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+                <tr class="section_article-item-xs">
+              <td class="img_item-xs"><img src="/img/product2.jpg" alt="product" /></td>
+              <td class="infor_item-xs">
+                <b class="namePr-xs">High quality men's and women's t-shirts</b>
+                <p class="if_item-xs">Size M, cotton</p>
+    
+                <div class="d-flex">
+                  <button class="button_item1-xs">-</button>
+                  <div class="quantity_item-xs">1</div>
+                  <button class="button_item2-xs">+</button>
+                </div>
+              </td>
+
+              <td class="price1-xs">
+                <p>$ 26,70</p>
+                <div class="sale-xs">30% off</div>
+              </td>
+              <td class="button-xs"><button class="delete-xs"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cart_separate1"></div>
+        </div>
+        <div class="section_right">
+          <div class="total_payment">
+            <div class="total_payment-header">
+              <div class="total_payment-header-left">
+                <i class="fa-solid fa-tag"></i>
+                <p>Shop discount code</p>
+              </div>
+              <div>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="cart_separate2"></div>
+            <div class="total_payment-body">
+              <b class="sumary">Summary in order</b>
+              <div class="space">
+                <p>Total product cost</p>
+                <p class="price2">$ 107,91</p>
+              </div>
+              <div class="space">
+                <p>Standard delivery</p>
+                <p class="price2">$ 27,34</p>
+              </div>
+              <div class="space space2">
+                <p>Total payment :</p>
+                <p class="price2">$ 135,25</p>
+              </div>
+            </div>
+            <div class="transport">
+              <p>Delivery country: <b>Vietnamese</b></p>
+              <a href="#">Edit</a>
+            </div>
+            <div class="delivery">
+              <p>Standard delivery: July 22 - July 25</p>
+              <div class="pay">
+                <p>Billing: $ 135,25</p>
+              </div>
+            </div>
+            <div class="or">
+              <div class="cart_separate3"></div>
+              <p>OR</p>
+              <div class="cart_separate3"></div>
+            </div>
+            <div class="delivery">
+              <p>Express delivery: July 15 - July 18</p>
+              <div class="pay">
+                <p>Billing: $ 151,20</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="service">
+        <div class="service1">
+          <p class="fa-solid fa-lock"></p>
+            <h3>All forms of payment are safe</h3>
+            <div class="infor-service">
+                <p class="text"><i>We always provide suitable payment methods for customers and are always absolutely confidential</i></p>
+                <img src="/img/logomomo.png" alt="momo">
+                <img src="/img/logozalopay.webp" alt="zalopay">
+                <img src="/img/logosmartpay.png" alt="smartpay">
+                <br>
+                <img src="/img/logoviettelpay.png" alt="viettelpay">
+                <img src="/img/logopayoo.png" alt="payoo">
+            </div>
+        </div>
+        <div class="service1">
+          <p class="fa-regular fa-face-smile fa-lg"></p>
+          <h3>Satisfaction guaranteed</h3>
+          <div class="infor-service">
+            <p class="text"><i>We have special treatment for customers and businesses when working with us</i></p>
+            <img class="doitra" src="/img/doitra-removebg-preview.png" alt="doitra">
+            <div class="service2">
+                <b>Free <br>shipping</b>
+                <b>Return after <br> 7 days</b>
+                <b>24/7 support <br> consulting</b>
+            </div>
+          </div>
+      </div>
+      <div class="service1">
+        <p class="fa-solid fa-truck-fast fa-lg"></p>
+        <h3>Worldwide delivery</h3>
+        <div class="infor-service">
+            <p class="text"><i>We work with economical, professional and timely delivery facilities</i></p>
+            <img src="/img/logounited.svg" alt="united">
+            <img src="/img/logoups.png" alt="ups">
+            <br>
+            <img class="dsv" src="/img/logodsv.webp" alt="dsv">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer">
+      <div class="footer_left">
+          <div class="follow">
+              <b>Subscribe to our newsletter !</b>
+              <input type="email" class="footer_email" placeholder="Email">
+              <input type="submit" value="Send" class="send">
+          </div>
+          <div class="language">
+              <b>language / currency</b>
+              <br>
+              <div class="language_select">
+                  <input type="email" class="footer_language" placeholder="Vietnamese | VND">
+              </div>
+          </div>
+      </div>
+      <div class="down-line">
+        <div class="footer_middle1">
+            <b>Service</b>
+            <table class="service_footer">
+                <tr class="service_item">
+                    <td class="fa-solid fa-cart-shopping"></td>
+                    <td>Your order</td>
+                </tr>
+                <tr class="service_item">
+                    <td class="fa-light fa-question"></td>
+                    <td>Help</td>
+                </tr>
+                <tr class="service_item">
+                    <td class="fa-regular fa-envelope"></td>
+                    <td>Contact</td>
+                </tr>
+            </table>
+            <b>
+                <span>More</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </b>
+        </div>
+        <div class="footer_middle2">
+            <b>Company</b>
+            <table class="service_footer">
+                <tr class="service_item">
+                    <td>About Us</td>
+                </tr>
+                <tr class="service_item">
+                    <td>Sustainability</td>
+                </tr>
+                <tr class="service_item">
+                    <td>History</td>
+                </tr>
+            </table>
+            <b>
+                <span>More</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </b>
+        </div>
+        <div class="footer_right">
+            <b>Follow us on:</b>
+            <table class="service_footer">
+                <tr class="service_item">
+                    <td class="fa-brands fa-square-facebook"></td>
+                    <td>Facebook</td>
+                </tr>
+                <tr class="service_item">
+                    <td class="fa-brands fa-twitter"></td>
+                    <td>Twitter</td>
+                </tr>
+                <tr class="service_item">
+                    <td class="fa-brands fa-instagram"></td>
+                    <td>Instagram</td>
+                </tr>
+            </table>
+            <b>
+                <span>More</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </b>
+        </div>
+      </div>
+  </div>
+  <script>
+    var Listbar = document.getElementById("listbar");
+    function openListbar(){
+        Listbar.style = "display: block";
+    }
+    function closeListbar(){
+        Listbar.style = "display: none";
+    }
+</script>
+  </body>
+</html>

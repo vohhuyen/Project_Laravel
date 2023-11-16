@@ -1,0 +1,393 @@
+
+.img-banner{
+    background: url(/public/source/image/bannerhome.webp) center/cover;
+    width: 100%;
+    height: 620px;
+    color: white;
+    text-align: center;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(/public/source/image/bannerhome.webp), lightgray 50% / cover no-repeat;
+
+
+}
+.img-banner p{
+    font-size: 5rem;
+    padding-top: 40px;
+}
+.img-banner span{
+    font-size: 2rem;
+}
+.text-summer{
+    font-family: Comic Sans MS;
+    font-size: 12rem;
+    text-shadow: 0 0 5px #fe5454,
+                0 0 25px #fe5454,
+                0 0 50px #fe5454,
+                0 0 200px #fe5454;
+}
+.button-banner{
+    margin-top: 100px;
+    font-size: 5rem;
+}
+.button-banner span{
+    font-size: 5rem;
+}
+.button-banner a{
+    padding: 30px 50px;
+    font-size: 3rem;
+    border-radius: 10px;
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    color: #fe5454;
+    transition: 0.5s;
+    box-shadow: 0 0 5px white,
+                0 0 25px white,
+                0 0 50px white,
+                0 0 200px white;
+}
+
+.button-banner a:hover{
+    background-color: #fe5454;
+    color: white;
+    box-shadow: 0 0 5px #fe5454,
+                0 0 25px #fe5454,
+                0 0 50px #fe5454,
+                0 0 200px #fe5454;
+}
+
+
+
+.intro{
+    display: flex;
+    justify-content: center;
+}
+.intro-pr img{
+    width: 340px;
+    height: 340px;
+    margin-left: 25px;
+    box-shadow: 0 0 5px black;
+}
+.intro-pr{
+    display: flex;
+}
+.video h1, .bestseller h1, .featureArtist h1{
+    text-align: center;
+    padding: 40px;
+    color: var(--main-color);
+}
+.video video{
+    width: 700px;
+    height: 700px;
+}
+
+
+
+
+.column{
+    background-color: white;
+    padding-top: 20px;
+    width: 227px !important;
+}
+.product_img{
+    width: 225px;
+}
+.first-img, .last-img{
+    width: 225px;
+    height: 225px;
+    background-size: cover;
+}
+.product_img:hover .last-img{
+    display: block;
+}
+.product_img:hover .first-img,.last-img {
+    display: none;
+}
+.product_icon{
+    font-size: 1.7rem;
+    margin-left: 200px;
+    position: absolute;
+}
+.product_name{
+    font-size: 1.4rem;
+    padding: 5px 0;
+}
+.product_price{
+    font-size: 1.5rem;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.price{
+    color: var(--main-color);
+}
+
+
+
+
+.row_artist{
+    display: flex;
+    justify-content: space-evenly;
+}
+.row_artist i{
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-top: 140px;
+}
+.col_artist{
+    box-shadow: 0 0 5px black;
+    background-color: white;
+    width: 225px !important;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
+.cover-img{
+    width: 100%;
+    height: 200px;
+}
+.avatar{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    margin-left: 80px;
+    margin-top: -25px;
+}
+.avatar img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--main-color);
+}
+.nameArtist{
+    padding-top: 35px;
+}
+.col_artist button{
+    padding: 10px 20px;
+    border: none;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+
+
+
+
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .video h1, .bestseller h1, .featureArtist h1{
+        padding: 20px;
+    }
+    .intro{
+        display: block;
+        text-align: center;
+    }
+    .intro-pr img{
+        width: 200px;
+        height: 200px;
+    }
+    .intro-box{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1450px){
+    .intro-pr img{
+        width: 200px;
+        height: 200px;
+    }
+    .intro-box{
+        margin: auto 0;
+    }
+    .video video{
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media (min-width: 770px) and (max-width: 1024px){
+    .video h1, .bestseller h1, .featureArtist h1{
+        padding: 5px;
+    }
+    .intro{
+        display: block;
+        text-align: center;
+    }
+    .intro-pr img{
+        width: 160px;
+        height: 160px;
+    }
+    .intro-box{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .column{
+        width: 170px !important;
+        padding-left: 10px !important;
+    }
+    .product_img{
+        width: 170px;
+    }
+    .first-img, .last-img {
+        width: 170px;
+        height: 170px;
+    }
+    .product_icon{
+        margin-left: 140px;
+    }
+}
+@media (min-width: 480px) and (max-width: 770px){
+    .img-banner{
+        height: 400px;
+    }
+    .img-banner p{
+        font-size: 3rem;
+        padding: 5px;
+    }
+    .text-summer{
+        font-size: 7rem;
+    }
+    .video h1, .bestseller h1, .featureArtist h1{
+        padding: 5px;
+    }
+    .video video{
+        width: 450px;
+        height: 450px;
+    }
+    .intro{
+        display: block;
+        text-align: center;
+    }
+    .intro-pr{
+        display: flex;
+        justify-content: center;
+    }
+    .intro-pr img{
+        width: 160px;
+        height: 160px;
+    }
+    .column{
+        width: 150px !important;
+        padding-left: 10px !important;
+    }
+    .product_img{
+        width: 150px;
+    }
+    .first-img, .last-img {
+        width: 150px;
+        height: 150px;
+    }
+    .product_icon{
+        margin-left: 120px;
+    }
+    .price{
+        font-size: 1rem;
+    }
+    .disnone-sm, .disnone{
+        display: none;
+    }
+    .cover-img{
+        height: 100px;
+    }
+    .row_artist i{
+        margin-top: 90px;
+    }
+    .avatar{
+        margin-left:35px;
+    }
+    .button-banner span, .button-banner a{
+        font-size: 2rem;
+    }
+    .button-banner, .intro-box{
+        margin-top: 10px;
+    }
+}
+@media (min-width: 320px) and (max-width: 480px){
+    .disnone{
+        display: none;
+    }
+    .img-banner{
+        height: 230px;
+    }
+    .img-banner p{
+        font-size: 1.5rem;
+        padding: 5px;
+    }
+    .img-banner span{
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .button-banner b{
+        font-size: 1.5rem;
+    }
+    .button-banner a {
+        padding: 10px 24px;
+    }
+    .text-summer{
+        font-size: 4rem;
+    }
+    .video h1, .bestseller h1, .featureArtist h1{
+        padding: 5px;
+    }
+    .video video{
+        width: 300px;
+        height: 300px;
+    }
+    .intro{
+        display: block;
+        text-align: center;
+    }
+    .intro-pr{
+        display: flex;
+        justify-content: center;
+    }
+    .intro-pr img{
+        width: 130px;
+        height: 130px;
+        margin-left: 10px;
+    }
+    .intro-box{
+        margin-top: 10px;
+    }
+    .column{
+        width: 150px !important;
+        padding-left: 10px !important;
+    }
+    .product_img{
+        width: 150px;
+    }
+    .first-img, .last-img {
+        width: 150px;
+        height: 150px;
+    }
+    .product_icon{
+        margin-left: 120px;
+    }
+    .price{
+        font-size: 1rem;
+    }
+    p{
+        margin-bottom: 0px !important;
+    }
+    .cover-img{
+        height: 100px;
+    }
+    .row_artist i{
+        margin-top: 90px;
+    }
+    .avatar{
+        margin-left:30px;
+    }
+    .button-banner span, .button-banner a{
+        font-size: 2rem;
+    }
+    .button-banner{
+        margin-top: 10px;
+    }
+}
+
+
+
