@@ -41,7 +41,7 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Sign In" class="auth-submit">
-                            <a href="/html/SIGNUP.html" class="auth-btn-direct">Sign Up</a>
+                            <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
                         </div>
                     </form>
                     <div class="auth-forgot-password">
@@ -52,7 +52,7 @@
             <div class="auth-action-right">
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
-                        <a href="/html/HOME.html"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+<a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-twitter"></td>
-                            <td>Twitter</td>
+<td>Twitter</td>
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-instagram"></td>
