@@ -255,16 +255,21 @@
                 </div>
                 <button class="openbtn disnone-all" onclick="openNav()">☰</button> 
                 <ul class="nav_bar-item-right">
-                    <a href="./SIGNUP.html">
+                    @if(Session::has('user'))
+                    <a href="logout"><i class="fa fa-user"></i>{{count('user')->Name}}</a>
+                    @else
+                    <a href="{{route('createAccount')}}">
                         <button class="btn-login" style="background-color: white; color: black;">
                             <b>Register</b>
                         </button>
                     </a>
-                    <a href="./SIGNIN.html">
+                    
+                    <a href="{{route('login')}}">
                         <button class="btn-login">
                             <b>Login</b>
                         </button>
                     </a>
+                    @endif
                 </ul>
             </nav>
         </div>

@@ -9,60 +9,24 @@
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
-    <!-- Form without bootstrap -->
-    <div class="auth-wrapper">
-        <div class="auth-container">
-            <div class="auth-action-left">
-                <div class="auth-form-outer">
-                    <h2 class="auth-form-title">
-                        Sign In
-                    </h2>
-                    <div class="auth-external-container">
-                        <div class="auth-external-list">
-                            <ul>
-                                <li><a href="#"><i class="fa-brands fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                            </ul>
+<form class="login-form" method="post" action="{{ route('login') }}">
+                     @csrf
+                    <input type="email" class="auth-form-input" placeholder="Email" name="email">
+                    <div class="input-icon">
+                    <input type="password" class="auth-form-input" placeholder="Password" name="password">
+                    <i class="fa fa-eye show-password"></i>
                         </div>
-                        <p class="auth-sgt">or sign in with:</p>
-                    </div>
-                    
-                   
-                    <form action="{{route('login')}}" method="post" class="login-form">
-                        <input type="email" class="auth-form-input" placeholder="email" name="email" id="email">
-                        @csrf
-                        <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password" name="pw"id="pw" >
-                            <i class="fa fa-eye show-password"></i>
-                        </div>
-                        <label class="btn active">
-                            <input type="checkbox" name='email1' checked>
-                            <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
-                            <span> Remember password.</span>
-                        </label>
-                        <div class="footer-action">
-                            <input type="submit" value="Sign In" class="auth-submit">
-                            <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
-                        </div>
-                    </form>
-
-
-                    <div class="auth-forgot-password">
-                        <a href="#">Forgot Password</a>
-                    </div>
-                </div>
+                    <label class="btn active">
+                    <input type="checkbox" name='remember' checked>
+                        <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
+                    <span> Remember password.</span>
+                    </label>
+            <div class="footer-action">
+                    <input type="submit" value="Sign In" class="auth-submit">
+                    <a href="{{route('createAccount') }}" class="auth-btn-direct">Sign Up</a>
             </div>
-            <div class="auth-action-right">
-                <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
-                    <div class="bg_logo">
-                        <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
+    </form>
+    <div class="footer">
             <div class="footer_left">
                 <div class="follow">
                     <b>Subscribe to our newsletter !</b>
