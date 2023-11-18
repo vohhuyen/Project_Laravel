@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/index',[PageController::class, 'getIndex'])->name('index');
-Route::get('/login',[PageController::class, 'getIndexLogin'])->name('login');
 
+Route::get('/login',[PageController::class, 'getIndexLogin'])->name('login');
+Route::post('/login',[PageController::class, 'postIndexLogin'])->name('login');
 Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->name('createAccount');
