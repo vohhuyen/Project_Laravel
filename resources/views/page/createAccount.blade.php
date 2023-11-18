@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
+@include('error')
 <div class="auth-wrapper">
         <div class="auth-container">
             <div class="auth-action-left">
@@ -27,14 +28,15 @@
                         </div>
                         <p class="auth-sgt">or use your email for registration:</p>
                     </div>
-                    <form class="login-form">
-                        <input type="text" class="auth-form-input" placeholder="Name">
-                        <input type="email" class="auth-form-input" placeholder="Email">
+                    <form action="createAccount" method="post" class="login-form">
+                    @csrf 
+                        <input type="text" class="auth-form-input" placeholder="Name" id="name" name="name">
+                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email" >
                         <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password">
+                            <input type="password" class="auth-form-input" placeholder="Password" id="password" name="password">
                             <i class="fa fa-eye show-password"></i>
                         </div>
-                        <input type="password" class="auth-form-input" placeholder="Confirm Password">
+                        <input type="password" class="auth-form-input" placeholder="Confirm Password" id="c_password" name="c_password">
                         <label class="btn active">
                             <input type="checkbox" name='email1' checked><br>
                             <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
@@ -45,6 +47,7 @@
                             <a href="{{route('login')}}" class="auth-btn-direct">Login</a>
                         </div>
                     </form>
+                    
                 </div>
             </div>
             <div class="auth-action-right">
