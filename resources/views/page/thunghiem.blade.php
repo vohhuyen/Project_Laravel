@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,79 +9,31 @@
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
-<<<<<<< HEAD
-@include('error')
-=======
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
->>>>>>> 80db7ae24dbc5ff5e52e97dbb3c90a69b77a638f
-<div class="auth-wrapper">
-        <div class="auth-container">
-            <div class="auth-action-left">
-                <div class="auth-form-outer">
-                    <h2 class="auth-form-title">
-                        Create Account
-                    </h2>
-                    <div class="auth-external-container">
-                        <div class="auth-external-list">
-                            <ul>
-                                <li><a href="#"><i class="fa-brands fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                            </ul>
+<form class="login-form" method="post" action="{{ route('login') }}">
+                     @csrf
+                    <input type="email" class="auth-form-input" placeholder="Email" name="email">
+                    <div class="input-icon">
+                    <input type="password" class="auth-form-input" placeholder="Password" name="password">
+                    <i class="fa fa-eye show-password"></i>
                         </div>
-                        <p class="auth-sgt">or use your email for registration:</p>
-                    </div>
-                    <form action="createAccount" method="post" class="login-form">
-                    @csrf 
-                        <input type="text" class="auth-form-input" placeholder="Name" id="name" name="name">
-                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email" >
-                        <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password" id="password" name="password">
-                            <i class="fa fa-eye show-password"></i>
-                        </div>
-                        <input type="password" class="auth-form-input" placeholder="Confirm Password" id="c_password" name="c_password">
-                        <label class="btn active">
-                            <input type="checkbox" name='email1' checked><br>
-                            <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
-                            <span> I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
-                        </label>
-                        <div class="footer-action">
-                            <input type="submit" value="Sign Up" class="auth-submit">
-<<<<<<< HEAD
-                            <a href="{{route('login')}}" class="auth-btn-direct">Sign In</a>
-=======
-                            <a href="{{route('login')}}" class="auth-btn-direct">Login</a>
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
-                        </div>
-                    </form>
-                    
-                </div>
+                    <label class="btn active">
+                    <input type="checkbox" name='remember' checked>
+                        <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
+                    <span> Remember password.</span>
+                    </label>
+            <div class="footer-action">
+                    <input type="submit" value="Sign In" class="auth-submit">
+                    <a href="{{route('createAccount') }}" class="auth-btn-direct">Sign Up</a>
             </div>
-            <div class="auth-action-right">
-                <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
-                    <div class="bg_logo">
-<<<<<<< HEAD
-                        <a href="{{route('index')}}"><img src="/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
-=======
-                        <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
+    </form>
+    <div class="footer">
             <div class="footer_left">
                 <div class="follow">
                     <b>Subscribe to our newsletter !</b>
                     <input type="email" class="footer_email" placeholder="Email">
                     <input type="submit" value="Send" class="send">
                 </div>
-<<<<<<< HEAD
                 <div class="language">
-=======
-<div class="language">
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     <b>language / currency</b>
                     <br>
                     <div class="language_select">
@@ -154,10 +104,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-    </div>
-=======
     </div>
 </body>
 </html>
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
