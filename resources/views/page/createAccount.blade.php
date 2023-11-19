@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="source/css/SIGNIN_UP.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
+</head>
+<body>
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
 <div class="auth-wrapper">
         <div class="auth-container">
             <div class="auth-action-left">
@@ -31,7 +45,11 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Sign Up" class="auth-submit">
+<<<<<<< HEAD
                             <a href="{{route('login')}}" class="auth-btn-direct">Sign In</a>
+=======
+                            <a href="{{route('login')}}" class="auth-btn-direct">Login</a>
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                         </div>
                     </form>
                 </div>
@@ -39,7 +57,11 @@
             <div class="auth-action-right">
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
+<<<<<<< HEAD
                         <a href="{{route('index')}}"><img src="/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+=======
+                        <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     </div>
                 </div>
             </div>
@@ -51,7 +73,11 @@
                     <input type="email" class="footer_email" placeholder="Email">
                     <input type="submit" value="Send" class="send">
                 </div>
+<<<<<<< HEAD
                 <div class="language">
+=======
+<div class="language">
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     <b>language / currency</b>
                     <br>
                     <div class="language_select">
@@ -122,4 +148,10 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </div>
+=======
+    </div>
+</body>
+</html>
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614

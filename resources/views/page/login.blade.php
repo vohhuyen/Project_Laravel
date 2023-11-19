@@ -28,6 +28,7 @@
                         </div>
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
+<<<<<<< HEAD
                     
                    
                     <form action="{{route('login')}}" method="post" class="login-form">
@@ -35,6 +36,12 @@
                         @csrf
                         <div class="input-icon">
                             <input type="password" class="auth-form-input" placeholder="Password" name="pw"id="pw" >
+=======
+                    <form class="login-form">
+                        <input type="email" class="auth-form-input" placeholder="Email">
+                        <div class="input-icon">
+                            <input type="password" class="auth-form-input" placeholder="Password">
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                             <i class="fa fa-eye show-password"></i>
                         </div>
                         <label class="btn active">
@@ -47,8 +54,11 @@
                             <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
                         </div>
                     </form>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     <div class="auth-forgot-password">
                         <a href="#">Forgot Password</a>
                     </div>
@@ -57,7 +67,11 @@
             <div class="auth-action-right">
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
+<<<<<<< HEAD
                         <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+=======
+<a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     </div>
                 </div>
             </div>
@@ -126,7 +140,11 @@
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-twitter"></td>
+<<<<<<< HEAD
                             <td>Twitter</td>
+=======
+<td>Twitter</td>
+>>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-instagram"></td>
