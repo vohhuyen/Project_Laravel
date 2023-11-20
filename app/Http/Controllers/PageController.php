@@ -56,6 +56,5 @@ class PageController extends Controller
                 window.location.assign("login");
             </script>
         ';
-        
     }
 }

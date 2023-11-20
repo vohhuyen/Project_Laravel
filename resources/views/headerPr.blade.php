@@ -255,7 +255,6 @@
                 </div>
                 <button class="openbtn disnone-all" onclick="openNav()">☰</button> 
                 <ul class="nav_bar-item-right">
-
                 @if(Session::has('user'))
                     <a href="logout"><i class="fa fa-user">{{Session('use')->name}}</a>
                    @else
