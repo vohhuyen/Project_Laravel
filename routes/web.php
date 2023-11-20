@@ -19,5 +19,6 @@ Route::get('/', function () {
 });
 Route::get('/index',[PageController::class, 'getIndex'])->name('index');
 Route::get('/login',[PageController::class, 'getIndexLogin'])->name('login');
-Route::post('/login',[PageController::class, 'postIndexLogin'])->name('login');
+Route::post('/login',[PageController::class, 'Login'])->name('login');
+Route::post('/logout',[PageController::class, 'Logout'])->name('logout');
 Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->name('createAccount');

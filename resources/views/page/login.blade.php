@@ -28,10 +28,11 @@
                         </div>
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
-                    <form class="login-form">
-                        <input type="email" class="auth-form-input" placeholder="Email">
+                    <form class="login-form" method="post" >
+                        @csrf
+                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email">
                         <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password">
+                            <input type="password" class="auth-form-input" placeholder="Password" id="pw" name="pw">
                             <i class="fa fa-eye show-password"></i>
                         </div>
                         <label class="btn active">
