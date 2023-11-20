@@ -45,9 +45,8 @@
                             <span> I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
                         </label>
                         <div class="footer-action">
+                            <a href="{{route('login')}}" class="auth-btn-direct me-1">Sign In</a>
                             <input type="submit" value="Sign Up" class="auth-submit">
-
-                            <a href="{{route('login')}}" class="auth-btn-direct">Login</a>
                         </div>
                     </form>
                     

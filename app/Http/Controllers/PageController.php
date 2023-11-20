@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Users;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -26,9 +26,9 @@ class PageController extends Controller
         if(Auth::attempt($login)){
             $user = Auth::user();
             Session::put('user',$user);
-            echo '<script>alert("Đăng nhập thành công");windown.location.assign("index");</script>';
+            echo '<script>alert("Đăng nhập thành công");window.location.assign("index");</script>';
         }else{
-            echo '<script>alert("Đăng nhập không thành công");windown.location.assign("login");</script>';
+            echo '<script>alert("Đăng nhập không thành công");window.location.assign("login");</script>';
         }
     }
     public function Logout(){		

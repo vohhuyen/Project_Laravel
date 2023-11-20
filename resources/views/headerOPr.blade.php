@@ -256,14 +256,23 @@
                 <button class="openbtn disnone-all" onclick="openNav()">☰</button> 
                 <ul class="nav_bar-item-right">
                     @if(Session::has('user'))
-                    <a href="logout"><i class="fa fa-user">{{Session('use')->name}}</a>
+                    <a href="#" style="color: black; text-decoration: none;">
+                        <button class="btn-login px-3" style="background-color: white; color: black; width: auto;">
+                            <i class="fa-solid fa-user"></i>  {{Session('user')->Name}}
+                        </button>
+                    </a>
+                    <a href="{{ route('logout') }}" style="color: black; text-decoration: none;">
+                        <button class="btn-login">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>  Logout
+                        </button>
+                    </a>
                    @else
-                    <a href="./SIGNUP.html">
+                    <a href="{{ route('createAccount') }}">
                         <button class="btn-login" style="background-color: white; color: black;">
                             <b>Register</b>
                         </button>
                     </a>
-                    <a href="./SIGNIN.html">
+                    <a href="{{ route('login') }}">
                         <button class="btn-login">
                             <b>Login</b>
                         </button>

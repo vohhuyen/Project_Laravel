@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::get('/index',[PageController::class, 'getIndex'])->name('index');
 
 Route::get('/login',[PageController::class, 'getIndexLogin'])->name('login');
-Route::post('/login',[PageController::class, 'postIndexLogin'])->name('login');
+Route::post('/login',[PageController::class, 'Login'])->name('login');
 Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->name('createAccount');
 Route::post('/createAccount',[PageController::class, 'createAccount']);
+Route::get('/reindex',[PageController::class, 'Logout'])->name('logout');

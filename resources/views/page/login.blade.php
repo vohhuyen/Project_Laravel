@@ -29,13 +29,6 @@
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
                     
-                   
-                    <form action="{{route('login')}}" method="post" class="login-form">
-                        <input type="email" class="auth-form-input" placeholder="email" name="email" id="email">
-                        @csrf
-                        <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password" name="pw"id="pw" >
-                            <input type="password" class="auth-form-input" placeholder="Password">
                     <form class="login-form" method="post" >
                         @csrf
                         <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email">
@@ -49,8 +42,8 @@
                             <span> Remember password.</span>
                         </label>
                         <div class="footer-action">
-                            <input type="submit" value="Sign In" class="auth-submit">
                             <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
+                            <input type="submit" value="Sign In" class="auth-submit">
                         </div>
                     </form>
 
@@ -64,7 +57,6 @@
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
                     <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
-                        <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
