@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
-    <!-- Form without bootstrap -
+     <!-- Form without bootstrap  -->
     <div class="auth-wrapper">
         <div class="auth-container">
             <div class="auth-action-left">
@@ -35,6 +35,12 @@
                         @csrf
                         <div class="input-icon">
                             <input type="password" class="auth-form-input" placeholder="Password" name="pw"id="pw" >
+                            <input type="password" class="auth-form-input" placeholder="Password">
+                    <form class="login-form" method="post" >
+                        @csrf
+                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email">
+                        <div class="input-icon">
+                            <input type="password" class="auth-form-input" placeholder="Password" id="pw" name="pw">
                             <i class="fa fa-eye show-password"></i>
                         </div>
                         <label class="btn active">
@@ -57,6 +63,7 @@
             <div class="auth-action-right">
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
+<a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
                         <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
@@ -126,6 +133,7 @@
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-twitter"></td>
+<td>Twitter</td>
                             <td>Twitter</td>
                         </tr>
                         <tr class="service_item">

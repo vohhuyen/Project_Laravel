@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +10,8 @@
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
-<<<<<<< HEAD
+
 @include('error')
-=======
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
->>>>>>> 80db7ae24dbc5ff5e52e97dbb3c90a69b77a638f
 <div class="auth-wrapper">
         <div class="auth-container">
             <div class="auth-action-left">
@@ -50,11 +46,8 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Sign Up" class="auth-submit">
-<<<<<<< HEAD
-                            <a href="{{route('login')}}" class="auth-btn-direct">Sign In</a>
-=======
+
                             <a href="{{route('login')}}" class="auth-btn-direct">Login</a>
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                         </div>
                     </form>
                     
@@ -63,11 +56,8 @@
             <div class="auth-action-right">
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
-<<<<<<< HEAD
-                        <a href="{{route('index')}}"><img src="/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
-=======
+
                         <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     </div>
                 </div>
             </div>
@@ -79,11 +69,8 @@
                     <input type="email" class="footer_email" placeholder="Email">
                     <input type="submit" value="Send" class="send">
                 </div>
-<<<<<<< HEAD
+
                 <div class="language">
-=======
-<div class="language">
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
                     <b>language / currency</b>
                     <br>
                     <div class="language_select">
@@ -154,10 +141,7 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-    </div>
-=======
+
     </div>
 </body>
 </html>
->>>>>>> 34f5e31ee1435a1011840864f36cc58c55ef5614
