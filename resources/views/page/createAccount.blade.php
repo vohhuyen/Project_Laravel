@@ -43,6 +43,7 @@
                         <div class="footer-action">
                             <input type="submit" value="Sign Up" class="auth-submit">
                             <a href="{{route('login')}}" class="auth-btn-direct">Login</a>
+                            <a href="{{route('login')}}" class="auth-btn-direct">Sign In</a>
                         </div>
                     </form>
                 </div>
@@ -51,6 +52,7 @@
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
                         <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+                        <a href="{{route('index')}}"><img src="/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
@@ -63,6 +65,7 @@
                     <input type="submit" value="Send" class="send">
                 </div>
 <div class="language">
+                <div class="language">
                     <b>language / currency</b>
                     <br>
                     <div class="language_select">
@@ -136,3 +139,4 @@
     </div>
 </body>
 </html>
+    </div>

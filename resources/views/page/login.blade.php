@@ -32,6 +32,11 @@
                         <input type="email" class="auth-form-input" placeholder="Email">
                         <div class="input-icon">
                             <input type="password" class="auth-form-input" placeholder="Password">
+                    <form class="login-form" method="post" >
+                        @csrf
+                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email">
+                        <div class="input-icon">
+                            <input type="password" class="auth-form-input" placeholder="Password" id="pw" name="pw">
                             <i class="fa fa-eye show-password"></i>
                         </div>
                         <label class="btn active">
@@ -53,6 +58,7 @@
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
 <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+                        <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
@@ -122,6 +128,7 @@
                         <tr class="service_item">
                             <td class="fa-brands fa-twitter"></td>
 <td>Twitter</td>
+                            <td>Twitter</td>
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-instagram"></td>

@@ -255,6 +255,9 @@
                 </div>
                 <button class="openbtn disnone-all" onclick="openNav()">☰</button> 
                 <ul class="nav_bar-item-right">
+                @if(Session::has('user'))
+                    <a href="logout"><i class="fa fa-user">{{Session('use')->name}}</a>
+                   @else
                     <a href="./SIGNUP.html">
                         <button class="btn-login" style="background-color: white; color: black;">
                             <b>Register</b>
@@ -265,6 +268,7 @@
                             <b>Login</b>
                         </button>
                     </a>
+                    @endif
                 </ul>
             </nav>
         </div>
