@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
 class PageController extends Controller
 {
     public function getIndex(){		
@@ -18,19 +19,43 @@ class PageController extends Controller
     public function getIndexLogin(){		
     	return view('page.login');	
     }
+
+  
     public function Login(Request $request){		
     	$login = [
             'email' =>$request->input('email'),
             'password'=>$request->input('pw')
         ];
+
+        $request->validate([
+            'email' => 'required',
+            'pw' => 'required',
+        ]);
+        
+      
         if(Auth::attempt($login)){
             $user = Auth::user();
             Session::put('user',$user);
-            echo '<script>alert("Đăng nhập thành công");window.location.assign("index");</script>';
+            return redirect('index')->with('status', 'Successfully');
         }else{
-            echo '<script>alert("Đăng nhập không thành công");window.location.assign("login");</script>';
+         
+            return redirect('login')->with('status', 'Invalid credentials');
         }
+        
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Invalid email format.',
+            'password.required' => 'Password is required.',
+        ]);
+    
+        // Your login logic here
+    
+        return redirect()->route('home');
     }
+
     public function Logout(){		
     	Session::forget('user');
         Session::forget('cart');

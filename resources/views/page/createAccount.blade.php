@@ -56,7 +56,7 @@
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
 
-                        <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+                        <a href="{{route('index')}}"><img src="source/img-project/logofull.jpg" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>

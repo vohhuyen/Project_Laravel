@@ -28,12 +28,69 @@
                         </div>
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
-                    
-                    <form class="login-form" method="post" >
+
+                    <!-- @if(session('status'))
+                    <div class="alert alert-danger">
+                     {{ session('status') }}
+                 </div>
+                    @endif -->
+                    @if(session('status'))
+                    <div class="alert_error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  {{ session('status')}}
+                  </div>
+                    @endif
+                    <form class="login-form" method="post" action="{{ route('login') }}">
+                 @csrf
+                <div class="input-icon  @error('email') is-invalid @enderror">
+                <input type="email" class="auth-form-input   @error('email')alert-danger @enderror" placeholder="Email" id="email" name="email">
+                @error('email')
+                @if($message == 'The email field is required.')
+                <div class="alert alert-danger" style="margin-top: -10px;">Required</div>          
+                @endif
+                @enderror
+                </div>
+                <div class="input-icon  @error('pw') is-invalid @enderror">
+                <input type="password" class="auth-form-input  @error('pw')alert-danger @enderror" placeholder="Password" id="pw" name="pw">
+                @error('pw')
+                @if($message == 'The pw field is required.')
+                <div class="alert alert-danger"style="margin-top: -10px;">Required</div>
+                @endif
+                @enderror
+                <i class="fa fa-eye show-password"></i>
+                </div>
+                <label class="btn active">
+                <input type="checkbox" name='email1' checked>
+                <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
+                <span> Remember password.</span>
+                    </label>
+                <div class="footer-action">
+                <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
+                <input type="submit" value="Sign In" class="auth-submit">
+                </div>
+                </form>
+
+
+                    <!-- @if(session('status'))
+                    <div class="alert alert-danger">
+                    {{ session('status') }}
+                     </div>
+                    @endif
+                    <form class="login-form" method="post" action="{{ route('login') }}" >
                         @csrf
-                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email">
+                        <input type="email" class="auth-form-input  @error('pw') is-invalid @enderror" placeholder="Email" id="email" name="email">
+                        @error('email')
+                        @if($message == 'The email field is required.')
+                        <div class="alert alert-danger"> required</div>          
+                        @endif
+                        @enderror
                         <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password" id="pw" name="pw">
+                            <input type="password" class="auth-form-input  @error('pw') is-invalid @enderror" placeholder="Password" id="pw" name="pw" >
+                        @error('pw')
+                         @if($message == 'The pw field is required.')
+                         <div class="alert alert-danger">required</div>
+                             @endif
+                        @enderror
                             <i class="fa fa-eye show-password"></i>
                         </div>
                         <label class="btn active">
@@ -45,7 +102,7 @@
                             <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
                             <input type="submit" value="Sign In" class="auth-submit">
                         </div>
-                    </form>
+                    </form> -->
 
 
                     <div class="auth-forgot-password">
@@ -56,7 +113,7 @@
             <div class="auth-action-right">
                 <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
                     <div class="bg_logo">
-                    <a href="{{route('index')}}"><img src="source/img/PRINT-removebg-preview.png" alt="logo" class="logo"></a>
+                    <a href="{{route('index')}}"><img src="source/img-project/logofull.jpg" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
