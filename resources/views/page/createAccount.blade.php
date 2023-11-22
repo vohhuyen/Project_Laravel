@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="auth-action-right">
-                <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
+                <div class="auth-image" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('{{ asset('source/img/vector.jpg')}}'), white 50% / cover no-repeat;">
                     <div class="bg_logo">
 
                         <a href="{{route('index')}}"><img src="source/img-project/logofull.jpg" alt="logo" class="logo"></a>
@@ -126,7 +126,7 @@
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-twitter"></td>
-                            <td>Twitter</td>
+                            <td>Twitter</td> 
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-instagram"></td>
