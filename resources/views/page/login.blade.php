@@ -50,7 +50,7 @@
                 <div class="alert alert-danger" style="margin-top: -10px;">Required</div>          
                 @endif
                 @enderror
-                </div>
+                </div> 
                 <div class="input-icon  @error('pw') is-invalid @enderror">
                 <input type="password" class="auth-form-input  @error('pw')alert-danger @enderror" placeholder="Password" id="pw" name="pw">
                 @error('pw')
