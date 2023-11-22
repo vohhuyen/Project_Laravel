@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ImPrint</title>
+  <link rel="shortcut icon" type="image/png" href="source/img-project/imprintrutgon.png" />
     <link rel="stylesheet" href="source/css/SIGNIN_UP.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
@@ -69,16 +70,51 @@
                 <input type="submit" value="Sign In" class="auth-submit">
                 </div>
                 </form>
-                
+
+
+                    <!-- @if(session('status'))
+                    <div class="alert alert-danger">
+                    {{ session('status') }}
+                     </div>
+                    @endif
+                    <form class="login-form" method="post" action="{{ route('login') }}" >
+                        @csrf
+                        <input type="email" class="auth-form-input  @error('pw') is-invalid @enderror" placeholder="Email" id="email" name="email">
+                        @error('email')
+                        @if($message == 'The email field is required.')
+                        <div class="alert alert-danger"> required</div>          
+                        @endif
+                        @enderror
+                        <div class="input-icon">
+                            <input type="password" class="auth-form-input  @error('pw') is-invalid @enderror" placeholder="Password" id="pw" name="pw" >
+                        @error('pw')
+                         @if($message == 'The pw field is required.')
+                         <div class="alert alert-danger">required</div>
+                             @endif
+                        @enderror
+                            <i class="fa fa-eye show-password"></i>
+                        </div>
+                        <label class="btn active">
+                            <input type="checkbox" name='email1' checked>
+                            <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
+                            <span> Remember password.</span>
+                        </label>
+                        <div class="footer-action">
+                            <a href="{{route('createAccount')}}" class="auth-btn-direct">Sign Up</a>
+                            <input type="submit" value="Sign In" class="auth-submit">
+                        </div>
+                    </form> -->
+
+
                     <div class="auth-forgot-password">
                         <a href="{{route('user.getpassword')}}">Forgot Password</a>
                     </div>
                 </div>
             </div>
             <div class="auth-action-right">
-                <div class="auth-image" style="background-image: url('{{ asset('source/img/vector.jpg')}}');">
+                <div class="auth-image" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('{{ asset('source/img/vector.jpg')}}'), white 50% / cover no-repeat;">
                     <div class="bg_logo">
-                    <a href="{{route('index')}}"><img src="source/img-project/logofull.jpg" alt="logo" class="logo"></a>
+                    <a href="{{route('index')}}"><img src="source/img-project/logofull.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
@@ -147,7 +183,6 @@
                         </tr>
                         <tr class="service_item">
                             <td class="fa-brands fa-twitter"></td>
-<td>Twitter</td>
                             <td>Twitter</td>
                         </tr>
                         <tr class="service_item">
