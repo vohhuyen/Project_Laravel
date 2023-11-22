@@ -233,6 +233,7 @@ p.auth-sgt {
     height: 200px;
     transform: translateX(3%);
     border-radius: 50px;
+    background-color: white;
 }
 
 /* FOOTER */

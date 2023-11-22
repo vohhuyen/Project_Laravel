@@ -56,7 +56,7 @@
                 <div class="auth-image" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('{{ asset('source/img/vector.jpg')}}'), white 50% / cover no-repeat;">
                     <div class="bg_logo">
 
-                        <a href="{{route('index')}}"><img src="source/img-project/logofull.jpg" alt="logo" class="logo"></a>
+                        <a href="{{route('index')}}"><img src="source/img-project/logofull.png" alt="logo" class="logo"></a>
                     </div>
                 </div>
             </div>
