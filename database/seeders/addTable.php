@@ -44,21 +44,21 @@ class addTable extends Seeder
             ['nameColor'=>'Brown','imageColor' => 'colorBrown.jpg']
         ]);
         \DB::table('Users')->insert([
-            ['Name'=>'Huyen','password'=> 'huyen123','Email' => 'huyen123@gmail.com'],
-            ['Name'=>'Hieu','password'=> 'hieu123','Email' => 'hieu123@gmail.com'],
-            ['Name'=>'Hung','password'=> 'hung123','Email' => 'hung123@gmail.com'],
-            ['Name'=>'Lan','password'=> 'lan123','Email' => 'lan123@gmail.com'],
-            ['Name'=>'Linh','password'=> 'linh123','Email' => 'linh123@gmail.com'],
-            ['Name'=>'Kiet','password'=> 'kiet123','Email' => 'kiet123@gmail.com'],
-            ['Name'=>'Hai','password'=> 'hai123','Email' => 'hai123@gmail.com'],
-            ['Name'=>'Hoang','password'=> 'hoang123','Email' => 'hoang123@gmail.com'],
-            ['Name'=>'Tien','password'=> 'tien123','Email' => 'tien123@gmail.com'],
-            ['Name'=>'Hong','password'=> 'hong123','Email'=> 'hong123@gmail.com'],
-            ['Name'=>'Huy ','password'=> 'huy123','Email'=> 'huy123@gmail.com'],
-            ['Name'=>'Tram','password'=> 'tram123','Email'=> 'tram123@gmail.com'],
-            ['Name'=>'Tung','password'=> 'tung123','Email'=> 'tung123@gmail.com'],
-            ['Name'=>'Nhan','password'=> 'nhan123','Email'=> 'nhan123@gmail.com'],
-            ['Name'=>'Hang','password'=> 'hang123','Email'=> 'hang123@gmail.com']
+            ['Name'=>'Huyen','password'=> 'huyen123','Email' => 'huyen123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Hieu','password'=> 'hieu123','Email' => 'hieu123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Hung','password'=> 'hung123','Email' => 'hung123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Lan','password'=> 'lan123','Email' => 'lan123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Linh','password'=> 'linh123','Email' => 'linh123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Kiet','password'=> 'kiet123','Email' => 'kiet123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Hai','password'=> 'hai123','Email' => 'hai123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Hoang','password'=> 'hoang123','Email' => 'hoang123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Tien','password'=> 'tien123','Email' => 'tien123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Hong','password'=> 'hong123','Email'=> 'hong123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Huy ','password'=> 'huy123','Email'=> 'huy123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Tram','password'=> 'tram123','Email'=> 'tram123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Tung','password'=> 'tung123','Email'=> 'tung123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Nhan','password'=> 'nhan123','Email'=> 'nhan123@gmail.com', 'role'=>'1'],
+            ['Name'=>'Hang','password'=> 'hang123','Email'=> 'hang123@gmail.com', 'role'=>'1']
         ]);
         \DB::table('Shop')->insert([
             ['idShop' => 1,'nameShop'=>'Huyenshop','avataShop'=> 'avtUser1.jpg','coverImageShop' => 'coverImg1.jpg', 'locationShop' => 'VietNam','descriptionShop' => 'Passion creates a career'],

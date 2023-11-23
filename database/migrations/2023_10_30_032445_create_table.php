@@ -29,6 +29,7 @@ return new class extends Migration
             $Users->string('Name')->comment('tên người dùng');
             $Users->string('password');
             $Users->string('Email')->unique()->comment('email duy nhất');
+            $Users->integer('role')->unsigned();
             $Users->timestamps();
         });
         Schema::create('Shop', function(Blueprint $Shop){
