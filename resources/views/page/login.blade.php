@@ -71,7 +71,7 @@
                 </div>
                 </form>
                     <div class="auth-forgot-password">
-                        <a href="{{route('user.getpassword')}}">Forgot Password</a>
+                        <a href="#">Forgot Password</a>
                     </div>
                 </div>
             </div>
