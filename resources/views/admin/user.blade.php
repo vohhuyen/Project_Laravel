@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ImPrint</title>
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/imprintrutgon.png" />
-  <link rel="stylesheet" href="../assets/css/stylepr.css" />
-  <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
+  <link rel="shortcut icon" type="image/png" href="source/admin/assets/images/logos/imprintrutgon.png" />
+  <link rel="stylesheet" href="source/admin/assets/css/stylepr.css" />
+  <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -25,7 +25,7 @@
       <div>
         <div class="brand-logo">
           <a href="./index.html" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/logo.png" width="200" style="margin-left: 10px; margin-top: 3px;" alt="" />
+            <img src="source/admin/assets/images/logos/logo.png" width="200" style="margin-left: 10px; margin-top: 3px;" alt="" />
           </a>
         </div>
         <!-- Sidebar navigation-->

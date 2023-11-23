@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ImPrint</title>
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/imprintrutgon.png" />
-  <link rel="stylesheet" href="../assets/css/stylepr.css" />
-  <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
+  <link rel="shortcut icon" type="image/png" href="source/admin/assets/images/logos/imprintrutgon.png" />
+  <link rel="stylesheet" href="source/admin/assets/css/stylepr.css" />
+  <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -25,7 +25,7 @@
       <div>
         <div class="brand-logo">
           <a href="./index.html" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/logo.png" width="200" style="margin-left: 10px; margin-top: 3px;" alt="" />
+            <img src="source/admin/assets/images/logos/logo.png" width="200" style="margin-left: 10px; margin-top: 3px;" alt="" />
           </a>
         </div>
         <!-- Sidebar navigation-->
@@ -246,11 +246,11 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td><img src="../assets/images/img/6400.png" alt="product1" style="width: 60px;height: 60px;"></td>
+                        <td><img src="source/admin/assets/images/img/6400.png" alt="product1" style="width: 60px;height: 60px;"></td>
                         <td>hoodie</td>
                         <td>24.48 USD</td>
                         <td>White</td>
-                        <td><img src="../assets/images/img/AV1.jpg" style="width: 60px;height: 60px;"></td>
+                        <td><img src="source/admin/assets/images/img/AV1.jpg" style="width: 60px;height: 60px;"></td>
                         <td>Huyen</td>
                         <td>relaxtion itself</td>
                         <td></td>
@@ -259,131 +259,122 @@
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td><img src="../assets/images/img/6401.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                      <td><img src="source/admin/assets/images/img/6401.png" alt="product2" style="width: 60px;height: 60px;"></td>
                       <td>hoodie</td>
                       <td>21.08 USD</td>
                       <td>White</td>
-                      <td><img src="../assets/images/img/product1.jpg" style="width: 60px;height: 60px;"></td>
+                      <td><img src="source/admin/assets/images/img/product1.jpg" style="width: 60px;height: 60px;"></td>
                       <td>Huyen</td>
                       <td>relaxtion itself</td>
                       <td></td>
                       <td><button class="update">Update</button></td>
                       <td><button class="delete">Delete</button></td>  
               
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td><img src="../assets/images/img/6402.png" alt="product2" style="width: 60px;height: 60px;"></td>
-                    <td>hoodie</td>
-                    <td>16.02 USD</td>
-                    <td>White</td>
-                    <td><img src="../assets/images/img/product2.jpg" style="width: 60px;height: 60px;"></td>
-                    <td>Huyen</td>
-                    <td>relaxtion itself</td>
-                    <td></td>
-                    <td><button class="update">Update</button></td>
-                    <td><button class="delete">Delete</button></td>  
-            
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td><img src="../assets/images/img/6403.png" alt="product2" style="width: 60px;height: 60px;"></td>
-                  <td>T-shirts</td>
-                  <td>19.91 USD</td>
-                  <td>Black</td>
-                  <td><img src="../assets/images/img/product3.jpg" style="width: 60px;height: 60px;"></td>
-                  <td>Hieu</td>
-                  <td>High Quality</td>
-                  <td></td>
-                  <td><button class="update">Update</button></td>
-                  <td><button class="delete">Delete</button></td>  
-          
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><img src="../assets/images/img/6404.png" alt="product2" style="width: 60px;height: 60px;"></td>
-                <td>T-shirts</td>
-                <td>17.35 USD</td>
-                <td>Black</td>
-                <td><img src="../assets/images/img/product4.jpg" style="width: 60px;height: 60px;"></td>
-                <td>Hieu</td>
-                <td>High Quality</td>
-                <td></td>
-                <td><button class="update">Update</button></td>
-                <td><button class="delete">Delete</button></td>  
-        
-            </tr>
-            <tr>
-              <td>6</td>
-              <td><img src="../assets/images/img/6405.png" alt="product2" style="width: 60px;height: 60px;"></td>
-              <td>Long Sleeve</td>
-              <td>12.33 USD</td>
-              <td>White</td>
-              <td><img src="../assets/images/img/product4.jpg" style="width: 60px;height: 60px;"></td>
-              <td>Hieu</td>
-              <td>High Quality</td>
-              <td></td>
-              <td><button class="update">Update</button></td>
-              <td><button class="delete">Delete</button></td>  
-      
-          </tr>
-          <tr>
-            <td>7</td>
-            <td><img src="../assets/images/img/6405.png" alt="product2" style="width: 60px;height: 60px;"></td>
-            <td>Long Sleeve</td>
-            <td>25.83 USD</td>
-            <td>Black</td>
-            <td><img src="../assets/images/img/product4.jpg" style="width: 60px;height: 60px;"></td>
-            <td>Hieu</td>
-            <td>High Quality</td>
-            <td></td>
-            <td><button class="update">Update</button></td>
-            <td><button class="delete">Delete</button></td>  
-    
-        </tr>
-        <tr>
-          <td>8</td>
-          <td><img src="../assets/images/img/6406.png" alt="product2" style="width: 60px;height: 60px;"></td>
-          <td>Sweatshirt</td>
-          <td>22.12 USD</td>
-          <td>White</td>
-          <td><img src="../assets/images/img/product3.jpg" style="width: 60px;height: 60px;"></td>
-          <td>Linh</td>
-          <td>reasonable price</td>
-          <td></td>
-          <td><button class="update">Update</button></td>
-          <td><button class="delete">Delete</button></td>  
-  
-      </tr>
-      <tr>
-        <td>9</td>
-        <td><img src="../assets/images/img/6407.png" alt="product2" style="width: 60px;height: 60px;"></td>
-        <td>Sweatshirt</td>
-        <td>15.14 USD</td>
-        <td>Black</td>
-        <td><img src="../assets/images/img/product2.jpg" style="width: 60px;height: 60px;"></td>
-        <td>Linh</td>
-        <td>reasonable price</td>
-        <td></td>
-        <td><button class="update">Update</button></td>
-        <td><button class="delete">Delete</button></td>    
-    </tr>
-    <tr>
-      <td>10</td>
-      <td><img src="../assets/images/img/6408.png" alt="product2" style="width: 60px;height: 60px;"></td>
-      <td>Sweatshirt</td>
-      <td>11.18 USD</td>
-      <td>White</td>
-      <td><img src="../assets/images/img/product1.jpg" style="width: 60px;height: 60px;"></td>
-      <td>Linh</td>
-      <td>reasonable price</td>
-      <td></td>
-      <td><button class="update">Update</button></td>
-      <td><button class="delete">Delete</button></td>   
-  </tr>
-      
-                    
-    
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><img src="source/admin/assets/images/img/6402.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>hoodie</td>
+                        <td>16.02 USD</td>
+                        <td>White</td>
+                        <td><img src="source/admin/assets/images/img/product2.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Huyen</td>
+                        <td>relaxtion itself</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>  
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><img src="source/admin/assets/images/img/6403.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>T-shirts</td>
+                        <td>19.91 USD</td>
+                        <td>Black</td>
+                        <td><img src="source/admin/assets/images/img/product3.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Hieu</td>
+                        <td>High Quality</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>  
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><img src="source/admin/assets/images/img/6404.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>T-shirts</td>
+                        <td>17.35 USD</td>
+                        <td>Black</td>
+                        <td><img src="source/admin/assets/images/img/product4.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Hieu</td>
+                        <td>High Quality</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>  
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><img src="source/admin/assets/images/img/6405.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>Long Sleeve</td>
+                        <td>12.33 USD</td>
+                        <td>White</td>
+                        <td><img src="source/admin/assets/images/img/product4.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Hieu</td>
+                        <td>High Quality</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>  
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><img src="source/admin/assets/images/img/6405.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>Long Sleeve</td>
+                        <td>25.83 USD</td>
+                        <td>Black</td>
+                        <td><img src="source/admin/assets/images/img/product4.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Hieu</td>
+                        <td>High Quality</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>  
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><img src="source/admin/assets/images/img/6406.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>Sweatshirt</td>
+                        <td>22.12 USD</td>
+                        <td>White</td>
+                        <td><img src="source/admin/assets/images/img/product3.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Linh</td>
+                        <td>reasonable price</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>  
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><img src="source/admin/assets/images/img/6407.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>Sweatshirt</td>
+                        <td>15.14 USD</td>
+                        <td>Black</td>
+                        <td><img src="source/admin/assets/images/img/product2.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Linh</td>
+                        <td>reasonable price</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>    
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><img src="source/admin/assets/images/img/6408.png" alt="product2" style="width: 60px;height: 60px;"></td>
+                        <td>Sweatshirt</td>
+                        <td>11.18 USD</td>
+                        <td>White</td>
+                        <td><img src="source/admin/assets/images/img/product1.jpg" style="width: 60px;height: 60px;"></td>
+                        <td>Linh</td>
+                        <td>reasonable price</td>
+                        <td></td>
+                        <td><button class="update">Update</button></td>
+                        <td><button class="delete">Delete</button></td>   
+                    </tr>
                 </tbody>
             </table>
           </section>
