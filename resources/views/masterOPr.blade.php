@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ImPrint</title>
     <base href="{{asset('')}}"></base>
+    <link rel="shortcut icon" type="image/png" href="source/admin/assets/images/logos/imprintrutgon.png" />
     <link rel="stylesheet" href="source/css/main.css">
     <link rel="stylesheet" href="source/css/HOME.css">
     <link rel="stylesheet" href="source/css/OPrDetail.css">

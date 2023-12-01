@@ -30,6 +30,7 @@ return new class extends Migration
             $Users->string('password');
             $Users->string('Email')->unique()->comment('email duy nhất');
             $Users->integer('role')->unsigned()->default('1');
+            $Users->integer('lock')->unsigned()->default('1');
             $Users->timestamps();
         });
         Schema::create('Shop', function(Blueprint $Shop){
