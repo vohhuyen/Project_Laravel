@@ -57,7 +57,7 @@ return new class extends Migration
         Schema::create('Providers', function(Blueprint $Providers){
             $Providers->increments('idProvider');
             $Providers->string('Name')->unique()->comment('tên duy nhất');
-            $Providers->string('description');
+            $Providers->longText('description');
             $Providers->string('location');
             $Providers->float('evalue', 5)->default('0.0')->comment('Chất lượng # Chất lượng (1-5 sao)');
             $Providers->timestamps();
@@ -72,6 +72,7 @@ return new class extends Migration
             $categoryOPrDetail->increments('idCategoryOPrDetail');
             $categoryOPrDetail->integer('idCategoryOPr')->unsigned();
             $categoryOPrDetail->string('nameCategoryOPrDetail');
+            $categoryOPrDetail->string('image');
             $categoryOPrDetail->foreign('idCategoryOPr')->references('idCategoryOPr')->on('category_OPr');
             $categoryOPrDetail->timestamps();
         });
@@ -81,6 +82,7 @@ return new class extends Migration
             $OriginalProducts->string('nameOPr');
             $OriginalProducts->mediumText('descriptionOPr');
             $OriginalProducts->mediumText('aboutOPr');
+            $OriginalProducts->string('image');
             $OriginalProducts->foreign('idCategoryOPrDetail')->references('idCategoryOPrDetail')->on('category_OPr_Detail');
             $OriginalProducts->timestamps();
         });
@@ -140,11 +142,11 @@ return new class extends Migration
         });
         Schema::create('CareInstruction', function(Blueprint $CareInstruction){
             $CareInstruction->integer('idOPr')->unsigned()->primary();
-            $CareInstruction->string('image1')->nullable($value = true);
-            $CareInstruction->string('image2')->nullable($value = true);
-            $CareInstruction->string('image3')->nullable($value = true);
-            $CareInstruction->string('image4')->nullable($value = true);
-            $CareInstruction->string('image5')->nullable($value = true);
+            $CareInstruction->string('imageCI1')->nullable($value = true);
+            $CareInstruction->string('imageCI2')->nullable($value = true);
+            $CareInstruction->string('imageCI3')->nullable($value = true);
+            $CareInstruction->string('imageCI4')->nullable($value = true);
+            $CareInstruction->string('imageCI5')->nullable($value = true);
             $CareInstruction->mediumText('description');
             $CareInstruction->foreign('idOPr')->references('idOPr')->on('OriginalProducts');
             $CareInstruction->timestamps();
@@ -159,10 +161,10 @@ return new class extends Migration
             $SizeGuide->string('M')->nullable($value = true);
             $SizeGuide->string('L')->nullable($value = true);
             $SizeGuide->string('XL')->nullable($value = true);
-            $SizeGuide->string('2XL')->nullable($value = true);
-            $SizeGuide->string('3XL')->nullable($value = true);
-            $SizeGuide->string('4XL')->nullable($value = true);
-            $SizeGuide->string('5XL')->nullable($value = true);
+            $SizeGuide->string('size2XL')->nullable($value = true);
+            $SizeGuide->string('size3XL')->nullable($value = true);
+            $SizeGuide->string('size4XL')->nullable($value = true);
+            $SizeGuide->string('size5XL')->nullable($value = true);
             $SizeGuide->foreign('idOPr')->references('idOPr')->on('OriginalProducts');
             $SizeGuide->timestamps();
         });

@@ -1,0 +1,259 @@
+.alsolikeDetail {
+    overflow: hidden;
+    position: relative;
+}
+
+.alsolikeDetail .alsolikeImg1 {
+    display: inline-block;
+    opacity: 3;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.alsolikeDetail .alsolikeImg1.active {
+    opacity: 1;
+}
+.alsolikeImg1 img{
+    width: 200px;
+    height: 200px;
+}
+
+
+
+
+
+
+
+
+.sile-images-left {
+    position: relative;
+    overflow: hidden;
+}
+.big-img img {
+    width: 100%;
+}
+.small-img {
+    display: none;
+    margin-top: 10px;
+}
+.small-img.show {
+    display: block;
+}
+
+
+
+.small-img img{
+    width: 100px;
+    height: 100px;
+    margin: 5px 0px;
+}
+.icon-chev{
+    color: #fe5454;
+    font-size: 1.8rem;
+}
+.sile-images-left{
+    text-align: center;
+}
+.big-img img{
+    width: 500px;
+    height: 500px;
+}
+.pname{
+    font-size: 3rem;
+    font-weight: 600;
+}
+.product-name-and-details{
+    font-size: 1.5rem;
+    margin: 10px 0px;
+}
+.Infor_OProducts{
+    background-color: rgb(239, 238, 238);
+    padding: 20px;
+    font-size: 1.5rem;
+}
+.btn_ProviderInfor{
+    border: 1px solid rgb(174, 174, 174);
+    background-color: white;
+    font-weight: 500;
+    padding: 10px 20px;
+}
+.paintChoice{
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+.color-text2{
+    color: grey;
+}
+.btn_box div{
+    border: 1px solid grey;
+    margin: 5px;
+    background-color: white;
+    border-radius: 3px;
+}
+.btn_box div p{
+    padding: 2px 4px;
+    margin: 0px;
+}
+.line{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.363);
+    width: 100%;
+    margin: 10px 0px;
+}
+.color-text3{
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+.priceOPr, .shippingOPr{
+    font-size: 1.7rem;
+}
+.startdesignOPr{
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    border: 1px solid #fe5454;
+    background-color: white;
+    color: #fe5454;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+.startdesignOPr:hover{
+    background-color: #fe5454;
+    color: white;
+}
+.showProvider{
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.441);
+    background-color: white;
+    color: black;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+.showProvider:hover{
+    color: #fe5454;
+}
+.Additional_Provider{
+    margin-top: 50px;
+    font-size: 1.5rem;
+}
+.additionalProvider{
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+.btn-ranking{
+    border: 1px solid grey;
+    padding: 5px 10px;
+}
+.Provider{
+    background-color: rgba(239, 238, 238, 0.683);
+    border: 1px solid #e3e4e5;
+}
+.desProvider b{
+    font-size: 1.7rem;
+    padding: 5px 0px;
+}
+.desProvider p{
+    font-size: 1.5rem;
+    padding: 5px 0px;
+}
+.desProviderdetail{
+    
+    font-size: 1.5rem;
+    width: 100%;
+}
+.desProviderdetail td{
+    padding: 10px 0px;
+}
+.nameProvider{
+    font-size: 1.5rem;
+    color: black;
+}
+.nameProvider_OPrDetail{
+    font-size: 2rem;
+    color: black;
+    font-weight: 500;
+    width: 150px;
+}
+.Provider_evalua{
+    font-size: 1.7rem;
+    align-items: center;
+    margin: 0px 10px;
+    width: 60px;
+    border:1px solid cornflowerblue;
+    background-color: rgba(100, 148, 237, 0.297);
+}
+.saleProvider{
+    background-color:rgba(100, 148, 237, 0.297);
+    border: 1px solid cornflowerblue;
+    margin: 0px 5px;
+    padding: 3px 2px;
+    height: 25px;
+}
+.btn-provider-infor{
+    border: 1px solid grey;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background-color: white;
+    margin: 0px 5px;
+    border-radius: 5px;
+}
+.btn-provider-startdesign{
+    border: 1px solid #fe5454;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background-color: #fe5454;
+    margin: 0px 5px;
+    color: white;
+    border-radius: 5px;
+}
+.Provider_location img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.pname9{
+    color: grey;
+    font-size: 1.5rem;
+}
+.Provider_list{
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #17262b;
+}
+.name-Infor{
+    font-size: 2.5rem;
+}
+.Infor-OPr{
+    font-size: 1.5rem;
+}
+.tablesize{
+    border: 1px solid grey;
+}
+.tablesize td, .tablesize th{
+    height: 50px;
+    width: 100px;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+.size{
+    width: 250px !important;
+    border-right: 1px solid grey;
+}
+.size1{
+    border-bottom: 1px solid grey;
+}
+.color-circle-all img{
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid grey;
+}
+.imageKF{
+    width: 40px;
+    height: 40px;
+}
+.link-alsoLike{
+    color: black;
+}

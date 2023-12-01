@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="81" viewBox="0 0 81 81" width="81">
+    <g display="none" id="bg">
+        <g display="inline">
+            <rect fill="#D4EBF4" height="81" width="81"/>
+        </g>
+    </g>
+<path clip-rule="evenodd" d="M72.3108 70.9492L40.2452 10.6953L8.17969 70.9492H72.3108ZM21.4994 62.9492H27.5194L43.2553 33.3803L40.2452 27.7242L21.4994 62.9492ZM43.1219 62.9492H36.5817L47.7864 41.8947L51.0565 48.0395L43.1219 62.9492ZM52.1842 62.9492H58.9911L55.5877 56.5539L52.1842 62.9492Z" fill="black" fill-rule="evenodd"/>
+</svg>

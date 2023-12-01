@@ -24,3 +24,6 @@ Route::post('/login',[PageController::class, 'Login'])->name('login');
 Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->name('createAccount');
 Route::post('/createAccount',[PageController::class, 'createAccount']);
 Route::get('/reindex',[PageController::class, 'Logout'])->name('logout');
+
+Route::get('/Category-opr',[PageController::class, 'getIndexCategoryOPr'])->name('categoryopr');
+Route::get('/opr-detail/{idOPr}',[PageController::class, 'getIndexOPrDetail'])->name('opr-detail');

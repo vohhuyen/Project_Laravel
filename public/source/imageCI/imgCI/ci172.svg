@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="81" viewBox="0 0 81 81" width="81">
+    <g display="none" id="bg">
+        <g display="inline">
+            <rect fill="#D4EBF4" height="81" width="81"/>
+        </g>
+    </g>
+<path clip-rule="evenodd" d="M8.57812 70.982H72.7732L40.6756 10.668L8.57812 70.982ZM21.8978 62.982H59.4535L40.6756 27.6968L21.8978 62.982Z" fill="black" fill-rule="evenodd"/>
+</svg>
