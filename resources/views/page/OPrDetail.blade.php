@@ -166,7 +166,7 @@
                             </div>
                         </div>
                         <div class="btn-box">
-                            <button class="startdesignOPr">Start designing</button><br>
+                        <a href="{{ route('design', ['idProvider' => $provider1->idProvider, 'idOPr' => $pro->idOPr]) }}"><button class="startdesignOPr">Start designing</button></a><br>
                         </div>
                     </div> 
                     <button class="showProvider" onclick="toggleProvider()">Show additional providers</button>              
@@ -197,7 +197,7 @@
                     </div>
                     <div>
                         <button class="btn-provider-infor" data-toggle="modal" data-target="#btn{{$provider->idProvider}}">Provider info</button>
-                        <button class="btn-provider-startdesign">Start designing</button>
+                        <a href="{{ route('design', ['idProvider' => $provider->idProvider, 'idOPr' => $pro->idOPr]) }}"><button class="btn-provider-startdesign">Start designing</button></a>
                     </div>
                     <div class="modal fade" id="btn{{$provider->idProvider}}" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">

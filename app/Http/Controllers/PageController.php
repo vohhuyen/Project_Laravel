@@ -207,7 +207,6 @@ public function unlock($idUser) {
         $sizewidth = getSizeFromGuide($idOPr, 'width');
         $sizelength = getSizeFromGuide($idOPr, 'length');
         $sizesleeveLength = getSizeFromGuide($idOPr, 'sleeveLength');
-
         $colorProvider = DB::table('OriginalProducts')
         ->join('OriginalProductsDetail', function ($join) use ($idOPr) {
             $join->on('OriginalProductsDetail.idOPr', '=', 'OriginalProducts.idOPr')
@@ -233,6 +232,21 @@ public function unlock($idUser) {
         $shippingmin = $provider->min('shippingCost');
         $AvgPrTime = round($provider->avg('productTime'), 2);
 
+        $provider1 = DB::table('OriginalProducts')
+        ->join('DetailProvider', function ($join) use ($idOPr) {
+            $join->on('DetailProvider.idOPr', '=', 'OriginalProducts.idOPr')
+                ->where('DetailProvider.idOPr', '=', $idOPr);
+        })
+        ->join('Providers', 'DetailProvider.idProvider', '=', 'Providers.idProvider')
+        ->select('Providers.idProvider')
+        ->selectRaw('MAX(Providers.evalue) as max_evalue')
+        ->selectRaw('MIN(DetailProvider.priceOPr) as min_price')
+        ->selectRaw('MIN(DetailProvider.productTime) as min_productTime')
+        ->groupBy('Providers.idProvider')
+        ->orderBy('max_evalue', 'desc')
+        ->orderBy('min_price', 'asc')
+        ->orderBy('min_productTime', 'asc')
+        ->first();
 
 
         $colorall = DB::table('OriginalProducts')
@@ -259,7 +273,7 @@ public function unlock($idUser) {
             })->limit(10)
             ->get();
         return view('page.OPrDetail', compact('pro', 'infor','sizewidth','sizelength','sizesleeveLength','provider','colorProvider',
-        'colorall','Color','pricePrmax','pricePrmin','shippingmin','shippingmax','AvgPrTime','printArea', 'alsoLike'));
+        'colorall','Color','pricePrmax','pricePrmin','shippingmin','shippingmax','AvgPrTime','printArea', 'alsoLike','provider1'));
     }
 
    
@@ -310,5 +324,31 @@ public function unlock($idUser) {
         return redirect()->route('list-user')->with('success', 'User deleted successfully');
     }
    
-
+    public function getIndexDesign($idProvider, $idOPr){
+        $pro = DB::table('OriginalProducts')->where('idOPr', '=', $idOPr)->first();
+        $find = $idOPr;
+        $colorProvider = DB::table('Providers')
+            ->join('DetailSize', function ($join) use ($idProvider) {
+                $join->on('DetailSize.idProvider', '=', 'Providers.idProvider')
+                    ->where('DetailSize.idProvider', '=', $idProvider);
+            })
+            ->join('OriginalProductsDetail', 'OriginalProductsDetail.idOPrDetail', '=', 'DetailSize.idOPrDetail')
+            ->join('Color', 'OriginalProductsDetail.idColor', '=', 'Color.idColor')
+            ->join('image_OPr', 'OriginalProductsDetail.idOPrDetail', '=', 'image_OPr.idOPrDetail')
+            ->select('Color.*', 'OriginalProductsDetail.*','image_OPr.*') 
+            ->get();
+        $provider = DB::table('Providers')->where('idProvider', '=', $idProvider)->first();
+        $detail = DB::table('DetailProvider')->where('idProvider', '=', $idProvider)->where('idOPr', '=', $idOPr)->first();
+        // dd($provider);
+        return view('page.Design', compact('pro','colorProvider','find','provider','detail'));
+    }
+    public function chooseColor($idColor, $idOPr){
+        $pro = DB::table('OriginalProductsDetail')
+            ->join('image_OPr', 'OriginalProductsDetail.idOPrDetail', '=', 'image_OPr.idOPrDetail')
+            ->where('OriginalProductsDetail.idColor', $idColor)
+            ->where('OriginalProductsDetail.idOPr', $idOPr)
+            ->select('image_OPr.*')
+            ->first();
+        return redirect('design')->with('pro');
+    }
 }

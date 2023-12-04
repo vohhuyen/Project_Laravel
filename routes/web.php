@@ -35,3 +35,6 @@ Route::post('/delete-user/{idUser}', [PageController::class, 'deleteUser'])->nam
 
 Route::get('/adduser',[PageController::class, 'getadduser'])->name('adduser');
 Route::post('/adduser',[PageController::class, 'adduser']);
+
+Route::get('/design/{idProvider}/{idOPr}',[PageController::class, 'getIndexDesign'])->name('design');
+Route::post('/chooseColor/{idColor}/{idOPr}',[PageController::class, 'chooseColor'])->name('chooseColor');
