@@ -20,6 +20,8 @@ use App\Models\OriginalProduct;
 use App\Models\DetailProvider;
 use App\Models\Provider;
 use App\Models\OriginalProductDetail;
+use App\Models\categoryPr;
+// use App\Models\categoryPrDetail;
 
 class PageController extends Controller
 {
@@ -342,13 +344,36 @@ public function unlock($idUser) {
         // dd($provider);
         return view('page.Design', compact('pro','colorProvider','find','provider','detail'));
     }
-    public function chooseColor($idColor, $idOPr){
-        $pro = DB::table('OriginalProductsDetail')
-            ->join('image_OPr', 'OriginalProductsDetail.idOPrDetail', '=', 'image_OPr.idOPrDetail')
-            ->where('OriginalProductsDetail.idColor', $idColor)
-            ->where('OriginalProductsDetail.idOPr', $idOPr)
-            ->select('image_OPr.*')
-            ->first();
-        return redirect('design')->with('pro');
+    public function getIndexProduct(){
+        $product = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
+        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
+        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
+        $provider = Provider::all();
+        // dd($category);
+        return view('page.Product', compact('product','category','provider'));
+    }
+    public function filterProduct($idCategoryPrDetail){
+        $filteredProducts = DB::table('products')
+            ->join('category_Pr_Detail', 'products.idCategoryPrDetail', '=', 'category_Pr_Detail.idCategoryPrDetail')
+            ->where('category_Pr_Detail.idCategoryPrDetail', $idCategoryPrDetail)
+            ->select('products.*')
+            ->get();
+    
+        return response()->json($filteredProducts);
+    }
+    public function filterPriceProduct($minPrice, $maxPrice){
+        $filterPrice = DB::table('products')->where('pricePr', '>=',$minPrice)->where('pricePr', '<=', $maxPrice)->get();
+        return response()->json($filterPrice);
+    }
+    public function filterProviderLocation($idProvider){
+        $filterLocation = DB::table('products')
+            ->join('Providers', 'products.idProvider', '=', 'Providers.idProvider')
+            ->where('Providers.idProvider', $idProvider)
+            ->select('products.*')
+            ->get();
+        return response()->json($filterLocation);
+    }
+    public function getIndexCart(){
+        return view('page.Cart');
     }
 }

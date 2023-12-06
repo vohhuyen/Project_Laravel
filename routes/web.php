@@ -37,4 +37,9 @@ Route::get('/adduser',[PageController::class, 'getadduser'])->name('adduser');
 Route::post('/adduser',[PageController::class, 'adduser']);
 
 Route::get('/design/{idProvider}/{idOPr}',[PageController::class, 'getIndexDesign'])->name('design');
-Route::post('/chooseColor/{idColor}/{idOPr}',[PageController::class, 'chooseColor'])->name('chooseColor');
+Route::get('/product',[PageController::class, 'getIndexProduct'])->name('product');
+Route::get('/filter-products/{idCategoryPrDetail}',[PageController::class, 'filterProduct']);
+Route::get('/filter-products-by-price/{minPrice}/{maxPrice}',[PageController::class, 'filterPriceProduct']);
+Route::get('/filter-provider-location/{idProvider}',[PageController::class, 'filterProviderLocation']);
+
+Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
