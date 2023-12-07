@@ -21,6 +21,9 @@ use App\Models\DetailProvider;
 use App\Models\Provider;
 use App\Models\OriginalProductDetail;
 use App\Models\categoryPr;
+use App\Models\Product;
+use App\Models\Cart;
+use App\Models\Shop;
 // use App\Models\categoryPrDetail;
 
 class PageController extends Controller
@@ -51,7 +54,7 @@ class PageController extends Controller
         ];
         if (Auth::attempt($login)) {
             $loggedInUser = auth()->user();
-            Session::put('User', $loggedInUser);
+            Session::put('user', $loggedInUser);
             // Truy vấn database để lấy thông tin user với email tương ứng
             $user = Users::where('Email', $loggedInUser->Email)->first();
             // Kiểm tra xem người dùng có tồn tại không và có thuộc tính 'role' không
@@ -163,6 +166,43 @@ public function unlock($idUser) {
                 window.location.assign("login");
             </script>
         ';
+    }
+    public function createShop(Request $request){
+        $input = $request->validate([
+            'nameShop' => 'required|string|unique:Shop',
+        ]);
+
+        $shop = new Shop();	
+
+        if ($request->hasFile('avatar')) {							
+            $fileavatar = $request->file('avatar');							
+            $fileNameAvatar = $fileavatar->getClientOriginalName('avatar');							
+            $fileavatar->move('image', $fileNameAvatar);							
+        }							
+        $file_name_avatar = null;							
+        if ($request->file('avatar') != null) {							
+            $file_name_avatar = $request->file('avatar')->getClientOriginalName();							
+        }
+
+        if ($request->hasFile('coverImage')) {							
+            $filecoverimage = $request->file('coverImage');							
+            $fileNameCoverImage = $filecoverimage->getClientOriginalName('coverImage');							
+            $filecoverimage->move('image', $fileNameCoverImage);							
+        }							
+        $file_name_cover_image = null;							
+        if ($request->file('coverImage') != null) {							
+            $file_name_cover_image = $request->file('coverImage')->getClientOriginalName();							
+        }
+        $idUser = Session::get('user.idUser');										
+        $shop->nameShop = $request->name;							
+        $shop->avataShop = $file_name_avatar;
+        $shop->coverImageShop = $file_name_cover_image;							
+        $shop->descriptionShop = $request->description;
+        $shop->locationShop = $request->location;
+        $shop->idShop = $idUser;													
+        $shop->save();							
+        return redirect('user');							
+
     }
 
     public function getIndexCategoryOPr(){
@@ -298,7 +338,7 @@ public function unlock($idUser) {
         $user->password = Hash::make($request->input('password'));
         $user->role = $request->input('role');
       
-            if($user->role=='User'){
+            if($user->role=='user'){
                 $user->role=1;}
                 else{
                     $user->role=2;
@@ -374,6 +414,47 @@ public function unlock($idUser) {
         return response()->json($filterLocation);
     }
     public function getIndexCart(){
-        return view('page.Cart');
+        // if(Session('cart')){
+        //     $oldCart = Session::get('cart');
+        //     $cart = new Cart($oldCart);
+        // }
+        // return view('page.Cart')->with(['cart' => Session::get('cart'),
+        //     'product_cart' => $cart->items,
+        //     'totalPrice' => $cart->totalPrice,
+        //     'totalQty' => $cart->totalQty
+        // ]);
+
+        $cart = null;  // Khởi tạo biến $cart
+    
+        if(Session('cart')){
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+        }
+        
+        return view('page.Cart')->with([
+            'cart' => Session::get('cart'),
+            'product_cart' => $cart ? $cart->items : null,
+            'totalPrice' => $cart ? $cart->totalPrice : null,
+            'totalQty' => $cart ? $cart->totalQty : null
+        ]);
     }
+    public function getAddToCart(Request $req, $idProduct){																			
+        if (Session::has('user')) {																			
+            if (Product::find($idProduct)) {																			
+                $product = Product::find($idProduct);																			
+                $oldCart = Session('cart') ? Session::get('cart') : null;																			
+                $cart = new Cart($oldCart);																			
+                $cart->addcart($product, $idProduct);																			
+                $req->session()->put('cart', $cart);																			
+                return redirect()->back();																			
+            } else {																			
+                return '<script>alert("Không tìm thấy sản phẩm này.");window.location.assign("/");</script>';																			
+            }																			
+        } else {																			
+            return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
+        }																			
+    }	
+    public function getIndexProductDetail(){
+        return view('page.ProductDetail');
+    }																		
 }

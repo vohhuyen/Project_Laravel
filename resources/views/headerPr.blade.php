@@ -256,11 +256,19 @@
                 <button class="openbtn disnone-all" onclick="openNav()">☰</button> 
                 <ul class="nav_bar-item-right">
                 @if(Session::has('user'))
-                    <a href="#" style="color: black; text-decoration: none;">
-                        <button class="btn-login px-3" style="background-color: white; color: black; width: auto;">
-                            <i class="fa-solid fa-user"></i>  {{Session('user')->Name}}
-                        </button>
-                    </a>
+                    <div class="dropdown">
+                        <!-- <a href="#" style="color: black; text-decoration: none;"> -->
+                            <button class="btn-login px-3 dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: white; color: black; width: auto;">
+                                <i class="fa-solid fa-user"></i>  {{Session('user')->Name}}
+                                <span class="caret"></span></button>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="fa-solid fa-list-check mx-2"></i> Order</a></li>
+                                <li data-toggle="modal" data-target="#btncreateshop"><a><i class="fa-solid fa-store mx-2"></i> Your shop</a></li>
+                                <li><a href="#"><i class="fa-solid fa-chart-column mx-2"></i> Revenue</a></li>
+                            </ul>
+                        <!-- </a> -->
+                    </div>
                     <a href="{{ route('logout') }}" style="color: black; text-decoration: none;">
                         <button class="btn-login">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>  Logout
@@ -300,7 +308,7 @@
                     <a href="#"><i class="far icon_header_body fa-heart"></i></a>
                 </div>
                 <div>
-                    <a href="./CART.html"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
+                    <a href="{{route('cart')}}"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
             <div class="bar">
@@ -311,7 +319,7 @@
                         <button class="btn-close" onclick="closeListbar()"></button>
                     </li>
                     
-                        <a href="./CART.html"><span class="icon_header_body fa-solid fa-cart-shopping"></span> Cart</a>
+                        <a href="{{route('cart')}}"><span class="icon_header_body fa-solid fa-cart-shopping"></span> Cart</a>
                     </li>
                     <li class="icon-user">
                         <a href="#"><span class="icon_header_body fa-solid fa-user"></span>Login </a>
@@ -321,4 +329,45 @@
         </div>
 
 </header>
-<div class="margin"></div>
+<div class="margin"></div><div class="modal fade" id="btncreateshop" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Create Shop</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            @include('error')
+                <form action="{{ route('createShop') }}" method="post" class="login-form w-100" enctype="multipart/form-data">
+                @csrf
+                    <div class="form-group">
+                        <label for='avatar'>Name shop</label>
+                        <input type="text" class="auth-form-input w-100" placeholder="Name" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for='avatar'>Description shop</label>
+                        <input type="area" class="auth-form-input w-100" placeholder="Description" id="description" name="description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for='avatar'>Location shop</label>
+                        <input type="text" class="auth-form-input w-100" placeholder="Location" id="location" name="location" required>
+                    </div>
+                    <div class="form-group">						
+                        <label for='avatar'>Avatar shop</label>						
+                        <input type="file" class="auth-form-input w-100" name="avatar" id="avatar" required>						
+                    </div>
+                    <div class="form-group">						
+                        <label for='coverImage'>Cover image shop</label>						
+                        <input type="file" class="auth-form-input w-100" name="coverImage" id="coverImage" required>						
+                    </div>	
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+                        <button type="submit" class="btn btn-danger">Save</button>	
+                    </div>				
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,12 +8,9 @@
                 <b class="title">YOUR CART</b>
               </li>
               <li>
-                <span class="title_item">4 products</span>
+                <span class="title_item">@if(Session::has('cart')){{Session('cart')->totalQty}}@else Trong @endif products</span>
               </li>
               <li class="navbar-separate3"></li>
-              <li>
-                <span class="title_item">$107,91</span>
-              </li>
             </ul>
             <div class="box_message">Free shipping when buying from 5 products - and many other offers</div>
             <div class="cart_separate1"></div>
@@ -22,7 +19,24 @@
           <div class="section_article">
             <table>
               <tbody>
-                <tr class="section_article-item">
+              @if(Session::has('cart'))
+              @foreach($product_cart as $product)
+                <tr class="section_article-item" id="cart-item{{$product['item']['id']}}">
+                    <td class="img_item"><img src="source/imageOPr/{{$product['item']['imagePr']}}" alt="product" /></td>
+                    <td class="infor_item">
+                      <b class="namePr">{{$product['item']['namePr']}}</b>
+                      <p class="if_item">Size M, cotton</p>
+                      <div class="if_item">tên shop</div>
+                    </td>
+                    <td><button class="button_item1">-</button></td>
+                    <td><div class="quantity_item">{{$product['qty']}}</div></td>
+                    <td><button class="button_item2">+</button></td>
+                    <td class="price1"><p>$ {{$product['item']['pricePr']}}</p></td>
+                    <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
+                </tr>
+              @endforeach
+              @endif
+                <!-- <tr class="section_article-item">
                     <td class="img_item"><img src="/img/product2.jpg" alt="product" /></td>
                     <td class="infor_item">
                       <b class="namePr">High quality men's and women's t-shirts</b>
@@ -34,11 +48,11 @@
                     <td><button class="button_item2">+</button></td>
                     <td class="price1"><p>$ 26,70</p></td>
                     <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
-          <div class="section_article-xs">
+          <!-- <div class="section_article-xs">
             <table>
               <tbody>
                 <tr class="section_article-item-xs">
@@ -119,7 +133,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> -->
 
           <div class="cart_separate1"></div>
         </div>
@@ -139,15 +153,15 @@
               <b class="sumary">Summary in order</b>
               <div class="space">
                 <p>Total product cost</p>
-                <p class="price2">$ 107,91</p>
+                <p class="price2">$ {{number_format(Session('cart')->totalPrice,  2, '.', ',')}}</p>
               </div>
               <div class="space">
                 <p>Standard delivery</p>
-                <p class="price2">$ 27,34</p>
+                <p class="price2">$ {{number_format(Session('cart')->standard,  2, '.', ',')}}</p>
               </div>
               <div class="space space2">
                 <p>Total payment :</p>
-                <p class="price2">$ 135,25</p>
+                <p class="price2">$ {{number_format(Session('cart')->totalPayment,  2, '.', ',')}}</p>
               </div>
             </div>
             <div class="transport">
@@ -155,9 +169,11 @@
               <a href="#">Edit</a>
             </div>
             <div class="delivery">
-              <p>Standard delivery: July 22 - July 25</p>
+              <p>Standard delivery: @if(Session::has('cart') && Session::get('cart')->futureDate1 && Session::get('cart')->futureDate2)
+    {{ Session::get('cart')->futureDate1->format('d/m') }} to {{ Session::get('cart')->futureDate2->format('d/m') }}
+@endif</p>
               <div class="pay">
-                <p>Billing: $ 135,25</p>
+                <p>Billing: $ {{number_format(Session('cart')->totalPayment,  2, '.', ',')}}</p>
               </div>
             </div>
             <div class="or">
@@ -166,9 +182,11 @@
               <div class="cart_separate3"></div>
             </div>
             <div class="delivery">
-              <p>Express delivery: July 15 - July 18</p>
+              <p>Express delivery:  @if(Session::has('cart') && Session::get('cart')->futureDate3 && Session::get('cart')->futureDate4)
+    {{ Session::get('cart')->futureDate3->format('d/m') }} to {{ Session::get('cart')->futureDate4->format('d/m') }}
+@endif</p>
               <div class="pay">
-                <p>Billing: $ 151,20</p>
+                <p>Billing: $ {{number_format(Session('cart')->Express,  2, '.', ',')}}</p>
               </div>
             </div>
           </div>

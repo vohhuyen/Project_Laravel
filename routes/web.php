@@ -42,4 +42,9 @@ Route::get('/filter-products/{idCategoryPrDetail}',[PageController::class, 'filt
 Route::get('/filter-products-by-price/{minPrice}/{maxPrice}',[PageController::class, 'filterPriceProduct']);
 Route::get('/filter-provider-location/{idProvider}',[PageController::class, 'filterProviderLocation']);
 
+Route::get('/product-detail',[PageController::class, 'getIndexProductDetail'])->name('product-detail');
+
 Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
+Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('addcart');
+
+Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');

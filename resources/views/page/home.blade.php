@@ -1,14 +1,14 @@
 @extends('masterPr')
 @section('contentPr')
 <div class="banner">
-        <div class="img-banner">
+        <div class="img-banner" style=" background: url(source/image/bannerhome.webp) center/cover; background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(source/image/bannerhome.webp), lightgray 50% / cover no-repeat;">
             <p>welcome to</p>
             <b class="text-summer">iMPRiNT</b><br><br>
             <span>Unique product floors created by independent designers</span> <br>
             <div class="button-banner">
                 <a href="/html/DESIGN.html"><b>Design Now</b></a>
                 <span>or</span>
-                <a href="/html/PRODUCTS.html"><b>Shop Now</b></a>
+                <a href="{{route('product')}}"><b>Shop Now</b></a>
             </div>
         </div>
     </div>

@@ -135,7 +135,7 @@
                                 <div class="d-flex justify-content-between">
                                     <b class="product_price ">${{$pr->pricePr}}</b>
                                         <div class="image-249-parent">
-                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <!-- <a href="{{route('addcart', $pr->idProduct)}}"><i class="fa-solid fa-cart-shopping"></i></a> -->
                                             <i class="fa-regular fa-heart"></i>
                                         </div>
                                 </div>
