@@ -24,3 +24,13 @@ Route::post('/login',[PageController::class, 'Login'])->name('login');
 Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->name('createAccount');
 Route::post('/createAccount',[PageController::class, 'createAccount']);
 Route::get('/reindex',[PageController::class, 'Logout'])->name('logout');
+
+Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete']);														
+// Route::get('/admin', [PageController::class, 'getIndexAdmin']);											
+Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');														
+Route::post('/admin-add-form', [PageController::class, 'postAdminAdd']);											
+Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
+Route::post('/admin-edit',[PageController::class, 'postAdminEdit']);
+
+Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');		
+										
