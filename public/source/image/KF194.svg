@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" height="36px" version="1.1" viewBox="0 0 40 36" width="40px">
+    
+    <title>aop</title>
+    <desc>Created with Sketch.</desc>
+    <defs/>
+    <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1">
+        <g fill="#1B1B1B" fill-rule="nonzero" id="aop">
+            <path d="M20,12 L20,17.8 L30.9,11 L20,4.2 L20,10 C11.5,10 6,7.6 6,6 C6,4.4 11.5,2 20,2 C28.5,2 34,4.4 34,6 L36,6 C36,2.1 28,0 20,0 C12,0 4,2.1 4,6 C4,9.9 12,12 20,12 Z M22,7.8 L27.1,11 L22,14.2 L22,7.8 Z" id="Shape"/>
+            <path d="M20,22 C10.3,22 0,24.5 0,29 C0,33.5 10.3,36 20,36 L20,34 C8.8,34 2,31.1 2,29 C2,26.9 8.8,24 20,24 C31.2,24 38,26.9 38,29 L40,29 C40,24.5 29.7,22 20,22 Z" id="Shape"/>
+        </g>
+    </g>
+</svg>

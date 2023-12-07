@@ -34,3 +34,26 @@ Route::post('/admin-edit',[PageController::class, 'postAdminEdit']);
 
 Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');		
 										
+Route::get('/Category-opr',[PageController::class, 'getIndexCategoryOPr'])->name('categoryopr');
+Route::get('/opr-detail/{idOPr}',[PageController::class, 'getIndexOPrDetail'])->name('opr-detail');
+Route::get('/list-user',[PageController::class, 'getuser'])->name('list-user');
+// Route::post('/list-user',[PageController::class, 'adduser'])->name('adduser');
+Route::post('/lockup/{idUser}', [PageController::class, 'lockup'])->name('lockup');
+Route::post('/Unlock/{idUser}', [PageController::class, 'Unlock'])->name('Unlock');
+Route::post('/delete-user/{idUser}', [PageController::class, 'deleteUser'])->name('delete-user');
+
+Route::get('/adduser',[PageController::class, 'getadduser'])->name('adduser');
+Route::post('/adduser',[PageController::class, 'adduser']);
+
+Route::get('/design/{idProvider}/{idOPr}',[PageController::class, 'getIndexDesign'])->name('design');
+Route::get('/product',[PageController::class, 'getIndexProduct'])->name('product');
+Route::get('/filter-products/{idCategoryPrDetail}',[PageController::class, 'filterProduct']);
+Route::get('/filter-products-by-price/{minPrice}/{maxPrice}',[PageController::class, 'filterPriceProduct']);
+Route::get('/filter-provider-location/{idProvider}',[PageController::class, 'filterProviderLocation']);
+
+Route::get('/product-detail',[PageController::class, 'getIndexProductDetail'])->name('product-detail');
+
+Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
+Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('addcart');
+
+Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');

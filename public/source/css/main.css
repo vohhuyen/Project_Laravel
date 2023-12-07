@@ -52,6 +52,17 @@ html{
     background-color: rgba(128, 128, 128, 0.247);
     border: 1px solid white;
 }
+.dropdown-menu > li{
+    margin: 10px 0;
+}
+.dropdown-menu > li > a{
+    font-size: 1.5rem;
+    padding: 10px 10px;
+   
+}
+.dropdown-menu > li > a:hover{
+    color: #fe5454;
+}
 /* NAVBAR */
 .nav_bar{
     height: var(--header-navbar);
