@@ -48,3 +48,5 @@ Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
 Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('addcart');
 
 Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');
+
+Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');
