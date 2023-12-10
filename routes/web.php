@@ -63,3 +63,13 @@ Route::post('/admin-edit',[PageController::class, 'postProductEdit'])->name('adm
 // Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');																		
 // Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
 
+
+
+Route::get('/addOPr',[PageController::class, 'getaddOPr'])->name('addOPr');
+Route::post('/addOPr',[PageController::class, 'addOPr']);
+
+Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->name('originalproduct');
+// Route::post('/originalproduct',[PageController::class, 'originalproduct']);
+// Route::get('/addInfo',[PageController::class, 'getaddInfo'])->name('addInfo');
+// Route::post('/addInfo',[PageController::class, 'addInfo']);
+
