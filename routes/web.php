@@ -33,3 +33,12 @@ Route::post('/delete-user/{idUser}', [PageController::class, 'deleteUser'])->nam
 
 Route::get('/adduser',[PageController::class, 'getadduser'])->name('adduser');
 Route::post('/adduser',[PageController::class, 'adduser']);
+
+Route::get('/addOPr',[PageController::class, 'getaddOPr'])->name('addOPr');
+Route::post('/addOPr',[PageController::class, 'addOPr']);
+
+Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->name('originalproduct');
+// Route::post('/originalproduct',[PageController::class, 'originalproduct']);
+// Route::get('/addInfo',[PageController::class, 'getaddInfo'])->name('addInfo');
+// Route::post('/addInfo',[PageController::class, 'addInfo']);
+

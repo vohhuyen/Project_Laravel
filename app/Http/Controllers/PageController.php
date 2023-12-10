@@ -1,16 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
+// use Illuminate\Support\Facades\image_opr;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\User;
+use App\Models\idinputkf;
+use App\Models\inputkf;
+use App\Models\idOPrDetail;
+use App\Models\idinputci;
+use App\Models\inputci;
+use App\Models\color;
+use App\Models\idColor;
+use App\Models\originalproducts;
+use App\Models\idOPr;
+use App\Models\sizeguide;
+use App\Models\idSizeGuide;
+use App\Models\size;
+use App\Models\idSize;
+use App\Models\category_opr_detail;
+use App\Models\idCategoryOPrDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\middleware;
 use App\Models\idUser;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -199,6 +215,112 @@ public function unlock($idUser) {
 
         return redirect()->route('list-user')->with('success', 'User deleted successfully');
     }
-   
 
-}
+
+
+
+   
+    public function getoriginalproduct(){	
+        $originalproducts = originalproducts::all(); // Lấy danh sách người dùng từ cơ sở dữ liệu
+        // $originalproducts = DB::table('OriginalProducts')
+        //     ->join('OriginalProductsDetail','OriginalProductsDetail.idOPr','=','OriginalProducts.idOPr')
+        //     ->join('image_OPr','image_OPr.idOPrDetail','=','OriginalProductsDetail.idOPrDetail')
+        //     ->select('OriginalProducts.*','OriginalProductsDetail.*','image_OPr.*','OriginalProducts.idOPr as id')
+        //     ->first();             ccvbn
+        return view('admin.originalproduct', ['originalproducts' => $originalproducts]);	
+        
+    	// dd($originalproducts);
+    }
+
+    // public function getoriginalproduct() {
+    //     try {
+    //         $originalproducts = DB::table('OriginalProducts')
+    //             ->join('OriginalProductsDetail', 'OriginalProductsDetail.idOPr', '=', 'OriginalProducts.idOPr')
+    //             ->join('image_OPr', 'image_OPr.idOPrDetail', '=', 'OriginalProductsDetail.idOPrDetail')
+    //             // ->select('OriginalProducts.*', 'image_OPr')
+    //             ->select('OriginalProducts.*', 'image_OPr.column1')
+
+    //             ->first();
+    
+    //         if (!$originalproducts) {
+    //             throw new \Exception("Không có dữ liệu trả về từ cơ sở dữ liệu.");
+    //         }
+    
+    //         return view('admin.originalproduct', ['originalproducts' => $originalproducts]);
+    //     } catch (\Exception $e) {
+    //         // Ghi log hoặc hiển thị thông báo lỗi
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+    
+
+    public function getaddOPr(){	
+        	
+    	$originalproducts = originalproducts::all();
+        $category_opr_detail=category_opr_detail::all();
+        $inputkf=inputkf::all();
+        $inputci=inputci::all();
+        $color=color::all();
+
+    //    dd($category_opr_detail);
+        // return view('admin.addOPr', ['originalproducts' => $originalproducts], ['category_opr_detail' => $category_opr_detail]);	
+        return view('admin.addOPr', compact('originalproducts','category_opr_detail','color','inputci','inputkf'));
+        }
+    
+
+    public function addOPr(Request $request){		
+    	$originalproducts = new originalproducts;
+        if($request->hasFile('inputImage') ){
+            $file=$request->file('inputImage');
+            $fileName=$file->getClientOriginalName('inputImage');
+            $file->move('source/imageOPr',$fileName);
+        }
+        $file_name = null;
+        if($request->file('inputImage') !=null){
+            $file_name = $request->file('inputImage')->getClientOriginalName();
+        }
+        $originalproducts->idCategoryOPrDetail = $request->input('idCategoryOPrDetail');
+        $originalproducts->nameOPr = $request->input('nameOPr');
+        $originalproducts->descriptionOPr = $request->input('descriptionOPr');
+        $originalproducts->aboutOPr = $request->input('aboutOPr');
+        $originalproducts->image =  $file_name;
+        $originalproducts->save();
+        $sizeguide = new sizeguide;
+        $sizeguide->idSizeGuide = $request->input('idSizeGuide');
+        $sizeguide->Width = $request->input('Width');
+        $sizeguide->lenght = $request->input('lenght');
+        $sizeguide->sleeveLength = $request->input('sleeveLength');
+        $sizeguide->save();
+
+       
+        // dd($originalproducts);
+         // Lấy id của sản phẩm vừa được tạo
+        // Lấy id lớn nhất
+        // $maxidOPr= originalproducts::max('idOPr');
+        // dd($maxidOPr);
+        return redirect()->route('addOPr')->with('success', 'Sản phẩm đã được tạo thành công. ID: ' . $originalproducts);
+
+    }
+
+    // public function getaddInfo(){
+    //     return view('admin.addOPr');	
+    // 	}
+
+    // public function addInfo(Request $request){	
+    //     $sizeguide = new sizeguide;
+    //     $sizeguide->idSizeGuide = $request->input('idSizeGuide');
+    //     $sizeguide->Width = $request->input('Width');
+    //     $sizeguide->lenght = $request->input('lenght');
+    //     $sizeguide->SleeveLength = $request->input('SleeveLength');
+    //     $sizeguide->save();
+    //     // $size = new size;
+    //     // $size->NameSize = $request->input('NameSize');
+    //     // $size->idSize = $request->input('idSize');
+    //     // $size->save();
+    //     return redirect()->route('originalproduct');
+
+    // 	}
+   
+   
+    
+    }

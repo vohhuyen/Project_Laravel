@@ -105,8 +105,12 @@ td{
 thead{
     height: 50px;
 }
-tr{
-    text-align: center;
+tr, th{
+    text-align: center !important;
+    
+}
+td{
+    vertical-align: middle !important;
 }
 
 
