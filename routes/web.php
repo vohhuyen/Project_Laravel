@@ -49,4 +49,17 @@ Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('
 
 Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');
 
+
+Route::get('/admin-product', [PageController::class, 'getProductAdd'])->name('admin-product');
 Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');
+Route::get('/get-colors-by-provider', [PageController::class, 'getColorsByProvider'])->name('get-colors-by-provider');
+Route::post('/admin-add-form', [PageController::class, 'postProductAdd']);	
+Route::post('/admin-product-delete/{id}', [PageController::class, 'postProductDelete'])->name('admin-product-delete');	
+Route::get('/get-products-infor', [PageController::class, 'getUpdateProductInfor'])->name('get-products-infor');
+Route::post('/admin-edit',[PageController::class, 'postProductEdit'])->name('admin-edit');
+
+
+// // Route::get('/admin', [PageController::class, 'getIndexAdmin']);											
+// Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');																		
+// Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
+

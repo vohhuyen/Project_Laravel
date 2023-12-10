@@ -197,6 +197,7 @@ return new class extends Migration
             $products->foreign('idShop')->references('idShop')->on('Shop');
             $products->foreign('idCategoryPrDetail')->references('idCategoryPrDetail')->on('category_Pr_Detail');
             $products->foreign('idProvider')->references('idProvider')->on('Providers');
+            $products->foreign('colorPr')->references('idColor')->on('Color');
             $products->timestamps();
         });
         Schema::create('image_Pr', function(Blueprint $imagePr){

@@ -24,7 +24,8 @@ use App\Models\categoryPr;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Shop;
-// use App\Models\categoryPrDetail;
+use App\Models\Color;
+use App\Models\categoryPrDetail;
 
 class PageController extends Controller
 {
@@ -457,26 +458,36 @@ class PageController extends Controller
 
 
     // bai cua Hieu
-    public function getAdminAdd()
-    {
-        $products = DB::table('products')->join('Providers', 'Providers.idProvider', '=', 'products.idProvider')
-            ->orderBy('Providers.idProvider', 'DESC')
-            ->select([
-                'products.idProvider as idProviderProduct', 'Providers.idProvider as idProviderProvider',
-                'products.*',
-                'Providers.*'
-            ])->get();
-        $ids = Product::pluck('idProvider');
-        $idColor = Product::pluck('colorPr');
-        $providers = Provider::orderBy('idProvider', 'DESC')->get();
+    public function getProductAdd()
+        {
         $color = Color::orderBy('idColor', 'DESC')->get();
-        $category_pr = Category_pr::all();
-        $originalproducts = Nameproduct::all();
+        $products = Product::join('Providers', 'Providers.idProvider', '=', 'products.idProvider')
+        ->orderBy('Products.idProduct', 'ASC')
+        ->select([
+            'products.idProvider as idProviderProduct', 'Providers.idProvider as idProviderProvider',
+            'products.*',
+            'Providers.*'
+        ])
+        ->get()
+        ->toArray();
+        $colors = Color::orderBy('idColor', 'DESC')->get()->keyBy('idColor')->toArray();
+        // Gán màu sắc cho từng sản phẩm
+        foreach ($products as &$product) {
+            $product['color'] = $colors[$product['colorPr']] ?? null;
+        }
+        // dd($products);
+        $category_pr = CategoryPrDetail::all();
+        $category_pr_detail = CategoryPrDetail::all();
+        $originalproducts = OriginalProduct::all();
+        $originalproduct = OriginalProduct::all();
         $shop = Shop::all();
-        return view('admin.product', compact('products', 'providers', 'color', 'category_pr', 'originalproducts', 'shop'));
+        $shops = Shop::all();
+        $providers = Provider::orderBy('idProvider', 'ASC')->get();
+        $provider = Provider::orderBy('idProvider', 'ASC')->get();
+        return view('admin.product', compact('products', 'providers','provider', 'color', 'category_pr', 'category_pr_detail', 'originalproducts', 'originalproduct', 'shop', 'shops'));
     }
-    public function postAdminAdd(Request $request)
-    {
+    public function postProductAdd(Request $request)
+        {
         $product = new Product();
         if ($request->hasFile('productImage')) {
             $file1 = $request->file('productImage');
@@ -497,41 +508,88 @@ class PageController extends Controller
         if ($request->file('designImage') != null) {
             $file_design_image = $request->file('designImage')->getClientOriginalName();
         }
+        $idOPr = $request->input('name_product');
+        $namePr = OriginalProduct::where('idOPr', $idOPr)->value('nameOPr');
 
-       
+        $idColor = $request->input('name_color');
+        $idOPrDe = OriginalProductDetail::where('idColor', $idColor)->where('idOPr', $idOPr)->value('idOPrDetail');
+        $product->idOPrDetail = $idOPrDe;
+        $product->idShop = $request->input('idShop');
         $product->idCategoryPrDetail = $request->input('categories');
-        $product->namePr = $request->input('name_product') .' '. $request->input('NameDesign');
-        $product->idProvider = $request->input('provider');
-        $product->colorPr = $request->input('color');
+        $product->idProvider = $request->input('name_provider');
         $product->imagePr = $file_product_image;
+        $product->namePr = $request->input('NameDesign') .' '. $namePr;
+        $product->pricePr = $request->input('productPrice');
+        $product->colorPr = $request->input('name_color');
         $product->imageDesign =  $file_design_image;
         $product->nameDesign = $request->input('NameDesign');
-        $product->idShop = $request->input('idShop');
-        $product->pricePr = $request->input('productPrice');
         $product->descriptionDesign = $request->input('description');
         $product->note = $request->input('note');
-
-        $idColor =$request->input('color');
-        $nameOPr = $request->input('name_product');
-        $idOPr = Nameproduct::where('nameOPr', $nameOPr)->value('idOPr');
-        $idOPrDetail = originalproducts::where('idColor', $idColor)->where('idOPr', $idOPr)->value('idOPrDetail');
-        $product->idOPrDetail = $idOPrDetail;
         $product->save();
 
-
-
-          return $this->getIndexAdmin();							
+        return redirect()->route('admin-product');							
     
     }
-    public function getAdminEdit($id)
-    {
-        $product = Product::find($id);
-        return view('pageadmin.formEdit')->with('product',$product);
+    public function getCategoryById(Request $request){
+        $id = $request->query('id');
+        // $product = Product::where('idCategoryPrDetail', $id)->get();
+        $provider = DB::table('OriginalProducts')
+        ->join('DetailProvider', function ($join) use ($id) {
+            $join->on('DetailProvider.idOPr', '=', 'OriginalProducts.idOPr')
+                ->where('DetailProvider.idOPr', '=', $id);
+        })
+        ->join('Providers', 'DetailProvider.idProvider', '=', 'Providers.idProvider')
+        ->select('Providers.*') 
+        ->get();
+        // $provider = DB::table('products');
+        return response()->json([
+            'data' => $provider
+        ]);
     }
-
-    public function postAdminEdit(Request $request)
+    public function getColorsByProvider(Request $request){
+        $idOPr = $request->query('idOPr');
+        $idProvider = $request->query('idProvider');
+        $colors = DB::table('Color')
+        ->join('OriginalProductsDetail', 'Color.idColor', '=', 'OriginalProductsDetail.idColor')
+        ->join('DetailSize', 'OriginalProductsDetail.idOPrDetail', '=', 'DetailSize.idOPrDetail')
+        ->where('OriginalProductsDetail.idOPr', '=', $idOPr)
+        ->where('DetailSize.idProvider', '=', $idProvider)
+        ->select('Color.*')
+        ->get();
+        $originalPrice = DetailProvider::where('idOPr', $idOPr)
+        ->where('idProvider', $idProvider)
+        ->first();
+        return response()->json([
+            'data' => $colors,
+            'originalPrice' => $originalPrice,
+        ]);
+    }
+    public function postProductDelete($id)
+        {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('admin-product');
+    }
+    public function getUpdateProductInfor(Request $request){
+        $idProduct = $request->query('productId');
+        $productinfor = DB::table('Products')->where('Products.idProduct','=',$idProduct)
+            ->join('Shop', 'Shop.idShop', '=','Products.idShop')
+            ->join('category_Pr_Detail', 'category_Pr_Detail.idCategoryPrDetail', '=', 'Products.idCategoryPrDetail')
+            ->join('Providers', 'Providers.idProvider', '=', 'Products.idProvider')
+            ->join('Color', 'Color.idColor','=','Products.colorPr')
+            ->join('OriginalProductsDetail','OriginalProductsDetail.idOPrDetail','=','Products.idOPrDetail')
+            ->join('OriginalProducts', 'OriginalProducts.idOPr','=','OriginalProductsDetail.idOPr')
+            ->select('Products.*', 'Shop.*', 'category_Pr_Detail.*','Providers.*','OriginalProducts.*','Color.*')
+            ->get();
+        // dd($productinfor);
+        return response()->json([
+            'data' => $productinfor
+        ]);
+    }
+    public function postProductEdit(Request $request)
     {
-        $id = $request->editId;
+        $id = $request->idProduct;
+        $product = Product::find($id);
         if ($request->hasFile('productImage')) {
             $file1 = $request->file('productImage');
             $fileproductImage = $file1->getClientOriginalName('productImage');
@@ -551,42 +609,25 @@ class PageController extends Controller
         if ($request->file('designImage') != null) {
             $file_design_image = $request->file('designImage')->getClientOriginalName();
         }
-        
-        $product = Product::find($id);
-        if($request->hasFile('editImage')) {
-            $file = $request->file('editImage');
-            $fileName = $file->getClientOriginalName('editImage');
-            $file->move('source/image/product',$fileName);
-        }
+        $idOPr = $request->input('nameproduct');
+        $namePr = OriginalProduct::where('idOPr', $idOPr)->value('nameOPr');
 
-        if($request->file('editImage') != null) {
-            $product->image = $fileName;
-        }
-
+        $idColor = $request->input('namecolor');
+        $idOPrDe = OriginalProductDetail::where('idColor', $idColor)->where('idOPr', $idOPr)->value('idOPrDetail');
+        $product->idOPrDetail = $idOPrDe;
+        $product->idShop = $request->input('idShop');
         $product->idCategoryPrDetail = $request->input('categories');
-        $product->namePr = $request->input('name_product') .' '. $request->input('NameDesign');
-        $product->idProvider = $request->input('provider');
-        $product->colorPr = $request->input('color');
+        $product->idProvider = $request->input('nameprovider');
         $product->imagePr = $file_product_image;
+        $product->namePr =  $request->input('NameDesign') .' '. $namePr;
+        $product->pricePr = $request->input('productPrice');
+        $product->colorPr = $request->input('namecolor');
         $product->imageDesign =  $file_design_image;
         $product->nameDesign = $request->input('NameDesign');
-        $product->idShop = $request->input('idShop');
-        $product->pricePr = $request->input('productPrice');
         $product->descriptionDesign = $request->input('description');
         $product->note = $request->input('note');
-        return $this->getIndexAdmin();
-    }
-    public function postAdminDelete($id)
-    {
-        $product = Product::find($id);
-        $product->delete();
-        return $this->getIndexAdmin();
-    }
-    public function getCategoryById(Request $request){
-        $id = $request->query('id');
-        $product = Product::where('idCategoryPrDetail', $id)->get();
-        return response()->json([
-            'data' => $product
-        ]);
-    }
+        $product->save();
+
+        return redirect()->route('admin-product');
+    }    
 }
