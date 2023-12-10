@@ -59,12 +59,6 @@ Route::get('/get-products-infor', [PageController::class, 'getUpdateProductInfor
 Route::post('/admin-edit',[PageController::class, 'postProductEdit'])->name('admin-edit');
 
 
-// // Route::get('/admin', [PageController::class, 'getIndexAdmin']);											
-// Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');																		
-// Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
-
-
-
 Route::get('/addOPr',[PageController::class, 'getaddOPr'])->name('addOPr');
 Route::post('/addOPr',[PageController::class, 'addOPr']);
 

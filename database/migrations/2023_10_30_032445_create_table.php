@@ -13,7 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-       
         Schema::create('inputkf', function (Blueprint $inputkf) {
             $inputkf->increments('idinputkf');
             $inputkf->string('Nameinputkf');

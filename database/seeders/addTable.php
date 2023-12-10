@@ -64,7 +64,6 @@ class addTable extends Seeder
             ['imageinputkf'=>'k747.svg','Nameinputkf'=>'Teddy Bear']
            
         ]);
-
         \DB::table('inputci')->insert([
             ['imageinputci'=>'k601.svg','description'=>'Machine wash: warm (max 40C or 105F);'],
             ['imageinputci'=>'k602.svg','description'=>'Bleach as needed;'],
