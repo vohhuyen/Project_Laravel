@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nameproduct extends Model
+class inputci extends Model
 {
-    protected $table = "OriginalProducts";
+    use HasFactory;
+    protected $primaryKey = 'idinputci';
+    protected $table = "inputci";
 }

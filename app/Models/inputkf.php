@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class inputkf extends Model
 {
     use HasFactory;
-    protected $table = "Cart";
-
+    protected $primaryKey = 'idinputkf';
+    protected $table = "inputkf";
 }

@@ -13,6 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('inputkf', function (Blueprint $inputkf) {
+            $inputkf->increments('idinputkf');
+            $inputkf->string('Nameinputkf');
+            $inputkf->string('imageinputkf');
+            $inputkf->text('description')->nullable()->change();
+        });
+        Schema::create('inputci', function (Blueprint $inputci) {
+            $inputci->increments('idinputci');
+            $inputci->string('imageinputci');
+            $inputci->longText('description');
+        });
         Schema::create('Color', function (Blueprint $Color) {
             $Color->increments('idColor');
             $Color->string('NameColor');
@@ -197,6 +208,7 @@ return new class extends Migration
             $products->foreign('idShop')->references('idShop')->on('Shop');
             $products->foreign('idCategoryPrDetail')->references('idCategoryPrDetail')->on('category_Pr_Detail');
             $products->foreign('idProvider')->references('idProvider')->on('Providers');
+            $products->foreign('colorPr')->references('idColor')->on('Color');
             $products->timestamps();
         });
         Schema::create('image_Pr', function(Blueprint $imagePr){
@@ -300,6 +312,8 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('inputkf');
+        Schema::dropIfExists('inputci');
         Schema::dropIfExists('Color');
         Schema::dropIfExists('Size');
         Schema::dropIfExists('Users');

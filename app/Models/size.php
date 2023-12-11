@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class originalproducts extends Model
+class size extends Model
 {
     use HasFactory;
-    protected $table = "OriginalProductsDetail";
+    protected $primaryKey = 'idSize';
+    protected $table = "size";
 }

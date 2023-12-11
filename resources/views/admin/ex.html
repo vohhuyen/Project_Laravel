@@ -1,0 +1,207 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Selected Option Content with Input</title>
+</head>
+<body>
+    <label for="options">Choose options:</label>
+    <select id="options" onchange="showSelectedOptionContent()">
+        <option value="option1" data-content="Content for Option 1">Option 1</option>
+        <option value="option2" data-content="Content for Option 2">Option 2</option>
+        <option value="option3" data-content="Content for Option 3">Option 3</option>
+    </select>
+
+    <div id="selectedOptionsContent">
+        <label for="content">Selected Option Content:</label>
+        <div id="content"></div>
+    </div>
+
+    <script>
+        var selectedOptions = [];
+        var caretPosition = 0;
+
+        function showSelectedOptionContent() {
+            var dropdown = document.getElementById("options");
+            var selectedOption = dropdown.options[dropdown.selectedIndex];
+            var contentDiv = document.getElementById("content");
+
+            // Lưu trạng thái con trỏ chuột
+            var input = document.getElementById("additionalInfo");
+            caretPosition = input ? input.selectionStart || 0 : 0;
+
+            // Lấy nội dung từ thuộc tính data-content của option
+            var optionContent = selectedOption.getAttribute("data-content");
+
+            // Lấy giá trị từ ô input
+            var inputValue = input ? input.value : "";
+
+            // Thêm nội dung và giá trị từ ô input vào mảng selectedOptions
+            selectedOptions.push({ optionContent, inputValue });
+
+            // Hiển thị nội dung và giá trị của tất cả các tùy chọn đã chọn
+            contentDiv.innerHTML = selectedOptions.map(option => `${option.optionContent} - ${option.inputValue}`).join("<br>");
+
+            // Xóa ô input hiện tại
+            if (input) {
+                input.remove();
+            }
+
+            // Tạo và hiển thị ô input mới
+            var inputLabel = document.createElement("label");
+            var inputElement = document.createElement("input");
+
+            inputLabel.textContent = "Enter additional information:";
+            inputElement.type = "text";
+            inputElement.id = "additionalInfo";
+            inputElement.value = inputValue;
+
+            contentDiv.appendChild(inputLabel);
+            contentDiv.appendChild(inputElement);
+
+            // Đặt lại con trỏ chuột vào cuối ô input
+            inputElement.setSelectionRange(caretPosition, caretPosition);
+            inputElement.focus();
+        }
+    </script>
+</body>
+</html> -->
+<!-- ----------------------------------------------------------------------------------------------------gjghjtfhgjthg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Selected Option Content with Input</title>
+    <style>
+        #selectedOptionsContent {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #content {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+        }
+
+        input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <label for="options">Choose options:</label>
+    <select id="options" onchange="showSelectedOptionContent()">
+        <option value="option1" data-content="Content for Option 1">Option 1</option>
+        <option value="option2" data-content="Content for Option 2">Option 2</option>
+        <option value="option3" data-content="Content for Option 3">Option 3</option>
+    </select>
+
+    <div id="selectedOptionsContent">
+        <label for="content">Selected Option Content:</label>
+        <div id="content"></div>
+    </div>
+
+    <script>
+        var selectedOptions = [];
+        var caretPosition = 0;
+        var inputElement;
+
+        function showSelectedOptionContent() {
+            var dropdown = document.getElementById("options");
+            var selectedOption = dropdown.options[dropdown.selectedIndex];
+            var contentDiv = document.getElementById("content");
+
+            // Lưu trạng thái con trỏ chuột
+            caretPosition = inputElement ? inputElement.selectionStart || 0 : 0;
+
+            // Lấy nội dung từ thuộc tính data-content của option
+            var optionContent = selectedOption.getAttribute("data-content");
+
+            // Lấy giá trị từ ô input
+            var inputValue = inputElement ? inputElement.value : "";
+
+            // Thêm nội dung và giá trị từ ô input vào mảng selectedOptions
+            selectedOptions.push({ optionContent, inputValue });
+
+            // Hiển thị nội dung và giá trị của tất cả các tùy chọn đã chọn
+            contentDiv.innerHTML = selectedOptions.map(option => `${option.optionContent} - ${option.inputValue}`).join("<br>");
+
+            // Xóa ô input hiện tại
+            if (inputElement) {
+                inputElement.remove();
+            }
+
+            // Tạo và hiển thị ô input mới
+            var inputLabel = document.createElement("label");
+            inputElement = document.createElement("input");
+
+            inputLabel.textContent = "Enter additional information:";
+            inputElement.type = "text";
+            inputElement.id = "additionalInfo";
+            inputElement.value = inputValue;
+
+            contentDiv.appendChild(inputLabel);
+            contentDiv.appendChild(inputElement);
+
+            // Đặt lại con trỏ chuột vào cuối ô input
+            inputElement.setSelectionRange(caretPosition, caretPosition);
+            inputElement.focus();
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Selected Nameinputkf</title>
+    <style>
+        #nameInputList {
+            margin-top: 10px;
+        }
+
+        #selectedNames {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="idinputkf">Key Feature:</label>
+        <select name="idinputkf" id="idinputkf" onchange="showNameInputkf()">
+            <!-- Điền dữ liệu từ database hoặc mock data -->
+            <option value="1">Nameinputkf 1</option>
+            <option value="2">Nameinputkf 2</option>
+            <option value="3">Nameinputkf 3</option>
+        </select>
+    </div>
+
+    <div id="nameInputList">
+        <label for="nameInputkf">Selected Nameinputkf:</label>
+        <ul id="selectedNames"></ul>
+    </div>
+
+    <script>
+        function showNameInputkf() {
+            var select = document.getElementById("idinputkf");
+            var selectedName = select.options[select.selectedIndex].text;
+
+            var selectedNamesList = document.getElementById("selectedNames");
+            var listItem = document.createElement("li");
+            listItem.textContent = selectedName;
+
+            selectedNamesList.appendChild(listItem);
+
+            // Đặt lại giá trị của select về giá trị mặc định
+            select.selectedIndex = 0;
+        }
+    </script>
+</body>
+</html>

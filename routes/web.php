@@ -57,3 +57,22 @@ Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
 Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('addcart');
 
 Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');
+
+
+Route::get('/admin-product', [PageController::class, 'getProductAdd'])->name('admin-product');
+Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');
+Route::get('/get-colors-by-provider', [PageController::class, 'getColorsByProvider'])->name('get-colors-by-provider');
+Route::post('/admin-add-form', [PageController::class, 'postProductAdd']);	
+Route::post('/admin-product-delete/{id}', [PageController::class, 'postProductDelete'])->name('admin-product-delete');	
+Route::get('/get-products-infor', [PageController::class, 'getUpdateProductInfor'])->name('get-products-infor');
+Route::post('/admin-edit',[PageController::class, 'postProductEdit'])->name('admin-edit');
+
+
+Route::get('/addOPr',[PageController::class, 'getaddOPr'])->name('addOPr');
+Route::post('/addOPr',[PageController::class, 'addOPr']);
+
+Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->name('originalproduct');
+// Route::post('/originalproduct',[PageController::class, 'originalproduct']);
+// Route::get('/addInfo',[PageController::class, 'getaddInfo'])->name('addInfo');
+// Route::post('/addInfo',[PageController::class, 'addInfo']);
+

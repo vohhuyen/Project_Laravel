@@ -57,6 +57,7 @@ td, th{
     text-align: center;
     background-color: white;
 }
+
 .delete{
     width: 80px;
     height: 25px;
@@ -105,8 +106,12 @@ td, th{
 thead{
     height: 50px;
 }
-tr{
-    text-align: center;
+tr, th{
+    text-align: center !important;
+    
+}
+td{
+    vertical-align: middle !important;
 }
 
 

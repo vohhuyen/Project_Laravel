@@ -1,0 +1,138 @@
+
+.title{
+    text-align: center;
+  color: #fe5454;
+}
+
+.input{
+    
+    border: 1px solid #56aef485;
+    margin-bottom: 1rem;
+    width: 95%;
+    padding: 13px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #f7f8f97a;
+}
+.save,.cancel,.clear{
+    display: right;
+    margin-left: 10px;
+    background: #fe5454;
+    border: none;
+    width: 10%;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 5px;
+    flex: 1;
+    cursor: pointer;
+    padding:15px;
+}
+.Exit{
+    background: #fe5454;
+    border: none;
+    width: auto;
+    color: #fff;
+    font-weight: 500px;
+    border-radius: 5px;
+    flex: 1;
+    margin-right: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding:13px;
+}
+/* form chọn màu */
+.color-buttons {
+    flex-wrap: wrap;
+}
+
+.color-button {
+    border: 1px solid #56aef485;
+    margin-bottom: 1rem;
+    width: 30%;
+    padding: 13px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #f7f8f97a;
+}
+
+.color-form {
+    display: none;
+}
+
+.color-form.active {
+    display: block;
+}
+
+.image-upload {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.input1{
+        flex-direction: row;
+        align-items: flex-start;
+}
+/* .input2{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+} */
+.color-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.color-list li {
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ccc;
+}
+
+.color-form {
+    display: none;
+}
+
+.color-form.active {
+    display: block;
+}
+
+.image-upload {
+    margin-bottom: 10px;
+}
+.horizontal-line {
+    border-top: 1px solid black;
+  }
+
+.input3{
+    flex-direction: row;
+        align-items: flex-start;
+}
+.SizeName{
+    border: 1px solid #56aef485;
+    margin-bottom: 1rem;
+    width: 10%;
+    padding: 13px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #f7f8f97a;
+}
+.a1{
+    border: 1px solid #56aef485;
+    margin-bottom: 1rem;
+    width: 25%;
+    padding: 13px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #f7f8f97a;
+}
+/* ------------------------------------------------keyFeature =--------------------------------------------------------*/
+.key-feature-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details-container {
+    display: none;
+  }
