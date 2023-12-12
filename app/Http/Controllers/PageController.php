@@ -14,6 +14,12 @@ use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Comment;
+use App\Models\size;
+use App\Models\DetailSize;
+use App\Models\sizeguide;
+use App\Models\inputkf;
+use App\Models\inputci;
 use App\Models\categoryOPr;
 use App\Models\categoryOPrDetail;
 use App\Models\OriginalProduct;
@@ -26,6 +32,7 @@ use App\Models\Cart;
 use App\Models\Shop;
 use App\Models\Color;
 use App\Models\categoryPrDetail;
+
 
 
 class PageController extends Controller
@@ -367,7 +374,7 @@ class PageController extends Controller
 
    
     public function getoriginalproduct(){	
-        $originalproducts = originalproducts::all(); // Lấy danh sách người dùng từ cơ sở dữ liệu
+        $originalproducts = OriginalProduct::all(); // Lấy danh sách người dùng từ cơ sở dữ liệu
         // $originalproducts = DB::table('OriginalProducts')
         //     ->join('OriginalProductsDetail','OriginalProductsDetail.idOPr','=','OriginalProducts.idOPr')
         //     ->join('image_OPr','image_OPr.idOPrDetail','=','OriginalProductsDetail.idOPrDetail')
@@ -378,35 +385,15 @@ class PageController extends Controller
     	// dd($originalproducts);
     }
 
-    // public function getoriginalproduct() {
-    //     try {
-    //         $originalproducts = DB::table('OriginalProducts')
-    //             ->join('OriginalProductsDetail', 'OriginalProductsDetail.idOPr', '=', 'OriginalProducts.idOPr')
-    //             ->join('image_OPr', 'image_OPr.idOPrDetail', '=', 'OriginalProductsDetail.idOPrDetail')
-    //             // ->select('OriginalProducts.*', 'image_OPr')
-    //             ->select('OriginalProducts.*', 'image_OPr.column1')
-
-    //             ->first();
-    
-    //         if (!$originalproducts) {
-    //             throw new \Exception("Không có dữ liệu trả về từ cơ sở dữ liệu.");
-    //         }
-    
-    //         return view('admin.originalproduct', ['originalproducts' => $originalproducts]);
-    //     } catch (\Exception $e) {
-    //         // Ghi log hoặc hiển thị thông báo lỗi
-    //         return response()->json(['error' => $e->getMessage()], 500);
-    //     }
-    // }
-    
+   
 
     public function getaddOPr(){	
         	
-    	$originalproducts = originalproducts::all();
-        $category_opr_detail=category_opr_detail::all();
+    	$originalproducts = OriginalProduct::all();
+        $category_opr_detail=CategoryOPrDetail::all();
         $inputkf=inputkf::all();
         $inputci=inputci::all();
-        $color=color::all();
+        $color=Color::all();
 
     //    dd($category_opr_detail);
         // return view('admin.addOPr', ['originalproducts' => $originalproducts], ['category_opr_detail' => $category_opr_detail]);	
@@ -415,7 +402,7 @@ class PageController extends Controller
     
 
     public function addOPr(Request $request){		
-    	$originalproducts = new originalproducts;
+    	$originalproducts = new OriginalProduct;
         if($request->hasFile('inputImage') ){
             $file=$request->file('inputImage');
             $fileName=$file->getClientOriginalName('inputImage');
@@ -448,24 +435,7 @@ class PageController extends Controller
 
     }
 
-    // public function getaddInfo(){
-    //     return view('admin.addOPr');	
-    // 	}
-
-    // public function addInfo(Request $request){	
-    //     $sizeguide = new sizeguide;
-    //     $sizeguide->idSizeGuide = $request->input('idSizeGuide');
-    //     $sizeguide->Width = $request->input('Width');
-    //     $sizeguide->lenght = $request->input('lenght');
-    //     $sizeguide->SleeveLength = $request->input('SleeveLength');
-    //     $sizeguide->save();
-    //     // $size = new size;
-    //     // $size->NameSize = $request->input('NameSize');
-    //     // $size->idSize = $request->input('idSize');
-    //     // $size->save();
-    //     return redirect()->route('originalproduct');
-
-    // 	}
+   
    
    
     public function getIndexDesign($idProvider, $idOPr){
@@ -556,10 +526,86 @@ class PageController extends Controller
             return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
         }																			
     }	
-    public function getIndexProductDetail(){
-        return view('page.ProductDetail');
-    }		
+
     
+
+    public function getIndexProductDetail($idProduct)
+{
+  
+    // Truy vấn thông tin sản phẩm từ bảng 'Products' và các bảng liên quan
+    $productinfor = DB::table('Products')
+        ->where('Products.idProduct', '=', $idProduct)
+        ->join('Shop', 'Shop.idShop', '=', 'Products.idShop')
+        ->join('Providers', 'Providers.idProvider', '=', 'Products.idProvider')
+        ->join('Color', 'Color.idColor', '=', 'Products.colorPr')
+        ->select('Products.*', 'Shop.*', 'Providers.*', 'Color.*')
+        ->first();
+        // dd($productinfor);
+    // Truy vấn danh sách hình ảnh từ bảng 'image_Pr' dựa trên 'idProduct'
+
+    $images = DB::table('image_Pr')->where('idProduct', '=', $idProduct)->first();
+    
+       
+        $DetailSize = DetailSize::where('idOPrDetail', $productinfor->idOPrDetail)
+                ->where('idProvider', $productinfor->idProvider)
+                ->first();
+
+                $sizeNames = [];
+
+                foreach ($DetailSize->first()->toArray() as $fieldName => $sizeId) {
+                    // Kiểm tra nếu trường chứa idSize
+                    if (strpos($fieldName, 'idSize') === 0) {
+                        // Lấy tên của size từ bảng Size
+                        $size = size::find($sizeId);
+            
+                        if ($size) {
+                            $NameSizes[$fieldName] = $size->NameSize;
+                        }
+                    }
+                }
+//Truy vấn danh sách chất liệu và giới thiệu sản phẩm  từ bảng 'descriptionOPr' và 'aboutOPr' Dữa trên idProduct
+                   
+                $opr = DB::table('Products')
+                ->where('Products.idProduct', '=', $idProduct)
+                ->join('OriginalProductsDetail', 'OriginalProductsDetail.idOPrDetail', '=', 'Products.idOPrDetail')
+                ->join('OriginalProducts', 'OriginalProducts.idOPr', '=', 'OriginalProductsDetail.idOPr')
+                ->select('OriginalProducts.*')
+                ->first();
+                $idOPr = $opr->idOPr;
+                function getSize($idOPr, $column) {
+                    return DB::table('OriginalProducts')
+                        ->join('SizeGuide', function ($join) use ($idOPr, $column) {
+                            $join->on('SizeGuide.idOPr', '=', 'OriginalProducts.idOPr')
+                                ->where([
+                                    ['SizeGuide.idOPr', '=', $idOPr],
+                                    ['SizeGuide.' . $column, '=', '1']
+                                ]);
+                        })
+                        ->select('SizeGuide.*')
+                        ->first();
+                }
+                $sizewidth = getSize($idOPr, 'width');
+                $sizelength = getSize($idOPr, 'length');
+                $sizesleeveLength = getSize($idOPr, 'sleeveLength');
+//Truy vấn danh dách nhận xét của khách hàng tuè bảng 'comment' dựa trên idProduct
+$comment =comment::where('idProduct', $idProduct)
+                ->get();
+//Truy vấn danh dách nhận xét của khách hàng tuè bảng 'reviews' dựa trên idProduct
+$reviews =comment::where('idProduct', $idProduct)
+
+                ->count();
+
+$evalue = comment::where('idProduct',$idProduct )
+                ->avg('evalue');
+
+    // dd($opr);
+    // Truy vấn danh sách size từ bảng 'detailSize' dựa trên 'idProvider' và 'idOPrDetail' có trong bảng …[omitted]
+    
+        return view('page.ProductDetail', compact('productinfor', 'images','DetailSize','NameSizes','opr', 'sizewidth','sizelength','sizesleeveLength','comment','reviews','evalue'));
+        // return view('page.ProductDetail')->with('detailsize', $detailsize);
+
+}
+
     
 
 
@@ -737,4 +783,78 @@ class PageController extends Controller
 
         return redirect()->route('admin-product');
     }    
+// ------------------------------------------------Quản lý Shop-------------------------------------------------------
+    public function getshop(){	
+    	$shops = Shop::all(); 
+        $users = Users::all();// Lấy danh sách người dùng từ cơ sở dữ liệu
+        return view('admin.shop',compact('users','shops'));
+    }
+   
+    public function addshop(Request $request)
+    {
+
+        $shop = new Shop;
+        $shop->idShop = $request->input('idShop');
+        $shop->nameShop = $request->input('nameShop');
+        if($request->file('coverImageShop') !=null){
+        $shop->coverImageShop = $request->file('coverImageShop')->getClientOriginalName();
+        }
+        if($request->file('avataShop') !=null){
+        $shop->avataShop = $request->file('avataShop')->getClientOriginalName();
+        }
+        $shop->locationShop = $request->input('locationShop');
+        $shop->descriptionShop = $request->input('descriptionShop');
+        
+    
+      
+        // Lưu đối tượng Shop vào cơ sở dữ liệu
+        $shop->save();
+        return redirect()->route('list-shop');
+    }
+
+
+    public function updateAdminshop(Request $request)
+    {
+        $idShop=$request->input('idShop');
+        $shop = Shop::find($idShop);
+        $shop->nameShop = $request->input('nameShop');
+        if($request->file('coverImageShop') !=null){
+        $shop->coverImageShop = $request->file('coverImageShop')->getClientOriginalName();
+        }
+        if($request->file('avataShop') !=null){
+        $shop->avataShop = $request->file('avataShop')->getClientOriginalName();
+        }
+        $shop->locationShop = $request->input('locationShop');
+        $shop->descriptionShop = $request->input('descriptionShop');
+        
+    
+      
+        // Lưu đối tượng Shop vào cơ sở dữ liệu
+        $shop->save();
+        return redirect()->route('list-shop');
+    }
+    
+
+   
+
+    public function deleteShop($idShop)
+    {
+        // Tìm người dùng cần xóa trong cơ sở dữ liệu
+        // $shop = Shops::find($idShop);
+        $shop = Shop::where('idShop', $idShop);
+        // Nếu không tìm thấy người dùng, trả về thông báo lỗi
+        if (!$shop) {
+            return back()->with('error', 'Shop not found');
+        }
+
+        // Xóa người dùng khỏi cơ sở dữ liệu
+        $shop->delete();
+
+        return redirect()->route('list-shop')->with('success', 'Shop deleted successfully');
+    }
+
+
+  
+
+
 }

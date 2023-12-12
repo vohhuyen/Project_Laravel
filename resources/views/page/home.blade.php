@@ -6,7 +6,7 @@
             <b class="text-summer">iMPRiNT</b><br><br>
             <span>Unique product floors created by independent designers</span> <br>
             <div class="button-banner">
-                <a href="/html/DESIGN.html"><b>Design Now</b></a>
+                <a href="{{route('categoryopr')}}"><b>Design Now</b></a>
                 <span>or</span>
                 <a href="{{route('product')}}"><b>Shop Now</b></a>
             </div>

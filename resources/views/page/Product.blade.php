@@ -128,8 +128,8 @@
                         @foreach($product as $pr)
                         <div class=" col-3">
                             <div class="product">
-                                <img class="image-Product" alt="" src="source/imageOPr/{{$pr->imagePr}}"/>
-                                <p class="product_name">{{$pr->namePr}}</p>
+                                <a href="product-detail/{{$pr->idProduct}}"><img class="image-Product" alt="" src="source/imageOPr/{{$pr->imagePr}}"/></a>
+                                <a href="product-detail/{{$pr->idProduct}}"><p class="product_name">{{$pr->namePr}}</p></a>
                                 <p class="name-design">By: {{$pr->nameShop}}</p>
                                 <p class="description">{{$pr->descriptionDesign}}</p>
                                 <div class="d-flex justify-content-between">
