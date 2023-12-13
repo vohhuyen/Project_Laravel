@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <base href="{{asset('')}}"></base>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="source/admin/assets/css/addOPr.css">
@@ -47,21 +48,23 @@
                 <pre></pre>
                 <div class="form-group">
                     <label for="descriptionOPr" >Mô Tả Sản phẩm gốc:</label>
-                    <textarea id="descriptionOPr" name="descriptionOPr" rows="4" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required  ></textarea>
+                    <textarea id="descriptionOPr" name="descriptionOPr" rows="4" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >{{$originalproducts->descriptionOPr}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="image" >Chọn Hình Ảnh đại diện cho sản phẩm gốc: </label>
-                    <input type="file" id="inputImage" name="inputImage" accept="image/*" class="input"  onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >
+                    <input type="file" id="inputImage" name="inputImage" onchange="displayFileName()" value="{{$originalproducts->image}}" accept="image/*" class="input"  required >
+                    <span id="selectedFileName">{{$originalproducts->image}}</span>
                 </div>
+                
             </div>
             <div class="input2 col-6">
                 <div class="form-group mb-3">
                     <label for="nameOPr" >Tên Sản Phẩm Gốc : </label>
-                    <input type="text" id="nameOPr" name="nameOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >
+                    <input type="text" id="nameOPr" name="nameOPr" value="{{$originalproducts->nameOPr}}" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >
                 </div>
                 <div class="form-group">
                     <label for="aboutOPr" >Giới Thiệu Sản Phẩm Gốc : </label> 
-                    <textarea id="aboutOPr" name="aboutOPr" rows="4" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></textarea>
+                    <textarea id="aboutOPr" name="aboutOPr" rows="4" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >{{$originalproducts->aboutOPr}}</textarea>
                 </div>
             </div>
             <div class="horizontal-line my-5"></div>
@@ -70,51 +73,51 @@
                     <tbody id="SizeGuide">Original Product Size:
                         <tr>
                             <td><button class="SizeName">S</button></td>
-                            <td><input type="number" name="size1s" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size2s" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size3s" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->S}}" name="size1s" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->S}}" name="size2s" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->S}}" name="size3s" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">M</button></td>
-                            <td><input type="number" name="size1m" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size2m" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size3m" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->M}}" name="size1m" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->M}}" name="size2m" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->M}}" name="size3m" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">L</button></td>
-                            <td><input type="number" name="size1l" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size2l" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size3l" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->L}}" name="size1l" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->L}}" name="size2l" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->L}}" name="size3l" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">XL</button></td>
-                            <td><input type="number" name="size1xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size2xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size3xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->XL}}" name="size1xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->XL}}" name="size2xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->XL}}" name="size3xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">2XL</button></td>
-                            <td><input type="number" name="size12xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size22xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size32xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->size2XL}}" name="size12xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->size2XL}}" name="size22xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->size2XL}}" name="size32xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">3XL</button></td>
-                            <td><input type="number" name="size13xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size23xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size33xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->size3XL}}" name="size13xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->size3XL}}" name="size23xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->size3XL}}" name="size33xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">4XL</button></td>
-                            <td><input type="number" name="size14xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size24xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size34xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->size4XL}}" name="size14xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->size4XL}}" name="size24xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->size4XL}}" name="size34xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                         <tr>
                             <td><button class="SizeName">5XL</button></td>
-                            <td><input type="number" name="size15xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size25xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
-                            <td><input type="number" name="size35xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizew->size5XL}}" name="size15xl" id="width1" placeholder="Enter width"style="color"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizel->size5XL}}" name="size25xl" id="lenght1" placeholder="Enter lenght"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
+                            <td><input type="number" value="{{$sizeslv->size5XL}}" name="size35xl" id="Sleevelength" placeholder="Enter Sleevelength"  class="a1"  step="0.01" pattern="[0-9]+(\.[0-9]+)?"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -169,7 +172,7 @@
                     </select>
                     <div id="selectedOption" class="mt-3"></div>
                     <label for="idinputkf"> Description: </label>
-                    <textarea class="input" name="descriptionci" id="descriptionci"></textarea>
+                    <textarea class="input" name="descriptionci" id="descriptionci" value="{{$ci->description}}">{{$ci->description}}</textarea>
                 </div>
             </div>
             <div class="buttons col-12 text-end mt-5 pt-5">
@@ -181,6 +184,13 @@
     </div>
 </body>
 </html>
+<script>
+    function displayFileName() {
+        var input = document.getElementById('inputImage');
+        var output = document.getElementById('selectedFileName');
+        output.textContent = input.files[0].name;
+    }
+</script>
 <script>
         function showForm(selectedColorId) {
             // Hide all color forms
@@ -207,9 +217,24 @@
 </script>
 <script>
         $(document).ready(function() {
+            var kfData = @json($kf);
+           
+            var oprData = @json($oprdetail);
+            console.log(oprData);
+            // $.each(oprData, function (index, option){
+            //     var imageInputsContainer = document.getElementById('imageInputs_' + oprData.idColor);
+            //     let selectColor = $('#selectedFileNameColor');
+            //     imageInputsContainer.append('<input type="file" name="imageinputkf[]" class="image-upload input" value="'+oprData.image+'">');
+            //     selectColor.append('<span id="selectedFileName">'+oprData.image+'</span>')
+            // });
+            let selectOption = $('#selectedOptions');
+            $.each(kfData, function (index, option){
+                    selectOption.append('<div class="d-flex"><p class="me-2">' + option.nameKF + '</p><input type="hidden" name="idkf[]" value="'+ option.idKF +'"><input type="text"  name="deskf_'+ option.idKF +'" class="input" value="'+option.descriptionKF+'" placeholder="enter your description......."></div><br>');
+            });
+
+
             $('#idinputkf').on('change', function () {
                 var selectedOptions = [];
-                let selectOption = $('#selectedOptions');
 
                 $(this).find('option:selected').each(function () {
                     var selectedValue = $(this).val();
@@ -251,5 +276,3 @@
             });
         });
 </script>
-
-

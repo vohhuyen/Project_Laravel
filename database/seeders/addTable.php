@@ -97,10 +97,10 @@ class addTable extends Seeder
             ['NameSize'=>'M'],
             ['NameSize'=>'L'],
             ['NameSize'=>'XL'],
-            ['NameSize'=>'size2XL'],
-            ['NameSize'=>'size3XL'],
-            ['NameSize'=>'size4XL'],
-            ['NameSize'=>'size5XL']
+            ['NameSize'=>'2XL'],
+            ['NameSize'=>'3XL'],
+            ['NameSize'=>'4XL'],
+            ['NameSize'=>'5XL']
         ]);
         \DB::table('Color')->insert([
             ['nameColor'=>'White','imageColor' => 'colorWhite.jpg'],
@@ -288,8 +288,6 @@ class addTable extends Seeder
                 'descriptionOPr' => '60% Cotton/40% Polyester | Fabric weight: 7.08 oz (mid weight). Textured, terry (towel-like) fabric on sleeves and hood trim. Rough-cut, open cuffs and waist. Fitting node: Unisex cut falls to the waist and will fit tighter for men.',
                 'aboutOPr' => 'Light as a long sleeve t-shirt with the features of a hoodie, our unisex lightweight terry hoodie is a super-versatile choice. When the weather is a little too cold for a short-sleeved tee and a little too warm for a heavy hoodie, this is the way to go. Terrycloth textures and rough-cut hems make this item an eye-catching choice. Bottom hem and sleeves have a raw edge.',
                 'image'=> 'opr95.webp'],
-                'aboutOPr' => 'Light as a long sleeve t-shirt with the features of a hoodie, our unisex lightweight terry hoodie is a super-versatile choice. When the weather is a little too cold for a short-sleeved tee and a little too warm for a heavy hoodie, this is the way to go. Terrycloth textures and rough-cut hems make this item an eye-catching choice. Bottom hem and sleeves have a raw edge.',
-                'image'=> 'opr95.webp'],
             ['idCategoryOPrDetail' => '1',
                 'nameOPr' => 'Unisex Contrast Hoodie',
                 'descriptionOPr' => '60% cotton / 40% polyester | Fabric Weight: 7.2 oz (midweight). Contrasting jersey hood lining, neck tape and drwstring. Two-ply hood with aluminum grommets. Tear away label; double-needle cover-seamed cuffs, armholes, hood and waistband.',
@@ -333,9 +331,6 @@ class addTable extends Seeder
                 'nameOPr' => 'Men’s Pique Polo Shirt',
                 'descriptionOPr' => '100% cotton | Heavyweight fabric (6 oz). Three-button closure. Topstitching for a crisp finish throughout',
                 'aboutOPr' => 'Make an impression in this classic and durable men’s polo. A timeless, perfect companion for the office, the golf course, or everyday wear.',
-            ['idCategoryOPrDetail' => '1','nameOPr' => 'Adidas Unisex Fleece Hoodie',
-            'descriptionOPr' => 'Material: 70% BCI cotton/30% recycled polyester (Charcoal gray is 55% BCI cotton/45% recycled polyester) | Fabric weight: 8.5 oz (mid-weight). Pouch pocket. Cuff sleeves and hem. Contrast adidas logo on right arm.',
-            'aboutOPr' => 'A sustainable, sporty staple fit for any occasion, whether working up a sweat or just getting comfy in style. Durable, warm, and designed for movement, this hoodie will do anything you do.',
             'image'=> 'opr141.png'],
 
         // idCategoryOPrDetail = 2
@@ -499,7 +494,7 @@ class addTable extends Seeder
             'image'=> 'opr1401.png'],
 
         // idCategoryOPrDetail = 15
-        ['idCategoryOPrDetail' => '15',
+            ['idCategoryOPrDetail' => '15',
             'nameOPr' => 'Kids’ Premium Long Sleeve T-Shirt',
             'descriptionOPr' => '100% cotton (heather gray is 95%/5% viscose. charcoal gray is 80% cotton/20% polyester) | Fabric Weight: 4.42 oz (heavyweight). Wide range of sizes from Youth XS - L. Fairly produced, certified and triple audited. Double stitched, reinforced seams at shoulder, sleeve, collar and waist. Optimized for beautiful brilliance across all printing methods.',
             'aboutOPr' => 'This premium long sleeve T-shirt is as close to perfect as can be. It’s optimized for all types of print and will quickly become your child’s favorite layer. Soft, comfortable and durable, this is a definite must-own and a recommended product.',
@@ -642,7 +637,7 @@ class addTable extends Seeder
 
             // idCategoryOPrDetail = 26 toy
             ['idCategoryOPrDetail' => '26',
-            'nameOPr' => 'Dog toy',
+                'nameOPr' => 'Dog toy',
                 'descriptionOPr' => 'Dog & T-Shirt 100% Polyester. 14" Long. Stitched nose and eyes. Tiny T-shirt can be printed with designs.',
                 'aboutOPr' => 'This cute fluffy dog in a T-shirt is ideal if you’re looking for a cuddly gift for yourself or a loved one. The dog’s fur is extra soft and has a real-life textured look. It makes a sweet snuggle companion and great for comforting kids.',
                 'image'=> 'opr2191.png'],
@@ -650,7 +645,7 @@ class addTable extends Seeder
                 'nameOPr' => 'Teddy Bear',
                 'descriptionOPr' => 'Bear & T-Shirt 100% Polyester. 12" Tall. Stitched nose and eyes. Tiny T-shirt can be printed with designs.',
                 'aboutOPr' => 'This cute teddy in a T-shirt is ideal if you’re looking for a cuddly gift for yourself or a loved one. The bear’s fur is extra soft and has a real-life textured look. It makes a sweet snuggle companion and is great for comforting kids.',
-                'image'=> 'opr2221.png'],
+                'image'=> 'opr2221.png']
         ]);
 
         \DB::table('CareInstruction')->insert([

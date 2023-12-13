@@ -10,7 +10,7 @@ class OriginalProduct extends Model
 {
     use HasFactory;
     protected $table = "originalproducts";
-
+    protected $primaryKey = 'idOPr';
     public function categoryoprdetail(){
         return $this->belongsTo(OriginalProduct::class, 'idCategoryOPrDetail', 'idCategoryOPrDetail');
     }
