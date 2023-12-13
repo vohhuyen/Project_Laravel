@@ -2566,6 +2566,7 @@ class addTable extends Seeder
             
         ['idOPrDetail' => '224','imageOPr' => 'opr2241.png'],
         ['idOPrDetail' => '224','imageOPr' => 'opr2242.png']
+        
         ]);
 
         \DB::table('SizeGuide')->insert([    

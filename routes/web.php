@@ -77,3 +77,9 @@ Route::post('/addshop',[PageController::class, 'addshop']);
 
 Route::get('/updateAdminshop',[PageController::class, 'getupdateAdminshop'])->name('updateAdminshop');
 Route::post('/updateAdminshop',[PageController::class, 'updateAdminshop']);
+
+Route::get('/forsalepage',[PageController::class, 'getforsalepage'])->name('forsalepage');
+Route::post('/forsalepage',[PageController::class, 'forsalepage']);
+
+
+Route::get('/search',[PageController::class, 'search'])->name('search');
