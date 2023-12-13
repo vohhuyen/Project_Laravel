@@ -76,3 +76,7 @@ Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->na
 // Route::get('/addInfo',[PageController::class, 'getaddInfo'])->name('addInfo');
 // Route::post('/addInfo',[PageController::class, 'addInfo']);
 
+Route::get('/providermanagement',[PageController::class, 'providermanagement'])->name('providermanagement');
+Route::post('/providermanagement',[PageController::class, 'providerAdd'])->name('providermanagement');
+Route::post('/editprovideradmin',[PageController::class, 'providerEdit'])->name('editprovideradmin');
+Route::post('/deleteprovideradmin/{idProvider}',[PageController::class, 'providerDelete'])->name('deleteprovideradmin');

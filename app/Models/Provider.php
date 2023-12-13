@@ -10,7 +10,7 @@ class Provider extends Model
 {
     use HasFactory;
     protected $table = "Providers";
-    // protected $primaryKey = 'idProvider';
+    protected $primaryKey = 'idProvider';
     public function product(){
         return $this->hasMany(Provider::class, 'idProvider', 'idProvider');
     }

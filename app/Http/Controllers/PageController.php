@@ -11,6 +11,7 @@ use App\Models\Nameproduct;
 use App\Models\originalproducts;
 use App\Models\Shop;
 
+
 // use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -782,5 +783,32 @@ class PageController extends Controller
         $product->save();
 
         return redirect()->route('admin-product');
-    }    
+    }   
+    public function providermanagement(){
+        $providers = Provider::all();
+        return view('admin.provider',compact('providers'));
+    }
+    public function providerAdd(Request $request){
+        $providers = new Provider();
+        $providers->Name =  $request->input('Name');
+        $providers->description = $request->input('description');
+        $providers->location = $request->input('location');
+        $providers->save();
+        return redirect()->route('providermanagement');
+
+    }
+     public function providerEdit(Request $request){
+        $idProvider = $request->input('idprovider');
+        $providers = Provider::find($idProvider);
+        $providers->Name =  $request->input('Name');
+        $providers->description = $request->input('description');
+        $providers->location = $request->input('location');
+        $providers->save();
+        return redirect()->route('providermanagement');
+     }
+     public function providerDelete($idProvider){
+        $providers = Provider::find($idProvider);
+        $providers->delete();
+        return redirect()->route('providermanagement');
+     }
 }
