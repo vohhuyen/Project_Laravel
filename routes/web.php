@@ -42,7 +42,7 @@ Route::get('/filter-products/{idCategoryPrDetail}',[PageController::class, 'filt
 Route::get('/filter-products-by-price/{minPrice}/{maxPrice}',[PageController::class, 'filterPriceProduct']);
 Route::get('/filter-provider-location/{idProvider}',[PageController::class, 'filterProviderLocation']);
 
-Route::get('/product-detail',[PageController::class, 'getIndexProductDetail'])->name('product-detail');
+Route::get('/product-detail/{idProduct}',[PageController::class, 'getIndexProductDetail'])->name('product-detail');
 
 Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
 Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('addcart');
@@ -69,3 +69,13 @@ Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->na
 // Route::get('/addInfo',[PageController::class, 'getaddInfo'])->name('addInfo');
 // Route::post('/addInfo',[PageController::class, 'addInfo']);
 
+Route::get('/shop',[PageController::class, 'getshop'])->name('shop');
+Route::post('/shop',[PageController::class, 'shop']);
+Route::get('/list-shop',[PageController::class, 'getshop'])->name('list-shop');
+// Route::post('/list-shop',[PageController::class, 'addshop'])->name('addshop');
+Route::post('/delete-shop/{idshop}', [PageController::class, 'deleteshop'])->name('delete-shop');
+Route::get('/addshop',[PageController::class, 'getaddshop'])->name('addshop');
+Route::post('/addshop',[PageController::class, 'addshop']);
+
+Route::get('/updateAdminshop',[PageController::class, 'getupdateAdminshop'])->name('updateAdminshop');
+Route::post('/updateAdminshop',[PageController::class, 'updateAdminshop']);
