@@ -854,7 +854,13 @@ $evalue = comment::where('idProduct',$idProduct )
     }
 
 
-  
 
+    public function getforsalepage()
+    {
+        $Products = Product::all();
+        $category_opr_detail=CategoryOPrDetail::all();
+        $color=Color::all();    
+    return view('admin.forsalepage',compact('Products','category_opr_detail','color'));	
+    }
 
 }
