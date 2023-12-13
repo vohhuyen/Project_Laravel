@@ -35,7 +35,7 @@
                         </td>
                         <td class="col-2">{{$originalproduct->descriptionOPr}}</td>
                         <td class="col-4">{{$originalproduct->aboutOPr}}</td>
-                        <form action="{{ route('editOPr',$originalproduct->idOPr) }}" method="get" enctype="multipart/form-data">
+                        <form action="{{ route('geteditOPr',$originalproduct->idOPr) }}" method="get" enctype="multipart/form-data">
                             @csrf
                             <td class="col-1"><button class="update">Update</button></td>
                         </form>

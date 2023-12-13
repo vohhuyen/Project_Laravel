@@ -30,9 +30,13 @@
         <div class="text-center">
             <b id="title">Add Original Product</b>
         </div>
-        <form action="{{ route('addOPrr') }}" method="post" enctype="multipart/form-data"class="row gridoriginalproduct" onsubmit="saveImagesToDatabase(event)">
+        <form action="editOPr" method="post" enctype="multipart/form-data"class="row gridoriginalproduct" onsubmit="saveImagesToDatabase(event)">
         @csrf
             <div class="input1 col-6">
+                <div class="form-group mb-3">
+                    <label for="nameOPr" >ID : </label><br>
+                    <input type="text" id="idOPr" name="idOPr" value="{{$originalproducts->idOPr}}" class="input" readonly onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >
+                </div>
                 <div class="form-group">
                     <label for="idCategoryPrDetail">Danh Mục Sản Phẩm Gốc: </label>
                     <div>
@@ -46,9 +50,9 @@
                     </div>
                 </div>
                 <pre></pre>
-                <div class="form-group">
-                    <label for="descriptionOPr" >Mô Tả Sản phẩm gốc:</label>
-                    <textarea id="descriptionOPr" name="descriptionOPr" rows="4" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >{{$originalproducts->descriptionOPr}}</textarea>
+                <div class="form-group mb-3">
+                    <label for="nameOPr" >Tên Sản Phẩm Gốc : </label>
+                    <input type="text" id="nameOPr" name="nameOPr" value="{{$originalproducts->nameOPr}}" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >
                 </div>
                 <div class="form-group">
                     <label for="image" >Chọn Hình Ảnh đại diện cho sản phẩm gốc: </label>
@@ -58,9 +62,9 @@
                 
             </div>
             <div class="input2 col-6">
-                <div class="form-group mb-3">
-                    <label for="nameOPr" >Tên Sản Phẩm Gốc : </label>
-                    <input type="text" id="nameOPr" name="nameOPr" value="{{$originalproducts->nameOPr}}" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >
+            <div class="form-group">
+                    <label for="descriptionOPr" >Mô Tả Sản phẩm gốc:</label>
+                    <textarea id="descriptionOPr" name="descriptionOPr" rows="4" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required >{{$originalproducts->descriptionOPr}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="aboutOPr" >Giới Thiệu Sản Phẩm Gốc : </label> 
@@ -151,7 +155,12 @@
                             <input type="hidden" name="color_id[]" value="{{ $colors->idColor }}">
                             <h3>{{ $colors->NameColor }} Form</h3>
                             <div id="imageInputs_{{ $colors->idColor }}">
+                                @foreach($oprdetail as $detail)
+                                @if($detail->idColor == $colors->idColor)
                                 <input type="file" name="imageinputcolor_{{ $colors->idColor }}[]" class="image-upload input">
+                                <p>{{$detail->imageOPr}}</p>
+                                @endif
+                                @endforeach
                             </div>
                             <button type="button" class="color-button" onclick="addImageInput('{{ $colors->idColor }}')">Thêm ảnh</button>
                         </div>
@@ -219,14 +228,7 @@
         $(document).ready(function() {
             var kfData = @json($kf);
            
-            var oprData = @json($oprdetail);
-            console.log(oprData);
-            // $.each(oprData, function (index, option){
-            //     var imageInputsContainer = document.getElementById('imageInputs_' + oprData.idColor);
-            //     let selectColor = $('#selectedFileNameColor');
-            //     imageInputsContainer.append('<input type="file" name="imageinputkf[]" class="image-upload input" value="'+oprData.image+'">');
-            //     selectColor.append('<span id="selectedFileName">'+oprData.image+'</span>')
-            // });
+       
             let selectOption = $('#selectedOptions');
             $.each(kfData, function (index, option){
                     selectOption.append('<div class="d-flex"><p class="me-2">' + option.nameKF + '</p><input type="hidden" name="idkf[]" value="'+ option.idKF +'"><input type="text"  name="deskf_'+ option.idKF +'" class="input" value="'+option.descriptionKF+'" placeholder="enter your description......."></div><br>');
@@ -275,4 +277,44 @@
                 });
             });
         });
+</script>
+<script>
+    $(document).ready(function() {
+        var productId = $('#idOPr').val();
+
+        let selectOption = $('#idCategoryOPrDetail');
+        var allOptionsCategory = [];
+        $('#idCategoryOPrDetail option').each(function () {
+            var optionValue = $(this).val();
+            var optionText = $(this).text();
+
+            allOptionsCategory.push({
+                value: optionValue,
+                text: optionText
+            });
+        });
+        $.ajax({
+                url: "{{ route('get-category-infor') }}" + "?productId=" + productId,
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                  console.log(data);
+
+                  // category
+                  selectOption.empty();
+                  $.each(data.data, function (key, value) {
+                    selectOption.find('option[value="' + value.idCategoryOPrDetail + '"]').remove();
+                    selectOption.prepend('<option value="' + value.idCategoryOPrDetail + '">' + value.nameCategoryOPrDetail + '</option>');
+                  });
+                  $.each(allOptionsCategory, function (index, option) {
+                    selectOption.append('<option value="' + option.value + '">' + option.text + '</option>');
+                  }); },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+    });
 </script>

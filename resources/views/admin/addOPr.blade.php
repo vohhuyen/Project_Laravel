@@ -200,7 +200,7 @@
             var imageInputsContainer = document.getElementById('imageInputs_' + colorId);
             var input = document.createElement('input');
             input.type = 'file';
-            input.name = 'imageinputkf[]';
+            input.name = 'imageinputcolor_'+colorId +'[]';
             input.className = 'image-upload input ';
             imageInputsContainer.appendChild(input);
         }

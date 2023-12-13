@@ -61,13 +61,11 @@ Route::post('/admin-edit',[PageController::class, 'postProductEdit'])->name('adm
 
 Route::get('/addOPr',[PageController::class, 'getaddOPr'])->name('addOPr');
 Route::post('/addOPrr',[PageController::class, 'addOPr'])->name('addOPrr');
-Route::get('/editOPr/{idOPr}',[PageController::class, 'geteditOPr'])->name('editOPr');
-Route::post('/editOPr',[PageController::class, 'editOPr']);
+Route::get('/editOPr/{idOPr}',[PageController::class, 'geteditOPr'])->name('geteditOPr');
+Route::post('/editOPr',[PageController::class, 'posteditOPr'])->name('editOPr');
 Route::post('/deleteOPr/{idOPr}',[PageController::class, 'deleteOPr'])->name('deleteOPr');
 Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->name('originalproduct');
-// Route::post('/originalproduct',[PageController::class, 'originalproduct']);
-// Route::get('/addInfo',[PageController::class, 'getaddInfo'])->name('addInfo');
-// Route::post('/addInfo',[PageController::class, 'addInfo']);
+Route::get('/get-category-infor', [PageController::class, 'getCategoryInfor'])->name('get-category-infor');
 
 Route::get('/shop',[PageController::class, 'getshop'])->name('shop');
 Route::post('/shop',[PageController::class, 'shop']);
