@@ -863,4 +863,15 @@ $evalue = comment::where('idProduct',$idProduct )
     return view('admin.forsalepage',compact('Products','category_opr_detail','color'));	
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $product= Product::where('namePr','like', '%' . $query . '%')->paginate(16);
+        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
+        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
+        $provider = Provider::all();
+        // dd($category);
+        return view('page.Product', compact('product','category','provider'));
+    }
+
 }
