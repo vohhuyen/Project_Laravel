@@ -45,10 +45,16 @@
         <div class="row justify-content-center w-100">
         @foreach($products as $product )
             <div class="column col-xl-2">
-            <a href="product-detail/{{$product->idProduct}}"><div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone">
-                </div></a>
+           <div class="product_img">
+           @if(Session::has('user'))
+           <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data">
+            @csrf
+                   <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+            </form>
+            @endif
+                   <a href="product-detail/{{$product->idProduct}}">
+                    <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
+                </div>
                 <a href="product-detail/{{$product->idProduct}}"><div class="product_name">
                     <span><b>{{ $product->namePr }}</b>...</span>
                 </div></a>

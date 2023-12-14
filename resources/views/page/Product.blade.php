@@ -135,8 +135,12 @@
                                 <div class="d-flex justify-content-between">
                                     <b class="product_price ">${{$pr->pricePr}}</b>
                                         <div class="image-249-parent">
-                                            <!-- <a href="{{route('addcart', $pr->idProduct)}}"><i class="fa-solid fa-cart-shopping"></i></a> -->
-                                            <i class="fa-regular fa-heart"></i>
+                                            @if(Session::has('user'))
+                                            <form method="POST" action="{{ route('likePr',$pr->idProduct) }}" enctype="multipart/form-data">
+                                                @csrf
+                                                    <button type="submit"> <i class="fa-regular fa-heart"></i></button>
+                                                </form>
+                                                @endif
                                         </div>
                                 </div>
                             </div>

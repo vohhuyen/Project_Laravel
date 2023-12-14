@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\SavePr;
 use App\Models\Comment;
 use App\Models\size;
 use App\Models\DetailSize;
@@ -159,8 +160,8 @@ class PageController extends Controller
     }		
     public function createAccount(Request $request){
         $input = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'Name' => 'string',
+            'Email' => 'email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password'
         ]);
@@ -883,5 +884,41 @@ $evalue = comment::where('idProduct',$idProduct )
         $product = Product::where('idShop',$idShop)->first();
   
     return view('page.PersionalPage', compact('product','shop'));
+    }
+
+    public function getlikePr()
+    {
+        $idUser = Session::get('user.idUser');
+        $product = SavePr::where('idSavePr',$idUser)->get();
+        $LPC = SavePr::where('idSavePr',$idUser)->count();
+    return view('page.likePr', compact('product','LPC'));
+    }
+    public function likePr($idProduct)
+    {
+        $idUser = Session::get('user.idUser');
+        $product = Product::where('idProduct',$idProduct)->first();
+        $savePr = new SavePr;
+        $savePr->idSavePr = $idUser;
+        $savePr->idProduct = $idProduct;
+        $savePr->namePr = $product->namePr;
+        $savePr->pricePr = $product->pricePr;
+        $savePr->imagePr = $product->imagePr;
+        $savePr->save();
+        return redirect()->back();
+
+    }
+    public function deletelikePr($idProduct)
+    {
+        // Tìm sản phẩm yêu thích cần xóa trong cơ sở dữ liệu
+        $savePr = SavePr::where('idProduct', $idProduct);
+        // Nếu không tìm thấy người dùng, trả về thông báo lỗi
+        if (!$savePr) {
+            return back()->with('error', 'User not found');
+        }
+
+        // Xóa người dùng khỏi cơ sở dữ liệu
+        $savePr->delete();
+
+        return redirect()->route('getlikePr')->with('success', 'User deleted successfully');
     }
 }
