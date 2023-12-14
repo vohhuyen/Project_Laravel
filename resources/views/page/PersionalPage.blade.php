@@ -29,12 +29,13 @@
                     </p>
                
                 </div>
+                @if(Session::has('user') && Session::get('user')->idUser == $shop->idShop)
                 <div class="btn-right">
                     <button class="bg-danger-subtle"><b>Manager your product</b></button>
                     <br>
                     <button class="bg-danger-subtle"><b><i class="fa-solid fa-share-nodes"></i> Share</b></button>
                 </div>
-             
+                @endif
             </div>
             <h1 class="title">All Design from {{ $shop->nameShop }}</h1>
           
