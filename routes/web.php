@@ -83,3 +83,6 @@ Route::post('/forsalepage',[PageController::class, 'forsalepage']);
 
 
 Route::get('/search',[PageController::class, 'search'])->name('search');
+
+Route::get('/PersionalPage/{idShop}',[PageController::class, 'getPersionalPage'])->name('PersionalPage');
+

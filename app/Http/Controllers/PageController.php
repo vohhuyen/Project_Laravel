@@ -38,7 +38,11 @@ use App\Models\categoryPrDetail;
 class PageController extends Controller
 {
     public function getIndex(){		
-    	return view('page.home');	
+        $shop = Shop::all();
+    // $products = Product::all();
+    $products = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);
+    
+    return view('page.home', compact('products','shop'));
     }
     public function getIndexLogin(){		
     	return view('page.login');	
@@ -873,5 +877,11 @@ $evalue = comment::where('idProduct',$idProduct )
         // dd($category);
         return view('page.Product', compact('product','category','provider'));
     }
-
+    public function getPersionalPage($idShop)
+    {
+        $shop = Shop::where('idShop',$idShop)->first();
+        $product = Product::where('idShop',$idShop)->first();
+  
+    return view('page.PersionalPage', compact('product','shop'));
+    }
 }

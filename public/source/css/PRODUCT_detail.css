@@ -222,16 +222,10 @@
 .product_img{
   width: 225px;
 }
-.first-img, .last-img{
+.first-img{
   width: 225px;
   height: 225px;
   background-size: cover;
-}
-.product_img:hover .last-img{
-  display: block;
-}
-.product_img:hover .first-img,.last-img {
-  display: none;
 }
 .product_icon{
   font-size: 1.7rem;

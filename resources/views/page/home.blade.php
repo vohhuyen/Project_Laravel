@@ -41,205 +41,78 @@
     </div>
     <div class="bestseller grid">
         <h1>BESTSELLER</h1>
+        
         <div class="row justify-content-center w-100">
+        @foreach($products as $product )
             <div class="column col-xl-2">
-                <div class="product_img">
+            <a href="product-detail/{{$product->idProduct}}"><div class="product_img">
                     <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/product3.jpg" alt="phone">
-                    <img class="last-img" src="source/img/hover-product.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
+                    <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone">
+                </div></a>
+                <a href="product-detail/{{$product->idProduct}}"><div class="product_name">
+                    <span><b>{{ $product->namePr }}</b>...</span>
+                </div></a>
+                <p>{{ $product->nameShop }}</p>
                 <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
+                    <b class="price">{{ $product->pricePr }}</b>
                     <i class="fa-solid fa-cart-plus"></i>
                 </div>
             </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp1.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep1.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp2.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep2.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp3.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep3.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp4.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep4.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp5.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep5.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/product3.jpg" alt="phone">
-                    <img class="last-img" src="source/img/hover-product.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp1.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep1.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp2.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep2.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
-            <div class="column col-xl-2">
-                <div class="product_img">
-                    <i class="product_icon fa-regular fa-heart"></i>
-                    <img class="first-img" src="source/img/homepp3.jpg" alt="phone">
-                    <img class="last-img" src="source/img/homep3.jpg" alt="phone">
-                </div>
-                <div class="product_name">
-                    <span><b>men's and women's t-shirts </b>...</span>
-                </div>
-                <p>By Sunny</p>
-                <div class="product_price">
-                    <b class="price">$ 32.20 - $ 55.00</b>
-                    <i class="fa-solid fa-cart-plus"></i>
-                </div>
-            </div>
+ @endforeach
         </div>
+       
+       
     </div>
     <div class="featureArtist grid">
         <h1>FEATURED ARTIST</h1>
         <div class="row_artist">
-            <i class="fa-solid fa-circle-chevron-left"></i>
-                <div class="col_artist">
-                    <img class="cover-img" src="source/img/backgroundAV1.jpg" alt="backgroundAV">
-                    <div class="avatar">
-                        <img src="source/img/AV1.jpg" alt="avatar">
-                    </div>
-                    <h2 class="nameArtist">Alja Horvat</h2>
-                    <button>See Shop</button>
-                </div>
-                <div class="col_artist">
-                    <img class="cover-img" src="source/img/backgroundAV1.jpg" alt="backgroundAV">
-                    <div class="avatar">
-                        <img src="source/img/AV1.jpg" alt="avatar">
-                    </div>
-                    <h2 class="nameArtist">Alja Horvat</h2>
-                    <button>See Shop</button>
-                </div>
-                <div class="col_artist disnone">
-                    <img class="cover-img" src="source/img/backgroundAV1.jpg" alt="backgroundAV">
-                    <div class="avatar">
-                        <img src="source/img/AV1.jpg" alt="avatar">
-                    </div>
-                    <h2 class="nameArtist">Alja Horvat</h2>
-                    <button>See Shop</button>
-                </div>
-                <div class="col_artist disnone">
-                    <img class="cover-img" src="source/img/backgroundAV1.jpg" alt="backgroundAV">
-                    <div class="avatar">
-                        <img src="source/img/AV1.jpg" alt="avatar">
-                    </div>
-                    <h2 class="nameArtist">Alja Horvat</h2>
-                    <button>See Shop</button>
-                </div>
-                <div class="col_artist disnone-xs">
-                <img class="cover-img" src="source/img/backgroundAV1.jpg" alt="backgroundAV">
-                <div class="avatar">
-                    <img src="source/img/AV1.jpg" alt="avatar">
-                </div>
-                <h2 class="nameArtist">Alja Horvat</h2>
-                <button>See Shop</button>
-            
+            <div class="chevleft">
+                <i class="fa-solid fa-circle-chevron-left"></i>
             </div>
-            <i class="fa-solid fa-circle-chevron-right"></i>
+            @foreach($shop as $sh )
+            <div class="col_artist">
+                <img class="cover-img" src="image/{{$sh->coverImageShop}}" alt="backgroundAV">
+                <div class="avatar">
+                    <img src="image/{{$sh->avataShop}}" alt="avatar">
+                </div>
+                <h2 class="nameArtist">{{ $sh->nameShop }}</h2>
+                <a href="{{route('PersionalPage',$sh->idShop)}}"><button>See Shop</button></a>
+            </div>
+            @endforeach
+            <div class="chevright">
+                <i class="fa-solid fa-circle-chevron-right"></i>
+            </div>
         </div>
 </div>
+<script>
+       
+       document.addEventListener('DOMContentLoaded', function () {
+    const alsolikeContainer = document.querySelector('row_artist');
+    const alsolikeItems = document.querySelectorAll('.col_artist');
+    let currentIndex = 0;
+
+    function showItems() {
+        alsolikeItems.forEach((item, index) => {
+            const isVisible = index >= currentIndex && index < currentIndex + 5;
+            item.style.display = isVisible ? 'inline-block' : 'none';
+        });
+    }
+
+    function updateIndex(direction) {
+        const maxIndex = alsolikeItems.length - 5;
+        currentIndex = Math.max(0, Math.min(currentIndex + direction, maxIndex));
+        showItems();
+    }
+
+    document.querySelector('.chevleft').addEventListener('click', function () {
+        updateIndex(-1);
+    });
+
+    document.querySelector('.chevright').addEventListener('click', function () {
+        updateIndex(1);
+    });
+
+    showItems();
+    });
+</script>
 @endsection
