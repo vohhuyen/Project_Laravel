@@ -799,7 +799,7 @@ class PageController extends Controller
     }
      public function providerEdit(Request $request){
         $idProvider = $request->input('idprovider');
-        $providers = Provider::find($idProvider);
+        $providers = Provider::find('idProvider',$idProvider);
         $providers->Name =  $request->input('Name');
         $providers->description = $request->input('description');
         $providers->location = $request->input('location');
@@ -810,5 +810,8 @@ class PageController extends Controller
         $providers = Provider::find($idProvider);
         $providers->delete();
         return redirect()->route('providermanagement');
+     }
+     public function designproductmanagement(){
+        return view('admin.designproduct');
      }
 }

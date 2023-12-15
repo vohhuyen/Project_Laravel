@@ -80,3 +80,5 @@ Route::get('/providermanagement',[PageController::class, 'providermanagement'])-
 Route::post('/providermanagement',[PageController::class, 'providerAdd'])->name('providermanagement');
 Route::post('/editprovideradmin',[PageController::class, 'providerEdit'])->name('editprovideradmin');
 Route::post('/deleteprovideradmin/{idProvider}',[PageController::class, 'providerDelete'])->name('deleteprovideradmin');
+
+Route::get('/designproductmanagement',[PageController::class, 'designproductmanagement'])->name('designproductmanagement');
