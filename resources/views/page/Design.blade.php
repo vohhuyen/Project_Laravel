@@ -314,9 +314,9 @@
   </div>
 
   @foreach($colorProvider as $color)
-                @if($color->idOPr == $find)
+    @if($color->idOPr == $find)
   <img class="imageanhchinh d-none" src="source/imageOPr/{{$color->imageOPr}}" data-index="{{$color->idColor}}" class="rounded-top imageOPr"  alt="image Product"/>
-  @endif
+    @endif
   @endforeach
   <canvas class="resultmerge d-none" id="resultmerge"></canvas>
   <br />
