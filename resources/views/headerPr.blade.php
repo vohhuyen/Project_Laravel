@@ -308,8 +308,9 @@
                 <div>
                     <a href="#"><i class="icon_header_body fa-solid fa-bell"></i></a>
                 </div>
+                
                 <div>
-                    <a href="#"><i class="far icon_header_body fa-heart"></i></a>
+                    <a href="{{route('getlikePr')}}"><i class="far icon_header_body fa-heart"></i></a>
                 </div>
                 <div>
                     <a href="{{route('cart')}}"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>

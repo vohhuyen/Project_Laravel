@@ -476,6 +476,7 @@
     });
     });
 
+    
     document.addEventListener('DOMContentLoaded', function () {
     const alsolikeContainer = document.querySelector('.alsolikeDetail');
     const alsolikeItems = document.querySelectorAll('.alsolikeImg1');

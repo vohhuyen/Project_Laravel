@@ -85,3 +85,9 @@ Route::post('/forsalepage',[PageController::class, 'forsalepage']);
 
 
 Route::get('/search',[PageController::class, 'search'])->name('search');
+
+Route::get('/PersionalPage/{idShop}',[PageController::class, 'getPersionalPage'])->name('PersionalPage');
+
+Route::get('/likePr',[PageController::class, 'getlikePr'])->name('getlikePr');
+Route::post('/likePr/{idProduct}',[PageController::class, 'likePr'])->name('likePr');
+Route::post('/deletelikePr/{idProduct}', [PageController::class, 'deletelikePr'])->name('deletelikePr');

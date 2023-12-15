@@ -107,20 +107,7 @@ form > div > span, form > span {
     height: 230px;
     background-size: cover;
 }
-.last-img{
-    width: 220px;
-    height: 235px;
-    background-size: cover;
-}
-.last-img{
-    display: none;
-}
-.product_img:hover .last-img{
-    display: block;
-}
-.product_img:hover .first-img{
-    display: none;
-}
+
 .product_icon{
     font-size: 1.7rem;
     margin-left: 200px;

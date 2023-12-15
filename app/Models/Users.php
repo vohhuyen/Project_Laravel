@@ -14,4 +14,5 @@ class Users extends Model
         'Email',
         'password',
     ];
+    
 }
