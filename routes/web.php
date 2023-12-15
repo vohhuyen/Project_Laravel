@@ -37,6 +37,8 @@ Route::get('/adduser',[PageController::class, 'getadduser'])->name('adduser');
 Route::post('/adduser',[PageController::class, 'adduser']);
 
 Route::get('/design/{idProvider}/{idOPr}',[PageController::class, 'getIndexDesign'])->name('design');
+Route::post('/postPr',[PageController::class, 'getIndexFormPostPr'])->name('postPr');
+Route::get('/getformPr',[PageController::class, 'getFormPostPr'])->name('getformPr');
 Route::get('/product',[PageController::class, 'getIndexProduct'])->name('product');
 Route::get('/filter-products/{idCategoryPrDetail}',[PageController::class, 'filterProduct']);
 Route::get('/filter-products-by-price/{minPrice}/{maxPrice}',[PageController::class, 'filterPriceProduct']);

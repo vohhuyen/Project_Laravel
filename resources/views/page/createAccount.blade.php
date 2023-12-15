@@ -32,8 +32,8 @@
                     </div>
                     <form action="createAccount" method="post" class="login-form">
                     @csrf 
-                        <input type="text" class="auth-form-input" placeholder="Name" id="name" name="name">
-                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="email" >
+                        <input type="text" class="auth-form-input" placeholder="Name" id="name" name="Name">
+                        <input type="email" class="auth-form-input" placeholder="Email" id="email" name="Email" >
                         <div class="input-icon">
                             <input type="password" class="auth-form-input" placeholder="Password" id="password" name="password">
                             <i class="fa fa-eye show-password"></i>

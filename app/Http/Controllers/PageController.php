@@ -156,13 +156,14 @@ class PageController extends Controller
     }		
     public function createAccount(Request $request){
         $input = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'Name' => 'string',
+            'Email' => 'email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password'
         ]);
         $input['password'] = Hash::make($input['password']);
         Users::create($input);
+
         
         echo '
             <script>
@@ -173,7 +174,7 @@ class PageController extends Controller
     }
     public function createShop(Request $request){
         $input = $request->validate([
-            'nameShop' => 'required|string|unique:Shop',
+            'nameShop' => 'unique:Shop',
         ]);
 
         $shop = new Shop();	
@@ -205,7 +206,7 @@ class PageController extends Controller
         $shop->locationShop = $request->location;
         $shop->idShop = $idUser;													
         $shop->save();							
-        return redirect('user');							
+        return redirect('index');							
 
     }
 
@@ -693,6 +694,8 @@ class PageController extends Controller
 
 
     public function getIndexDesign($idProvider, $idOPr){
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop', $idUser)->first();	
         $pro = DB::table('OriginalProducts')->where('idOPr', '=', $idOPr)->first();
         $find = $idOPr;
         $colorProvider = DB::table('Providers')
@@ -708,7 +711,36 @@ class PageController extends Controller
         $provider = DB::table('Providers')->where('idProvider', '=', $idProvider)->first();
         $detail = DB::table('DetailProvider')->where('idProvider', '=', $idProvider)->where('idOPr', '=', $idOPr)->first();
         // dd($provider);
-        return view('page.Design', compact('pro','colorProvider','find','provider','detail'));
+        return view('page.Design', compact('pro','colorProvider','find','provider','detail','shop'));
+    }
+    public function getIndexFormPostPr(Request $request){
+        $imageData = $request->json('image');
+        $Design = $request->json('result');
+
+        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $Design = str_replace('data:image/png;base64,', '', $Design); 
+
+        $imageData = str_replace(' ', '+', $imageData);
+        $Design = str_replace(' ', '+', $Design);
+
+        $imageBinary = base64_decode($imageData);
+        $imageB = base64_decode($Design);
+
+        $newFileName = 'merge.png';
+        $newFileNameDesign = 'design.png';
+        $path = public_path('image/' . $newFileName);
+        $pathDesign = public_path('image/' .  $newFileNameDesign); 
+        file_put_contents($path, $imageBinary);
+        file_put_contents($pathDesign,$imageB); 
+        return response()->json(['success' => true, 'image' => $newFileName, 'result' => $newFileNameDesign]);
+    }
+    public function getFormPostPr(Request $request){
+        $image = $request->input('image');
+        $imageDesign = $request->input('result');
+        // $idshop = Session::get('user');
+        // $shop = Shop::where('idShop', $idshop->idUser)->first();
+
+        return view('page.forsalepage', compact('image','imageDesign'));
     }
     public function getIndexProduct(){
         $product = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
@@ -1114,7 +1146,7 @@ $evalue = comment::where('idProduct',$idProduct )
         $Products = Product::all();
         $category_opr_detail=CategoryOPrDetail::all();
         $color=Color::all();    
-    return view('admin.forsalepage',compact('Products','category_opr_detail','color'));	
+    return view('page.forsalepage',compact('Products','category_opr_detail','color'));	
     }
 
     public function search(Request $request)
