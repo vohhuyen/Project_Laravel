@@ -9,4 +9,5 @@ class Color extends Model
 {
     use HasFactory;
     protected $table = "Color";
+    protected $primaryKey = 'idColor';
 }

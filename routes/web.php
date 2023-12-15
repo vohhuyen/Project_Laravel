@@ -25,6 +25,15 @@ Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->n
 Route::post('/createAccount',[PageController::class, 'createAccount']);
 Route::get('/reindex',[PageController::class, 'Logout'])->name('logout');
 
+Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete']);														
+// Route::get('/admin', [PageController::class, 'getIndexAdmin']);											
+Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');														
+Route::post('/admin-add-form', [PageController::class, 'postAdminAdd']);											
+Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
+Route::post('/admin-edit',[PageController::class, 'postAdminEdit']);
+
+Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');		
+										
 Route::get('/Category-opr',[PageController::class, 'getIndexCategoryOPr'])->name('categoryopr');
 Route::get('/opr-detail/{idOPr}',[PageController::class, 'getIndexOPrDetail'])->name('opr-detail');
 Route::get('/list-user',[PageController::class, 'getuser'])->name('list-user');
@@ -91,3 +100,9 @@ Route::get('/PersionalPage/{idShop}',[PageController::class, 'getPersionalPage']
 Route::get('/likePr',[PageController::class, 'getlikePr'])->name('getlikePr');
 Route::post('/likePr/{idProduct}',[PageController::class, 'likePr'])->name('likePr');
 Route::post('/deletelikePr/{idProduct}', [PageController::class, 'deletelikePr'])->name('deletelikePr');
+Route::get('/providermanagement',[PageController::class, 'providermanagement'])->name('providermanagement');
+Route::post('/providermanagement',[PageController::class, 'providerAdd'])->name('providermanagement');
+Route::post('/editprovideradmin',[PageController::class, 'providerEdit'])->name('editprovideradmin');
+Route::post('/deleteprovideradmin/{idProvider}',[PageController::class, 'providerDelete'])->name('deleteprovideradmin');
+
+Route::get('/designproductmanagement',[PageController::class, 'designproductmanagement'])->name('designproductmanagement');

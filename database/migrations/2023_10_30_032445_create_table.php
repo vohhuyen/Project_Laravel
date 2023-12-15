@@ -198,6 +198,27 @@ return new class extends Migration
             $products->foreign('colorPr')->references('idColor')->on('Color');
             $products->timestamps();
         });
+        Schema::create('DesignProducts', function(Blueprint $DesignProducts){
+            $DesignProducts->increments('idDesignProducts');
+            $DesignProducts->integer('idOPrDetail')->unsigned();
+            $DesignProducts->integer('idShop')->unsigned();
+            $DesignProducts->integer('idCategoryPrDetail')->unsigned();
+            $DesignProducts->integer('idProvider')->unsigned();
+            $DesignProducts->string('imagePr')->comment('hình đại diện sản phẩm');
+            $DesignProducts->string('namePr');
+            $DesignProducts->float('pricePr', 8, 2)->default('0');
+            $DesignProducts->integer('colorPr')->unsigned()->comment('mã màu # định dạng 001');
+            $DesignProducts->string('imageDesign');
+            $DesignProducts->string('nameDesign', 200);
+            $DesignProducts->string('descriptionDesign');
+            $DesignProducts->string('note');
+            $DesignProducts->foreign('idOPrDetail')->references('idOPrDetail')->on('OriginalProductsDetail');
+            $DesignProducts->foreign('idShop')->references('idShop')->on('Shop');
+            $DesignProducts->foreign('idCategoryPrDetail')->references('idCategoryPrDetail')->on('category_Pr_Detail');
+            $DesignProducts->foreign('idProvider')->references('idProvider')->on('Providers');
+            $DesignProducts->foreign('colorPr')->references('idColor')->on('Color');
+            $DesignProducts->timestamps();
+        });
         Schema::create('image_Pr', function(Blueprint $imagePr){
             $imagePr->integer('idProduct')->unsigned()->comment('tham chiếu từ idproduct');
             $imagePr->string('image1')->nullable($value = true);

@@ -5,6 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\User;
+use App\Models\Color;
+use App\Models\Category_pr;
+use App\Models\Nameproduct;
+use App\Models\originalproducts;
+use App\Models\Shop;
+
+
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -30,8 +39,6 @@ use App\Models\OriginalProductDetail;
 use App\Models\categoryPr;
 use App\Models\Product;
 use App\Models\Cart;
-use App\Models\Shop;
-use App\Models\Color;
 use App\Models\categoryPrDetail;
 use App\Models\ImageOPr;
 use App\Models\KeyFeature;
@@ -46,12 +53,36 @@ class PageController extends Controller
     
     return view('page.home', compact('products','shop'));
     }
-    public function getIndexLogin(){		
-    	return view('page.login');	
+    public function getIndexLogin()
+    {
+        return view('page.login');
     }
      
 
-   
+
+    // public function Login(Request $request)
+    // {
+    //     $login = [
+    //         'email' => $request->input('email'),
+    //         'password' => $request->input('pw')
+    //     ];
+
+    //     $request->validate([
+    //         'email' => 'required',
+    //         'pw' => 'required',
+    //     ]);
+
+
+    //     if (Auth::attempt($login)) {
+    //         $user = Auth::user();
+    //         Session::put('user', $user);
+    //         return redirect('index')->with('status', 'Successfully');
+    //     } else {
+
+    //         return redirect('login')->with('status', 'Invalid credentials');
+    //     }
+
+    // }
     
     public function login(Request $request) {
         $request->validate([
@@ -62,6 +93,10 @@ class PageController extends Controller
             'email.email' => 'Invalid email format.',
             'pw.required' => 'Password is required.',
         ]);
+
+        // Your login logic here
+
+        return redirect()->route('home');
     
         $login = [
             'email' => $request->input('email'),
@@ -150,22 +185,27 @@ class PageController extends Controller
     }
 
 
-    public function Logout(){		
-    	Session::forget('user');
+    public function Logout()
+    {
+        Session::forget('user');
         Session::forget('cart');
         return redirect('index');
-
     }
-    public function getIndexCreateAccount(){		
-    	return view('page.createAccount');	
-    }		
-    public function createAccount(Request $request){
+    public function getIndexCreateAccount()
+    {
+        return view('page.createAccount');
+    }
+    public function createAccount(Request $request)
+    {
         $input = $request->validate([
             'Name' => 'string',
             'Email' => 'email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password'
         ]);
+        $input['password'] = bcrypt($input['password']);
+        User::create($input);
+
         $input['password'] = Hash::make($input['password']);
         Users::create($input);
 
@@ -177,6 +217,9 @@ class PageController extends Controller
             </script>
         ';
     }
+
+    
+
     public function createShop(Request $request){
         $input = $request->validate([
             'nameShop' => 'unique:Shop',
@@ -1207,4 +1250,35 @@ $evalue = comment::where('idProduct',$idProduct )
 
         return redirect()->route('getlikePr')->with('success', 'User deleted successfully');
     }
+    
+    public function providermanagement(){
+        $providers = Provider::all();
+        return view('admin.provider',compact('providers'));
+    }
+    public function providerAdd(Request $request){
+        $providers = new Provider();
+        $providers->Name =  $request->input('Name');
+        $providers->description = $request->input('description');
+        $providers->location = $request->input('location');
+        $providers->save();
+        return redirect()->route('providermanagement');
+
+    }
+     public function providerEdit(Request $request){
+        $idProvider = $request->input('idprovider');
+        $providers = Provider::find('idProvider',$idProvider);
+        $providers->Name =  $request->input('Name');
+        $providers->description = $request->input('description');
+        $providers->location = $request->input('location');
+        $providers->save();
+        return redirect()->route('providermanagement');
+     }
+     public function providerDelete($idProvider){
+        $providers = Provider::find($idProvider);
+        $providers->delete();
+        return redirect()->route('providermanagement');
+     }
+     public function designproductmanagement(){
+        return view('admin.designproduct');
+     }
 }
