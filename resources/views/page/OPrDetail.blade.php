@@ -9,21 +9,21 @@
                     <i class="fa-solid fa-chevron-up icon-chev"></i>
                 </div>
                 <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image1}}" oneclick="showImg(this.src)">
+                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
                 </div>
                 @if(!empty($pro->image2))
                 <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image2}}" oneclick="showImg(this.src)">
+                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
                 </div>
                 @endif
                 @if(!empty($pro->image3))
                 <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image3}}" oneclick="showImg(this.src)">
+                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
                 </div>
                 @endif
                 @if(!empty($pro->image4))
                 <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image4}}" oneclick="showImg(this.src)">
+                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
                 </div>
                 @endif
                 @if(!empty($pro->image5))
@@ -88,7 +88,7 @@
                 
             </div>
             <div class="big-img">
-                    <img src="source/imageOPr/{{$pro->image1}}">
+                    <img src="source/imageOPr/{{$pro->imageOPr}}">
             </div>
             <div class="infor-right">
                     <div class="pname">{{$pro->nameOPr}}</div> 
@@ -476,6 +476,7 @@
     });
     });
 
+    
     document.addEventListener('DOMContentLoaded', function () {
     const alsolikeContainer = document.querySelector('.alsolikeDetail');
     const alsolikeItems = document.querySelectorAll('.alsolikeImg1');

@@ -23,6 +23,10 @@ use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\SavePr;
+use App\Models\Comment;
+use App\Models\size;
+use App\Models\DetailSize;
 use App\Models\categoryOPr;
 use App\Models\categoryOPrDetail;
 use App\Models\OriginalProduct;
@@ -36,13 +40,20 @@ use App\Models\categoryPrDetail;
 use App\Models\inputci;
 use App\Models\inputkf;
 use App\Models\sizeguide;
+use App\Models\ImageOPr;
+
+use App\Models\KeyFeature;
+use App\Models\CareIntruction;
 use NunoMaduro\Collision\Contracts\Provider as ContractsProvider;
 
 class PageController extends Controller
 {
-    public function getIndex()
-    {
-        return view('page.home');
+    public function getIndex(){		
+        $shop = Shop::all();
+    // $products = Product::all();
+    $products = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);
+    
+    return view('page.home', compact('products','shop'));
     }
     public function getIndexLogin()
     {
@@ -189,8 +200,8 @@ class PageController extends Controller
     public function createAccount(Request $request)
     {
         $input = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'Name' => 'string',
+            'Email' => 'email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password'
         ]);
@@ -199,6 +210,7 @@ class PageController extends Controller
 
         $input['password'] = Hash::make($input['password']);
         Users::create($input);
+
         
         echo '
             <script>
@@ -212,7 +224,7 @@ class PageController extends Controller
 
     public function createShop(Request $request){
         $input = $request->validate([
-            'nameShop' => 'required|string|unique:Shop',
+            'nameShop' => 'unique:Shop',
         ]);
 
         $shop = new Shop();	
@@ -244,7 +256,7 @@ class PageController extends Controller
         $shop->locationShop = $request->location;
         $shop->idShop = $idUser;													
         $shop->save();							
-        return redirect('user');							
+        return redirect('index');							
 
     }
 
@@ -414,53 +426,19 @@ class PageController extends Controller
 
    
     public function getoriginalproduct(){	
-        $originalproducts = OriginalProduct::all(); // Lấy danh sách người dùng từ cơ sở dữ liệu
-        // $originalproducts = DB::table('OriginalProducts')
-        //     ->join('OriginalProductsDetail','OriginalProductsDetail.idOPr','=','OriginalProducts.idOPr')
-        //     ->join('image_OPr','image_OPr.idOPrDetail','=','OriginalProductsDetail.idOPrDetail')
-        //     ->select('OriginalProducts.*','OriginalProductsDetail.*','image_OPr.*','OriginalProducts.idOPr as id')
-        //     ->first();             ccvbn
+        $originalproducts = OriginalProduct::all(); 
         return view('admin.originalproduct', ['originalproducts' => $originalproducts]);	
-        
-    	// dd($originalproducts);
     }
-
-    // public function getoriginalproduct() {
-    //     try {
-    //         $originalproducts = DB::table('OriginalProducts')
-    //             ->join('OriginalProductsDetail', 'OriginalProductsDetail.idOPr', '=', 'OriginalProducts.idOPr')
-    //             ->join('image_OPr', 'image_OPr.idOPrDetail', '=', 'OriginalProductsDetail.idOPrDetail')
-    //             // ->select('OriginalProducts.*', 'image_OPr')
-    //             ->select('OriginalProducts.*', 'image_OPr.column1')
-
-    //             ->first();
-    
-    //         if (!$originalproducts) {
-    //             throw new \Exception("Không có dữ liệu trả về từ cơ sở dữ liệu.");
-    //         }
-    
-    //         return view('admin.originalproduct', ['originalproducts' => $originalproducts]);
-    //     } catch (\Exception $e) {
-    //         // Ghi log hoặc hiển thị thông báo lỗi
-    //         return response()->json(['error' => $e->getMessage()], 500);
-    //     }
-    // }
-    
-
     public function getaddOPr(){	
         	
     	$originalproducts = OriginalProduct::all();
         $category_opr_detail=CategoryOPrDetail::all();
         $inputkf=inputkf::all();
         $inputci=inputci::all();
-        $color=color::all();
+        $color=Color::all();
 
-    //    dd($category_opr_detail);
-        // return view('admin.addOPr', ['originalproducts' => $originalproducts], ['category_opr_detail' => $category_opr_detail]);	
         return view('admin.addOPr', compact('originalproducts','category_opr_detail','color','inputci','inputkf'));
-        }
-    
-
+    }
     public function addOPr(Request $request){		
     	$originalproducts = new OriginalProduct;
         if($request->hasFile('inputImage') ){
@@ -478,44 +456,296 @@ class PageController extends Controller
         $originalproducts->aboutOPr = $request->input('aboutOPr');
         $originalproducts->image =  $file_name;
         $originalproducts->save();
-        $sizeguide = new sizeguide;
-        $sizeguide->idSizeGuide = $request->input('idSizeGuide');
-        $sizeguide->Width = $request->input('Width');
-        $sizeguide->lenght = $request->input('lenght');
-        $sizeguide->sleeveLength = $request->input('sleeveLength');
-        $sizeguide->save();
 
-       
-        // dd($originalproducts);
-         // Lấy id của sản phẩm vừa được tạo
-        // Lấy id lớn nhất
-        // $maxidOPr= originalproducts::max('idOPr');
-        // dd($maxidOPr);
-        return redirect()->route('addOPr')->with('success', 'Sản phẩm đã được tạo thành công. ID: ' . $originalproducts);
+        $maxidOPr= OriginalProduct::max('idOPr');
 
+        if ($request->filled('size1s') && $request->filled('size1m') && $request->filled('size1l') && $request->filled('size1xl')
+        && $request->filled('size12xl') && $request->filled('size13xl') && $request->filled('size14xl') && $request->filled('size15xl')) {
+            $sizeguide = new sizeguide;
+            $sizeguide->idOPr = $maxidOPr;
+            $sizeguide->width = 1;
+            $sizeguide->length = 0;
+            $sizeguide->sleeveLength = 0;
+            $sizeguide->S = $request->input('size1s');
+            $sizeguide->M = $request->input('size1m');
+            $sizeguide->L = $request->input('size1l');
+            $sizeguide->XL = $request->input('size1xl');
+            $sizeguide->size2XL = $request->input('size12xl');
+            $sizeguide->size3XL = $request->input('size13xl');
+            $sizeguide->size4XL = $request->input('size14xl');
+            $sizeguide->size5XL = $request->input('size15xl');
+            $sizeguide->save();
+        }
+        if ($request->filled('size2s') && $request->filled('size2m') && $request->filled('size2l') && $request->filled('size2xl')
+        && $request->filled('size22xl') && $request->filled('size23xl') && $request->filled('size24xl') && $request->filled('size25xl')) {
+            $sizeguide = new sizeguide;
+            $sizeguide->idOPr = $maxidOPr;
+            $sizeguide->width = 0;
+            $sizeguide->length = 1;
+            $sizeguide->sleeveLength = 0;
+            $sizeguide->S = $request->input('size2s');
+            $sizeguide->M = $request->input('size2m');
+            $sizeguide->L = $request->input('size2l');
+            $sizeguide->XL = $request->input('size2xl');
+            $sizeguide->size2XL = $request->input('size22xl');
+            $sizeguide->size3XL = $request->input('size23xl');
+            $sizeguide->size4XL = $request->input('size24xl');
+            $sizeguide->size5XL = $request->input('size25xl');
+            $sizeguide->save();
+        }
+        if ($request->filled('size3s') && $request->filled('size3m') && $request->filled('size3l') && $request->filled('size3xl')
+        && $request->filled('size32xl') && $request->filled('size33xl') && $request->filled('size34xl') && $request->filled('size35xl')) {
+            $sizeguide = new sizeguide;
+            $sizeguide->idOPr = $maxidOPr;
+            $sizeguide->width = 0;
+            $sizeguide->length = 0;
+            $sizeguide->sleeveLength = 1;
+            $sizeguide->S = $request->input('size3s');
+            $sizeguide->M = $request->input('size3m');
+            $sizeguide->L = $request->input('size3l');
+            $sizeguide->XL = $request->input('size3xl');
+            $sizeguide->size3XL = $request->input('size32xl');
+            $sizeguide->size3XL = $request->input('size33xl');
+            $sizeguide->size4XL = $request->input('size34xl');
+            $sizeguide->size5XL = $request->input('size35xl');
+            $sizeguide->save();
+        }
+
+        $colors = $request->input('color_id');
+        foreach($colors as $color){
+            if($request->hasFile('imageinputcolor_' . $color)){
+                $OPrDetail = new OriginalProductDetail;
+                $OPrDetail->idOPr = $maxidOPr;
+                $OPrDetail->idColor = $color;
+                $OPrDetail->save();
+
+                $maxidOPrDetail= OriginalProductDetail::max('idOPrDetail');
+                foreach($request->file('imageinputcolor_' . $color) as $image){
+                    
+                    $image_opr = new ImageOPr;
+                    $image_opr->idOPrDetail = $maxidOPrDetail;
+                    $file_color = null;
+                    if($image !=null){
+                        $file_color = $image->getClientOriginalName();
+                    }
+                    $image_opr->imageOPr = $file_color;
+                    $image_opr->save();
+                }
+                
+            }
+        }
+        if ($request->filled('idkf')){
+        $idkf = $request->input('idkf');
+        foreach($idkf as $kf){
+            $inputkf = inputkf::where('idinputkf', $kf)->first();
+            $keyfeature = new KeyFeature;
+            $keyfeature->idOPr = $maxidOPr;
+            $keyfeature->imageKF = $inputkf->imageinputkf;
+            $keyfeature->nameKF = $inputkf->Nameinputkf;
+            $keyfeature->descriptionKF = $request->input('deskf_'.$kf);
+            $keyfeature->save();
+        }
+        }
+        if ($request->filled('idci')){
+            $idci = $request->input('idci');
+            $CareIn = new CareIntruction;
+            $CareIn->idOPr = $maxidOPr;
+            $description = '';
+            $imageCounter = 1;
+            foreach($idci as $ci){
+                $inputci = inputci::where('idinputci', $ci)->first();
+                $imageField = 'imageCI' . $imageCounter;
+                $CareIn->$imageField = $inputci->imageinputci;
+                $imageCounter++;
+                if ($imageCounter > 5) {
+                    break;
+                }
+                $description .= $inputci->description . ', ';
+            }
+            if ($request->filled('descriptionci')){
+                $description .= $request->input('descriptionci');
+            }
+            $description = rtrim($description, ', ');
+            $CareIn->description = $description;
+            $CareIn->save();
+        }
+        return redirect()->route('originalproduct')->with('success', 'Sản phẩm đã được tạo thành công. ID: ' . $originalproducts);
+    }
+    public function geteditOPr($idOPr){	
+        $inputkf=inputkf::all();
+        $inputci=inputci::all();
+        $color=Color::all();
+        $category_opr_detail=CategoryOPrDetail::all();
+    	$originalproducts = OriginalProduct::where('idOPr', $idOPr)->first();
+        $sizew = sizeguide::where('idOPr', $idOPr)->where('width',1)->first();
+        $sizel = sizeguide::where('idOPr', $idOPr)->where('length',1)->first();
+        $sizeslv = sizeguide::where('idOPr', $idOPr)->where('length',1)->first();
+        $kf = KeyFeature::where('idOPr', $idOPr)->get();
+        $ci = CareIntruction::where('idOPr', $idOPr)->first();
+        $oprdetail = DB::table('OriginalProductsDetail')
+        ->where('idOPr', $idOPr)
+        ->join('image_opr', 'image_opr.idOPrDetail','OriginalProductsDetail.idOPrDetail')
+        ->select('OriginalProductsDetail.*','image_opr.*')
+        ->get();
+        return view('admin.formEditOPr', compact('category_opr_detail','originalproducts','sizew','sizel','sizeslv','kf', 'ci','oprdetail','color','inputci','inputkf'))->with(['data' => $kf, 'imagecolor' => $oprdetail]);
+    }
+    public function posteditOPr(Request $request){
+        $idOPr = $request->input('idOPr');
+        $originalproducts = OriginalProduct::where('idOPr', $idOPr)->first();
+        if($request->hasFile('inputImage') ){
+            $file=$request->file('inputImage');
+            $fileName=$file->getClientOriginalName('inputImage');
+            $file->move('source/imageOPr',$fileName);
+        }
+        $file_name = null;
+        if($request->file('inputImage') !=null){
+            $file_name = $request->file('inputImage')->getClientOriginalName();
+        }
+        $originalproducts->idCategoryOPrDetail = $request->input('idCategoryOPrDetail');
+        $originalproducts->nameOPr = $request->input('nameOPr');
+        $originalproducts->descriptionOPr = $request->input('descriptionOPr');
+        $originalproducts->aboutOPr = $request->input('aboutOPr');
+        $originalproducts->image =  $file_name;
+        $originalproducts->save();
+
+        // $maxidOPr= $idOPr;
+
+        if ($request->filled('size1s') && $request->filled('size1m') && $request->filled('size1l') && $request->filled('size1xl')
+        && $request->filled('size12xl') && $request->filled('size13xl') && $request->filled('size14xl') && $request->filled('size15xl')) {
+            $sizeguide = sizeguide::where('idOPr', $idOPr)->where('width', 1)->first();
+            $sizeguide->S = $request->input('size1s');
+            $sizeguide->M = $request->input('size1m');
+            $sizeguide->L = $request->input('size1l');
+            $sizeguide->XL = $request->input('size1xl');
+            $sizeguide->size2XL = $request->input('size12xl');
+            $sizeguide->size3XL = $request->input('size13xl');
+            $sizeguide->size4XL = $request->input('size14xl');
+            $sizeguide->size5XL = $request->input('size15xl');
+            $sizeguide->save();
+        }
+        if ($request->filled('size2s') && $request->filled('size2m') && $request->filled('size2l') && $request->filled('size2xl')
+        && $request->filled('size22xl') && $request->filled('size23xl') && $request->filled('size24xl') && $request->filled('size25xl')) {
+            $sizeguide = sizeguide::where('idOPr', $idOPr)->where('length', 1)->first();
+            $sizeguide->S = $request->input('size2s');
+            $sizeguide->M = $request->input('size2m');
+            $sizeguide->L = $request->input('size2l');
+            $sizeguide->XL = $request->input('size2xl');
+            $sizeguide->size2XL = $request->input('size22xl');
+            $sizeguide->size3XL = $request->input('size23xl');
+            $sizeguide->size4XL = $request->input('size24xl');
+            $sizeguide->size5XL = $request->input('size25xl');
+            $sizeguide->save();
+        }
+        if ($request->filled('size3s') && $request->filled('size3m') && $request->filled('size3l') && $request->filled('size3xl')
+        && $request->filled('size32xl') && $request->filled('size33xl') && $request->filled('size34xl') && $request->filled('size35xl')) {
+            $sizeguide = sizeguide::where('idOPr', $idOPr)->where('sleeveLength', 1)->first();
+            $sizeguide->S = $request->input('size3s');
+            $sizeguide->M = $request->input('size3m');
+            $sizeguide->L = $request->input('size3l');
+            $sizeguide->XL = $request->input('size3xl');
+            $sizeguide->size3XL = $request->input('size32xl');
+            $sizeguide->size3XL = $request->input('size33xl');
+            $sizeguide->size4XL = $request->input('size34xl');
+            $sizeguide->size5XL = $request->input('size35xl');
+            $sizeguide->save();
+        }
+
+        $colors = $request->input('color_id');
+        foreach($colors as $color){
+            if($request->hasFile('imageinputcolor_' . $color)){
+                $OPrDetail = OriginalProductDetail::where('idOPr', $idOPr)->first();
+                $OPrDetail->idColor = $color;
+                $OPrDetail->save();
+
+                $maxidOPrDetail= OriginalProductDetail::where('idOPr', $idOPr)->where('idColor', $color)->first();
+                foreach($request->file('imageinputcolor_' . $color) as $image){
+                    $image_opr = ImageOPr::where('idOPrDetail', $maxidOPrDetail)->first();
+                    $file_color = null;
+                    if($image !=null){
+                        $file_color = $image->getClientOriginalName();
+                    }
+                    $image_opr->imageOPr = $file_color;
+                    $image_opr->save();
+                }
+            }
+        }
+        if ($request->filled('idkf')){
+        $idkf = $request->input('idkf');
+        foreach($idkf as $kf){
+            $inputkf = inputkf::where('idinputkf', $kf)->first();
+            $keyfeature = KeyFeature::where('idOPr', $idOPr)->first();
+            if (!$keyfeature) {
+                $keyfeature->imageKF = $inputkf->imageinputkf;
+                $keyfeature->nameKF = $inputkf->Nameinputkf;
+                $keyfeature->descriptionKF = $request->input('deskf_'.$kf);
+                $keyfeature->save();
+                }
+            }
+        }
+        if ($request->filled('idci')){
+            $idci = $request->input('idci');
+            $CareIn = CareIntruction::where('idOPr', $idOPr)->first();
+            if (!$keyfeature) {
+                $description = '';
+                $imageCounter = 1;
+                foreach($idci as $ci){
+                    $inputci = inputci::where('idinputci', $ci)->first();
+                    $imageField = 'imageCI' . $imageCounter;
+                    $CareIn->$imageField = $inputci->imageinputci;
+                    $imageCounter++;
+                    if ($imageCounter > 5) {
+                        break;
+                    }
+                    $description .= $inputci->description . ', ';
+                }
+                if ($request->filled('descriptionci')){
+                    $description .= $request->input('descriptionci');
+                }
+                $description = rtrim($description, ', ');
+                $CareIn->description = $description;
+                $CareIn->save();
+            }
+        }
+        return redirect()->route('originalproduct')->with('success', 'Sản phẩm đã được tạo thành công. ID: ' . $originalproducts);
+    }
+    public function getCategoryInfor(Request $request){
+        $idProduct = $request->query('productId');
+        $productinfor = DB::table('OriginalProducts')->where('OriginalProducts.idOPr','=',$idProduct)
+        ->join('category_OPr_Detail', 'category_OPr_Detail.idCategoryOPrDetail', '=', 'OriginalProducts.idCategoryOPrDetail')
+        ->select('category_OPr_Detail.*')
+        ->get();
+        return response()->json([
+            'data' => $productinfor
+        ]);
+    }
+    public function deleteOPr($idOPr){       
+        $sizeguide = sizeguide::where('idOPr', $idOPr);
+        $sizeguide->delete();
+        $kf = KeyFeature::where('idOPr', $idOPr);
+        $kf->delete();
+        $ci = CareIntruction::where('idOPr', $idOPr);
+        $ci->delete();
+        $oprdetail = DB::table('OriginalProductsDetail')
+        ->where('idOPr', $idOPr)
+        ->get();
+        foreach ($oprdetail as $detail) {
+            DB::table('image_opr')->where('idOPrDetail', $detail->idOPrDetail)->delete();
+        }
+        DB::table('OriginalProductsDetail')->where('idOPr', $idOPr)->delete();
+
+        $originalproducts = OriginalProduct::where('idOPr', $idOPr);
+        $originalproducts->delete();
+        return  redirect()->route('originalproduct');
     }
 
-    // public function getaddInfo(){
-    //     return view('admin.addOPr');	
-    // 	}
 
-    // public function addInfo(Request $request){	
-    //     $sizeguide = new sizeguide;
-    //     $sizeguide->idSizeGuide = $request->input('idSizeGuide');
-    //     $sizeguide->Width = $request->input('Width');
-    //     $sizeguide->lenght = $request->input('lenght');
-    //     $sizeguide->SleeveLength = $request->input('SleeveLength');
-    //     $sizeguide->save();
-    //     // $size = new size;
-    //     // $size->NameSize = $request->input('NameSize');
-    //     // $size->idSize = $request->input('idSize');
-    //     // $size->save();
-    //     return redirect()->route('originalproduct');
 
-    // 	}
-   
-   
+
+
+
     public function getIndexDesign($idProvider, $idOPr){
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop', $idUser)->first();	
         $pro = DB::table('OriginalProducts')->where('idOPr', '=', $idOPr)->first();
         $find = $idOPr;
         $colorProvider = DB::table('Providers')
@@ -531,7 +761,36 @@ class PageController extends Controller
         $provider = DB::table('Providers')->where('idProvider', '=', $idProvider)->first();
         $detail = DB::table('DetailProvider')->where('idProvider', '=', $idProvider)->where('idOPr', '=', $idOPr)->first();
         // dd($provider);
-        return view('page.Design', compact('pro','colorProvider','find','provider','detail'));
+        return view('page.Design', compact('pro','colorProvider','find','provider','detail','shop'));
+    }
+    public function getIndexFormPostPr(Request $request){
+        $imageData = $request->json('image');
+        $Design = $request->json('result');
+
+        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $Design = str_replace('data:image/png;base64,', '', $Design); 
+
+        $imageData = str_replace(' ', '+', $imageData);
+        $Design = str_replace(' ', '+', $Design);
+
+        $imageBinary = base64_decode($imageData);
+        $imageB = base64_decode($Design);
+
+        $newFileName = 'merge.png';
+        $newFileNameDesign = 'design.png';
+        $path = public_path('image/' . $newFileName);
+        $pathDesign = public_path('image/' .  $newFileNameDesign); 
+        file_put_contents($path, $imageBinary);
+        file_put_contents($pathDesign,$imageB); 
+        return response()->json(['success' => true, 'image' => $newFileName, 'result' => $newFileNameDesign]);
+    }
+    public function getFormPostPr(Request $request){
+        $image = $request->input('image');
+        $imageDesign = $request->input('result');
+        // $idshop = Session::get('user');
+        // $shop = Shop::where('idShop', $idshop->idUser)->first();
+
+        return view('page.forsalepage', compact('image','imageDesign'));
     }
     public function getIndexProduct(){
         $product = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
@@ -603,10 +862,86 @@ class PageController extends Controller
             return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
         }																			
     }	
-    public function getIndexProductDetail(){
-        return view('page.ProductDetail');
-    }		
+
     
+
+    public function getIndexProductDetail($idProduct)
+{
+  
+    // Truy vấn thông tin sản phẩm từ bảng 'Products' và các bảng liên quan
+    $productinfor = DB::table('Products')
+        ->where('Products.idProduct', '=', $idProduct)
+        ->join('Shop', 'Shop.idShop', '=', 'Products.idShop')
+        ->join('Providers', 'Providers.idProvider', '=', 'Products.idProvider')
+        ->join('Color', 'Color.idColor', '=', 'Products.colorPr')
+        ->select('Products.*', 'Shop.*', 'Providers.*', 'Color.*')
+        ->first();
+        // dd($productinfor);
+    // Truy vấn danh sách hình ảnh từ bảng 'image_Pr' dựa trên 'idProduct'
+
+    $images = DB::table('image_Pr')->where('idProduct', '=', $idProduct)->first();
+    
+       
+        $DetailSize = DetailSize::where('idOPrDetail', $productinfor->idOPrDetail)
+                ->where('idProvider', $productinfor->idProvider)
+                ->first();
+
+                $sizeNames = [];
+
+                foreach ($DetailSize->first()->toArray() as $fieldName => $sizeId) {
+                    // Kiểm tra nếu trường chứa idSize
+                    if (strpos($fieldName, 'idSize') === 0) {
+                        // Lấy tên của size từ bảng Size
+                        $size = size::find($sizeId);
+            
+                        if ($size) {
+                            $NameSizes[$fieldName] = $size->NameSize;
+                        }
+                    }
+                }
+//Truy vấn danh sách chất liệu và giới thiệu sản phẩm  từ bảng 'descriptionOPr' và 'aboutOPr' Dữa trên idProduct
+                   
+                $opr = DB::table('Products')
+                ->where('Products.idProduct', '=', $idProduct)
+                ->join('OriginalProductsDetail', 'OriginalProductsDetail.idOPrDetail', '=', 'Products.idOPrDetail')
+                ->join('OriginalProducts', 'OriginalProducts.idOPr', '=', 'OriginalProductsDetail.idOPr')
+                ->select('OriginalProducts.*')
+                ->first();
+                $idOPr = $opr->idOPr;
+                function getSize($idOPr, $column) {
+                    return DB::table('OriginalProducts')
+                        ->join('SizeGuide', function ($join) use ($idOPr, $column) {
+                            $join->on('SizeGuide.idOPr', '=', 'OriginalProducts.idOPr')
+                                ->where([
+                                    ['SizeGuide.idOPr', '=', $idOPr],
+                                    ['SizeGuide.' . $column, '=', '1']
+                                ]);
+                        })
+                        ->select('SizeGuide.*')
+                        ->first();
+                }
+                $sizewidth = getSize($idOPr, 'width');
+                $sizelength = getSize($idOPr, 'length');
+                $sizesleeveLength = getSize($idOPr, 'sleeveLength');
+//Truy vấn danh dách nhận xét của khách hàng tuè bảng 'comment' dựa trên idProduct
+$comment =comment::where('idProduct', $idProduct)
+                ->get();
+//Truy vấn danh dách nhận xét của khách hàng tuè bảng 'reviews' dựa trên idProduct
+$reviews =comment::where('idProduct', $idProduct)
+
+                ->count();
+
+$evalue = comment::where('idProduct',$idProduct )
+                ->avg('evalue');
+
+    // dd($opr);
+    // Truy vấn danh sách size từ bảng 'detailSize' dựa trên 'idProvider' và 'idOPrDetail' có trong bảng …[omitted]
+    
+        return view('page.ProductDetail', compact('productinfor', 'images','DetailSize','NameSizes','opr', 'sizewidth','sizelength','sizesleeveLength','comment','reviews','evalue'));
+        // return view('page.ProductDetail')->with('detailsize', $detailsize);
+
+}
+
     
 
 
@@ -814,4 +1149,138 @@ class PageController extends Controller
      public function designproductmanagement(){
         return view('admin.designproduct');
      }
+    
+// ------------------------------------------------Quản lý Shop-------------------------------------------------------
+    public function getshop(){	
+    	$shops = Shop::all(); 
+        $users = Users::all();// Lấy danh sách người dùng từ cơ sở dữ liệu
+        return view('admin.shop',compact('users','shops'));
+    }
+   
+    public function addshop(Request $request)
+    {
+
+        $shop = new Shop;
+        $shop->idShop = $request->input('idShop');
+        $shop->nameShop = $request->input('nameShop');
+        if($request->file('coverImageShop') !=null){
+        $shop->coverImageShop = $request->file('coverImageShop')->getClientOriginalName();
+        }
+        if($request->file('avataShop') !=null){
+        $shop->avataShop = $request->file('avataShop')->getClientOriginalName();
+        }
+        $shop->locationShop = $request->input('locationShop');
+        $shop->descriptionShop = $request->input('descriptionShop');
+        
+    
+      
+        // Lưu đối tượng Shop vào cơ sở dữ liệu
+        $shop->save();
+        return redirect()->route('list-shop');
+    }
+
+
+    public function updateAdminshop(Request $request)
+    {
+        $idShop=$request->input('idShop');
+        $shop = Shop::find($idShop);
+        $shop->nameShop = $request->input('nameShop');
+        if($request->file('coverImageShop') !=null){
+        $shop->coverImageShop = $request->file('coverImageShop')->getClientOriginalName();
+        }
+        if($request->file('avataShop') !=null){
+        $shop->avataShop = $request->file('avataShop')->getClientOriginalName();
+        }
+        $shop->locationShop = $request->input('locationShop');
+        $shop->descriptionShop = $request->input('descriptionShop');
+        
+    
+      
+        // Lưu đối tượng Shop vào cơ sở dữ liệu
+        $shop->save();
+        return redirect()->route('list-shop');
+    }
+    
+
+   
+
+    public function deleteShop($idShop)
+    {
+        // Tìm người dùng cần xóa trong cơ sở dữ liệu
+        // $shop = Shops::find($idShop);
+        $shop = Shop::where('idShop', $idShop);
+        // Nếu không tìm thấy người dùng, trả về thông báo lỗi
+        if (!$shop) {
+            return back()->with('error', 'Shop not found');
+        }
+
+        // Xóa người dùng khỏi cơ sở dữ liệu
+        $shop->delete();
+
+        return redirect()->route('list-shop')->with('success', 'Shop deleted successfully');
+    }
+
+
+
+    public function getforsalepage()
+    {
+        $Products = Product::all();
+        $category_opr_detail=CategoryOPrDetail::all();
+        $color=Color::all();    
+    return view('page.forsalepage',compact('Products','category_opr_detail','color'));	
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $product= Product::where('namePr','like', '%' . $query . '%')->paginate(16);
+        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
+        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
+        $provider = Provider::all();
+        // dd($category);
+        return view('page.Product', compact('product','category','provider'));
+    }
+    public function getPersionalPage($idShop)
+    {
+        $shop = Shop::where('idShop',$idShop)->first();
+        $product = Product::where('idShop',$idShop)->first();
+  
+    return view('page.PersionalPage', compact('product','shop'));
+    }
+
+    public function getlikePr()
+    {
+        $idUser = Session::get('user.idUser');
+        $product = SavePr::where('idSavePr',$idUser)->get();
+        $LPC = SavePr::where('idSavePr',$idUser)->count();
+    return view('page.likePr', compact('product','LPC'));
+    }
+    public function likePr($idProduct)
+    {
+        $idUser = Session::get('user.idUser');
+        $product = Product::where('idProduct',$idProduct)->first();
+        $savePr = new SavePr;
+        $savePr->idSavePr = $idUser;
+        $savePr->idProduct = $idProduct;
+        $savePr->namePr = $product->namePr;
+        $savePr->pricePr = $product->pricePr;
+        $savePr->imagePr = $product->imagePr;
+        $savePr->save();
+        return redirect()->back();
+
+    }
+    public function deletelikePr($idProduct)
+    {
+        // Tìm sản phẩm yêu thích cần xóa trong cơ sở dữ liệu
+        $savePr = SavePr::where('idProduct', $idProduct);
+        // Nếu không tìm thấy người dùng, trả về thông báo lỗi
+        if (!$savePr) {
+            return back()->with('error', 'User not found');
+        }
+
+        // Xóa người dùng khỏi cơ sở dữ liệu
+        $savePr->delete();
+
+        return redirect()->route('getlikePr')->with('success', 'User deleted successfully');
+    }
 }

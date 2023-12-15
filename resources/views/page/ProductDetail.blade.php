@@ -1,52 +1,101 @@
 @extends('masterPr')
 @section('contentPr')
 <div class="content grid">
+
     <div class="Product_detail grid">
       <div class="dis-flex-all">
         <div class="image_bar disnone-xs">
-          <img src="/image/image_Pr.webp" alt="imagePr"><br>
-          <img src="/image/image_Pr2.jpg" alt="imagePr2"><br>
-          <img src="/image/image_Pr3.jpg" alt="imagePr3">
+        @if(!empty($images->image1))
+       <img src="source/imageOPr/{{$images->image1}}"><br>
+       @endif
+       @if(!empty($images->image2))
+          <img src="source/imageOPr/{{$images->image2}}"><br>
+          @endif
+          @if(!empty($images->image3))
+          <img src="source/imageOPr/{{$images->image3}}">
+          @endif
+          @if(!empty($images->image4))
+          <img src="source/imageOPr/{{$images->image4}}">
+          @endif
+          @if(!empty($images->image5))
+          <img src="source/imageOPr/{{$images->image5}}">
+          @endif
+          @if(!empty($images->image6))
+          <img src="source/imageOPr/{{$images->image6}}">
+          @endif
+          @if(!empty($images->image7))
+          <img src="source/imageOPr/{{$images->image7}}">
+          @endif
+          @if(!empty($images->image8))
+          <img src="source/imageOPr/{{$images->image8}}">
+          @endif
+          @if(!empty($images->image9))
+          <img src="source/imageOPr/{{$images->image9}}">
+          @endif
+          @if(!empty($images->image10))
+          <img src="source/imageOPr/{{$images->image10}}">
+          @endif
+
         </div>
         <div class="image_Detail_Pr">
-          <img src="/image/image_Pr2.jpg" alt="imagePr2">
+          <img src="source/imageOPr/{{$productinfor->imagePr}}">
         </div>
         <div class="image_bar dis-flex-xs">
-          <img src="/image/image_Pr.webp" alt="imagePr"><br>
-          <img src="/image/image_Pr2.jpg" alt="imagePr2"><br>
-          <img src="/image/image_Pr3.jpg" alt="imagePr3">
+        @if(!empty($images->image1))
+       <img src="source/imageOPr/{{$images->image1}}"><br>
+       @endif
+       @if(!empty($images->image2))
+          <img src="source/imageOPr/{{$images->image2}}"><br>
+          @endif
+          @if(!empty($images->image3))
+          <img src="source/imageOPr/{{$images->image3}}">
+          @endif
+          @if(!empty($images->image4))
+          <img src="source/imageOPr/{{$images->image4}}">
+          @endif
+          @if(!empty($images->image5))
+          <img src="source/imageOPr/{{$images->image5}}">
+          @endif
+          @if(!empty($images->image6))
+          <img src="source/imageOPr/{{$images->image6}}">
+          @endif
+          @if(!empty($images->image7))
+          <img src="source/imageOPr/{{$images->image7}}">
+          @endif
+          @if(!empty($images->image8))
+          <img src="source/imageOPr/{{$images->image8}}">
+          @endif
+          @if(!empty($images->image9))
+          <img src="source/imageOPr/{{$images->image9}}">
+          @endif
+          @if(!empty($images->image10))
+          <img src="source/imageOPr/{{$images->image10}}">
+          @endif
         </div>
       </div>
       <div class="infor_Detail_Pr">
-        <b class="name_Deatil_Pr">The nobel element T shirt Design Fathers Day Men’s Organic T-Shirt</b>
+        <b class="name_Deatil_Pr" >{{ $productinfor->namePr }} </b>
         <p class="namedesign_DPr">
           Designed by 
-          <a href="#"  class="text-info">tshirtcare</a>
+          <a href="#"  class="text-info">{{ $productinfor->nameShop }}</a>
         </p>
-        <b class="price_DPr">$26.99</b>
+        <b class="price_DPr">${{$productinfor->pricePr }}</b>
 
           <div class="color_DPr">
-            <p><b>Color:</b> heather gray </p>
+            <p><b>Color:</b>{{ $productinfor->NameColor }}</p>
             <div class="color_Detail_Pr">
-              <div class="rounded-circle bg-black"></div>
-              <div class="rounded-circle bg-danger"></div>
-              <div class="rounded-circle bg-white"></div>
-              <div class="rounded-circle bg-primary"></div>
+              <div class="rounded-circle"><img class="rounded-circle" src="image/{{$productinfor->imageColor}}"></img></div>
             </div>
           </div>
           <div class="chooseSizePr">
-            <b>Choose size:</b><br>
-            <div class="sizeDetailPr">
-              <button>S</button>
-              <button>M</button>
-              <button>L</button>
-              <button>XL</button>
-              <button>2XL</button>
-              <button>3XL</button>
-              <button>4XL</button>
-              <button>5XL</button>
-            </div>
-          </div>
+    <b>Choose size:</b><br>
+    <div class="sizeDetailPr">
+    
+    @foreach ($NameSizes as $fieldName => $NameSize)
+            <button>{{ $NameSize }}</button>
+        @endforeach
+</div>
+</div>
 
         <div class="Slimfit_Detail_Pr">
           <b>Slim fit</b>
@@ -75,7 +124,7 @@
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
             </p>
-            <b>5</b>
+            <b>{{ $productinfor->evalue}}</b>
             <p>(66 review)</p>
           </div>
         </div>
@@ -92,22 +141,19 @@
           <div class="word">
             <b>Men's Organic T-Shirt</b>
             <p>
-              Get this: you can look while being environmentally consciou.
-              The men's premium organic t-shirt is made up of 100% organic cotton, 
-              making it green and comfy. Plus, the shirt promises the best-possible print sesults
-              , making it an excellent choice for those looking to customize.
+            {{ $opr->aboutOPr }}
             </p>
             <ul>
-              <li>Brand: Paint</li>
-              <li>Fabric weight: 4.42oz (lightweight)</li>
-              <li>Material: 100% organic cotton (charcoal grey is 80% organic cotton/20%
-               recycled polyester, heather gray is 95% organic cotton/5% viscode)
+              <li>Brand: {{ $productinfor->Name }}</li>
+              
+              <li>
+              {{ $opr->descriptionOPr }}
               </li>
-              <li>Imported product, printed & processed in the USA</li>
+              
             </ul>
           </div>
           <div class="inf_pr-item-image1">
-            <img src="/image/PRINT-removebg-preview.png" class="img-infor-pr1" alt="">
+            <img src="source/image/PRINT-removebg-preview.png" class="img-infor-pr1" alt="">
             <div class="box-product-detail">
               <b>Custom-printed for you</b>
               <div class="d-flex my-2 ms-5">
@@ -135,12 +181,12 @@
           <b>Size table</b>
           <button class="btn-minus" id="btn-minus2" data-toggle="collapse" data-target="#myCollapse2" aria-expanded="false" aria-controls="myCollapse2"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <div id="myCollapse2" class="collapse">
+        <div id="myCollapse2" class="collapse d-block">
           <p><b>Fit: </b>Slim fit</p>
           <p><b>Find the right size: </b>Compare these measurements with a similar product you have at home. Place the product on a flat surface to get the best results</p>
           <div class="infor_product-item-content2" >
-              <div class="img-size-clothes">
-                <img src="/image/size.png" alt="size">
+              <div class="img-size-clothes d-block">
+                <img src="source/image/size.png" alt="size">
                 <div>
                   <p>A - Length in inch</p>
                   <p>B - Width in inch</p>
@@ -160,51 +206,84 @@
                   <tbody>
                     <tr>
                       <th scope="row">S</th>
-                      <td>26.50</td>
-                      <td>17.48</td>
-                      <td>7.99</td>
+                      <td>{{$sizewidth->S}}</td>
+                      <td>{{$sizelength->S}}</td>
+                      @if(!empty($sizesleeveLength->S))
+                      <td>{{$sizesleeveLength->S}}</td>
+                      @endif
                     </tr>
                     <tr>
                       <th scope="row">M</th>
-                      <td>27.48</td>
-                      <td>20.00</td>
-                      <td>8.27</td>
+                      <td>{{$sizewidth->M}}</td>
+                      <td>{{$sizelength->M}}</td>
+                      @if(!empty($sizesleeveLength->M))
+                      <td>{{$sizesleeveLength->M}}</td>
+                      @endif
                     </tr>
                     <tr>
                       <th scope="row">L</th>
-                      <td>28.46</td>
-                      <td>21.50</td>
-                      <td>8.98</td>
+                      <td>{{$sizewidth->L}}</td>
+                      <td>{{$sizelength->L}}</td>
+                      @if(!empty($eveLength->L))
+                      <td>{{$eveLength->L}}</td>
+                      @endif
                     </tr>
                     <tr>
                       <th scope="row">XL</th>
-                      <td>30.24</td>
-                      <td>23.98</td>
-                      <td>9.25</td>
+                      <td>{{$sizewidth->XL}}</td>
+                      <td>{{$sizelength->XL}}</td>
+                      @if(!empty($sizesleeveLength->XL))
+                      <td>{{$sizesleeveLength->XL}}</td>
+                      @endif
                     </tr>
+                   
                     <tr>
                       <th scope="row">2XL</th>
-                      <td>31.50</td>
-                      <td>25.47</td>
-                      <td>9.45</td>
+                      @if(!empty($sizewidth->size2XL))
+                      <td>{{$sizewidth->size2XL}}</td>
+                      @endif
+                      @if(!empty($sizelength->size2XL))
+                      <td>{{$sizelength->size2XL}}</td>
+                      @endif
+                      @if(!empty($sizesleeveLength->size2XL))
+                      <td>{{$sizesleeveLength->size2XL}}</td>
+                      @endif
                     </tr>
                     <tr>
                       <th scope="row">3XL</th>
-                      <td>31.97</td>
-                      <td>27.72</td>
-                      <td>10.24</td>
+                      @if(!empty($sizewidth->size3XL))
+                      <td>{{$sizewidth->size3XL}}</td>
+                      @endif
+                      @if(!empty($sizelength->size3XL))
+                      <td>{{$sizelength->size3XL}}</td>
+                      @endif
+                      @if(!empty($sizesleeveLength->size3XL))
+                      <td>{{$sizesleeveLength->size3XL}}</td>
+                      @endif
                     </tr>
                     <tr>
                       <th scope="row">4XL</th>
-                      <td>32.99</td>
-                      <td>29.49</td>
-                      <td>10.51</td>
+                      @if(!empty($sizewidth->size4XL))
+                      <td>{{$sizewidth->size4XL}}</td>
+                      @endif
+                      @if(!empty($sizelength->size4XL))
+                      <td>{{$sizelength->size4XL}}</td>
+                      @endif
+                      @if(!empty($sizesleeveLength->size4XL))
+                      <td>{{$sizesleeveLength->size4XL}}</td>
+                      @endif
                     </tr>
                     <tr>
                       <th scope="row">5XL</th>
-                      <td>33.98</td>
-                      <td>31.50</td>
-                      <td>10.98</td>
+                      @if(!empty($sizewidth->size5XL))
+                      <td>{{$sizewidth->size5XL}}</td>
+                      @endif
+                      @if(!empty($sizelength->size5XL))
+                      <td>{{$sizelength->size5XL}}</td>
+                      @endif
+                      @if(!empty($sizesleeveLength->size5XL))
+                      <td>{{$sizesleeveLength->size5XL}}</td>
+                      @endif
                     </tr>
                   </tbody>
                 </table>
@@ -221,17 +300,14 @@
           <div>
             <b>Customer reviews</b> 
             <span class="evalue_DPr">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star">{{$evalue}}</i>
             </span>
-            <span>(66 reviews)</span>
+            <span>{{ $reviews}} reviews</span>
           </div>
           <button class="btn-minus" id="btn-minus3" data-toggle="collapse" data-target="#myCollapse3" aria-expanded="false" aria-controls="myCollapse3"><i class="fa-solid fa-plus"></i></button>
         </div>
         <div class="infor_product-item-content3 collapse"  id="myCollapse3">
+          @foreach($comment as $comment)
           <div class="item_cmt">
             <div class="item_cmt-header">
               <span class="evalue_DPr">
@@ -245,137 +321,11 @@
               <span><b>Size: </b> L </span>
             </div>
             <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
+              <p>{{$comment->cmt}}
               </p>
             </div>
           </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
-          <div class="item_cmt">
-            <div class="item_cmt-header">
-              <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
-            </div>
-            <div class="item_cmt-body">
-              <p>At firt it' look good but when i washed it first time it shrunk a little but.
-                A little bit tight now. I hope it will not shrink more on succeeding wash
-              </p>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
 
@@ -387,19 +337,17 @@
           <b>Design details</b> 
           <button class="btn-minus" id="btn-minus4" data-toggle="collapse" data-target="#myCollapse4" aria-expanded="false" aria-controls="myCollapse4"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <div class="infor_product-item-content4 collapse"  id="myCollapse4" >
+        <div class="infor_product-item-content4 collapse d-block"  id="myCollapse4" >
           <div class="d-flex">
-            <img src="/image/design_detail.jpg" class="img-design-detail" alt="">
+            <img src="source/imageOPr/{{$productinfor->imageDesign}}" class="img-design-detail" alt="">
             <div class="name_design-detail">
               <p>DESIGN</p>
-              <b>The nobel element T shirt Design Fathers Day</b><br>
-              <span>Designed by <a href="#" class="text-danger">tshirtcare</a></span>
+              <b>{{$productinfor->nameDesign}}</b><br>
+              <span>Designed by <a href="#" class="text-danger">{{ $productinfor->nameShop }}</a></span>
             </div>
           </div>
           <div class="word">
-            Buy fathers day t shirts for gifts or presents. Choose your favorite happy
-            fathers day t-shirts with unique high quantity print & design. Funny fathers day
-            ideas & gifts for mom shirts, tops, sweathir
+          {{$productinfor->descriptionDesign}}
           </div>
           <p class="report_design">Do you find the design problematic? <button class="btn-report"><i class="fa-solid fa-flag"></i> Report design </button></p>
           

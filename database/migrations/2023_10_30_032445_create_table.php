@@ -98,7 +98,7 @@ return new class extends Migration
             $OriginalProducts->foreign('idCategoryOPrDetail')->references('idCategoryOPrDetail')->on('category_OPr_Detail');
             $OriginalProducts->timestamps();
         });
-        Schema::create('OriginalProductsDetail', function(Blueprint $OriginalProductsDetail){
+        Schema::create('OriginalProductsDetail', function(Blueprint $OriginalProductsDetail){        
             $OriginalProductsDetail->increments('idOPrDetail');
             $OriginalProductsDetail->integer('idOPr')->unsigned();
             $OriginalProductsDetail->integer('idColor')->unsigned();
@@ -107,22 +107,9 @@ return new class extends Migration
             $OriginalProductsDetail->timestamps();
         });
         Schema::create('image_OPr', function(Blueprint $imageOPr){
-            $imageOPr->integer('idOPrDetail')->unsigned()->primary();
-            $imageOPr->string('image1')->nullable($value = true);
-            $imageOPr->string('image2')->nullable($value = true);
-            $imageOPr->string('image3')->nullable($value = true);
-            $imageOPr->string('image4')->nullable($value = true);
-            $imageOPr->string('image5')->nullable($value = true);
-            $imageOPr->string('image6')->nullable($value = true);
-            $imageOPr->string('image7')->nullable($value = true);
-            $imageOPr->string('image8')->nullable($value = true);
-            $imageOPr->string('image9')->nullable($value = true);
-            $imageOPr->string('image10')->nullable($value = true);
-            $imageOPr->string('image11')->nullable($value = true);
-            $imageOPr->string('image12')->nullable($value = true);
-            $imageOPr->string('image13')->nullable($value = true);
-            $imageOPr->string('image14')->nullable($value = true);
-            $imageOPr->string('image15')->nullable($value = true);
+            $imageOPr->increments('idImageOPr');
+            $imageOPr->integer('idOPrDetail')->unsigned();
+            $imageOPr->string('imageOPr')->nullable($value = true);
             $imageOPr->foreign('idOPrDetail')->references('idOPrDetail')->on('OriginalProductsDetail');
             $imageOPr->timestamps();
         });

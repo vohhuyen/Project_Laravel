@@ -1,5 +1,4 @@
 @extends('masterAdmin') @section('contentAdmin')
-
 <header class="app-header">
     <b>List of original products</b>
     <a href="{{route('addOPr')}}"><button class="addproducts" >Create <i class="fa-solid fa-plus"></i></button></a>
@@ -36,8 +35,14 @@
                         </td>
                         <td class="col-2">{{$originalproduct->descriptionOPr}}</td>
                         <td class="col-4">{{$originalproduct->aboutOPr}}</td>
-                        <td class="col-1"><button class="update">Detail</button></td>
-                        <td class="col-1"><button class="delete">Delete</button></td>
+                        <form action="{{ route('geteditOPr',$originalproduct->idOPr) }}" method="get" enctype="multipart/form-data">
+                            @csrf
+                            <td class="col-1"><button class="update">Update</button></td>
+                        </form>
+                        <form action="{{ route('deleteOPr',$originalproduct->idOPr) }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <td class="col-1"><button class="delete">Delete</button></td>
+                        </form>
                     </tr>
                     @endforeach
                 </tbody>

@@ -7,12 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="JavaScript image cropper.">
   <meta name="author" content="Chen Fengyuan">
+  <script>
+    var baseUrl = '{{ url("/") }}';
+  </script>
+   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Design</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="source/docs/css/cropper.css">
   <link rel="stylesheet" href="source/docs/css/main.css">
   <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   
@@ -33,7 +38,11 @@
       </div>
       <button class="mx-3 btn-back mb-1">
         <i class="fa-solid fa-store icon-store"></i>
-        <span>ten shop</span>
+        @if(Session::has('user'))
+        <span>{{$shop->nameShop}}</span>
+        @else 
+        <span>Create Shop</span>
+        @endif
       </button>
     </div>
     <div class="d-flex">
@@ -49,8 +58,8 @@
         <!-- <h3>Preview:</h3> bg-pr-->
         <div class="docs-preview clearfix bg-pr"> 
         @foreach($colorProvider as $color)
-          @if($color->idOPr == $find )
-          <img src="source/imageOPr/{{$color->image1}}" style="display: none" class="rounded-top imageOPr" data-index="{{$color->idColor}}" alt="image Product">
+                @if($color->idOPr == $find)
+          <img src="source/imageOPr/{{$color->imageOPr}}" style="display: none" class="rounded-top imageOPr" data-index="{{$color->idColor}}" alt="image Product">
           @endif
         @endforeach
           <div class="d-flex justify-content-center">
@@ -293,7 +302,7 @@
         </div>
             <div class="color-circle-all">
             @foreach($colorProvider as $color)
-                @if($color->idOPr == $find )
+                @if($color->idOPr == $find)
                     <button class="btn-group btn-show-imageOPr btn btn-color" onclick="showImage({{$color->idColor}})"><img src="image/{{$color->imageColor}}" alt="#"></button>
                 @endif
             @endforeach
@@ -304,11 +313,15 @@
     </div>
   </div>
 
-
-  <img class="imageanhchinh d-none" src="/product/product/img/productsanhchinh.png"/>
+  @foreach($colorProvider as $color)
+    @if($color->idOPr == $find)
+  <img class="imageanhchinh d-none" src="source/imageOPr/{{$color->imageOPr}}" data-index="{{$color->idColor}}" class="rounded-top imageOPr"  alt="image Product"/>
+    @endif
+  @endforeach
   <canvas class="resultmerge d-none" id="resultmerge"></canvas>
   <br />
   <!-- Scripts -->
+  
   <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="https://fengyuanchen.github.io/shared/google-analytics.js" crossorigin="anonymous"></script>
@@ -337,7 +350,7 @@
                     showImage(color);
                 });
             });
-        });
+      });
     </script>
 </body>
 </html>

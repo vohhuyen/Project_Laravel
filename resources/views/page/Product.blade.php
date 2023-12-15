@@ -128,15 +128,19 @@
                         @foreach($product as $pr)
                         <div class=" col-3">
                             <div class="product">
-                                <img class="image-Product" alt="" src="source/imageOPr/{{$pr->imagePr}}"/>
-                                <p class="product_name">{{$pr->namePr}}</p>
+                                <a href="product-detail/{{$pr->idProduct}}"><img class="image-Product" alt="" src="source/imageOPr/{{$pr->imagePr}}"/></a>
+                                <a href="product-detail/{{$pr->idProduct}}"><p class="product_name">{{$pr->namePr}}</p></a>
                                 <p class="name-design">By: {{$pr->nameShop}}</p>
                                 <p class="description">{{$pr->descriptionDesign}}</p>
                                 <div class="d-flex justify-content-between">
                                     <b class="product_price ">${{$pr->pricePr}}</b>
                                         <div class="image-249-parent">
-                                            <!-- <a href="{{route('addcart', $pr->idProduct)}}"><i class="fa-solid fa-cart-shopping"></i></a> -->
-                                            <i class="fa-regular fa-heart"></i>
+                                            @if(Session::has('user'))
+                                            <form method="POST" action="{{ route('likePr',$pr->idProduct) }}" enctype="multipart/form-data">
+                                                @csrf
+                                                    <button type="submit"> <i class="fa-regular fa-heart"></i></button>
+                                                </form>
+                                                @endif
                                         </div>
                                 </div>
                             </div>

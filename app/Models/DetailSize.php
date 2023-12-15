@@ -10,7 +10,7 @@ use App\Models\Provider;
 class DetailSize extends Model
 {
     use HasFactory;
-    protected $table = "detailsize";
+    protected $table = "DetailSize";
     public function originalProductDetail()
     {
         return $this->belongsTo(OriginalProduct::class, 'idOPrDetail', 'idOPrDetail');

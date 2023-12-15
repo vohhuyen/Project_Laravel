@@ -297,15 +297,20 @@
                 <img src="source/img-project/imprintrutgon.png" alt="logoPaint" class="logo disnone-xs disblock-sm">
             </div>
             <div class="search">
-                <i class="icon_search fa-solid fa-magnifying-glass"></i>
-                <input class="input_search" type="text" placeholder="What do you need? ">
+                <form action="{{route('search')}}"method="GET" class="input-group">
+                    @csrf
+                    <button type="submit"><i class="icon_search fa-solid fa-magnifying-glass"></i></button>
+                <input class="input_search" type="text" placeholder="What do you need? " name="query">
+      
+</form>
             </div>
             <div class="header_heard_cart">
                 <div>
                     <a href="#"><i class="icon_header_body fa-solid fa-bell"></i></a>
                 </div>
+                
                 <div>
-                    <a href="#"><i class="far icon_header_body fa-heart"></i></a>
+                    <a href="{{route('getlikePr')}}"><i class="far icon_header_body fa-heart"></i></a>
                 </div>
                 <div>
                     <a href="{{route('cart')}}"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
