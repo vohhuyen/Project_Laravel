@@ -74,6 +74,7 @@
         </div>
       </div>
       <div class="infor_Detail_Pr">
+
         <b class="name_Deatil_Pr" >{{ $productinfor->namePr }} </b>
         <p class="namedesign_DPr">
           Designed by 
@@ -87,15 +88,18 @@
               <div class="rounded-circle"><img class="rounded-circle" src="image/{{$productinfor->imageColor}}"></img></div>
             </div>
           </div>
+   
           <div class="chooseSizePr">
     <b>Choose size:</b><br>
     <div class="sizeDetailPr">
-    
+            
     @foreach ($NameSizes as $fieldName => $NameSize)
             <button>{{ $NameSize }}</button>
         @endforeach
 </div>
 </div>
+
+
 
         <div class="Slimfit_Detail_Pr">
           <b>Slim fit</b>

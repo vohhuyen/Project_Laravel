@@ -515,7 +515,8 @@ class PageController extends Controller
             'totalQty' => $cart ? $cart->totalQty : null
         ]);
     }
-    public function getAddToCart(Request $req, $idProduct){																			
+    public function getAddToCart(Request $req, $idProduct){		
+        															
         if (Session::has('user')) {																			
             if (Product::find($idProduct)) {																			
                 $product = Product::find($idProduct);																			
@@ -529,8 +530,10 @@ class PageController extends Controller
             }																			
         } else {																			
             return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
-        }																			
-    }	
+        }		
+       
+    }
+    
 
     
 

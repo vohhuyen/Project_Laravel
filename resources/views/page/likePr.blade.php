@@ -19,19 +19,19 @@
           <div class="section_article w-100">
             <table class="w-100">
               <tbody class="w-100">
-              @foreach($product as $products )
-                <tr class="section_article-item w-100">
-                <a href="product-detail/{{$products->idProduct}}"><td class="img_item"><img src="source/imageOPr/{{$products->imagePr}}" alt="product" /></td></a>
-                <a href="product-detail/{{$products->idProduct}}"> <td class="infor_item">
-                      <b class="namePr">{{ $products->namePr }}</b>
-                    </td></a>
-                    <td class="price1"><p>${{$products->pricePr}}</p></td>
-                    <form method="POST" action="{{ route('deletelikePr',$products->idProduct) }}" enctype="multipart/form-data">
-                    @csrf
-                    <td class="button"><button type="submit"><p class="fa-light fa-x"></p></button></td>
-                    </form>
-                </tr>
-                @endforeach
+                @foreach($product as $products )
+                  <tr class="section_article-item w-100">
+                  <a href="product-detail/{{$products->idProduct}}"><td class="img_item"><img src="source/imageOPr/{{$products->imagePr}}" alt="product" /></td></a>
+                  <a href="product-detail/{{$products->idProduct}}"> <td class="infor_item">
+                        <b class="namePr">{{ $products->namePr }}</b>
+                      </td></a>
+                      <td class="price1"><p>${{$products->pricePr}}</p></td>
+                      <form method="POST" action="{{ route('deletelikePr',$products->idProduct) }}" enctype="multipart/form-data">
+                      @csrf
+                      <td class="button"><button type="submit"><p class="fa-light fa-x"></p></button></td>
+                      </form>
+                  </tr>
+                  @endforeach
               
               </tbody>
             </table>
