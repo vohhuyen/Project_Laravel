@@ -117,10 +117,12 @@ window.onload = function () {
     }
   };
   var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  function sendImageToServer(image, result) {
+  function sendImageToServer(image, result, detailValue, providerValue) {
     console.log('image:', image);
     console.log('result:', result);
-    axios.post('/postPr', { image: image , result: result}, {
+    // console.log(detailValue);
+    // console.log(providerValue);
+    axios.post('/postPr', { image: image , result: result, detailValue: detailValue, providerValue: providerValue}, {
       headers: {
         'X-CSRF-TOKEN': csrfToken,
         'Content-Type': 'application/json',
@@ -130,7 +132,7 @@ window.onload = function () {
       console.log('Response from server:', response.data);
       const data = response.data; 
       if (data.success) {
-        window.location.href = '/getformPr?image=' + encodeURIComponent(data.image) + '&result=' + encodeURIComponent(data.result);
+        window.location.href = '/getformPr?image=' + encodeURIComponent(data.image) + '&result=' + encodeURIComponent(data.result) + '&detailValue=' + data.detailValue + '&providerValue=' + data.providerValue;
       } else {
           console.log('Something went wrong.');
       }
@@ -277,7 +279,7 @@ window.onload = function () {
 
               var myElement = document.getElementById('preview');
 
-      
+              
               const newWidth1 = 500;
               const newHeight1 = 500; 
               const newWidth2 = myElement.clientWidth; 
@@ -298,7 +300,11 @@ window.onload = function () {
 
               var img = resEle.toDataURL("image/png");
               var result = imgEle2.toDataURL("image/png");
-              sendImageToServer(img, result);
+              const detailValue = imgEle1.getAttribute('data-detail');
+              const providerValue = imgEle1.getAttribute('data-provider');
+              // console.log(detailValue);
+              // console.log(providerValue);
+              sendImageToServer(img, result, detailValue, providerValue);
           }
           break;
       }

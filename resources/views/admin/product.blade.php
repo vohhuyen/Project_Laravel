@@ -784,10 +784,10 @@
                     var selectOptions = $('#name_provider');
                     selectOptions.empty();
 
-</html>
-<script>
-    function myfunction(event){ 
-        let value = event.value;
+// </html>
+// <script>
+//     function myfunction(event){ 
+        // let value = event.value;
                     $.each(data.data, function (key, value) {
                     selectOptions.append('<option value="' + value.idProvider + '">' + value.Name + '</option>');
                 });

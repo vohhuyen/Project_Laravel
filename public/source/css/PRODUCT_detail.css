@@ -1,4 +1,20 @@
 
+  .size-option input[type="radio"] {
+      display: none; 
+  }
+
+  .size-option button {
+      background-color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+  }
+
+  .size-option input[type="radio"]:checked + button {
+      background-color: #fe5454; /* Thay đổi màu nền khi ô radio được chọn */
+      color: white; /* Thay đổi màu chữ khi ô radio được chọn */
+  }
+
 /* Products Infor */
 .content{
   margin-left: 70px;

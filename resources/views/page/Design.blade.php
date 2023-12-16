@@ -58,8 +58,8 @@
         <!-- <h3>Preview:</h3> bg-pr-->
         <div class="docs-preview clearfix bg-pr"> 
         @foreach($colorProvider as $color)
-                @if($color->idOPr == $find)
-          <img src="source/imageOPr/{{$color->imageOPr}}" style="display: none" class="rounded-top imageOPr" data-index="{{$color->idColor}}" alt="image Product">
+                @if($color->idOPr == $find && $color->role == 1)
+          <img src="source/imageOPr/{{$color->imageOPr}}" data-detail="{{$color->idOPrDetail}}" data-provider="{{$provider->idProvider}}" style="display: none" class="rounded-top imageOPr" data-index="{{$color->idColor}}" alt="image Product">
           @endif
         @endforeach
           <div class="d-flex justify-content-center">
@@ -302,7 +302,7 @@
         </div>
             <div class="color-circle-all">
             @foreach($colorProvider as $color)
-                @if($color->idOPr == $find)
+                @if($color->idOPr == $find && $color->role == 1)
                     <button class="btn-group btn-show-imageOPr btn btn-color" onclick="showImage({{$color->idColor}})"><img src="image/{{$color->imageColor}}" alt="#"></button>
                 @endif
             @endforeach
@@ -314,12 +314,12 @@
   </div>
 
   @foreach($colorProvider as $color)
-    @if($color->idOPr == $find)
-  <img class="imageanhchinh d-none" src="source/imageOPr/{{$color->imageOPr}}" data-index="{{$color->idColor}}" class="rounded-top imageOPr"  alt="image Product"/>
+    @if($color->idOPr == $find && $color->role == 1)
+  <img class="imageanhchinh d-none" src="source/imageOPr/{{$color->imageOPr}}" data-detail="{{$color->idOPrDetail}}" data-provider="{{$provider->idProvider}}" data-index="{{$color->idColor}}" class="rounded-top imageOPr"  alt="image Product"/>
     @endif
   @endforeach
   <canvas class="resultmerge d-none" id="resultmerge"></canvas>
-  <br />
+  <br/>
   <!-- Scripts -->
   
   <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>

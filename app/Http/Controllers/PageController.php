@@ -92,12 +92,7 @@ class PageController extends Controller
             'email.required' => 'Email is required.',
             'email.email' => 'Invalid email format.',
             'pw.required' => 'Password is required.',
-        ]);
-
-        // Your login logic here
-
-        return redirect()->route('home');
-    
+        ]); 
         $login = [
             'email' => $request->input('email'),
             'password' => $request->input('pw'),
@@ -198,15 +193,12 @@ class PageController extends Controller
     public function createAccount(Request $request)
     {
         $input = $request->validate([
-            'Name' => 'string',
-            'Email' => 'email|unique:users',
+            'Name' => 'required|string',
+            'Email' => 'required|email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password'
         ]);
         $input['password'] = bcrypt($input['password']);
-        User::create($input);
-
-        $input['password'] = Hash::make($input['password']);
         Users::create($input);
 
         
@@ -758,12 +750,14 @@ class PageController extends Controller
             ->get();
         $provider = DB::table('Providers')->where('idProvider', '=', $idProvider)->first();
         $detail = DB::table('DetailProvider')->where('idProvider', '=', $idProvider)->where('idOPr', '=', $idOPr)->first();
-        // dd($provider);
+        // dd($colorProvider);
         return view('page.Design', compact('pro','colorProvider','find','provider','detail','shop'));
     }
     public function getIndexFormPostPr(Request $request){
         $imageData = $request->json('image');
         $Design = $request->json('result');
+        $detailValue = $request->json('detailValue');
+        $providerValue = $request->json('providerValue');
 
         $imageData = str_replace('data:image/png;base64,', '', $imageData);
         $Design = str_replace('data:image/png;base64,', '', $Design); 
@@ -780,15 +774,25 @@ class PageController extends Controller
         $pathDesign = public_path('image/' .  $newFileNameDesign); 
         file_put_contents($path, $imageBinary);
         file_put_contents($pathDesign,$imageB); 
-        return response()->json(['success' => true, 'image' => $newFileName, 'result' => $newFileNameDesign]);
+        return response()->json(['success' => true, 'image' => $newFileName, 'result' => $newFileNameDesign, 'detailValue' => $detailValue, 'providerValue' => $providerValue]);
     }
     public function getFormPostPr(Request $request){
         $image = $request->input('image');
         $imageDesign = $request->input('result');
-        // $idshop = Session::get('user');
-        // $shop = Shop::where('idShop', $idshop->idUser)->first();
-
-        return view('page.forsalepage', compact('image','imageDesign'));
+        $idOPrDetail = $request->input('detailValue');
+        $idProvider = $request->input('providerValue');
+        $idshop = Session::get('user');
+        $shop = Shop::where('idShop', $idshop->idUser)->first();
+        $provider = Provider::where('idProvider',$idProvider)->first();
+        $detail = DB::table('OriginalProductsDetail')
+        ->where('idOPrDetail', '=', $idOPrDetail)
+        ->join('Color', 'Color.idColor','=','OriginalProductsDetail.idColor')
+        ->join('OriginalProducts', 'OriginalProducts.idOPr', '=', 'OriginalProductsDetail.idOPr')
+        ->join('category_OPr_Detail', 'category_OPr_Detail.idCategoryOPrDetail', '=', 'OriginalProducts.idCategoryOPrDetail')
+        ->select('OriginalProductsDetail.*', 'Color.*', 'OriginalProducts.*','category_OPr_Detail.*')
+        ->first();
+        $minPrice = DetailProvider::where('idProvider',$idProvider)->where('idOPr', $detail->idOPr)->first();
+        return view('page.forsalepage', compact('image','imageDesign', 'shop','provider','detail','minPrice'));
     }
     public function getIndexProduct(){
         $product = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);

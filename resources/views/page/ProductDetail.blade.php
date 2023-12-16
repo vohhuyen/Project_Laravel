@@ -90,10 +90,12 @@
           <div class="chooseSizePr">
     <b>Choose size:</b><br>
     <div class="sizeDetailPr">
-    
-    @foreach ($NameSizes as $fieldName => $NameSize)
-            <button>{{ $NameSize }}</button>
-        @endforeach
+        @foreach ($NameSizes as $fieldName => $NameSize)
+        <span class="size-option">
+            <input type="radio" id="{{ $fieldName }}" name="selectedSize" value="{{ $NameSize }}" hidden>
+            <button type="button" onclick="selectSize('{{ $fieldName }}')">{{ $NameSize }}</button>
+        </span>
+    @endforeach
 </div>
 </div>
 
@@ -537,4 +539,15 @@
       </div>
     </div>
 </div>
+<script>
+    function selectSize(fieldName) {
+        // Bỏ chọn tất cả các ô radio
+        document.querySelectorAll('input[name="selectedSize"]').forEach(function (radio) {
+            radio.checked = false;
+        });
+
+        // Chọn ô radio tương ứng
+        document.getElementById(fieldName).checked = true;
+    }
+</script>
 @endsection

@@ -30,9 +30,9 @@
 <body>
   <div class="grid">
     <h1 class="title">Tạo Product</h1>
-    <div class="d-block"style="display:center">
-      <img src="#" alt="" style="width: 15%;height: 35%;">
-      <h4><b><a href="#" class="text-danger">nameshop</a></b></h4>        
+    <div class="d-flex"style="display:center">
+      <img src="image/{{$shop->avataShop}}" alt="" style="width: 15%;height: 35%;">
+      <h4><b><a href="#" class="text-danger">{{$shop->nameShop}}</a></b></h4>        
     </div>
     <form action="#" method="post" enctype="multipart/form-data"class="row gridoriginalproduct">
       <div class="input1 col-6">
@@ -50,17 +50,17 @@
             <p>{{ $error ?? 'No image available.' }}</p>
           @endif
           <div class="color_DPr d-block">
-            <b>Ten sản phẩm :#</b><br>
-            <b>Loại sản phẩm :#</b><br>
-            <b>provider: #- Color:#</b><br>
+            <b>Ten sản phẩm :{{$detail->nameOPr}}</b><br>
+            <b>Loại sản phẩm :{{$detail->nameCategoryOPrDetail}}</b><br>
+            <b>provider: {{$provider->Name}} - Color:{{$detail->NameColor}}</b><br>
           </div>
         </div>
 
         <label for="aboutOPr">Price Product :</label>
-        <input id="aboutOPr" name="aboutOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
+        <input type="number" id="aboutOPr" name="aboutOPr" class="input" min="{{$minPrice->priceOPr}}" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
         <br>
         <label for="aboutOPr">Design Name :</label>
-        <input id="aboutOPr" name="aboutOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
+        <input type="text" id="aboutOPr" name="aboutOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
         <br>
         <label for="aboutOPr">Design Describe:</label>
         <textarea id="aboutOPr" name="aboutOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></textarea>
@@ -75,3 +75,12 @@
 </div>
 </body>
 </html>
+<script>
+function validatePrice(input) {
+    const value = input.value;
+    if (isNaN(value) || parseFloat(value) <= 0) {
+        alert("Please enter a valid positive number.");
+        input.value = ''; 
+    }
+}
+</script>

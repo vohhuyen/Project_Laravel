@@ -110,6 +110,7 @@ return new class extends Migration
             $imageOPr->increments('idImageOPr');
             $imageOPr->integer('idOPrDetail')->unsigned();
             $imageOPr->string('imageOPr')->nullable($value = true);
+            $imageOPr->integer('role')->unsigned()->default('0');
             $imageOPr->foreign('idOPrDetail')->references('idOPrDetail')->on('OriginalProductsDetail');
             $imageOPr->timestamps();
         });
