@@ -87,24 +87,27 @@
               <div class="rounded-circle"><img class="rounded-circle" src="image/{{$productinfor->imageColor}}"></img></div>
             </div>
           </div>
+          <form action="{{ route('add-to-cart', $productinfor->idProduct) }}">
+          @csrf
           <div class="chooseSizePr">
-    <b>Choose size:</b><br>
-    <div class="sizeDetailPr">
-        @foreach ($NameSizes as $fieldName => $NameSize)
-        <span class="size-option">
-            <input type="radio" id="{{ $fieldName }}" name="selectedSize" value="{{ $NameSize }}" hidden>
-            <button type="button" onclick="selectSize('{{ $fieldName }}')">{{ $NameSize }}</button>
-        </span>
-    @endforeach
-</div>
-</div>
+              <b>Choose size:</b><br>
+              <div class="sizeDetailPr">
+                @foreach ($NameSizes as $fieldName => $NameSize)
+                  <span class="size-option">
+                      <input type="radio" id="{{ $fieldName }}" name="selectedSize" value="{{ $NameSize }}" hidden>
+                      <button type="button" onclick="selectSize('{{ $fieldName }}')">{{ $NameSize }}</button>
+                  </span>
+                @endforeach
+              </div>
+          </div>
 
         <div class="Slimfit_Detail_Pr">
           <b>Slim fit</b>
           <p>|</p>
           <a href="#">Size table</a>
         </div>
-        <button class="btn-add-cart_DPr"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>
+        <button type="submit" class="btn-add-cart_DPr"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>
+</form>
         <div class="Other_Pr_Infor">
           <div class="d-flex">
             <i class="fa-solid fa-truck-fast"></i>

@@ -56,7 +56,10 @@ Route::get('/filter-provider-location/{idProvider}',[PageController::class, 'fil
 Route::get('/product-detail/{idProduct}',[PageController::class, 'getIndexProductDetail'])->name('product-detail');
 
 Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
-Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('addcart');
+Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('add-to-cart');
+Route::post('/increase-quantity/{productId}', [PageController::class, 'increaseQuantity'])->name('increase-quantity');
+Route::post('/decrease-quantity/{productId}', [PageController::class, 'decreaseQuantity'])->name('decrease-quantity');
+Route::post('/delete-item/{productId}', [PageController::class, 'DeleteItemCart'])->name('delete-item');
 
 Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');
 

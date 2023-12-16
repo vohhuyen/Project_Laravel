@@ -850,13 +850,21 @@ class PageController extends Controller
     }
     public function getAddToCart(Request $req, $idProduct){																			
         if (Session::has('user')) {																			
-            if (Product::find($idProduct)) {																			
-                $product = Product::find($idProduct);																			
-                $oldCart = Session('cart') ? Session::get('cart') : null;																			
-                $cart = new Cart($oldCart);																			
-                $cart->addcart($product, $idProduct);																			
-                $req->session()->put('cart', $cart);																			
-                return redirect()->back();																			
+            if (Product::find($idProduct)) {
+                if($req->filled('selectedSize')){																			
+                    $product = Product::find($idProduct);																			
+                    $oldCart = Session('cart') ? Session::get('cart') : null;
+                    $size = $req->input('selectedSize');
+                    $shop = Shop::where('idShop', $product->idShop)->first();
+                    $provider = Provider::where('idProvider', $product->idProvider)->first();																			
+                    $cart = new Cart($oldCart);																			
+                    $cart->addcart($product, $idProduct, $size, $shop, $provider);																			
+                    $req->session()->put('cart', $cart);																			
+                    return redirect()->back();	
+                }
+                else{
+                    return  back()->with('error', 'phải chọn size');
+                }																		
             } else {																			
                 return '<script>alert("Không tìm thấy sản phẩm này.");window.location.assign("/");</script>';																			
             }																			
@@ -864,7 +872,26 @@ class PageController extends Controller
             return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
         }																			
     }	
-
+    public function increaseQuantity($productId)
+{
+    $cart = new Cart(session()->get('cart'));
+    $cart->increaseQuantity($productId);
+    session()->put('cart', $cart);
+    return redirect()->route('cart');
+}
+public function decreaseQuantity($productId)
+{   
+    $cart = new Cart(session()->get('cart'));
+    $cart->decreaseQuantity($productId);
+    session()->put('cart', $cart);
+    return redirect()->route('cart');
+}
+    public function DeleteItemCart($idProduct){
+        $cart = new Cart(session()->get('cart'));
+        $cart->deleteItem($idProduct);
+        session()->put('cart', $cart);
+        return redirect()->route('cart');
+    }
     
 
     public function getIndexProductDetail($idProduct)

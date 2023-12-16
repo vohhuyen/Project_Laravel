@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class Cart extends Model
 {
     use HasFactory;
-    protected $table = "cart";
+    // protected $table = "cart";
     public $items = null;
     public $totalQty = 0;
     public $totalPrice = 0;
@@ -34,10 +36,13 @@ class Cart extends Model
         $this->futureDate4 = $oldCart->futureDate4;
         }
     }
-    public function addCart($item, $id, $qty = 1){
+    public function addCart($item, $id, $size, $shop, $provider, $qty = 1){
         $cart = [
             'qty' => 0,
             'pricePr' => $item->pricePr,
+            'size' => $size,
+            'nameshop' => $shop,
+            'nameprovider' => $provider,
             'item' =>$item
         ];
         if($this->item){
@@ -71,6 +76,41 @@ class Cart extends Model
         $futureDate4 = clone $currentDate;
         $this->futureDate4 = $futureDate4->addDays($productTime)->addDays(8);
 
+    }
+    public function increaseQuantity($productId)
+    {
+        if ($this->items && array_key_exists($productId, $this->items)) {
+            $this->items[$productId]['qty']++;
+            $this->items[$productId]['pricePr'] += $this->items[$productId]['item']->pricePr;
+            $this->totalQty++;
+            $this->totalPrice += $this->items[$productId]['item']->pricePr;
+            $this->totalPayment = $this->standard + $this->totalPrice;
+            $this->Express = $this->totalPayment + 20;
+        }
+    }
+    public function decreaseQuantity($productId)
+    {
+        if ($this->items && array_key_exists($productId, $this->items)) {
+            $this->items[$productId]['qty']--;
+            $this->items[$productId]['pricePr'] -= $this->items[$productId]['item']->pricePr;
+            $this->totalQty--;
+            $this->totalPrice -= $this->items[$productId]['item']->pricePr;
+            $this->totalPayment = $this->standard + $this->totalPrice;
+            $this->Express = $this->totalPayment + 20;
+
+            if ($this->items[$productId]['qty'] <= 0) {
+                unset($this->items[$productId]);
+            }
+        }
+    }
+    public function deleteItem($idProduct){
+        $this->items[$idProduct]['pricePr'] = 0;
+        $this->standard = 0;
+        $this->totalQty = 0;
+        $this->totalPrice = 0;
+        $this->totalPayment = 0;
+        $this->Express = 0;
+        unset($this->items[$idProduct]);
     }
     public function reduceByOne($id)
       {

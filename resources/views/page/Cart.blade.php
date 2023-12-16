@@ -25,14 +25,24 @@
                     <td class="img_item"><img src="source/imageOPr/{{$product['item']['imagePr']}}" alt="product" /></td>
                     <td class="infor_item">
                       <b class="namePr">{{$product['item']['namePr']}}</b>
-                      <p class="if_item">Size M, cotton</p>
-                      <div class="if_item">tên shop</div>
+                      <p class="if_item">Size {{$product['size']}}</p>
+                      <div class="if_item"><b>Design by: </b> {{$product['shop'][0]['nameShop']}}</div>
+                      <div class="if_item"><b>Provided by: </b> {{$product['provider'][0]['Name']}}</div>
                     </td>
-                    <td><button class="button_item1">-</button></td>
+                    <form action="{{ route('decrease-quantity', $product['item']['idProduct']) }}" method="post" style="display:inline;">
+            @csrf
+                    <td><button type="submit" class="button_item1">-</button></td>
+</form>
                     <td><div class="quantity_item">{{$product['qty']}}</div></td>
-                    <td><button class="button_item2">+</button></td>
+                    <form action="{{ route('increase-quantity', $product['item']['idProduct']) }}" method="post" style="display:inline;">
+            @csrf
+                    <td><button type="submit" class="button_item2">+</button></td>
+</form>
                     <td class="price1"><p>$ {{$product['item']['pricePr']}}</p></td>
+                    <form action="{{ route('delete-item', $product['item']['idProduct']) }}" method="post" style="display:inline;">
+            @csrf
                     <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
+</form>
                 </tr>
               @endforeach
               @endif
