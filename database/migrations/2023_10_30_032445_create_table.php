@@ -341,6 +341,7 @@ return new class extends Migration
         Schema::dropIfExists('SizeGuide');
         Schema::dropIfExists('KeyFeatures');
         Schema::dropIfExists('Products');
+        Schema::dropIfExists('DesignProducts');
         Schema::dropIfExists('image_Pr');
         Schema::dropIfExists('SavePr');
         Schema::dropIfExists('comment');

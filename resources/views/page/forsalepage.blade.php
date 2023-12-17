@@ -34,10 +34,12 @@
       <img src="image/{{$shop->avataShop}}" alt="" style="width: 15%;height: 35%;">
       <h4><b><a href="#" class="text-danger">{{$shop->nameShop}}</a></b></h4>        
     </div>
-    <form action="#" method="post" enctype="multipart/form-data"class="row gridoriginalproduct">
+    <form action="{{route('addDesignProduct',  ['idShop' => $shop->idShop, 'idProvider' => $provider->idProvider])}}" method="post" enctype="multipart/form-data" class="row gridoriginalproduct">
+      @csrf
       <div class="input1 col-6">
         @if (isset($image))
           <img src="image/{{ $image }}" alt="Merged Image">
+          <input type="hidden" name="imageProduct" value="{{$image}}" accept="image/*">
         @else
           <p>{{ $error ?? 'No image available.' }}</p>
         @endif
@@ -46,32 +48,45 @@
         <div class="d-flex">
           @if (isset($imageDesign))
             <img src="image/{{ $imageDesign }}" alt="Merged Image" style="width: 160px; height: 90px;">
+            <input type="hidden" name="imageDesign"  value="{{$imageDesign}}" accept="image/*">
             @else
             <p>{{ $error ?? 'No image available.' }}</p>
           @endif
           <div class="color_DPr d-block">
-            <b>Ten sản phẩm :{{$detail->nameOPr}}</b><br>
+            <b>Ten sản phẩm :{{$detail->nameOPr}}</b><br><input type="text" name="idOPr" value="{{$detail->idOPr}}" hidden>
             <b>Loại sản phẩm :{{$detail->nameCategoryOPrDetail}}</b><br>
-            <b>provider: {{$provider->Name}} - Color:{{$detail->NameColor}}</b><br>
+            <b>provider: {{$provider->Name}} - Color:{{$detail->NameColor}}</b><br><input type="text" name="idColor" value="{{$detail->idColor}}" hidden>
           </div>
         </div>
-
+        <div class="form-group">
+          <label for="supplier">Categories:</label>
+          <br>
+          <select id="categories" name="categories" class="input">
+          @foreach ($category_pr_detail as $category_pr)
+              <option value="{{ $category_pr->idCategoryPrDetail }}">{{ $category_pr->nameCategoryPrDetail }}</option>
+            @endforeach
+          </select>
+        </div>
+        <pre></pre>
         <label for="aboutOPr">Price Product :</label>
-        <input type="number" id="aboutOPr" name="aboutOPr" class="input" min="{{$minPrice->priceOPr}}" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
+        <input type="number" id="aboutOPr" name="pricePr" class="input" min="{{$minPrice->priceOPr}}" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
         <br>
         <label for="aboutOPr">Design Name :</label>
-        <input type="text" id="aboutOPr" name="aboutOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
+        <input type="text" id="aboutOPr" name="nameDesign" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></input>
         <br>
-        <label for="aboutOPr">Design Describe:</label>
-        <textarea id="aboutOPr" name="aboutOPr" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></textarea>
+        <label for="aboutOPr">Design Description:</label>
+        <textarea id="aboutOPr" name="Description" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></textarea>
+        <br>
+        <label for="aboutOPr">Note:</label>
+        <textarea id="aboutOPr" name="NoteDesign" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></textarea>
         <br>
         <div class="buttons col-12">
         <button class="save" >Cancel</button>
         <button type="submit" class="save" >post</button>
-</div>
-</div>
-</div>
-</form>
+      </div>
+      </div>
+      </div>
+    </form>
 </div>
 </body>
 </html>

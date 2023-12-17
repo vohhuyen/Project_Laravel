@@ -94,6 +94,7 @@ Route::post('/updateAdminshop',[PageController::class, 'updateAdminshop']);
 
 Route::get('/forsalepage',[PageController::class, 'getforsalepage'])->name('forsalepage');
 Route::post('/forsalepage',[PageController::class, 'forsalepage']);
+Route::post('/addDesignProduct/{idShop}/{idProvider}',[PageController::class, 'addDesignProduct'])->name('addDesignProduct');
 
 
 Route::get('/search',[PageController::class, 'search'])->name('search');
@@ -109,3 +110,5 @@ Route::post('/editprovideradmin',[PageController::class, 'providerEdit'])->name(
 Route::post('/deleteprovideradmin/{idProvider}',[PageController::class, 'providerDelete'])->name('deleteprovideradmin');
 
 Route::get('/designproductmanagement',[PageController::class, 'designproductmanagement'])->name('designproductmanagement');
+Route::post('/brower/{idDesignProducts}',[PageController::class, 'browerDesign'])->name('brower');
+Route::post('/cancel-design', [PageController::class, 'cancelDesign'])->name('cancel-design');
