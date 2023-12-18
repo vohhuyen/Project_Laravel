@@ -1,5 +1,5 @@
-@extends('masterOPr')
-@section('contentOPr')
+@extends('masterPr')
+@section('contentPr')
 
 <div class="grid mt-5 pt-5">
         <div class="d-flex justify-content-between">
@@ -316,24 +316,7 @@
                             <p class="SP1">{{$KF->descriptionKF}}</hp>
                         </div>
                     @endforeach
-                        <!-- <div class="col-6">
-                            <img src="./img/icons_v4_outlined_19_coard 1.png">
-                            <p>Drawstring hood</p>
-                            <p class="SP2">Adjustable hood with self-colored woven cord</p>
-                        </div> -->
                     </div>
-                    <!-- <div class="d-flex row">
-                        <div class="col-6">
-                            <img src="./img/image 191.png">
-                            <p>Without side seams</p>
-                            <p class="SP3">Knitted in one piece using a tubular knit, it reduces fabric waste and makes the garment more attractive</p>
-                        </div>
-                        <div class="col-6">
-                            <img src="./img/icons_v4_outlined_1_cotton 1.png">
-                            <p>50% cotton, 50% polyester</p>
-                            <p class="SP4">Made from specially spun fibers that make for a very strong, smooth fabric which is perfect for printing. Polyester fibers are extremely resilient, resistant to most chemicals, stretching, and shrinking. Heather Sport colors are 40% Cotton, 60% Polyester</p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="line my-5"></div>

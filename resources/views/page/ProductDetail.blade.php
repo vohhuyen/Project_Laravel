@@ -1,7 +1,6 @@
 @extends('masterPr')
 @section('contentPr')
-<div class="content grid">
-
+<div class="content-PrDetail grid">
     <div class="Product_detail grid">
       <div class="dis-flex-all">
         <div class="image_bar disnone-xs">
@@ -184,9 +183,9 @@
       <div class="infor_product-item">
         <div class="infor_product-item-name">
           <b>Size table</b>
-          <button class="btn-minus" id="btn-minus2" data-toggle="collapse" data-target="#myCollapse2" aria-expanded="false" aria-controls="myCollapse2"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn-minus" id="btn-minus2" data-toggle="collapse" data-target="#myCollapsePrDetail2" aria-expanded="false" aria-controls="myCollapsePrDetail2"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <div id="myCollapse2" class="collapse d-block">
+        <div id="myCollapsePrDetail2" class="collapse">
           <p><b>Fit: </b>Slim fit</p>
           <p><b>Find the right size: </b>Compare these measurements with a similar product you have at home. Place the product on a flat surface to get the best results</p>
           <div class="infor_product-item-content2" >
@@ -342,20 +341,21 @@
           <b>Design details</b> 
           <button class="btn-minus" id="btn-minus4" data-toggle="collapse" data-target="#myCollapse4" aria-expanded="false" aria-controls="myCollapse4"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <div class="infor_product-item-content4 collapse d-block"  id="myCollapse4" >
-          <div class="d-flex">
-            <img src="source/imageOPr/{{$productinfor->imageDesign}}" class="img-design-detail" alt="">
-            <div class="name_design-detail">
-              <p>DESIGN</p>
-              <b>{{$productinfor->nameDesign}}</b><br>
-              <span>Designed by <a href="#" class="text-danger">{{ $productinfor->nameShop }}</a></span>
+        <div class="infor_product-item-content4 collapse"  id="myCollapse4" >
+          <div class="d-block">
+            <div class="d-flex">
+              <img src="source/imageOPr/{{$productinfor->imageDesign}}" class="img-design-detail" alt="">
+              <div class="name_design-detail">
+                <p>DESIGN</p>
+                <b>{{$productinfor->nameDesign}}</b><br>
+                <span>Designed by <a href="#" class="text-danger">{{ $productinfor->nameShop }}</a></span>
+              </div>
             </div>
+            <div class="word">
+            {{$productinfor->descriptionDesign}}
+            </div>
+            <p class="report_design">Do you find the design problematic? <button class="btn-report"><i class="fa-solid fa-flag"></i> Report design </button></p>
           </div>
-          <div class="word">
-          {{$productinfor->descriptionDesign}}
-          </div>
-          <p class="report_design">Do you find the design problematic? <button class="btn-report"><i class="fa-solid fa-flag"></i> Report design </button></p>
-          
         </div>
       </div>
 
@@ -366,56 +366,27 @@
       <div class="d-flex align-items-center w-100 justify-content-center">
         <i class="fa-solid fa-chevron-left icon-chevron"></i>
         <div class="row justify-content-center w-100">
+          @foreach($otherProductShop as $other)
           <div class="column col-xl-2">
-              <div class="product_img">
-                  <i class="product_icon fa-regular fa-heart"></i>
-                  <img class="first-img" src="/img/product3.jpg" alt="phone">
-                  <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-              </div>
-              <div class="product_name">
-                  <span>men's and women's t-shirts ...</span>
-              </div>
-          </div>
-          <div class="column col-xl-2">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
+           <div class="product_img">
+           @if(Session::has('user'))
+           <form method="POST" action="{{ route('likePr',$other->idProduct) }}" enctype="multipart/form-data">
+            @csrf
+                   <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+            </form>
+            @endif
+                   <a href="product-detail/{{$other->idProduct}}">
+                    <img class="first-img" src="source/imageOPr/{{$other->imagePr}}" alt="phone"></a>
+                </div>
+                <a href="product-detail/{{$other->idProduct}}"><div class="product_name">
+                    <span><b>{{ $other->namePr }}</b>...</span>
+                </div></a>
+                <p>{{ $other->nameShop }}</p>
+                <div class="product_price">
+                    <b class="price">{{ $other->pricePr }}</b>
+                </div>
             </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2 disnone-md">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2 disnone-md">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
+          @endforeach
         </div>
         <i class="fa-solid fa-chevron-right icon-chevron"></i>
       </div>
@@ -424,121 +395,39 @@
       </div>
     </div>
     <div class="Other_design">
-      <b>Similar designs</b>
-      <div class="d-flex align-items-center w-100 justify-content-center">
-        <i class="fa-solid fa-chevron-left icon-chevron"></i>
-        <div class="row justify-content-center w-100">
-          <div class="column col-xl-2">
-              <div class="product_img">
-                  <i class="product_icon fa-regular fa-heart"></i>
-                  <img class="first-img" src="/img/product3.jpg" alt="phone">
-                  <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-              </div>
-              <div class="product_name">
-                  <span>men's and women's t-shirts ...</span>
-              </div>
-          </div>
-          <div class="column col-xl-2">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2 disnone-md">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2 disnone-md">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-        </div>
-        <i class="fa-solid fa-chevron-right icon-chevron"></i>
-      </div>
-    </div>
-    <div class="Other_design">
       <b>Customer also liked</b>
-      <div class="d-flex align-items-center w-100 justify-content-center">
-        <i class="fa-solid fa-chevron-left icon-chevron"></i>
-        <div class="row justify-content-center w-100">
-          <div class="column col-xl-2">
-              <div class="product_img">
-                  <i class="product_icon fa-regular fa-heart"></i>
-                  <img class="first-img" src="/img/product3.jpg" alt="phone">
-                  <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-              </div>
-              <div class="product_name">
-                  <span>men's and women's t-shirts ...</span>
-              </div>
-          </div>
-          <div class="column col-xl-2">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2 disnone-md">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
-          <div class="column col-xl-2 disnone-md">
-            <div class="product_img">
-                <i class="product_icon fa-regular fa-heart"></i>
-                <img class="first-img" src="/img/product3.jpg" alt="phone">
-                <img class="last-img" src="/img/hover-product.jpg" alt="phone">
-            </div>
-            <div class="product_name">
-                <span>men's and women's t-shirts ...</span>
-            </div>
-          </div>
+      <div class="alsolikeDetail d-flex align-items-center w-100 justify-content-center">
+        <div class="chevleft">
+            <i class="fa-solid fa-chevron-left" style="color: #fe5959;font-size: 30px;"></i>
         </div>
-        <i class="fa-solid fa-chevron-right icon-chevron"></i>
+        <div class="row justify-content-center w-100">
+          @foreach($otherproducts as $product )
+            <div class="column col-xl-2 alsolikeImg1">
+              <div class="product_img">
+                @if(Session::has('user'))
+                  <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data">
+                    @csrf
+                   <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+                  </form>
+                @endif
+                <a href="product-detail/{{$product->idProduct}}">
+                <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
+              </div>
+              <a href="product-detail/{{$product->idProduct}}">
+                <div class="product_name">
+                  <span><b>{{ $product->namePr }}</b>...</span>
+                </div>
+              </a>
+              <p>{{ $product->nameShop }}</p>
+              <div class="product_price">
+                <b class="price">{{ $product->pricePr }}</b>
+              </div>
+            </div>
+          @endforeach
+        </div>
+        <div class="chevright">
+          <i class="fa-solid fa-chevron-right" style="color: #fe5959;font-size: 30px;"></i>
+        </div>
       </div>
     </div>
 </div>
@@ -552,5 +441,36 @@
         // Chọn ô radio tương ứng
         document.getElementById(fieldName).checked = true;
     }
+
+
+    
+    document.addEventListener('DOMContentLoaded', function () {
+    const alsolikeContainer = document.querySelector('.alsolikeDetail');
+    const alsolikeItems = document.querySelectorAll('.alsolikeImg1');
+    let currentIndex = 0;
+
+    function showItems() {
+        alsolikeItems.forEach((item, index) => {
+            const isVisible = index >= currentIndex && index < currentIndex + 4;
+            item.style.display = isVisible ? 'inline-block' : 'none';
+        });
+    }
+
+    function updateIndex(direction) {
+        const maxIndex = alsolikeItems.length - 4;
+        currentIndex = Math.max(0, Math.min(currentIndex + direction, maxIndex));
+        showItems();
+    }
+
+    document.querySelector('.chevleft').addEventListener('click', function () {
+        updateIndex(-1);
+    });
+
+    document.querySelector('.chevright').addEventListener('click', function () {
+        updateIndex(1);
+    });
+
+    showItems();
+    });
 </script>
 @endsection

@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/index',[PageController::class, 'getIndex'])->name('index');
+Route::get('/categoryPr/{idCategoryPrDetail}', [PageController::class, 'getProductFromCategory'])->name('categoryPr');
 
 Route::get('/login',[PageController::class, 'getIndexLogin'])->name('login');
 Route::post('/login',[PageController::class, 'Login'])->name('login');
@@ -95,11 +96,12 @@ Route::post('/updateAdminshop',[PageController::class, 'updateAdminshop']);
 Route::get('/forsalepage',[PageController::class, 'getforsalepage'])->name('forsalepage');
 Route::post('/forsalepage',[PageController::class, 'forsalepage']);
 Route::post('/addDesignProduct/{idShop}/{idProvider}',[PageController::class, 'addDesignProduct'])->name('addDesignProduct');
-
+Route::post('/updateProductPP',[PageController::class, 'updateProductPP'])->name('updateProductPP');
 
 Route::get('/search',[PageController::class, 'search'])->name('search');
 
 Route::get('/PersionalPage/{idShop}',[PageController::class, 'getPersionalPage'])->name('PersionalPage');
+Route::post('/personal-product-delete/{id}', [PageController::class, 'PersinalPageProductDelete'])->name('personal-product-delete');	
 
 Route::get('/likePr',[PageController::class, 'getlikePr'])->name('getlikePr');
 Route::post('/likePr/{idProduct}',[PageController::class, 'likePr'])->name('likePr');
@@ -112,3 +114,6 @@ Route::post('/deleteprovideradmin/{idProvider}',[PageController::class, 'provide
 Route::get('/designproductmanagement',[PageController::class, 'designproductmanagement'])->name('designproductmanagement');
 Route::post('/brower/{idDesignProducts}',[PageController::class, 'browerDesign'])->name('brower');
 Route::post('/cancel-design', [PageController::class, 'cancelDesign'])->name('cancel-design');
+
+
+Route::get('/page-user', [PageController::class, 'getIndexPageUser'])->name('page-user');

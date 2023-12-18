@@ -213,6 +213,7 @@ return new class extends Migration
             $DesignProducts->string('nameDesign', 200);
             $DesignProducts->string('descriptionDesign');
             $DesignProducts->string('note');
+            $DesignProducts->integer('role')->unsigned()->default('0');
             $DesignProducts->foreign('idOPrDetail')->references('idOPrDetail')->on('OriginalProductsDetail');
             $DesignProducts->foreign('idShop')->references('idShop')->on('Shop');
             $DesignProducts->foreign('idCategoryPrDetail')->references('idCategoryPrDetail')->on('category_Pr_Detail');

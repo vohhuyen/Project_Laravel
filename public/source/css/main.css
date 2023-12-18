@@ -150,20 +150,32 @@ html{
     border-radius: 10px;
     border: 1px solid grey;
 }
+.button-search{
+    border: none;
+    background: none;
+}
 .icon_search{
     font-size: 1.5rem;
     padding: 10px 15px;
 }
+.input_search:focus {
+    outline: none;
+    box-shadow: none;
+}
 .input_search{
     font-size: 1.5rem;
     float: right;
-    height: 100%;
-    width: 90%;
+    height: 36px;
+    width: 92%;
     border: none;
     border-radius: 0px 10px 10px 0px;
     background-color: rgba(128, 128, 128, 0.13);
     padding-left: 10px;
+    margin: 0px;
 } 
+.input_search:focus, .input_search:active{
+    border: none;
+}
 .header_heard_cart{
     display: flex;
 } 

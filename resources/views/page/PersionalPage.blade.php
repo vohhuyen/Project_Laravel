@@ -1,12 +1,12 @@
 @extends('masterPr')
 @section('contentPr')
    
-    <div class="content">
+    <div class="contentPersionalPage">
 
         <div class="cover_image">
             <img src="image/{{$shop->coverImageShop}}" alt="cover image">
         </div>
-        <div class="content-person">
+        <div class="content-person grid">
        
             <div class="avatar_image">
                 <img src="image/{{$shop->avataShop}}" alt="avatar image">
@@ -15,13 +15,13 @@
            
                 <div class="infor_design">
                
-                    <b class="name_design">{{ $shop->nameShop }}</b>
-                    <p class="location_design"><i class="fa-solid fa-location-dot"></i>{{ $shop->locationShop }} </p>
-                    <p class="icon-link">
-                        <i class="fa-brands fa-twitter"></i>
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-linkedin"></i>
-                        <i class="fa-brands fa-instagram"></i>
+                    <b class="name_design my-2">{{ $shop->nameShop }}</b>
+                    <p class="location_design my-2"><i class="fa-solid fa-location-dot"></i>{{ $shop->locationShop }} </p>
+                    <p class="icon-link my-2">
+                        <i class="fa-brands fa-twitter mx-1"></i>
+                        <i class="fa-brands fa-facebook mx-1"></i>
+                        <i class="fa-brands fa-linkedin mx-1"></i>
+                        <i class="fa-brands fa-instagram mx-1"></i>
                     </p>
                     <p class="description_design">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -31,7 +31,7 @@
                 </div>
                 @if(Session::has('user') && Session::get('user')->idUser == $shop->idShop)
                 <div class="btn-right">
-                    <button class="bg-danger-subtle"><b>Manager your product</b></button>
+                    <button class="bg-danger-subtle"><b>Create</b></button>
                     <br>
                     <button class="bg-danger-subtle"><b><i class="fa-solid fa-share-nodes"></i> Share</b></button>
                 </div>
@@ -40,9 +40,8 @@
             <h1 class="title">All Design from {{ $shop->nameShop }}</h1>
           
             <div class="row w-100 justify-content-between">
-           
+           @foreach($product as $product)
                 <div class="column col-xl-2">
-               
                     <div class="product_img">
                         <i class="product_icon fa-regular fa-heart"></i>
                         <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone">
@@ -51,13 +50,86 @@
                         <span>{{ $product->namePr }}</span>
                     </div>
                     <p class="description_Pr mb-0">{{ $product->descriptionDesign }}</p>
-                    <div class="product_price">
+                    <div class="product_price d-block">
                         <b class="price">$ {{ $product->pricePr }}</b>
-                        <i class="fa-solid fa-cart-plus pt-1"></i>
+                        @if(Session::has('user') && Session::get('user')->idUser == $shop->idShop)
+                        <div class="d-flex">
+                            <button data-toggle="modal" data-target="#btnupdate{{ $product->idProduct }}" class="btn-login" style="background-color: white; color: black; border:1px solid grey;">Update</button>
+                            <form role="form" action="{{ route('personal-product-delete', $product->idProduct) }}" method="post">
+                            @csrf
+                                <button type="submit" class="btn-login">Delete</button>
+                            </form>
+                        </div>
+                        @endif
                     </div>
-               
                 </div>
-                
+           
+            <div class="modal fade" id="btnupdate{{ $product->idProduct }}" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Create Shop</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        @include('error')
+                            <form action="{{ route('updateProductPP') }}" method="post" class="login-form w-100" enctype="multipart/form-data">
+                            @csrf
+                                <div class="form-group">
+                                    <label for='avatar'>ID: </label>
+                                    <input type="text" class="inputAddUser" id="idProduct" name="idProduct" value="{{ $product->idProduct }}" readonly>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="form-group">
+                                        <label for="productImage">Image product:</label>
+                                        <br>
+                                        <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone">
+                                        <input type="hidden" class="form-control-file inputAddUser" id="productImage" name="productImage" value="{{ $product->imagePr }}" required>
+                                    </div>
+                                    <pre></pre>
+                                    <div class="form-group">
+                                        <label for="designImage">Image design:</label>
+                                        <br>
+                                        <img class="first-img" src="source/imageOPr/{{$product->imageDesign}}" alt="phone" style="width: 160px; height: 90px;">
+                                        <input type="hidden" class="inputAddUser" id="designImage" name="designImage" value="{{ $product->imageDesign }}" required>
+                                    </div>
+                                </div>
+                                <pre></pre>
+                                <div class="form-group">
+                                    <label for='avatar'>Name design: </label>
+                                    <input type="text" class="inputAddUser" placeholder="Description" id="nameDesign" name="nameDesign" value="{{ $product->nameDesign }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productPrice">Price:</label>
+                                    <br>
+                                    <input type="number" class="inputAddUser" id="productPrice" name="productPrice" placeholder="Price product >= price original product" value="{{ $product->pricePr }}">
+                                </div>
+                                <pre></pre>
+                                <div class="form-group">
+                                    <label for="description">Descriptiton design:</label>
+                                    <br>
+                                    <textarea id="description" class="inputAddUser" name="description" placeholder="Enter description...">{{ $product->descriptionDesign }}</textarea>
+                                </div>
+                                <pre></pre>
+                                <div class="form-group">
+                                    <label for="note">Note:</label>
+                                    <br>
+                                    <textarea id="note" class="inputAddUser" name="note" placeholder="Enter your note...." >{{ $product->note }}</textarea>
+                                </div>
+                                <pre></pre>	
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+                                    <button type="submit" class="btn btn-danger">Save</button>	
+                                </div>				
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
                 <div class="column col-xl-2"></div>
                 <div class="column col-xl-2"></div>
                 <div class="column col-xl-2"></div>

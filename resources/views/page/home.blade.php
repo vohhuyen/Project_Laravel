@@ -14,7 +14,7 @@
     </div>
     
     <div class="video grid">
-        <h1>THE JOI OF SUMMER</h1>
+        <h1>THE JOI OF WINTER</h1>
         <div class="intro">
             <video preload="auto" autoplay loop controls>
             <source src="source/img/summer23_video.webm">

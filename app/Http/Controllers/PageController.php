@@ -55,6 +55,14 @@ class PageController extends Controller
         
         return view('page.home', compact('products','shop'));
     }
+    public function getProductFromCategory($idCategoryPrDetail){
+        $product = DB::table('products')->where('idCategoryPrDetail',$idCategoryPrDetail)->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
+        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
+        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
+        $provider = Provider::all();
+        // dd($category);
+        return view('page.Product', compact('product','category','provider'));
+    }
     public function getIndexLogin()
     {
         return view('page.login');
@@ -748,8 +756,8 @@ class PageController extends Controller
         $newFileName = $this->generateUniqueFilename('merge', 'png');
         $newFileNameDesign = $this->generateUniqueFilename('design', 'png');
 
-        $path = public_path('image/' . $newFileName);
-        $pathDesign = public_path('image/' . $newFileNameDesign);
+        $path = public_path('source/imageOPr/' . $newFileName);
+        $pathDesign = public_path('source/imageOPr/' . $newFileNameDesign);
 
         file_put_contents($path, $imageBinary);
         file_put_contents($pathDesign, $imageB);
@@ -767,7 +775,7 @@ class PageController extends Controller
     {
         $filename = $prefix . '_' . uniqid() . '.' . $extension;
         // Check if the filename already exists, generate a new one if it does
-        while (file_exists(public_path('image/' . $filename))) {
+        while (file_exists(public_path('source/imageOPr/' . $filename))) {
             $filename = $prefix . '_' . uniqid() . '.' . $extension;
         }
         return $filename;
@@ -981,22 +989,13 @@ class PageController extends Controller
                     $sizewidth = getSize($idOPr, 'width');
                     $sizelength = getSize($idOPr, 'length');
                     $sizesleeveLength = getSize($idOPr, 'sleeveLength');
-        //Truy vấn danh dách nhận xét của khách hàng tuè bảng 'comment' dựa trên idProduct
-        $comment =comment::where('idProduct', $idProduct)
-                        ->get();
-        //Truy vấn danh dách nhận xét của khách hàng tuè bảng 'reviews' dựa trên idProduct
-        $reviews =comment::where('idProduct', $idProduct)
 
-                        ->count();
-
-        $evalue = comment::where('idProduct',$idProduct )
-                        ->avg('evalue');
-
-            // dd($opr);
-            // Truy vấn danh sách size từ bảng 'detailSize' dựa trên 'idProvider' và 'idOPrDetail' có trong bảng …[omitted]
-            
-            return view('page.ProductDetail', compact('productinfor', 'images','DetailSize','NameSizes','opr', 'sizewidth','sizelength','sizesleeveLength','comment','reviews','evalue'));
-            // return view('page.ProductDetail')->with('detailsize', $detailsize);
+        $comment =comment::where('idProduct', $idProduct)->get();
+        $reviews =comment::where('idProduct', $idProduct)->count();
+        $evalue = comment::where('idProduct',$idProduct )->avg('evalue');
+        $otherProductShop = Product::where('idShop', $productinfor->idShop)->get();
+        $otherproducts = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);               
+        return view('page.ProductDetail', compact('productinfor', 'images','DetailSize','NameSizes','opr', 'sizewidth','sizelength','sizesleeveLength','comment','reviews','evalue','otherProductShop', 'otherproducts'));
 
     }
 
@@ -1270,11 +1269,41 @@ class PageController extends Controller
     public function getPersionalPage($idShop)
     {
         $shop = Shop::where('idShop',$idShop)->first();
-        $product = Product::where('idShop',$idShop)->first();
+        $product = Product::where('idShop',$idShop)->get();
   
         return view('page.PersionalPage', compact('product','shop'));
     }
+    public function PersinalPageProductDelete($id)
+        {
+        $product = Product::find($id);
+        $product->delete();
+        return back();
+    }
+    public function updateProductPP(Request $request){
+        $idProduct = $request->input('idProduct');
+        $product = Product::where('idProduct', $idProduct)->first();
 
+        $DesignProducts = new DesignProduct;
+
+        $DesignProducts->idOPrDetail = $product->idOPrDetail;
+        $DesignProducts->idShop = $product->idShop;
+        $DesignProducts->idCategoryPrDetail = $product->idCategoryPrDetail;
+        $DesignProducts->idProvider = $product->idProvider;
+        $DesignProducts->imagePr = $product->imagePr;
+        $idOPr = OriginalProductDetail::where('idOPrDetail', $product->idOPrDetail)->first();
+        $OPr = OriginalProduct::where('idOPr', $idOPr->idOPr)->first();
+        $DesignProducts->namePr = $request->input('nameDesign'). ' '.$OPr->nameOPr;
+        $DesignProducts->pricePr = $request->input('productPrice');
+        $DesignProducts->colorPr = $product->colorPr;
+        $DesignProducts->imageDesign = $product->imageDesign;
+        $DesignProducts->nameDesign = $request->input('nameDesign');
+        $DesignProducts->descriptionDesign = $request->input('description');
+        $DesignProducts->note = $request->input('note');
+        $DesignProducts->role = $idProduct;
+
+        $DesignProducts->save();
+        return back();
+    }
     public function getlikePr()
     {
         $idUser = Session::get('user.idUser');
@@ -1351,22 +1380,45 @@ class PageController extends Controller
      }
     public function browerDesign($idDesignProducts){
         $design = DesignProduct::where('idDesignProducts',$idDesignProducts)->first();
-        $product = new Product;
-        $product->idOPrDetail = $design->idOPrDetail;
-        $product->idShop = $design->idShop;
-        $product->idCategoryPrDetail = $design->idCategoryPrDetail;
-        $product->idProvider = $design->idProvider;
-        $product->imagePr = $design->imagePr;
-        $product->namePr = $design->namePr;
-        $product->pricePr = $design->pricePr;
-        $product->colorPr = $design->colorPr;
-        $product->imageDesign = $design->imageDesign;
-        $product->nameDesign = $design->nameDesign;
-        $product->descriptionDesign = $design->descriptionDesign;
-        $product->note = $design->note;
-        $product->save();
-        $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
-        $design->delete();
+
+        if($design->role == 0){
+            $product = new Product;
+            $product->idOPrDetail = $design->idOPrDetail;
+            $product->idShop = $design->idShop;
+            $product->idCategoryPrDetail = $design->idCategoryPrDetail;
+            $product->idProvider = $design->idProvider;
+            $product->imagePr = $design->imagePr;
+            $product->namePr = $design->namePr;
+            $product->pricePr = $design->pricePr;
+            $product->colorPr = $design->colorPr;
+            $product->imageDesign = $design->imageDesign;
+            $product->nameDesign = $design->nameDesign;
+            $product->descriptionDesign = $design->descriptionDesign;
+            $product->note = $design->note;
+            $product->save();
+            $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
+            $design->delete();
+        }
+        else{
+            $products = Product::where('idProduct', $design->role);
+            $products->delete();
+            $product = new Product;
+            $product->idOPrDetail = $design->idOPrDetail;
+            $product->idShop = $design->idShop;
+            $product->idCategoryPrDetail = $design->idCategoryPrDetail;
+            $product->idProvider = $design->idProvider;
+            $product->imagePr = $design->imagePr;
+            $product->namePr = $design->namePr;
+            $product->pricePr = $design->pricePr;
+            $product->colorPr = $design->colorPr;
+            $product->imageDesign = $design->imageDesign;
+            $product->nameDesign = $design->nameDesign;
+            $product->descriptionDesign = $design->descriptionDesign;
+            $product->note = $design->note;
+            $product->save();
+            $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
+            $design->delete();
+        }
         return back();
     }
     public function cancelDesign(Request $req)
@@ -1386,5 +1438,8 @@ class PageController extends Controller
         $products = DesignProduct::where('idDesignProducts', $product);
         $products->delete();
         return back();
+    }
+    public function getIndexPageUser(){
+        return view('page.PageUser');
     }
 }   

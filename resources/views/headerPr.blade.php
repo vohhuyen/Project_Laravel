@@ -12,87 +12,15 @@
                                     <a href="#" class="dropdown-item"><b>Licensed merch</b></a>
                                     <a href="#" class="dropdown-item"><b>All kid's merch</b></a>
                                 </div>
-
+                                @foreach($category as $category)
                                 <div>
-                                    <b>MEN'S CLOTHING</b>
-                                    <a class="dropdown-item" href="#">Hoodies</a>
-                                    <a class="dropdown-item" href="#">Sweatshirt</a>
-                                    <a class="dropdown-item" href="#">Polo shirt</a>
-                                    <a class="dropdown-item" href="#">Tank top</a>
-                                    <a class="dropdown-item" href="#">Clothing</a>
-                                    <a class="dropdown-item" href="#">Shirt</a>
-                                    <a class="dropdown-item" href="#">Aprons</a>
-                                    <a class="dropdown-item" href="#">Hat</a>
-                                    <a class="dropdown-item" href="#">Hoodie zip</a>
-                                    <b>All products for men</b>
+                                    <b>{{$category->nameCategoryPr}}</b>
+                                    @foreach($category->category_Pr_Detail as $detail)
+                                    <a class="dropdown-item" href="{{route('categoryPr', $detail->idCategoryPrDetail)}}">{{$detail->nameCategoryPrDetail}}</a>
+                                    @endforeach
+                                    <b>All for {{$category->nameCategoryPr}}</b>
                                 </div>
-                                <div>
-                                    <b>WOMEN'S CLOTHING</b>
-                                    <a class="dropdown-item" href="#">Hoodie</a>
-                                    <a class="dropdown-item" href="#">Sweatshirt</a>
-                                    <a class="dropdown-item" href="#">Polo shirt</a>
-                                    <a class="dropdown-item" href="#">Tank top</a>
-                                    <a class="dropdown-item" href="#">Long sleeves</a>
-                                    <a class="dropdown-item" href="#">Shirt</a>
-                                    <a class="dropdown-item" href="#">Aprons</a>
-                                    <a class="dropdown-item" href="#">Hat</a>
-                                    <a class="dropdown-item" href="#">Hoodie zip</a>
-                                    <b>All products for women</b>
-                                </div>
-
-                                <div>
-                                    <b>CHILDREN</b>
-                                    <a class="dropdown-item" href="#">Teen T-shirts</a>
-                                    <a class="dropdown-item" href="#">Children's Shirts</a>
-                                    <a class="dropdown-item" href="#">Sleeves for children</a>
-                                    <a class="dropdown-item" href="#">Children's hoodies and sweatshirts</a>
-                                    <a class="dropdown-item" href="#">Children's T-Shirts</a>
-                                    <a class="dropdown-item" href="#">Long-sleeved shirts for babies</a>
-                                    <a class="dropdown-item" href="#">Baby body suitss</a>
-                                    <a class="dropdown-item" href="#">Children's hats</a>
-                                    <b>View children's products</b>
-                                </div>
-
-                                <div>
-                                    <b>ACCESSORIES</b>
-                                    <a class="dropdown-item" href="#">Phone case</a>
-                                    <a class="dropdown-item" href="#">Cup</a>
-                                    <a class="dropdown-item" href="#">Beanie</a>
-                                    <a class="dropdown-item" href="#">Wrap towel around</a>
-                                    <a class="dropdown-item" href="#">Tote bag</a>
-                                    <a class="dropdown-item" href="#">Drawstring bag</a>
-                                    <a class="dropdown-item" href="#">Gift box</a>
-                                    <a class="dropdown-item" href="#">Beggar bag</a>
-                                    <a class="dropdown-item" href="#">Wee bag</a>
-                                </div>
-                                <div>
-                                    <b>HOME & LIVING</b>
-                                    <a class="dropdown-item" href="#">Cup</a>
-                                    <a class="dropdown-item" href="#">Travel mug</a>
-                                    <a class="dropdown-item" href="#">Water bottles</a>
-                                    <a class="dropdown-item" href="#">Lunch box</a>
-                                    <a class="dropdown-item" href="#">Apron</a>
-                                    <a class="dropdown-item" href="#">Pillowcase</a>
-                                    <a class="dropdown-item" href="#">Mouse pad</a>
-                                    <a class="dropdown-item" href="#">Teddy bear toy</a>
-                                    <a class="dropdown-item" href="#">Posters</a>
-                                </div>
-                                
-                                
-                                <div>
-                                    <b>GIFT IDEAS</b>
-                                    <a class="dropdown-item" href="#">Gifts for Men</a>
-                                    <a class="dropdown-item" href="#">Gifts for Women</a>
-                                    <a class="dropdown-item" href="#">Gift for Kids</a>
-                                    <a class="dropdown-item" href="#">Gifts for Couples</a>
-                                    <a class="dropdown-item" href="#">Gifts for CFilm Fans</a>
-                                    <a class="dropdown-item" href="#">Birthday Gifts</a>
-                                    <a class="dropdown-item" href="#">Wedding Gifts</a>
-                                    <a class="dropdown-item" href="#">Baby Shower Gifts</a>
-                                    <a class="dropdown-item" href="#">New Baby Gifts</a>
-                                    <a class="dropdown-item" href="#">Retirement Gifts</a>
-                                    <b>More Gift Ideas</b>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </li>
@@ -103,14 +31,14 @@
                         <a class="nav-link" href="#">How it work?</a>
                     </li>
                     <li class="py-3 px-4 nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Services</a>
+                        <a class="nav-link dropdown-toggle dropdown-btn">Services</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Order In Bulk</a></li>
                             <li><a class="dropdown-item" href="#">Experts Program</a></li>
                         </ul>
                     </li>
-                    <li class="py-3 px-4 nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Need help</a>
+                    <li class="py-3 px-4 nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle dropdown-btn">Need help</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Help center</a></li>
                             <li><a class="dropdown-item" href="#">Contact</a></li>
@@ -126,102 +54,18 @@
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container">
+                        @foreach($categorys as $categorys)
                             <div>
-                                <button class="dropdown-btn">Men's clothing
+                                <button class="dropdown-btn">{{$categorys->nameCategoryPr}}
                                     <i class="fa fa-caret-down"></i>
                                 </button>
                                 <div class="dropdown-container">
-                                    <a class="dropdown-item" href="#">Hoodies</a>
-                                    <a class="dropdown-item" href="#">Sweatshirt</a>
-                                    <a class="dropdown-item" href="#">Polo shirt</a>
-                                    <a class="dropdown-item" href="#">Tank top</a>
-                                    <a class="dropdown-item" href="#">Clothing</a>
-                                    <a class="dropdown-item" href="#">Shirt</a>
-                                    <a class="dropdown-item" href="#">Aprons</a>
-                                    <a class="dropdown-item" href="#">Hat</a>
-                                    <a class="dropdown-item" href="#">Hoodie zip</a>
+                                     @foreach($categorys->category_Pr_Detail as $detail)
+                                    <a class="dropdown-item" href="#">{{$detail->nameCategoryPrDetail}}</a>
+                                    @endforeach
                                 </div>
                             </div>
-                            <div>
-                                <button class="dropdown-btn">Women's clothing 
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown-container">
-                                    <a class="dropdown-item" href="#">Hoodie</a>
-                                    <a class="dropdown-item" href="#">Sweatshirt</a>
-                                    <a class="dropdown-item" href="#">Polo shirt</a>
-                                    <a class="dropdown-item" href="#">Tank top</a>
-                                    <a class="dropdown-item" href="#">Long sleeves</a>
-                                    <a class="dropdown-item" href="#">Shirt</a>
-                                    <a class="dropdown-item" href="#">Aprons</a>
-                                    <a class="dropdown-item" href="#">Hat</a>
-                                    <a class="dropdown-item" href="#">Hoodie zip</a>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="dropdown-btn">Children 
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown-container">
-                                    <a class="dropdown-item" href="#">Teen T-shirts</a>
-                                    <a class="dropdown-item" href="#">Children's Shirts</a>
-                                    <a class="dropdown-item" href="#">Sleeves for children</a>
-                                    <a class="dropdown-item" href="#">Children's hoodies and sweatshirts</a>
-                                    <a class="dropdown-item" href="#">Children's T-Shirts</a>
-                                    <a class="dropdown-item" href="#">Long-sleeved shirts for babies</a>
-                                    <a class="dropdown-item" href="#">Baby body suitss</a>
-                                    <a class="dropdown-item" href="#">Children's hats</a>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="dropdown-btn">Accessories 
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown-container">
-                                    <a class="dropdown-item" href="#">Phone case</a>
-                                    <a class="dropdown-item" href="#">Cup</a>
-                                    <a class="dropdown-item" href="#">Beanie</a>
-                                    <a class="dropdown-item" href="#">Wrap towel around</a>
-                                    <a class="dropdown-item" href="#">Tote bag</a>
-                                    <a class="dropdown-item" href="#">Drawstring bag</a>
-                                    <a class="dropdown-item" href="#">Gift box</a>
-                                    <a class="dropdown-item" href="#">Beggar bag</a>
-                                    <a class="dropdown-item" href="#">Wee bag</a>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="dropdown-btn">Home & Living
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown-container">
-                                    <a class="dropdown-item" href="#">Cup</a>
-                                    <a class="dropdown-item" href="#">Travel mug</a>
-                                    <a class="dropdown-item" href="#">Water bottles</a>
-                                    <a class="dropdown-item" href="#">Lunch box</a>
-                                    <a class="dropdown-item" href="#">Apron</a>
-                                    <a class="dropdown-item" href="#">Pillowcase</a>
-                                    <a class="dropdown-item" href="#">Mouse pad</a>
-                                    <a class="dropdown-item" href="#">Teddy bear toy</a>
-                                    <a class="dropdown-item" href="#">Posters</a>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="dropdown-btn">Gift ideas
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown-container">
-                                    <a class="dropdown-item" href="#">Gifts for Men</a>
-                                    <a class="dropdown-item" href="#">Gifts for Women</a>
-                                    <a class="dropdown-item" href="#">Gift for Kids</a>
-                                    <a class="dropdown-item" href="#">Gifts for Couples</a>
-                                    <a class="dropdown-item" href="#">Gifts for CFilm Fans</a>
-                                    <a class="dropdown-item" href="#">Birthday Gifts</a>
-                                    <a class="dropdown-item" href="#">Wedding Gifts</a>
-                                    <a class="dropdown-item" href="#">Baby Shower Gifts</a>
-                                    <a class="dropdown-item" href="#">New Baby Gifts</a>
-                                    <a class="dropdown-item" href="#">Retirement Gifts</a>
-                                </div>
-                            </div>
+                        @endforeach
                         </div>
                     </li>
                     <li class="py-3 px-4 nav-item">
@@ -290,31 +134,42 @@
             </nav>
         </div>
         <div class="header_body grid">
-            <div class="image_logo">
-                <img src="source/img-project/imprint.png" alt="logoPaint" class="logo disnone-sm">
-            </div>
-            <div class="image_logo">
-                <img src="source/img-project/imprintrutgon.png" alt="logoPaint" class="logo disnone-xs disblock-sm">
-            </div>
+            <a href="{{route('index')}}">
+                <div class="image_logo">
+                    <img src="source/img-project/imprint.png" alt="logoPaint" class="logo disnone-sm">
+                </div>
+            </a>
+            <a href="{{route('index')}}">
+                <div class="image_logo">
+                    <img src="source/img-project/imprintrutgon.png" alt="logoPaint" class="logo disnone-xs disblock-sm">
+                </div>
+            </a>
             <div class="search">
                 <form action="{{route('search')}}"method="GET" class="input-group">
                     @csrf
-                    <button type="submit"><i class="icon_search fa-solid fa-magnifying-glass"></i></button>
-                <input class="input_search" type="text" placeholder="What do you need? " name="query">
-      
-</form>
+                    <button type="submit" class="button-search"><i class="icon_search fa-solid fa-magnifying-glass"></i></button>
+                    <input class="input_search" type="text" placeholder="What do you need? " name="query">
+                </form>
             </div>
             <div class="header_heard_cart">
                 <div>
                     <a href="#"><i class="icon_header_body fa-solid fa-bell"></i></a>
                 </div>
-                
+                @if(Session::has('user'))
                 <div>
                     <a href="{{route('getlikePr')}}"><i class="far icon_header_body fa-heart"></i></a>
                 </div>
                 <div>
                     <a href="{{route('cart')}}"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
                 </div>
+                @else
+                <div>
+                    <a href="{{ route('login') }}"><i class="far icon_header_body fa-heart"></i></a>
+                </div>
+                <div>
+                    <a href="{{ route('login') }}"><i class="icon_header_body fa-solid fa-cart-shopping"></i></a>
+                </div>
+                @endif
             </div>
             <div class="bar">
                 <button onclick="openListbar()"><i class="fa-solid fa-bars"></i></button>
@@ -334,7 +189,8 @@
         </div>
 
 </header>
-<div class="margin"></div><div class="modal fade" id="btncreateshop" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
+<div class="margin"></div>
+<div class="modal fade" id="btncreateshop" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">

@@ -1,6 +1,6 @@
-@extends('masterOPr')
-@section('contentOPr')
-  <div class="content">
+@extends('masterPr')
+@section('contentPr')
+  <div class="content grid">
   @foreach($categoryOPr as $cateopr)
     <div class="category my-5">
         <b class="category_name">{{$cateopr->nameCategoryOPr}}</b>

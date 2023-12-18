@@ -38,7 +38,7 @@
       @csrf
       <div class="input1 col-6">
         @if (isset($image))
-          <img src="image/{{ $image }}" alt="Merged Image">
+          <img src="source/imageOPr/{{ $image }}" alt="Merged Image">
           <input type="hidden" name="imageProduct" value="{{$image}}" accept="image/*">
         @else
           <p>{{ $error ?? 'No image available.' }}</p>
@@ -47,7 +47,7 @@
       <div class="input2 col-6" style="display:center">
         <div class="d-flex">
           @if (isset($imageDesign))
-            <img src="image/{{ $imageDesign }}" alt="Merged Image" style="width: 160px; height: 90px;">
+            <img src="source/imageOPr/{{ $imageDesign }}" alt="Merged Image" style="width: 160px; height: 90px;">
             <input type="hidden" name="imageDesign"  value="{{$imageDesign}}" accept="image/*">
             @else
             <p>{{ $error ?? 'No image available.' }}</p>
