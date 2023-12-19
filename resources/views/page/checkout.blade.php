@@ -1,82 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="cartpay.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Cart</title>
-
-</head>
-
-<body>
-    <div class="main-container">
-        <div class="container1">
-            <div class="sp1">
-                <div class="sp-list1 d-flex">
-                    <div class="sp-list1-all1">Sản phẩm</div>
-                    <div class="sp-list1-all2">Đơn giá</div>
-                    <div class="sp-list1-all3">Số lượng</div>
-                    <div class="sp-list1-all4">Thành tiền</div>
+@extends('masterPr')
+@section('contentPr')
+<form action="postcheckout" method="post">
+    @csrf
+    <div class="containerCheckout grid">
+        <div class="infor-customer mt-5">
+            <div>
+                <i class="fa-solid fa-location-dot mx-4 my-3" style="color: #fe5454; font-size: 2.5rem"></i> 
+                <b>Delivery address</b>
+            </div>
+            <div class="d-flex">
+                <div class="form-group w-50 me-2">
+                    <label for="name" style="margin-bottom: 1px;">Name: </label>
+                    <br>
+                    <input type="text" name="name" id="name" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';" required>
                 </div>
-                <div class="sp-list2 d-flex">
-                    <div class="text-white mt-4 sp-list2-all1">
-                        <p>Yêu Thích</p>
-                    </div>
-                    <div class="sp-list2-all2">
-                        <p>Shop thể thao 24h giá rẻ</p>
-                    </div>
-                    <div class="vertical-line sp-line1"></div>
-                    <div class="sp-list2-all3 d-flex">
-                        <i class="fa-brands fa-rocketchat"></i>
-                        <p>Chat ngay</p>
-                    </div>
-                </div>
-                <div class="sp-list3 d-flex">
-                    <div class="sp-list3-all1">
-                        <img src="giay-11134207-7r98o-lns6bmh6a54q19_tn.jpg" alt="" width="40px" height="40px">
-                    </div>
-                    <div class="sp-list3-all2">
-                        <p>Giày cầu lông ASIA bóng chuyền bóng bàn chạy bộ</p>
-                    </div>
-                    <div class="sp-list3-all3">
-                        <p>Loại: Viền Xanh Đen,42</p>
-                    </div>
-                    <div class="sp-list3-all4">
-                        <p> ₫159.000</p>
-                    </div>
-                    <div class="sp-list3-all5">
-                        <p>1</p>
-                    </div>
-                    <div class="sp-list3-all6">
-                        <p> ₫159.000</p>
-                    </div>
-                </div>
-                <div class="dotted-line mt-3"></div>
-                <div class="sp-list4 d-flex">
-                    <div class="sp-list4-all1">
-                        <i class="fa-solid fa-ticket"></i>
-                    </div>
-                    <div class="sp-list4-all2">
-                        <p>Voucher của shop</p>
-                    </div>
-                    <div class="sp-list4-all3">
-                        <p>Chọn Voucher</p>
-                    </div>
+                <div class="form-group w-50 ms-2">
+                    <label for="phone" style="margin-bottom: 1px;">Phone: </label>
+                    <br>
+                    <input type="number" name="phone" id="phone" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';" required>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="address" style="margin-bottom: 1px;">Address: </label>
+                <br>
+                <textarea type="number" name="address" id="address" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';" required></textarea>
+            </div>
+        </div>
+        @if ($product_cart)
+        @php $currentProviderId = null; $total = 0; $ship = 0; $totalPayment = 0;@endphp
+        @foreach ($product_cart as $id => $item)
+        @php
+            $productTime = 0;
+            $maxShippingCost = 0;
+            $totalPrice = 0;
+            $count = 0;
+        @endphp
+        @if($currentProviderId != $item['nameprovider']['idProvider'])
+        <div class="container1 my-3 px-3 py-3">
+            <div class="sp1">
+                        <div class="sp-list2-all2 d-flex w-100">
+                            <b class="w-50">{{ $item['nameprovider']['Name'] }}</b>
+                            <div class=" d-flex w-50">
+                                <span class="sp-list1-all2"><p>Đơn giá</p></span>
+                                <span class="sp-list1-all2"><p>Số lượng</p></span>
+                                <span class="sp-list1-all2"><p>Design by</p></span>
+                                <span class="sp-list1-all2"><p>Thành tiền</p></span>
+                            </div>
+                        </div>
+                        @foreach ($product_cart as $id => $items)
+                        @if($items['nameprovider']['idProvider'] == $item['nameprovider']['idProvider'] )
+
+                        @if($items['detailProvider']['shippingCost'] > $maxShippingCost)
+                            @php
+                                $maxShippingCost = $items['detailProvider']['shippingCost'];
+                            @endphp
+                        @endif
+                        @if($items['detailProvider']['productTime'] > $productTime)
+                            @php
+                                $productTime = $items['detailProvider']['productTime'];
+                            @endphp
+                        @endif
+                        @php
+                            $count = $count + 1;
+                            $totalPrice += $items['pricePr'];
+                        @endphp
+                        <div class="sp-list3-all1 d-flex w-100">
+                            <div class="d-flex w-50">
+                                <img src="source/imageOPr/{{$items['item']['imagePr']}}" alt="" width="40px" height="40px">
+                                <div class="ps-5">
+                                    <p>{{$items['item']['namePr']}}</p>
+                                    <p>Loại: {{$items['size']}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex w-50">
+                                <span class="sp-list3-all4">{{$items['item']['pricePr']}}</span>
+                                <span class="sp-list3-all5">{{$items['qty']}}</span>
+                                <span class="sp-list3-all5">{{$items['nameshop']['nameShop']}}</span>
+                                <span class="sp-list3-all6 text-sp-11">{{$items['pricePr']}}</span>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+            </div>
             <div class="dotted-line mt-2 sp-line2"></div>
-            <div class="sp2">
+            <div class="sp2 mt-3">
                 <div class="cart-infor1 d-flex">
                     <div class="cart-infor-message d-flex">
                         <div class="cart-infor-message1">
                             <p>Lời nhắn:</p>
                         </div>
                         <div class="cart-infor-message2">
-                            <p>Lưu ý cho người bán...</p>
+                            <input name="note{{$item['nameprovider']['idProvider']}}" placeholder="Lưu ý cho người bán...">
                         </div>
                     </div>
                     <div class="cart-infor-shipping">
@@ -86,203 +100,45 @@
                             </div>
                             <div class="shipping-payment1">
                                 <div class="ship1">
-                                    <p>Nhanh</p>
+                                    <p>{{ $item['nameprovider']['Name'] }}</p>
                                 </div>
                                 <div class="ship2">
-                                    <p>Nhận hàng vào 20 Th12-22Th12</p>
+                                    <p>Thời gian chuẩn bị đơn hàng: {{$productTime}} days</p>
                                 </div>
                             </div>
-                            <div class="shipping-payment2">
-                                <p>THAY ĐỔI</p>
+                            <div class="shipping-payment3 text-sp-11">
+                                <p>$ {{$maxShippingCost}}</p>
                             </div>
-                            <div class="shipping-payment3">
-                                <p>₫45.100</p>
-                            </div>
-                        </div>
-                        <div class="dotted-line sp-line3">
-                        </div>
-                        <div class="dotted-line sp-line4">
-                        </div>
-                        <div class="cart-shipping-detail2 d-flex">
                         </div>
                     </div>
                 </div>
-                <div class="cart-infor2 d-flex">
-                    <div class="dotted-line sp-line5">
-                    </div>
-                    <div class="cart-payment1">
-                        <p>Được đồng kiểm.</p>
-                    </div>
-                    <div class="cart-payment2">
-                        <i class="fa-regular fa-circle-question"></i>
-                    </div>
-                </div>
-                <div class="dotted-line sp-line6">
+                <div class="dotted-line mt-2 sp-line2">
                 </div>
                 <div class="d-flex">
                     <div class="cart-detail1">
-                        <p>Tổng số tiền (1 sản phẩm):</p>
+                        <p>Tổng số tiền ({{$count}} sản phẩm):</p>
                     </div>
-                    <div class="cart-detail2">
-                        <p>₫204.100</p>
+                    @php
+                        $total = $total + $totalPrice;
+                        $totalPrice += $maxShippingCost;
+                    @endphp
+                    <div class="cart-detail2 text-sp-11">
+                        <p>{{$totalPrice}}</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container2 mt-4">
-            <div class="sp1">
-                <div class="sp-list2 d-flex">
-                    <div class="text-white mt-4 list1">
-                        <p>Yêu Thích</p>
-                    </div>
-                    <div class="list2">
-                        <p>By UniSpace</p>
-                    </div>
-                    <div class="vertical-line sp-line7"></div>
-                    <div class="list3 d-flex">
-                        <i class="fa-brands fa-rocketchat"></i>
-                        <p>Chat ngay</p>
-                    </div>
-                </div>
-                <div class="sp-list3 d-flex">
-                    <div class="list3-sp1">
-                        <img src="quan-11134207-7qukw-ljz1mr79dlaa5c_tn.jpg" alt="" width="40px" height="40px">
-                    </div>
-                    <div class="list3-sp2">
-                        <p>Quần Short local brand By Unispace unisex nam nữ thể ..</p>
-                    </div>
-                    <div class="list3-sp3">
-                        <p>Loại: quanchaotic,L</p>
-                    </div>
-                    <div class="list3-sp4">
-                        <p> ₫156.000</p>
-                    </div>
-                    <div class="list3-sp5">
-                        <p>1</p>
-                    </div>
-                    <div class="list3-sp6">
-                        <p> ₫156.000</p>
-                    </div>
-                </div>
-                <div class="sp-list3 d-flex">
-                    <div class="sp-sp-list1">
-                        <img src="ao-11134207-7qukw-lhk3c65c2n5t83_tn.jpg" alt="" width="40px" height="40px">
-                    </div>
-                    <div class="sp-sp-list2">
-                        <p>Áo thun local brand By UniSpace tay lỡ form rộng unise ..</p>
-                    </div>
-                    <div class="sp-sp-list3">
-                        <p>Loại: By-UpTee,L</p>
-                    </div>
-                    <div class="sp-sp-list4">
-                        <p> ₫184.800</p>
-                    </div>
-                    <div class="sp-sp-list5">
-                        <p>1</p>
-                    </div>
-                    <div class="sp-sp-list6">
-                        <p> ₫184.800</p>
-                    </div>
-                </div>
-                <div class="dotted-line mt-3"></div>
-                <div class="sp-list4 d-flex">
-                    <div class="sp-sp-1">
-                        <i class="fa-solid fa-ticket" style="color: #fe5454;"></i>
-                    </div>
-                    <div class="sp-sp-2">
-                        <p>Voucher của shop</p>
-                    </div>
-                    <div class="sp-sp-3">
-                        <p>Chọn Voucher</p>
-                    </div>
-                </div>
-            </div>
-            <div class="dotted-line mt-2 sp-line8"></div>
-            <div class="sp2">
-                <div class="cart-infor1 d-flex">
-                    <div class="cart-infor-message d-flex">
-                        <div class="message-1">
-                            <p>Lời nhắn:</p>
-                        </div>
-                        <div class="message-2">
-                            <p>Lưu ý cho người bán...</p>
-                        </div>
-                    </div>
-                    <div class="cart-infor-shipping">
-                        <div class="cart-shipping-detail1 d-flex">
-                            <div class="cart-1">
-                                <p>Đơn vị vận chuyển:</p>
-                            </div>
-                            <div class="cart-2">
-                                <div>
-                                    <p>Nhanh</p>
-                                </div>
-                                <div class="text-sp">
-                                    <p>Nhận hàng vào 20 Th12-22Th12</p>
-                                </div>
-                            </div>
-                            <div class="text-sp-1">
-                                <p>THAY ĐỔI</p>
-                            </div>
-                            <div class="text-sp-2">
-                                <p>₫28.800</p>
-                            </div>
-                        </div>
-                        <div class="dotted-line sp-line9">
-                        </div>
-                        <div class="dotted-line sp-line10">
-                        </div>
-                        <div class="cart-shipping-detail2 d-flex">
-                        </div>
-                    </div>
-                </div>
-                <div class="cart-infor2 d-flex">
-                    <div class="dotted-line sp-line11">
-                    </div>
-                    <div class="cart-payment1">
-                        <p>Được đồng kiểm.</p>
-                    </div>
-                    <div class="cart-payment2">
-                        <i class="fa-regular fa-circle-question"></i>
-                    </div>
-                </div>
-                <div class="dotted-line sp-line12">
-                </div>
-                <div class="d-flex">
-                    <div class="cart-detail1">
-                        <p>Tổng số tiền (2 sản phẩm):</p>
-                    </div>
-                    <div class="cart-detail2">
-                        <p>₫337.600</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container3">
+        @php $currentProviderId = $item['nameprovider']['idProvider'];  $ship += $maxShippingCost; $totalPayment += $totalPrice;@endphp
+        @endif
+        @endforeach
+        @endif
+        <div class="container1">
             <div class="payment-detail1 d-flex">
                 <div class="payment1">
                     <p>Phương thức thanh toán</p>
                 </div>
-                <div class="payment2">
-                    <p>Ví PaintPay</p>
-                </div>
-                <div class="payment3">
-                    <p>ApplePay</p>
-                </div>
-                <div class="payment4">
-                    <p>Thẻ tín dụng/Ghi nợ</p>
-                </div>
                 <div class="payment5">
                     <p>Thanh toán khi nhận hàng</p>
-                </div>
-            </div>
-            <div class="dotted-line mt-3 sp-line13"></div>
-            <div class="payment-detail2 d-flex">
-                <div>
-                    <p>Thanh toán khi nhận hàng</p>
-                </div>
-                <div class="text-sp-3">
-                    <p>Phí thu hộ: ₫0 VNĐ. Ưu đãi về phí vận chuyển (nếu có) áp dụng cả với phí thu hộ.</p>
                 </div>
             </div>
             <div class="dotted-line mt-4 sp-line14"></div>
@@ -292,7 +148,7 @@
                         <p>Tổng tiền hàng</p>
                     </div>
                     <div class="text-sp-5">
-                        <p>₫449.800</p>
+                        <p>{{$total}}</p>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -300,23 +156,15 @@
                         <p>Phí vận chuyển</p>
                     </div>
                     <div class="text-sp-7">
-                        <p>₫73.900</p>
+                        <p>{{$ship}}</p>
                     </div>
                 </div>
                 <div class="d-flex">
-                    <div class="text-sp-8">
-                        <p>Tổng cộng Voucher giảm giá:</p>
-                    </div>
-                    <div class="text-sp-9">
-                        <p>₫0</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="text-sp-10">
+                    <div class="text-sp-6">
                         <p>Tổng thanh toán</p>
                     </div>
                     <div class="text-sp-11">
-                        <p>₫541.700</p>
+                        <p>{{$totalPayment}}</p>
                     </div>
                 </div>
             </div>
@@ -329,11 +177,10 @@
                     <p>Điều khoản Paint</p>
                 </div>
                 <div class="text-sp-14">
-                    <p>Đặt hàng</p>
+                    <button type="submit">Đặt hàng</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
-
-</html>
+</form>
+@endsection

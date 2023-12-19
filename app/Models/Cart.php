@@ -16,11 +16,11 @@ class Cart extends Model
     public $totalPrice = 0;
     public $standard = 0;
     public $totalPayment = 0;
-    public $Express = 0;
-    public $futureDate1 = 0;
-    public $futureDate2 = 0;
-    public $futureDate3 = 0;
-    public $futureDate4 = 0;
+    // public $Express = 0;
+    // public $futureDate1 = 0;
+    // public $futureDate2 = 0;
+    // public $futureDate3 = 0;
+    // public $futureDate4 = 0;
     public function __construct($oldCart)
     {
         if ($oldCart) {
@@ -29,20 +29,21 @@ class Cart extends Model
         $this->totalPrice = $oldCart->totalPrice;
         $this->standard = $oldCart->standard;
         $this->totalPayment = $oldCart->totalPayment;
-        $this->Express = $oldCart->Express;
-        $this->futureDate1 = $oldCart->futureDate1;
-        $this->futureDate2 = $oldCart->futureDate2;
-        $this->futureDate3 = $oldCart->futureDate3;
-        $this->futureDate4 = $oldCart->futureDate4;
+        // $this->Express = $oldCart->Express;
+        // $this->futureDate1 = $oldCart->futureDate1;
+        // $this->futureDate2 = $oldCart->futureDate2;
+        // $this->futureDate3 = $oldCart->futureDate3;
+        // $this->futureDate4 = $oldCart->futureDate4;
         }
     }
-    public function addCart($item, $id, $size, $shop, $provider, $qty = 1){
+    public function addCart($item, $id, $size, $shop, $provider, $detailProvider, $qty = 1){
         $cart = [
             'qty' => 0,
             'pricePr' => $item->pricePr,
             'size' => $size,
             'nameshop' => $shop,
             'nameprovider' => $provider,
+            'detailProvider' => $detailProvider,
             'item' =>$item
         ];
         if($this->item){
@@ -62,19 +63,19 @@ class Cart extends Model
         $shippingCost = $detailProvider ? $detailProvider->shippingCost : 0;
         $this->standard = $this->standard + $shippingCost;
         $this->totalPayment = $this->standard + $this->totalPrice;
-        $this->Express = $this->totalPayment + 20;
+        // $this->Express = $this->totalPayment + 20;
 
-        $time = DB::table('DetailProvider')->select('productTime')->where('idOPr', $idOPr)->where('idProvider', $item->idProvider)->first();
-        $productTime = $time ? $time->productTime : 0;
-        $currentDate = Carbon::now();
-        $futureDate1 = clone $currentDate;
-        $this->futureDate1 = $futureDate1->addDays($productTime)->addDays(10);
-        $futureDate2 = clone $currentDate;
-        $this->futureDate2 = $futureDate2->addDays($productTime)->addDays(13);
-        $futureDate3 = clone $currentDate;
-        $this->futureDate3 = $futureDate3->addDays($productTime)->addDays(5);
-        $futureDate4 = clone $currentDate;
-        $this->futureDate4 = $futureDate4->addDays($productTime)->addDays(8);
+        // $time = DB::table('DetailProvider')->select('productTime')->where('idOPr', $idOPr)->where('idProvider', $item->idProvider)->first();
+        // $productTime = $time ? $time->productTime : 0;
+        // $currentDate = Carbon::now();
+        // $futureDate1 = clone $currentDate;
+        // $this->futureDate1 = $futureDate1->addDays($productTime)->addDays(10);
+        // $futureDate2 = clone $currentDate;
+        // $this->futureDate2 = $futureDate2->addDays($productTime)->addDays(13);
+        // $futureDate3 = clone $currentDate;
+        // $this->futureDate3 = $futureDate3->addDays($productTime)->addDays(5);
+        // $futureDate4 = clone $currentDate;
+        // $this->futureDate4 = $futureDate4->addDays($productTime)->addDays(8);
 
     }
     public function increaseQuantity($productId)
@@ -85,7 +86,7 @@ class Cart extends Model
             $this->totalQty++;
             $this->totalPrice += $this->items[$productId]['item']->pricePr;
             $this->totalPayment = $this->standard + $this->totalPrice;
-            $this->Express = $this->totalPayment + 20;
+            // $this->Express = $this->totalPayment + 20;
         }
     }
     public function decreaseQuantity($productId)
@@ -96,7 +97,7 @@ class Cart extends Model
             $this->totalQty--;
             $this->totalPrice -= $this->items[$productId]['item']->pricePr;
             $this->totalPayment = $this->standard + $this->totalPrice;
-            $this->Express = $this->totalPayment + 20;
+            // $this->Express = $this->totalPayment + 20;
 
             if ($this->items[$productId]['qty'] <= 0) {
                 unset($this->items[$productId]);
@@ -109,7 +110,7 @@ class Cart extends Model
         $this->totalQty = 0;
         $this->totalPrice = 0;
         $this->totalPayment = 0;
-        $this->Express = 0;
+        // $this->Express = 0;
         unset($this->items[$idProduct]);
     }
     public function reduceByOne($id)

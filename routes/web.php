@@ -117,3 +117,5 @@ Route::post('/cancel-design', [PageController::class, 'cancelDesign'])->name('ca
 
 
 Route::get('/page-user', [PageController::class, 'getIndexPageUser'])->name('page-user');
+Route::get('/indexcheckout', [PageController::class, 'getIndexCheckout'])->name('indexcheckout');
+Route::post('/postcheckout', [PageController::class, 'postCheckout'])->name('postcheckout');

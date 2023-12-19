@@ -1,134 +1,52 @@
-.main-container {
+.containerCheckout{
     background-color: #f5f5f5;
-    height: 1800px;
-
+    padding: 10px;
+    font-size: 1.5rem;
 }
 
 .container1 {
-    width: 1200px;
     background-color: #fff;
-    height: 460px;
-    margin-left: 150px;
     margin-top: 30px;
 }
-
-.container2 {
-    width: 1200px;
-    margin-left: 150px;
-    background: #ffffff;
+.infor-customer{
+    background-color: white;
 }
-
-.container3 {
-    width: 1200px;
-    background-color: #fff;
-    height: 460px;
-    margin-left: 150px;
-    margin-top: 30px;
-}
-
-.vertical-line {
-    width: 0.5px;
-    height: 25px;
-    background-color: rgb(201, 201, 201);
-}
-
-.dotted-line {
-    border-bottom: 1px dotted #ececec;
-    margin-bottom: 20px;
-}
-
-.sp-list1-all1 {
-    font-size: 20px;
-    margin-left: 40px;
-}
-
 .sp-list1-all2 {
     color: grey;
-    margin-left: 600px;
+    margin-left: 80px;
 }
-
-.sp-list1-all3 {
-    color: grey;
-    margin-left: 60px;
-}
-
-.sp-list1-all4 {
-    color: grey;
-    margin-left: 180px;
-}
-
-.sp-list2-all1 {
-    width: 70px;
-    height: 20px;
-    background-color: #fe5454;
-    margin-left: 40px;
-    font-size: 13px;
-    border-radius: 3%;
-}
-
-.sp-list2-all1 p {
-    margin-left: 6px;
-}
-
 .sp-list2-all2 {
-    margin-left: 10px;
-    margin-top: 22px;
-    font-size: 15px;
+    padding: 10px 0px;
+    border-bottom: 1px dotted #adadad;
+}
+.tableCheckout{
+    width: 100%;
+    height: 88px;
+}
+.tableCheckout td{
+    width: 25%;
 }
 
-.sp-line1 {
-    margin-top: 21px;
-    margin-left: 10px;
+.sp-list3-all1 img{
+    width: 100px;
+    height: 100px;
 }
-
-.sp-list2-all3 {
-    margin-left: 18px;
-    margin-top: 20px;
-}
-
-.sp-list2-all3 i {
-    color: #00bfa5;
-    margin-top: 6px;
-}
-
-.sp-list2-all3 p {
-    color: #00bfa5;
-    margin-left: 8px;
-}
-
 .sp-list3-all1 {
     margin-left: 40px;
     margin-top: 10px;
 }
-
-.sp-list3-all2 {
-    font-size: 15px;
-    margin-top: 20px;
-    margin-left: 15px;
-}
-
-.sp-list3-all3 {
-    font-size: 14px;
-    color: grey;
-    margin-left: 70px;
-    margin-top: 20px;
-}
-
 .sp-list3-all4 {
-    font-size: 14px;
-    margin-left: 85px;
+    margin-left: 50px;
     margin-top: 20px;
 }
 
 .sp-list3-all5 {
-    font-size: 14px;
-    margin-left: 88px;
+    margin-left: 110px;
     margin-top: 20px;
 }
 
 .sp-list3-all6 {
-    font-size: 14px;
-    margin-left: 215px;
+    margin-left: 230px;
     margin-top: 20px;
 }
 
@@ -169,7 +87,6 @@
 .cart-infor-message2 p {
     margin-left: 10px;
     margin-top: 7px;
-    font-size: 14px;
 }
 
 .shipping-payment {
@@ -185,7 +102,6 @@
 }
 
 .ship2 {
-    font-size: 12px;
     color: #757575;
 }
 
@@ -196,13 +112,6 @@
 
 .shipping-payment3 {
     margin-left: 100px;
-}
-
-.sp-line3 {
-    height: 100px;
-    margin-left: 20px;
-    margin-top: -94px;
-    border-left: 1px dotted #adadad;
 }
 
 .sp-line4 {
@@ -238,7 +147,6 @@
 
 .cart-detail1 {
     margin-left: 870px;
-    font-size: 14px;
 }
 
 .cart-detail2 {
@@ -250,7 +158,6 @@
     height: 20px;
     background-color: #fe5454;
     margin-left: 40px;
-    font-size: 13px;
     border-radius: 3%;
 }
 
@@ -261,7 +168,6 @@
 .list2 {
     margin-left: 10px;
     margin-top: 22px;
-    font-size: 15px;
 }
 
 .sp-line7 {
@@ -290,32 +196,27 @@
 }
 
 .list3-sp2 {
-    font-size: 15px;
     margin-top: 20px;
     margin-left: 15px;
 }
 
 .list3-sp3 {
-    font-size: 14px;
     color: grey;
     margin-left: 70px;
     margin-top: 20px;
 }
 
 .list3-sp4 {
-    font-size: 14px;
     margin-left: 85px;
     margin-top: 20px;
 }
 
 .list3-sp5 {
-    font-size: 14px;
     margin-left: 88px;
     margin-top: 20px;
 }
 
 .list3-sp6 {
-    font-size: 14px;
     margin-left: 215px;
     margin-top: 20px;
 }
@@ -326,32 +227,27 @@
 }
 
 .sp-sp-list2 {
-    font-size: 15px;
     margin-top: 20px;
     margin-left: 15px;
 }
 
 .sp-sp-list3 {
-    font-size: 14px;
     color: grey;
     margin-left: 67px;
     margin-top: 20px;
 }
 
 .sp-sp-list4 {
-    font-size: 14px;
     margin-left: 100px;
     margin-top: 20px;
 }
 
 .sp-sp-list5 {
-    font-size: 14px;
     margin-left: 88px;
     margin-top: 20px;
 }
 
 .sp-sp-list6 {
-    font-size: 14px;
     margin-left: 216px;
     margin-top: 20px;
 }
@@ -390,7 +286,6 @@
 .message-2 p {
     margin-left: 10px;
     margin-top: 7px;
-    font-size: 14px
 }
 
 .cart-1 {
@@ -403,7 +298,6 @@
 }
 
 .text-sp {
-    font-size: 12px;
     color: #757575;
 }
 
@@ -456,7 +350,6 @@
 
 .cart-detail1 {
     margin-left: 870px;
-    font-size: 14px;
 }
 
 .cart-detail2 {
@@ -466,7 +359,6 @@
 .payment1 {
     margin-left: 48px;
     margin-top: 20px;
-    font-size: 20px;
 }
 
 .payment2 {
@@ -481,7 +373,6 @@
 .payment2 p {
     margin-left: 8px;
     margin-top: 5px;
-    font-size: 14px;
 }
 
 .payment3 {
@@ -496,7 +387,6 @@
 .payment3 p {
     margin-left: 8px;
     margin-top: 5px;
-    font-size: 14px;
 }
 
 .payment4 {
@@ -511,7 +401,6 @@
 .payment4 p {
     margin-left: 8px;
     margin-top: 5px;
-    font-size: 14px;
 }
 
 .payment5 {
@@ -526,7 +415,6 @@
 .payment5 p {
     margin-left: 8px;
     margin-top: 5px;
-    font-size: 14px;
 }
 
 .sp-line13 {
@@ -535,12 +423,10 @@
 
 .payment-detail2 {
     margin-left: 50px;
-    font-size: 14px;
 }
 
 .text-sp-3 {
     margin-left: 65px;
-    font-size: 14px;
 }
 
 .sp-line14 {
@@ -553,7 +439,6 @@
 
 .text-sp-4 {
     color: #757575;
-    font-size: 14px;
 }
 
 .text-sp-5 {
@@ -562,7 +447,6 @@
 
 .text-sp-6 {
     color: #757575;
-    font-size: 14px;
 }
 
 .text-sp-7 {
@@ -571,7 +455,6 @@
 
 .text-sp-8 {
     color: #757575;
-    font-size: 14px;
 }
 
 .text-sp-9 {
@@ -580,14 +463,12 @@
 
 .text-sp-10 {
     color: #757575;
-    font-size: 14px;
 }
 
 .text-sp-11 {
-    margin-left: 80px;
-    font-size: 30px;
-    margin-top: -10px;
-    color: #fe5454
+    margin-left: 100px;
+    color: #fe5454;
+    font-weight: 500;
 }
 
 .text-sp-12 {
@@ -610,7 +491,6 @@
 
 .text-sp-14 p {
     margin-left: 70px;
-    font-size: 17px;
     margin-top: 8px;
 }
 

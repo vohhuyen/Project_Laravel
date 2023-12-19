@@ -255,63 +255,36 @@ return new class extends Migration
             $comment->foreign('idUser')->references('idUser')->on('Users');
             $comment->timestamps();
         });
-        Schema::create('Cart', function(Blueprint $cart){
-            $cart->integer('idCart')->unsigned()->comment('mã giỏ hàng lấy từ mã người dùng');
-            $cart->integer('idProduct')->unsigned()->comment('mã sản phẩm');
-            $cart->string('namePr');
-            $cart->string('imagePr');
-            $cart->float('price', 8, 2)->comment('giá sản phẩm');
-            $cart->integer('quantity')->unsigned();
-            $cart->integer('size')->unsigned();
-            $cart->string('sale')->comment('giảm giá bao nhiêu %');
-            $cart->float('totalCost', 8, 2)->unsigned()->default('0')->comment('tổng tiền sản phẩm');
-            $cart->foreign('idCart')->references('idUser')->on('Users');
-            $cart->foreign('idProduct')->references('idProduct')->on('Products');
-            $cart->timestamps();
-        });
         Schema::create('Order', function(Blueprint $order){
             $order->increments('idOrder')->comment('mã order');
             $order->integer('idUser')->unsigned()->comment('mã người dùng');
+            $order->integer('idProvider')->unsigned()->comment('mã nha cung cap');
             $order->string('address');
             $order->integer('phone')->unsigned()->comment('số điện thoại');
-            $order->float('price', 8,2)->default('0')->comment('tổng tiền sản phẩm');
-            $order->float('shippingCost', 8, 2)->default('0')->comment('tổng tiền sản phẩm');
+            $order->string('name');
             $order->float('totalPrice', 8, 2)->default('0')->comment('tổng tiền phải trả');
-            $order->datetime('shippingTime')->comment('dự kiến ngày nhận');
-            $order->integer('received')->unsigned();
-            $order->string('payment')->comment('cod hoac payment');
+            $order->float('shippingCost', 8, 2)->default('0');
+            $order->float('shippingTime')->comment('dự kiến ngày nhận');
+            $order->integer('received')->unsigned()->default('0');
             $order->string('note');
             $order->foreign('idUser')->references('idUser')->on('Users')->comment('idUser tham chiếu tới cột idUser của bảng Users');
+            $order->foreign('idProvider')->references('idProvider')->on('Providers');
             $order->timestamps();
         });
         Schema::create('OrderDetail', function(Blueprint $OrderDetail){
             $OrderDetail->increments('idOrderDetail')->comment('mã OrderDetail');
             $OrderDetail->integer('idProduct')->unsigned()->comment('mã sản phẩm');
             $OrderDetail->integer('idOrder')->unsigned()->comment('mã order');
-            $OrderDetail->string('address');
-            $OrderDetail->integer('phone')->unsigned()->comment('số điện thoại');
-            $OrderDetail->float('price', 8,2)->default('0')->comment('tổng tiền sản phẩm');
-            $OrderDetail->float('shippingCost', 8, 2)->default('0')->comment('tổng tiền sản phẩm');
-            $OrderDetail->float('totalPrice', 8, 2)->default('0')->comment('tổng tiền phải trả');
-            $OrderDetail->datetime('shippingTime')->comment('dự kiến ngày nhận');
-            $OrderDetail->integer('received')->unsigned();
-            $OrderDetail->string('payment')->comment('cod hoac payment');
-            $OrderDetail->string('note');
+            $OrderDetail->integer('idShop')->unsigned()->comment('mã shop');
+            $OrderDetail->string('namePr');
+            $OrderDetail->string('classify')->nullable($value = true)->comment('phan loai neu co');
+            $OrderDetail->float('priceOPr', 8,2)->default('0')->comment('tiền sản phẩm gốc');
+            $OrderDetail->float('pricePr', 8, 2)->default('0')->comment('tiền sản phẩm');
+            $OrderDetail->integer('quantity')->unsigned();
             $OrderDetail->foreign('idProduct')->references('idProduct')->on('Products');
             $OrderDetail->foreign('idOrder')->references('idOrder')->on('Order');
+            $OrderDetail->foreign('idShop')->references('idShop')->on('Shop');
             $OrderDetail->timestamps();
-        });
-        Schema::create('payment', function(Blueprint $payment){
-            $payment->increments('idPayment')->comment('Mã chuyển khoản');
-            $payment->integer('idUser')->unsigned()->comment('mã người dùng');
-            $payment->string('name')->comment('tên người chuyển khoản');
-            $payment->integer('bankAccountNumber')->unsigned()->default('0')->comment('số tài khoản');
-            $payment->dateTime('timePayment')->comment('ngày chuyển khoản');
-            $payment->float('totalPrice', 8, 2)->default('0')->comment('tổng tiền chuyển khoản');
-            $payment->string('content')->comment('nội dung chuyển khoản');
-            $payment->foreign('idPayment')->references('idOrder')->on('Order')->comment('idPayment tham chiếu tới cột idOrder của bảng Order #mối quan hệ 1-1');
-            $payment->foreign('idUser')->references('idUser')->on('Users')->comment('idUser tham chiếu tới cột idUser của bảng Users');
-            $payment->timestamps();
         });
     }
 
@@ -346,9 +319,7 @@ return new class extends Migration
         Schema::dropIfExists('image_Pr');
         Schema::dropIfExists('SavePr');
         Schema::dropIfExists('comment');
-        Schema::dropIfExists('Cart');
         Schema::dropIfExists('Order');
         Schema::dropIfExists('OrderDetail');
-        Schema::dropIfExists('payment');
     }
 };

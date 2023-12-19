@@ -26,8 +26,8 @@
                     <td class="infor_item">
                       <b class="namePr">{{$product['item']['namePr']}}</b>
                       <p class="if_item">Size {{$product['size']}}</p>
-                      <div class="if_item"><b>Design by: </b> {{$product['shop'][0]['nameShop']}}</div>
-                      <div class="if_item"><b>Provided by: </b> {{$product['provider'][0]['Name']}}</div>
+                      <div class="if_item"><b>Design by: </b> {{$product['nameshop']['nameShop']}}</div>
+                      <div class="if_item"><b>Provided by: </b> {{$product['nameprovider']['Name']}}</div>
                     </td>
                     <form action="{{ route('decrease-quantity', $product['item']['idProduct']) }}" method="post" style="display:inline;">
             @csrf
@@ -50,60 +50,6 @@
             </table>
           </div>
           <div class="cart_separate1"></div>
-        </div>
-        <div class="section_right">
-          <div class="total_payment">
-            <div class="total_payment-header">
-              <div class="total_payment-header-left">
-                <i class="fa-solid fa-tag"></i>
-                <p>Shop discount code</p>
-              </div>
-              <div>
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-            </div>
-            <div class="cart_separate2"></div>
-            <div class="total_payment-body">
-              <b class="sumary">Summary in order</b>
-              <div class="space">
-                <p>Total product cost</p>
-                <p class="price2">$ {{number_format(Session('cart')->totalPrice,  2, '.', ',')}}</p>
-              </div>
-              <div class="space">
-                <p>Standard delivery</p>
-                <p class="price2">$ {{number_format(Session('cart')->standard,  2, '.', ',')}}</p>
-              </div>
-              <div class="space space2">
-                <p>Total payment :</p>
-                <p class="price2">$ {{number_format(Session('cart')->totalPayment,  2, '.', ',')}}</p>
-              </div>
-            </div>
-            <div class="transport">
-              <p>Delivery country: <b>Vietnamese</b></p>
-              <a href="#">Edit</a>
-            </div>
-            <div class="delivery">
-              <p>Standard delivery: @if(Session::has('cart') && Session::get('cart')->futureDate1 && Session::get('cart')->futureDate2)
-    {{ Session::get('cart')->futureDate1->format('d/m') }} to {{ Session::get('cart')->futureDate2->format('d/m') }}
-@endif</p>
-              <div class="pay">
-                <p>Billing: $ {{number_format(Session('cart')->totalPayment,  2, '.', ',')}}</p>
-              </div>
-            </div>
-            <div class="or">
-              <div class="cart_separate3"></div>
-              <p>OR</p>
-              <div class="cart_separate3"></div>
-            </div>
-            <div class="delivery">
-              <p>Express delivery:  @if(Session::has('cart') && Session::get('cart')->futureDate3 && Session::get('cart')->futureDate4)
-    {{ Session::get('cart')->futureDate3->format('d/m') }} to {{ Session::get('cart')->futureDate4->format('d/m') }}
-@endif</p>
-              <div class="pay">
-                <p>Billing: $ {{number_format(Session('cart')->Express,  2, '.', ',')}}</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 @endsection

@@ -45,6 +45,8 @@ use App\Models\categoryPrDetail;
 use App\Models\ImageOPr;
 use App\Models\KeyFeature;
 use App\Models\CareIntruction;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class PageController extends Controller
 {
@@ -893,9 +895,11 @@ class PageController extends Controller
                     $oldCart = Session('cart') ? Session::get('cart') : null;
                     $size = $req->input('selectedSize');
                     $shop = Shop::where('idShop', $product->idShop)->first();
-                    $provider = Provider::where('idProvider', $product->idProvider)->first();																			
+                    $provider = Provider::where('idProvider', $product->idProvider)->first();
+                    $OPrDetail = OriginalProductDetail::where('idOPrDetail', $product->idOPrDetail)->first();
+                    $detailProvider = DetailProvider::where('idprovider', $product->idProvider)->where('idOPr', $OPrDetail->idOPr)->first();																			
                     $cart = new Cart($oldCart);																			
-                    $cart->addcart($product, $idProduct, $size, $shop, $provider);																			
+                    $cart->addcart($product, $idProduct, $size, $shop, $provider, $detailProvider);																			
                     $req->session()->put('cart', $cart);																			
                     return redirect()->back();	
                 }
@@ -1442,4 +1446,84 @@ class PageController extends Controller
     public function getIndexPageUser(){
         return view('page.PageUser');
     }
+    public function getIndexCheckout(){
+        if (Session::has('cart')) {														
+            $oldCart = Session::get('cart');														
+            $cart = new Cart($oldCart);												
+            return view('page.checkout')->with(['cart' => Session::get('cart'), 														
+                                    'product_cart' => $cart->items, 														
+                                    'totalPrice' => $cart->totalPrice, 														
+                                    'totalQty' => $cart->totalQty]);														
+        } else {														
+            return redirect('index');														
+        }														
+    }
+    public function postCheckout(Request $req)													
+    {													
+        $cart = Session::get('cart');
+        $user = Session::get('user');
+        $product_cart = $cart->items;													
+        $totalPrice = $cart->totalPrice;
+        if($product_cart){
+            $currentProviderId = null; 
+            $total = 0; 
+            $ship = 0; 
+            $totalPayment = 0; 
+            foreach ($product_cart as $id => $item){
+                $productTime = 0;
+                $maxShippingCost = 0;
+                $totalPrice = 0;
+                $count = 0;
+                if($currentProviderId != $item['nameprovider']['idProvider']){
+                    $order = new Order;
+                    $order->idUser = $user->idUser;
+                    $order->idProvider = $item['nameprovider']['idProvider'];
+                    $order->address = $req->input('address');
+                    $order->phone = $req->input('phone');
+                    $order->name = $req->input('name');
+                    foreach ($product_cart as $id => $items){
+                        if($items['nameprovider']['idProvider'] == $item['nameprovider']['idProvider'] ){
+                            if($items['detailProvider']['shippingCost'] > $maxShippingCost){
+                                $maxShippingCost = $items['detailProvider']['shippingCost'];
+                            }
+                            if($items['detailProvider']['productTime'] > $productTime){
+                                $productTime = $items['detailProvider']['productTime'];
+                            }
+                            $count = $count + 1;
+                            $totalPrice += $items['pricePr'];
+                        }
+                    }
+                    $order->shippingCost = $maxShippingCost;
+                    $totalPrice += $maxShippingCost;
+                    $order->totalPrice = $totalPrice;
+                    $order->shippingTime = $productTime;
+                    if ($req->filled('note'.$item['nameprovider']['idProvider'])) {							
+                        $order->note = $req->input('note'.$item['nameprovider']['idProvider']);						
+                    } else {							
+                        $order->note = "nothing";							
+                    }							
+                    $order->save();
+                    foreach ($product_cart as $id => $items){
+                        if($items['nameprovider']['idProvider'] == $item['nameprovider']['idProvider'] ){
+                            $orderDetail = new OrderDetail;
+                            $orderDetail->idProduct = $items['item']['idProduct'];
+                            $order = Order::max('idOrder');
+                            $orderDetail->idOrder = $order;
+                            $orderDetail->idShop = $items['nameshop']['idShop'];
+                            $orderDetail->namePr = $items['item']['namePr'];
+                            $orderDetail->classify = $items['size'];
+                            $orderDetail->priceOPr = $items['detailProvider']['priceOPr'];
+                            $orderDetail->pricePr = $items['item']['pricePr'];
+                            $orderDetail->quantity = $items['qty'];
+                            $orderDetail->save();
+                        }
+                    }
+                    $currentProviderId = $item['nameprovider']['idProvider'];
+                }
+            }
+        }														                                           
+        Session::forget('cart');													
+        return redirect('index');
+    }												
+
 }   
