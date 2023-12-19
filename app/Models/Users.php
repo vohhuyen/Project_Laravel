@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Users extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idUser';
-    protected $table = "users";
     protected $fillable = [
         'Name',
         'Email',
         'password',
     ];
+    protected $table = "users";
     
 }

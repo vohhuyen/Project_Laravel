@@ -1,20 +1,26 @@
-
-.title{
+.content{
+    background-color: rgb(241, 241, 241);
+    padding: 10px;
+}
+#title{
     text-align: center;
   color: #fe5454;
+  font-size: 2.5rem;
 }
-
+.input2{
+    font-size: 1.5rem;
+}
 .input{
-    
+    font-size: 1.5rem;
     border: 1px solid #56aef485;
-    margin-bottom: 1rem;
     width: 95%;
     padding: 13px;
     border-radius: 5px;
     box-sizing: border-box;
-    background: #f7f8f97a;
+    background: white;
 }
 .save,.cancel,.clear{
+    font-size: 1.5rem;
     display: right;
     margin-left: 10px;
     background: #fe5454;
@@ -28,6 +34,7 @@
     padding:15px;
 }
 .Exit{
+    font-size: 1.5rem;
     background: #fe5454;
     border: none;
     width: auto;
@@ -42,32 +49,38 @@
 }
 /* form chọn màu */
 .color-buttons {
+    font-size: 1.5rem;
     flex-wrap: wrap;
 }
 
 .color-button {
+    font-size: 1.5rem;
     border: 1px solid #56aef485;
-    margin-bottom: 1rem;
+    margin-bottom: 5px;
     width: 30%;
-    padding: 13px;
+    padding: 3px;
     border-radius: 5px;
     box-sizing: border-box;
-    background: #f7f8f97a;
+    background: white;
 }
 
 .color-form {
+    font-size: 1.5rem;
     display: none;
 }
 
 .color-form.active {
+    font-size: 1.5rem;
     display: block;
 }
 
 .image-upload {
+    font-size: 1.5rem;
     margin-bottom: 10px;
     margin-left: 10px;
 }
 .input1{
+    font-size: 1.5rem;
         flex-direction: row;
         align-items: flex-start;
 }
@@ -77,12 +90,14 @@
     align-items: flex-start;
 } */
 .color-list {
+    font-size: 1.5rem;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .color-list li {
+    font-size: 1.5rem;
     display: inline-block;
     margin: 5px;
     cursor: pointer;
@@ -91,48 +106,59 @@
 }
 
 .color-form {
+    font-size: 1.5rem;
     display: none;
 }
 
 .color-form.active {
+    font-size: 1.5rem;
     display: block;
 }
 
 .image-upload {
+    font-size: 1.5rem;
     margin-bottom: 10px;
 }
 .horizontal-line {
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(190, 190, 190);
+    width: 80px;
   }
 
 .input3{
+    font-size: 1.5rem;
     flex-direction: row;
         align-items: flex-start;
 }
 .SizeName{
+    font-size: 1.5rem;
     border: 1px solid #56aef485;
     margin-bottom: 1rem;
-    width: 10%;
-    padding: 13px;
+    margin-right: 15px;
+    width: 50px;
+    padding: 3px;
     border-radius: 5px;
     box-sizing: border-box;
-    background: #f7f8f97a;
+    background: white;
 }
 .a1{
+    font-size: 1.5rem;
     border: 1px solid #56aef485;
     margin-bottom: 1rem;
-    width: 25%;
-    padding: 13px;
+    width: 150px;
+    padding: 3px;
     border-radius: 5px;
     box-sizing: border-box;
-    background: #f7f8f97a;
+    background: white;
+    margin-right: 15px;
 }
 /* ------------------------------------------------keyFeature =--------------------------------------------------------*/
 .key-feature-form {
+    font-size: 1.5rem;
     display: flex;
     flex-direction: column;
   }
 
   .details-container {
+    font-size: 1.5rem;
     display: none;
   }

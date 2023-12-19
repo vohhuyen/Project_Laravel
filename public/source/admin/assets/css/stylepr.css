@@ -170,3 +170,56 @@ div.relative{
     margin-left: 10px;
     width: 250px;
         }
+
+
+
+
+        .main-container {
+            width: 100%;
+            border: 1px solid rgb(207, 206, 206);
+            box-shadow: 5px 5px rgb(243, 243, 243);
+        }
+        #buttons-box {
+            display: flex;
+            align-items: center;
+            width: 150px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #accept-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #reject-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .avt-managerdesign{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 5px 0;
+        }
+        .nameShopmn{
+            display: flex;
+            justify-content: space-between;
+            background-color: rgb(228, 228, 228) !important;
+        }
+        .index{
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(228, 228, 228, 0.422) !important;
+        }
+        .b-infor{
+            width: 50px;
+        }

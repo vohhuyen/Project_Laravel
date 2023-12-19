@@ -1,7 +1,7 @@
 
 window.onload = function () {
   'use strict';
-
+  
   var Cropper = window.Cropper;
   var URL = window.URL || window.webkitURL;
   var container = document.querySelector('.img-container');
@@ -116,6 +116,31 @@ window.onload = function () {
       cropper = new Cropper(image, options);
     }
   };
+  var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  function sendImageToServer(image, result, detailValue, providerValue) {
+    console.log('image:', image);
+    console.log('result:', result);
+    // console.log(detailValue);
+    // console.log(providerValue);
+    axios.post('/postPr', { image: image , result: result, detailValue: detailValue, providerValue: providerValue}, {
+      headers: {
+        'X-CSRF-TOKEN': csrfToken,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => {
+      console.log('Response from server:', response.data);
+      const data = response.data; 
+      if (data.success) {
+        window.location.href = '/getformPr?image=' + encodeURIComponent(data.image) + '&result=' + encodeURIComponent(data.result) + '&detailValue=' + data.detailValue + '&providerValue=' + data.providerValue;
+      } else {
+          console.log('Something went wrong.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
 
   // Methods
   actions.querySelector('.docs-buttons').onclick = function (event) {
@@ -254,9 +279,9 @@ window.onload = function () {
 
               var myElement = document.getElementById('preview');
 
-      
-              const newWidth1 = 600;
-              const newHeight1 = 600; 
+              
+              const newWidth1 = 500;
+              const newHeight1 = 500; 
               const newWidth2 = myElement.clientWidth; 
               const newHeight2 = myElement.clientHeight; 
 
@@ -270,11 +295,16 @@ window.onload = function () {
               context.globalAlpha = 1.0;
               context.drawImage(imgEle1, 0, 0, newWidth1, newHeight1); // Vẽ imgEle1 với kích thước mới
 
-              context.globalAlpha = 0.75;
+              context.globalAlpha = 0.99;
               context.drawImage(imgEle2, centerX, centerY, newWidth2, newHeight2); // Vẽ imgEle2 với kích thước mới
 
               var img = resEle.toDataURL("image/png");
-                document.write('<img src="' + img + '"/>');
+              var result = imgEle2.toDataURL("image/png");
+              const detailValue = imgEle1.getAttribute('data-detail');
+              const providerValue = imgEle1.getAttribute('data-provider');
+              // console.log(detailValue);
+              // console.log(providerValue);
+              sendImageToServer(img, result, detailValue, providerValue);
           }
           break;
       }

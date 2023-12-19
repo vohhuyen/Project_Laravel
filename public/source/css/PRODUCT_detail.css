@@ -1,8 +1,22 @@
 
+  .size-option input[type="radio"] {
+      display: none; 
+  }
+
+  .size-option button {
+      background-color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+  }
+
+  .size-option input[type="radio"]:checked + button {
+      background-color: #fe5454; /* Thay đổi màu nền khi ô radio được chọn */
+      color: white; /* Thay đổi màu chữ khi ô radio được chọn */
+  }
+
 /* Products Infor */
-.content{
-  margin-left: 70px;
-  margin-right: 70px;
+.content-PrDetail{
   margin-top: 50px;
 
 }
@@ -271,7 +285,7 @@ li a {
 
 
 @media (min-width: 1024px) and (max-width: 1200px) {
-  .content {
+  .content-PrDetail {
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -338,7 +352,7 @@ li a {
   height: 80px;
   margin: 5px 0px;
 }
- .content {
+ .content-PrDetail {
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -419,7 +433,7 @@ margin: 0px 5px;
   height: 80px;
   margin: 5px 0px;
 }
- .content {
+ .content-PrDetail {
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -550,7 +564,7 @@ margin: 0px 5px;
   height: 80px;
   margin: 5px;
 }
- .content {
+ .content-PrDetail {
   margin-left: 20px;
   margin-right: 20px;
 }
