@@ -1,114 +1,71 @@
 <?php
 
 namespace App\Http\Controllers;
-// use Illuminate\Support\Facades\image_opr;
 use Illuminate\Http\Request;
-use App\Models\Users;
-use App\Models\User;
-use App\Models\Color;
-use App\Models\Category_pr;
-use App\Models\Nameproduct;
-use App\Models\originalproducts;
-use App\Models\Shop;
-use App\Models\DesignProduct;
-use App\Jobs\SendMail;
-
-
-// use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\middleware;
-use App\Models\idUser;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\SavePr;
-use App\Models\Comment;
-use App\Models\size;
-use App\Models\DetailSize;
-use App\Models\sizeguide;
-use App\Models\inputkf;
-use App\Models\inputci;
-use App\Models\categoryOPr;
-use App\Models\categoryOPrDetail;
-use App\Models\OriginalProduct;
-use App\Models\DetailProvider;
-use App\Models\Provider;
-use App\Models\OriginalProductDetail;
 use App\Models\categoryPr;
-use App\Models\Product;
-use App\Models\Cart;
-use App\Models\categoryPrDetail;
-use App\Models\ImageOPr;
-use App\Models\KeyFeature;
-use App\Models\CareIntruction;
-use App\Models\Order;
-use App\Models\OrderDetail;
+use App\Models\Provider;
+use App\Models\Shop;
+
+// use App\Models\Users;
+// use App\Models\User;
+// use App\Models\Color;
+// use App\Models\Category_pr;
+// use App\Models\Nameproduct;
+// use App\Models\originalproducts;
+// use App\Models\Shop;
+// use App\Models\DesignProduct;
+// use App\Jobs\SendMail;
+// use App\Models\idUser;
+// use App\Models\SavePr;
+// use App\Models\Comment;
+// use App\Models\size;
+// use App\Models\DetailSize;
+// use App\Models\sizeguide;
+// use App\Models\inputkf;
+// use App\Models\inputci;
+// use App\Models\categoryOPr;
+// use App\Models\categoryOPrDetail;
+// use App\Models\OriginalProduct;
+// use App\Models\DetailProvider;
+// use App\Models\Provider;
+// use App\Models\OriginalProductDetail;
+// use App\Models\categoryPr;
+// use App\Models\Product;
+// use App\Models\Cart;
+// use App\Models\categoryPrDetail;
+// use App\Models\ImageOPr;
+// use App\Models\KeyFeature;
+// use App\Models\CareIntruction;
+// use App\Models\Order;
+// use App\Models\OrderDetail;
 
 class PageController extends Controller
 {
+    public function getProductFromCategory($idCategoryPrDetail){
+        $product = DB::table('products')->where('idCategoryPrDetail',$idCategoryPrDetail)->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
+        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
+        $provider = Provider::all();
+
+        return view('page.Product', compact('product','category','provider'));
+    }
     public function getIndex(){		
         $shop = Shop::all();
-        // $products = Product::all();
         $products = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);
         
         return view('page.home', compact('products','shop'));
     }
-    public function getProductFromCategory($idCategoryPrDetail){
-        $product = DB::table('products')->where('idCategoryPrDetail',$idCategoryPrDetail)->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
-        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
-        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
-        $provider = Provider::all();
-        // dd($category);
-        return view('page.Product', compact('product','category','provider'));
-    }
-    public function getIndexLogin()
-    {
-        return view('page.login');
-    }
-    public function login(Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'pw' => 'required',
-        ], [
-            'email.required' => 'Email is required.',
-            'email.email' => 'Invalid email format.',
-            'pw.required' => 'Password is required.',
-        ]); 
-        $login = [
-            'email' => $request->input('email'),
-            'password' => $request->input('pw'),
-        ];
-        if (Auth::attempt($login)) {
-            $loggedInUser = auth()->user();
-            Session::put('user', $loggedInUser);
-            // Truy vấn database để lấy thông tin user với email tương ứng
-            $user = Users::where('Email', $loggedInUser->Email)->first();
-            // Kiểm tra xem người dùng có tồn tại không và có thuộc tính 'role' không
-            if ($user && isset($user->role)) {
-                if($user->lock== 1){
-                // Kiểm tra và xử lý vai trò
-                    if ($user->role == 1) {
-                        return redirect('index');
-                    } elseif ($user->role == 2) {
-                        return redirect('admin');
-                    } 
-                    else{
-                        return redirect('login')->with('status', 'invalid credentials');
-                    }
-            }
-            else {
-                return redirect('login')->with('status', 'Your account has been locked');
-            }
-                  
-        } else {
-            return redirect('login')->with('status', 'User not found in the database or invalid credentials');
-        }
-    }
-    }
+
+
+
+
+    
 
     public function lockup($idUser) {
         $user = Users::where('idUser', $idUser)->first();
@@ -163,40 +120,6 @@ class PageController extends Controller
             
         }
     }
-
-
-    public function Logout()
-    {
-        Session::forget('user');
-        Session::forget('cart');
-        return redirect('index');
-    }
-    public function getIndexCreateAccount()
-    {
-        return view('page.createAccount');
-    }
-    public function createAccount(Request $request)
-    {
-        $input = $request->validate([
-            'Name' => 'required|string',
-            'Email' => 'required|email|unique:users',
-            'password' => 'required',
-            'c_password' => 'required|same:password'
-        ]);
-        $input['password'] = bcrypt($input['password']);
-        Users::create($input);
-
-        
-        echo '
-            <script>
-                alert("thanh cong.vui long dang nhap.");
-                window.location.assign("login");
-            </script>
-        ';
-    }
-
-    
-
     public function createShop(Request $request){
         $input = $request->validate([
             'nameShop' => 'unique:Shop',

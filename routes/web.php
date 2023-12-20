@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SignInUpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +18,13 @@ use App\Http\Controllers\PageController;
 Route::get('/index',[PageController::class, 'getIndex'])->name('index');
 Route::get('/categoryPr/{idCategoryPrDetail}', [PageController::class, 'getProductFromCategory'])->name('categoryPr');
 
-Route::get('/login',[PageController::class, 'getIndexLogin'])->name('login');
-Route::post('/login',[PageController::class, 'Login'])->name('login');
-Route::get('/createAccount',[PageController::class, 'getIndexCreateAccount'])->name('createAccount');
-Route::post('/createAccount',[PageController::class, 'createAccount']);
-Route::get('/reindex',[PageController::class, 'Logout'])->name('logout');
+Route::get('/login',[SignInUpController::class, 'getIndexLogin'])->name('login');
+Route::post('/login',[SignInUpController::class, 'Login'])->name('login');
+Route::get('/createAccount',[SignInUpController::class, 'getIndexCreateAccount'])->name('createAccount');
+Route::post('/createAccount',[SignInUpController::class, 'createAccount']);
+Route::get('/reindex',[SignInUpController::class, 'Logout'])->name('logout');
 
-Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete']);														
-// Route::get('/admin', [PageController::class, 'getIndexAdmin']);											
+Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete']);																									
 Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');														
 Route::post('/admin-add-form', [PageController::class, 'postAdminAdd']);											
 Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
@@ -35,7 +35,6 @@ Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById']
 Route::get('/Category-opr',[PageController::class, 'getIndexCategoryOPr'])->name('categoryopr');
 Route::get('/opr-detail/{idOPr}',[PageController::class, 'getIndexOPrDetail'])->name('opr-detail');
 Route::get('/list-user',[PageController::class, 'getuser'])->name('list-user');
-// Route::post('/list-user',[PageController::class, 'adduser'])->name('adduser');
 Route::post('/lockup/{idUser}', [PageController::class, 'lockup'])->name('lockup');
 Route::post('/Unlock/{idUser}', [PageController::class, 'Unlock'])->name('Unlock');
 Route::post('/delete-user/{idUser}', [PageController::class, 'deleteUser'])->name('delete-user');

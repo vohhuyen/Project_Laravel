@@ -7,10 +7,10 @@
                         <div id="myDropdown" class="dropdown-content">
                             <div class="toolbar">
                                 <div>
-                                    <a href="#" class="dropdown-item"><b>Products</b></a>
-                                    <a href="#" class="dropdown-item"><b>Trending now</b></a>
-                                    <a href="#" class="dropdown-item"><b>Licensed merch</b></a>
-                                    <a href="#" class="dropdown-item"><b>All kid's merch</b></a>
+                                    <a data-toggle="modal" data-target="#error" class="dropdown-item"><b>Products</b></a>
+                                    <a data-toggle="modal" data-target="#error" class="dropdown-item"><b>Trending now</b></a>
+                                    <a data-toggle="modal" data-target="#error" class="dropdown-item"><b>Licensed merch</b></a>
+                                    <a data-toggle="modal" data-target="#error" class="dropdown-item"><b>All kid's merch</b></a>
                                 </div>
                                 @foreach($category as $category)
                                 <div>
@@ -25,23 +25,23 @@
                         </div>
                     </li>
                     <li class="py-3 px-4 nav-item">
-                        <a class="nav-link" href="#">Blog</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#error">Blog</a>
                     </li>
                     <li class="py-3 px-4 nav-item">
-                        <a class="nav-link" href="#">How it work?</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#error">How it work?</a>
                     </li>
                     <li class="py-3 px-4 nav-item dropdown">
                         <a class="nav-link dropdown-toggle dropdown-btn">Services</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Order In Bulk</a></li>
-                            <li><a class="dropdown-item" href="#">Experts Program</a></li>
+                            <li><a class="dropdown-item" data-toggle="modal" data-target="#error">Order In Bulk</a></li>
+                            <li><a class="dropdown-item" data-toggle="modal" data-target="#error">Experts Program</a></li>
                         </ul>
                     </li>
                     <li class="py-3 px-4 nav-item dropdown ">
                         <a class="nav-link dropdown-toggle dropdown-btn">Need help</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Help center</a></li>
-                            <li><a class="dropdown-item" href="#">Contact</a></li>
+                            <li><a class="dropdown-item" data-toggle="modal" data-target="#error">Help center</a></li>
+                            <li><a class="dropdown-item" data-toggle="modal" data-target="#error">Contact</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -61,7 +61,7 @@
                                 </button>
                                 <div class="dropdown-container">
                                      @foreach($categorys->category_Pr_Detail as $detail)
-                                    <a class="dropdown-item" href="#">{{$detail->nameCategoryPrDetail}}</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#error">{{$detail->nameCategoryPrDetail}}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -69,10 +69,10 @@
                         </div>
                     </li>
                     <li class="py-3 px-4 nav-item">
-                        <a class="nav-link" href="#">Blog</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#error">Blog</a>
                     </li>
                     <li class="py-3 px-4 nav-item">
-                        <a class="nav-link" href="#">How it work?</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#error">How it work?</a>
                     </li>
                     <li class="py-3">
                         <div>
@@ -80,8 +80,8 @@
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-container">
-                                <a class="dropdown-item" href="#">Order In Bulk</a>
-                                <a class="dropdown-item" href="#">Experts Program</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#error">Order In Bulk</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#error">Experts Program</a>
                             </div>
                         </div>
                     </li>
@@ -91,8 +91,8 @@
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-container">
-                                <a class="dropdown-item" href="#">Help center</a>
-                                <a class="dropdown-item" href="#">Contact</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#error">Help center</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#error">Contact</a>
                             </div>
                         </div>
                     </li>
@@ -101,15 +101,15 @@
                 <ul class="nav_bar-item-right">
                 @if(Session::has('user'))
                     <div class="dropdown">
-                        <!-- <a href="#" style="color: black; text-decoration: none;"> -->
+                        <!-- <a data-toggle="modal" data-target="#error" style="color: black; text-decoration: none;"> -->
                             <button class="btn-login px-3 dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: white; color: black; width: auto;">
                                 <i class="fa-solid fa-user"></i>  {{Session('user')->Name}}
                                 <span class="caret"></span></button>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa-solid fa-list-check mx-2"></i> Order</a></li>
+                                <li><a data-toggle="modal" data-target="#error"><i class="fa-solid fa-list-check mx-2"></i> Order</a></li>
                                 <li data-toggle="modal" data-target="#btncreateshop"><a><i class="fa-solid fa-store mx-2"></i> Your shop</a></li>
-                                <li><a href="#"><i class="fa-solid fa-chart-column mx-2"></i> Revenue</a></li>
+                                <li><a data-toggle="modal" data-target="#error"><i class="fa-solid fa-chart-column mx-2"></i> Revenue</a></li>
                             </ul>
                         <!-- </a> -->
                     </div>
@@ -153,7 +153,7 @@
             </div>
             <div class="header_heard_cart">
                 <div>
-                    <a href="#"><i class="icon_header_body fa-solid fa-bell"></i></a>
+                    <a data-toggle="modal" data-target="#error"><i class="icon_header_body fa-solid fa-bell"></i></a>
                 </div>
                 @if(Session::has('user'))
                 <div>
@@ -175,14 +175,14 @@
                 <button onclick="openListbar()"><i class="fa-solid fa-bars"></i></button>
                 <div class="listbar" id="listbar">
                     <li class="d-flex justify-content-between">
-                        <a href="#"><span class="icon_header_body fa-solid fa-heart" style="color: white;"></span>Storage</a>
+                        <a data-toggle="modal" data-target="#error"><span class="icon_header_body fa-solid fa-heart" style="color: white;"></span>Storage</a>
                         <button class="btn-close" onclick="closeListbar()"></button>
                     </li>
                     
                         <a href="{{route('cart')}}"><span class="icon_header_body fa-solid fa-cart-shopping"></span> Cart</a>
                     </li>
                     <li class="icon-user">
-                        <a href="#"><span class="icon_header_body fa-solid fa-user"></span>Login </a>
+                        <a data-toggle="modal" data-target="#error"><span class="icon_header_body fa-solid fa-user"></span>Login </a>
                     </li>
                 </div>
             </div>
@@ -228,6 +228,15 @@
                         <button type="submit" class="btn btn-danger">Save</button>	
                     </div>				
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="error" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2>Sorry ! ImPrint team has not yet developed this functionality <i class="fa-solid fa-heart" style="color: #fe5454;"></i></h2>
             </div>
         </div>
     </div>

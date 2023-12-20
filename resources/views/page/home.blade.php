@@ -16,24 +16,35 @@
     <div class="video grid">
         <h1>THE JOI OF WINTER</h1>
         <div class="intro">
-            <video preload="auto" autoplay loop controls>
-            <source src="source/img/summer23_video.webm">
-            </video>
+            <div id="videoContainer">
+                <img id="placeholderImage" src="source/image/image-video_intro.webp" alt="Video Placeholder">
+                <video id="myVideo" preload="auto" autoplay loop controls>
+                <source src="source/image/video_intro.webm" type="video/webm">
+                </video>
+            </div>
             <div class="intro-box">
                 <div class="intro-pr mb-4">
                     <div class="">
-                        <a href="#"><img src="source/img/home-product.jpg" alt="product"></a>
+                        <a data-toggle="modal" data-target="#error"><img src="source/img/img-home-intro1.jpg" alt="product"></a>
                     </div> <br>
                     <div class="">
-                        <a href="#"><img src="source/img/home-product2.jpg" alt="product"></a>
+                        <a data-toggle="modal" data-target="#error"><img src="source/img/img-home-intro2.jpg" alt="product"></a>
+                    </div>
+                </div>
+                <div class="intro-pr mb-4">
+                    <div class="">
+                        <a data-toggle="modal" data-target="#error"><img src="source/img/img-home-intro3.jpg" alt="product"></a>
+                    </div> <br>
+                    <div class="">
+                        <a data-toggle="modal" data-target="#error"><img src="source/img/img-home-intro4.jpg" alt="product"></a>
                     </div>
                 </div>
                 <div class="intro-pr">
                     <div class="">
-                        <a href="#"><img src="source/img/home-product3.jpg" alt="product"></a>
+                        <a data-toggle="modal" data-target="#error"><img src="source/img/img-home-intro5.jpg" alt="product"></a>
                     </div> <br>
                     <div class="">
-                        <a href="#"><img src="source/img/product4.jpg" alt="product"></a>
+                        <a data-toggle="modal" data-target="#error"><img src="source/img/img-home-intro6.jpg" alt="product"></a>
                     </div>
                 </div>
             </div>
@@ -42,9 +53,9 @@
     <div class="bestseller grid">
         <h1>BESTSELLER</h1>
         
-        <div class="row justify-content-center w-100">
+        <div class="row justify-content-center w-100 row">
         @foreach($products as $product )
-            <div class="column col-xl-2">
+            <div class="columnhomepage col-lg-2">
            <div class="product_img">
            @if(Session::has('user'))
            <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data">
@@ -53,15 +64,14 @@
             </form>
             @endif
                    <a href="product-detail/{{$product->idProduct}}">
-                    <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
+                    <img class="first-imghome" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
                 </div>
-                <a href="product-detail/{{$product->idProduct}}"><div class="product_name">
+                <a href="product-detail/{{$product->idProduct}}" class="product_name"><div class="product_name">
                     <span><b>{{ $product->namePr }}</b>...</span>
                 </div></a>
-                <p>{{ $product->nameShop }}</p>
-                <div class="product_price">
+                <div class="product_price d-flex justify-content-between">
+                    <p>{{ $product->nameShop }}</p>
                     <b class="price">{{ $product->pricePr }}</b>
-                    <i class="fa-solid fa-cart-plus"></i>
                 </div>
             </div>
  @endforeach
@@ -91,8 +101,19 @@
         </div>
 </div>
 <script>
-       
+    
+  var video = document.getElementById("myVideo");
+  var placeholderImage = document.getElementById("placeholderImage");
+
+  // Ẩn hình ảnh placeholder và phát video khi video bắt đầu chạy
+  video.addEventListener("play", function() {
+    placeholderImage.style.display = "none";
+  });
+</script>
+<script>
        document.addEventListener('DOMContentLoaded', function () {
+  
+
     const alsolikeContainer = document.querySelector('row_artist');
     const alsolikeItems = document.querySelectorAll('.col_artist');
     let currentIndex = 0;
