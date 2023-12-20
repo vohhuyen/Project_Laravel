@@ -1444,7 +1444,13 @@ class PageController extends Controller
         return back();
     }
     public function getIndexPageUser(){
-        return view('page.PageUser');
+        $user = Session::get('user');
+        $order = DB::table('Order')->where('Order.idUser',  $user->idUser)
+        ->join('OrderDetail','OrderDetail.idOrder', '=','Order.idOrder')
+        ->join('Products', 'Products.idProduct', '=', 'OrderDetail.idProduct')
+        ->select('Order.*', 'OrderDetail.*', 'Products.*')
+        ->get();
+        return view('page.PageUser', compact('order'));
     }
     public function getIndexCheckout(){
         if (Session::has('cart')) {														
@@ -1525,5 +1531,24 @@ class PageController extends Controller
         Session::forget('cart');													
         return redirect('index');
     }												
-
+    public function browerOrder(){
+        $order = DB::table('Order')->where('Order.received',  0)
+        ->join('OrderDetail','OrderDetail.idOrder', '=','Order.idOrder')
+        ->join('Products', 'Products.idProduct', '=', 'OrderDetail.idProduct')
+        ->select('Order.*', 'OrderDetail.*', 'Products.*')
+        ->get();
+        return view('admin.browerOrder', compact('order'));
+    }
+    public function acceptOrder($idOrder){
+        $order = Order::where('idOrder', $idOrder);
+        $received = 1;
+        $order->update(['received' => $received]);
+        return back();
+    }
+    public function cancelOrder($idOrder){
+        $order = Order::where('idOrder', $idOrder);
+        $received = 4;
+        $order->update(['received' => $received]);
+        return back();
+    }
 }   

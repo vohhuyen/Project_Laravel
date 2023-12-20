@@ -23,16 +23,6 @@
             <div class="modal-body">
         <form method="POST" action="{{ route('adduser') }}" enctype="multipart/form-data">
           @csrf
-            <!-- @if (session('error'))
-          <div class="alert alert-danger">
-            {{ session('error') }}
-            </div>
-            @endif
-            @if (session('success'))
-            <div class="alert alert-success">
-              {{ session('success') }}
-            </div>
-            @endif -->
               <label for="name" style="margin-bottom: 1px;">Name:</label>
               <br>
             <input type="text" name="name" id="name" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>

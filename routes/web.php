@@ -14,9 +14,6 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/index',[PageController::class, 'getIndex'])->name('index');
 Route::get('/categoryPr/{idCategoryPrDetail}', [PageController::class, 'getProductFromCategory'])->name('categoryPr');
 
@@ -119,3 +116,7 @@ Route::post('/cancel-design', [PageController::class, 'cancelDesign'])->name('ca
 Route::get('/page-user', [PageController::class, 'getIndexPageUser'])->name('page-user');
 Route::get('/indexcheckout', [PageController::class, 'getIndexCheckout'])->name('indexcheckout');
 Route::post('/postcheckout', [PageController::class, 'postCheckout'])->name('postcheckout');
+
+Route::get('/browerOrder', [PageController::class, 'browerOrder'])->name('browerOrder');
+Route::post('/acceptOrder/{idOrder}', [PageController::class, 'acceptOrder'])->name('acceptOrder');
+Route::post('/cancelOrder/{idOrder}', [PageController::class, 'cancelOrder'])->name('cancelOrder');
