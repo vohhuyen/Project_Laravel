@@ -11,7 +11,7 @@
       </header>
       <div class="margin"></div>
 
-      <!-- <div class="modal fade" id="btn1" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
+      <div class="modal fade" id="btn1" tabindex="-1" role="dialog" aria-labelledby="btn1Title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -24,22 +24,22 @@
         <form method="POST" action="{{ route('addshop') }}" enctype="multipart/form-data">
           @csrf
             <label for="nameShop" style="margin-bottom: 1px;">Name:</label>
-            <input type="text" name="nameShop" id="nameShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input type="text" name="nameShop" id="nameShop" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
             <br>
             <label for="coverImageShop" style="margin-bottom: 1px;">ImageShop:</label>
-            <input type="file" id="coverImageShop" name="coverImageShop" accept="coverImageShop/*"class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
+            <input type="file" id="coverImageShop" name="coverImageShop" accept="coverImageShop/*"class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
             <br>
             <label for="avataShop" style="margin-bottom: 1px;">avataShop:</label>
-            <input type="file" id="avataShop" name="avataShop" accept="avataShop/*"class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
+            <input type="file" id="avataShop" name="avataShop" accept="avataShop/*"class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
             <br>
             <label for="locationShop" style="margin-bottom: 1px;">LocationShop:</label>
-            <input type="text" locationShop="locationShop"name="locationShop" id="locationShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input type="text" locationShop="locationShop"name="locationShop" id="locationShop" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
             <br>
             <label for="descriptionShop" style="margin-bottom: 1px;">descriptionShop:</label>
-            <input type="text" descriptionShop="descriptionShop"name="descriptionShop" id="descriptionShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input type="text" descriptionShop="descriptionShop"name="descriptionShop" id="descriptionShop" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
             <br>
             <label for="descriptionShop" style="margin-bottom: 1px;">Select the name of this shop management account:</label>
-            <select name="idShop" id="idShop">
+            <select name="idShop" id="idShop" class="inputAddUser">
                 @foreach($users as $users)
                 <option value="{{ $users->idUser}}">
                     {{ $users->Name}}
@@ -55,13 +55,10 @@
             </form> 
 
             </div>
-             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger" data-dismiss="modal">Save</button>
-            </div> -->
-          <!-- </div>
+             
+           </div>
         </div>
-      </div>  -->
+      </div> 
 
 
       <!--  Header End -->
@@ -126,24 +123,26 @@
           @csrf
 
           <label for="idShop" style="margin-bottom: 1px;">id:</label>
-            <input value="{{$shop->idShop}}" type="text" name="idShop" id="idShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input value="{{$shop->idShop}}" type="text" name="idShop1" id="idShop1" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';" readonly>
            
             <label for="nameShop" style="margin-bottom: 1px;">Name:</label>
             
-            <input value="{{$shop->nameShop}}" type="text" name="nameShop" id="nameShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input value="{{$shop->nameShop}}" type="text" name="nameShop" id="nameShop" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
            
             <br>
             <label for="coverImageShop" style="margin-bottom: 1px;">ImageShop:</label>
-            <input  value="{{$shop->coverImageShop}}" type="file" id="coverImageShop" name="coverImageShop" accept="coverImageShop/*"class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
+            <input  value="{{$shop->coverImageShop}}" type="file" id="coverImageShop" name="coverImageShop" accept="coverImageShop/*"class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input>
+            <input type="text" value="{{$shop->coverImageShop}}" name="coverImageShop1" hidden> 
             <br>
             <label for="avataShop" style="margin-bottom: 1px;">avataShop:</label>
-            <input type="file" id="avataShop" name="avataShop" accept="avataShop/*"class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
+            <input type="file" id="avataShop" name="avataShop" accept="avataShop/*"class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required></input> 
+            <input type="text" value="{{$shop->avataShop}}" name="avataShop1" hidden> 
             <br>
             <label for="locationShop" style="margin-bottom: 1px;">LocationShop:</label>
-            <input type="text"  value="{{$shop->locationShop}}" locationShop="locationShop"name="locationShop" id="locationShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input type="text"  value="{{$shop->locationShop}}" locationShop="locationShop"name="locationShop" id="locationShop" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
             <br>
             <label for="descriptionShop" style="margin-bottom: 1px;">descriptionShop:</label>
-            <input type="text"  value="{{$shop->descriptionShop}}" descriptionShop="descriptionShop"name="descriptionShop" id="descriptionShop" class="inputAddshop" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
+            <input type="text"  value="{{$shop->descriptionShop}}" descriptionShop="descriptionShop"name="descriptionShop" id="descriptionShop" class="inputAddUser" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required>
             <br>
             
            

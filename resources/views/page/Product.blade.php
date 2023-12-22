@@ -2,7 +2,7 @@
 @section('contentPr')
 <div class="grid mt-5">
         <div class="container_body">
-            <div class="content">
+            <div class="contentProductpage">
                 <div class="content-wrapper d-flex">
                     <div class="sidebar-col-2 me-5">
                         <div class="categories flex">
@@ -49,8 +49,8 @@
                             <form>
                                 @foreach($provider as $provider)
                                 <div>
-                                    <input type="radio" class="providerCheckbox" id="idProvider" name="ca1" value="{{$provider->idProvider}}" >
-                                    <span class="nameProvider">{{$provider->Name}}</span>
+                                    <input type="radio" class="providerCheckbox" id="idProvider" name="ca1" value="{{$provider->idProvider}}" checked>
+                                    <span class="nameProviderproductp">{{$provider->Name}}</span>
                                 </div>
                                 @endforeach
                             </form>
@@ -125,11 +125,12 @@
                         </div>
                     </div >
                     <div id="products" class="row-listproduct row">
+                        @if(isset($product) && count($product) > 0)
                         @foreach($product as $pr)
-                        <div class=" col-3">
+                        <div class="col-3" style="height: 350px; !important">
                             <div class="product">
                                 <a href="product-detail/{{$pr->idProduct}}"><img class="image-Product" alt="" src="source/imageOPr/{{$pr->imagePr}}"/></a>
-                                <a href="product-detail/{{$pr->idProduct}}"><p class="product_name">{{$pr->namePr}}</p></a>
+                                <a href="product-detail/{{$pr->idProduct}}" class="product_namePr"><p class="product_namePr">{{$pr->namePr}}</p></a>
                                 <p class="name-design">By: {{$pr->nameShop}}</p>
                                 <p class="description">{{$pr->descriptionDesign}}</p>
                                 <div class="d-flex justify-content-between">
@@ -146,6 +147,11 @@
                             </div>
                             </div>
                         @endforeach
+                        @else
+                        <div class="w-100 text-center mt-5 pt-5 " style="border: 1px solid grey; height: 350px; border-radius: 5px;">
+                            <img src="image/emty-product.png" style="width: 700px; height: 300px;" alt="">
+                        </div>
+                        @endif
                         <div class="page_number">
                             {{ $product->links() }}
                         </div>
@@ -180,19 +186,24 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
-                        // console.log(data);
                         var productContainer = $('#products');
                         productContainer.empty();
-                        // Thêm các sản phẩm mới
-                        $.each(data, function(key, product) {
-                            var productItem = $('<div class="col-3">');
-                            productItem.append('<img class="image-Product" alt="" src="source/imageOPr/' + product.imagePr + '"/>');
-                            productItem.append('<p class="product_name">' + product.namePr + '</p>');
-                            productItem.append('<p class="name-design">By: ' + product.nameShop + '</p>');
-                            productItem.append('<p class="description">' + product.descriptionDesign + '</p>');
-                            productItem.append('<b class="product_price ">' + product.pricePr + '</b>');
+                        if(data && data.length > 0){
+                            $.each(data, function(key, product) {
+                                var productItem = $('<div class="col-3" style="margin-bottom: 20px;">');
+                                productItem.append('<a href="product-detail/' + product.idProduct + '"><img class="image-Product" alt="" src="source/imageOPr/' + product.imagePr + '"/></a>');
+                                productItem.append('<a href="product-detail/' + product.idProduct + '" class="product_namePr"><p class="product_name">' + product.namePr + '</p></a>');
+                                productItem.append('<p class="name-design">By: ' + product.nameShop + '</p>');
+                                productItem.append('<p class="description">' + product.descriptionDesign + '</p>');
+                                productItem.append('<b class="product_price "> $' + product.pricePr + '</b>');
+                                productContainer.append(productItem);
+                            });
+                        }
+                        else{
+                            var productItem = $('<div class="w-100 text-center mt-5 pt-5 " style="border: 1px solid grey; height: 350px; border-radius: 5px;">');
+                            productItem.append('<img src="image/emty-product.png" style="width: 700px; height: 300px;" alt="">');
                             productContainer.append(productItem);
-                        });
+                        }
                     },
                     error: function(error) {
                         console.log(error);
@@ -215,16 +226,22 @@
                         // console.log(data);
                         var productContainer = $('#products');
                         productContainer.empty();
-                        // Thêm các sản phẩm mới
+                        if(data && data.length > 0){
                         $.each(data, function(key, product) {
-                            var productItem = $('<div class="col-3">');
-                            productItem.append('<img class="image-Product" alt="" src="source/imageOPr/' + product.imagePr + '"/>');
-                            productItem.append('<p class="product_name">' + product.namePr + '</p>');
+                            var productItem = $('<div class="col-3" style="margin-bottom: 20px;">');
+                            productItem.append('<a href="product-detail/' + product.idProduct + '"><img class="image-Product" alt="" src="source/imageOPr/' + product.imagePr + '"/></a>');
+                            productItem.append('<a href="product-detail/' + product.idProduct + '" class="product_namePr"><p class="product_name">' + product.namePr + '</p></a>');
                             productItem.append('<p class="name-design">By: ' + product.nameShop + '</p>');
                             productItem.append('<p class="description">' + product.descriptionDesign + '</p>');
-                            productItem.append('<b class="product_price ">' + product.pricePr + '</b>');
+                            productItem.append('<b class="product_price "> $' + product.pricePr + '</b>');
                             productContainer.append(productItem);
                         });
+                        }
+                        else{
+                            var productItem = $('<div class="w-100 text-center mt-5 pt-5 " style="border: 1px solid grey; height: 350px; border-radius: 5px;">');
+                            productItem.append('<img src="image/emty-product.png" style="width: 700px; height: 300px;" alt="">');
+                            productContainer.append(productItem);
+                        }
                     },
                     error: function(error) {
                         console.log(error);
@@ -239,7 +256,7 @@
 
             // Ẩn các provider sau khi trang web được tải
             $('form input:radio').slice(providersToShow).hide();
-            $('.nameProvider').slice(providersToShow).hide();
+            $('.nameProviderproductp').slice(providersToShow).hide();
 
             // Bắt sự kiện khi nhấp vào nút "More"
             $('.more1').click(function(e) {
@@ -247,7 +264,7 @@
 
                 // Hiển thị thêm 5 provider khi nhấp vào "More"
                 $('form input:radio:hidden').slice(0, providersToShow).show();
-                $('.nameProvider:hidden').slice(0, providersToShow).show();
+                $('.nameProviderproductp:hidden').slice(0, providersToShow).show();
 
                 // Nếu không còn provider ẩn, ẩn nút "More"
                 if ($('form input:radio:hidden').length === 0) {
@@ -275,16 +292,22 @@
                             var productContainer = $('#products');
                             productContainer.empty();
 
-                            // Thêm các sản phẩm mới
+                            if(data && data.length > 0){
                             $.each(data, function(key, product) {
-                                var productItem = $('<div class="col-3">');
-                                productItem.append('<img class="image-Product" alt="" src="source/imageOPr/' + product.imagePr + '"/>');
-                                productItem.append('<p class="product_name">' + product.namePr + '</p>');
+                                var productItem = $('<div class="col-3" style="margin-bottom: 20px;">');
+                                productItem.append('<a href="product-detail/' + product.idProduct + '"><img class="image-Product" alt="" src="source/imageOPr/' + product.imagePr + '"/></a>');
+                                productItem.append('<a href="product-detail/' + product.idProduct + '" class="product_namePr"><p class="product_name">' + product.namePr + '</p></a>');
                                 productItem.append('<p class="name-design">By: ' + product.nameShop + '</p>');
                                 productItem.append('<p class="description">' + product.descriptionDesign + '</p>');
-                                productItem.append('<b class="product_price ">' + product.pricePr + '</b>');
+                                productItem.append('<b class="product_price "> $' + product.pricePr + '</b>');
                                 productContainer.append(productItem);
                             });
+                            }
+                            else{
+                                var productItem = $('<div class="w-100 text-center mt-5 pt-5 " style="border: 1px solid grey; height: 350px; border-radius: 5px;">');
+                                productItem.append('<img src="image/emty-product.png" style="width: 700px; height: 300px;" alt="">');
+                                productContainer.append(productItem);
+                            }
                         },
                         error: function(error) {
                             console.log(error);

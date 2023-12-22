@@ -14,10 +14,10 @@
         <div class="container-fluid">
             <section id="content">
             @foreach($design as $designs)
-                <div class="main-container mt-5 w-100">
+                <div class="main-containerdesignpr mt-5 w-100">
                     <div class="w-100 nameShopmn ps-5">
                         <div>
-                            <img class="avt-managerdesign" src="image/{{$designs->avataShop}}" alt="Image">
+                            <img class="avt-managerdesign" src="source/imageOPr/{{$designs->avataShop}}" alt="Image">
                             <b class="nameshop">{{$designs->nameShop}}</b>
                         </div>
                         <div class="d-flex">
@@ -84,11 +84,11 @@
                         <div class="w-100 d-flex" style="align-items: center">
                             <div class="mx-5 my-2">
                                 <b>Image Product</b><br>
-                                <img src="image/{{$designs->imagePr}}" alt="Image" width="170px" height="150px">
+                                <img src="source/imageOPr/{{$designs->imagePr}}" alt="Image" width="170px" height="150px">
                             </div>
                             <div class="mx-5 my-2">
                                 <b>Image Design</b><br>
-                                <img src="image/{{$designs->imageDesign}}" alt="Image" width="160px" height="90px">
+                                <img src="source/imageOPr/{{$designs->imageDesign}}" alt="Image" width="160px" height="90px">
                             </div>
                             <div>
                                 <div class="w-100 d-flex justify-content-between">

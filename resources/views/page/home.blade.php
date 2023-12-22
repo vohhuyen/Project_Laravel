@@ -58,7 +58,7 @@
             <div class="columnhomepage col-lg-2">
            <div class="product_img">
            @if(Session::has('user'))
-           <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data">
+           <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
             @csrf
                    <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
             </form>
@@ -66,8 +66,8 @@
                    <a href="product-detail/{{$product->idProduct}}">
                     <img class="first-imghome" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
                 </div>
-                <a href="product-detail/{{$product->idProduct}}" class="product_name"><div class="product_name">
-                    <span><b>{{ $product->namePr }}</b>...</span>
+                <a href="product-detail/{{$product->idProduct}}" class="product_namePrDetail"><div class="product_name">
+                    <span><b>{{ $product->namePr }}</b></span>
                 </div></a>
                 <div class="product_price d-flex justify-content-between">
                     <p>{{ $product->nameShop }}</p>

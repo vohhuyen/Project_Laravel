@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SignInUpController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,33 +25,78 @@ Route::get('/createAccount',[SignInUpController::class, 'getIndexCreateAccount']
 Route::post('/createAccount',[SignInUpController::class, 'createAccount']);
 Route::get('/reindex',[SignInUpController::class, 'Logout'])->name('logout');
 
-Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete']);																									
-Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');														
-Route::post('/admin-add-form', [PageController::class, 'postAdminAdd']);											
-Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
-Route::post('/admin-edit',[PageController::class, 'postAdminEdit']);
-
-Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');		
-										
-Route::get('/Category-opr',[PageController::class, 'getIndexCategoryOPr'])->name('categoryopr');
-Route::get('/opr-detail/{idOPr}',[PageController::class, 'getIndexOPrDetail'])->name('opr-detail');
-Route::get('/list-user',[PageController::class, 'getuser'])->name('list-user');
-Route::post('/lockup/{idUser}', [PageController::class, 'lockup'])->name('lockup');
-Route::post('/Unlock/{idUser}', [PageController::class, 'Unlock'])->name('Unlock');
-Route::post('/delete-user/{idUser}', [PageController::class, 'deleteUser'])->name('delete-user');
-
-Route::get('/adduser',[PageController::class, 'getadduser'])->name('adduser');
-Route::post('/adduser',[PageController::class, 'adduser']);
-
-Route::get('/design/{idProvider}/{idOPr}',[PageController::class, 'getIndexDesign'])->name('design');
-Route::post('/postPr',[PageController::class, 'getIndexFormPostPr'])->name('postPr');
-Route::get('/getformPr',[PageController::class, 'getFormPostPr'])->name('getformPr');
 Route::get('/product',[PageController::class, 'getIndexProduct'])->name('product');
 Route::get('/filter-products/{idCategoryPrDetail}',[PageController::class, 'filterProduct']);
 Route::get('/filter-products-by-price/{minPrice}/{maxPrice}',[PageController::class, 'filterPriceProduct']);
 Route::get('/filter-provider-location/{idProvider}',[PageController::class, 'filterProviderLocation']);
 
 Route::get('/product-detail/{idProduct}',[PageController::class, 'getIndexProductDetail'])->name('product-detail');
+
+Route::get('/list-user',[AdminController::class, 'getuser'])->name('list-user');
+Route::post('/lockup/{idUser}', [AdminController::class, 'lockup'])->name('lockup');
+Route::post('/Unlock/{idUser}', [AdminController::class, 'Unlock'])->name('Unlock');
+Route::post('/delete-user/{idUser}', [AdminController::class, 'deleteUser'])->name('delete-user');
+Route::post('/adduser',[AdminController::class, 'adduser'])->name('adduser');
+
+Route::get('/list-shop',[AdminController::class, 'getshop'])->name('list-shop');
+Route::post('/addshop',[AdminController::class, 'addshop'])->name('addshop');
+Route::post('/updateAdminshop',[AdminController::class, 'updateAdminshop'])->name('updateAdminshop');
+Route::post('/delete-shop/{idshop}', [AdminController::class, 'deleteshop'])->name('delete-shop');
+
+Route::get('/providermanagement',[AdminController::class, 'providermanagement'])->name('providermanagement');
+Route::post('/providermanagement',[AdminController::class, 'providerAdd'])->name('providermanagement');
+Route::post('/editprovideradmin',[AdminController::class, 'providerEdit'])->name('editprovideradmin');
+Route::post('/deleteprovideradmin/{idProvider}',[AdminController::class, 'providerDelete'])->name('deleteprovideradmin');
+
+Route::get('/admin-product', [AdminController::class, 'getProductAdd'])->name('admin-product');
+Route::get('/get-product-bycategory', [AdminController::class, 'getCategoryById'])->name('get-product-bycategory');
+Route::get('/get-colors-by-provider', [AdminController::class, 'getColorsByProvider'])->name('get-colors-by-provider');
+Route::post('/admin-add-form', [AdminController::class, 'postProductAdd']);	
+Route::post('/admin-product-delete/{id}', [AdminController::class, 'postProductDelete'])->name('admin-product-delete');	
+Route::get('/get-products-infor', [AdminController::class, 'getUpdateProductInfor'])->name('get-products-infor');
+Route::post('/admin-edit',[AdminController::class, 'postProductEdit'])->name('admin-edit');
+
+Route::get('/addOPr',[AdminController::class, 'getaddOPr'])->name('addOPr');
+Route::post('/addOPrr',[AdminController::class, 'addOPr'])->name('addOPrr');
+Route::get('/editOPr/{idOPr}',[AdminController::class, 'geteditOPr'])->name('geteditOPr');
+Route::post('/editOPrr',[AdminController::class, 'posteditOPr'])->name('editOPrr');
+Route::post('/deleteOPr/{idOPr}',[AdminController::class, 'deleteOPr'])->name('deleteOPr');
+Route::get('/originalproduct',[AdminController::class, 'getoriginalproduct'])->name('originalproduct');
+Route::get('/get-category-infor', [AdminController::class, 'getCategoryInfor'])->name('get-category-infor');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete']);																									
+// Route::get('/admin-add-form', [PageController::class, 'getAdminAdd'])->name('admin-add-form');														
+// Route::post('/admin-add-form', [PageController::class, 'postAdminAdd']);											
+// Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEdit']);												
+// Route::post('/admin-edit',[PageController::class, 'postAdminEdit']);
+										
+Route::get('/Category-opr',[PageController::class, 'getIndexCategoryOPr'])->name('categoryopr');
+Route::get('/opr-detail/{idOPr}',[PageController::class, 'getIndexOPrDetail'])->name('opr-detail');
+
+
+Route::get('/design/{idProvider}/{idOPr}',[PageController::class, 'getIndexDesign'])->name('design');
+Route::post('/postPr',[PageController::class, 'getIndexFormPostPr'])->name('postPr');
+Route::get('/getformPr',[PageController::class, 'getFormPostPr'])->name('getformPr');
+
+
+
 
 Route::get('/cart',[PageController::class, 'getIndexCart'])->name('cart');
 Route::get('/add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('add-to-cart');
@@ -61,33 +107,21 @@ Route::post('/delete-item/{productId}', [PageController::class, 'DeleteItemCart'
 Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');
 
 
-Route::get('/admin-product', [PageController::class, 'getProductAdd'])->name('admin-product');
-Route::get('/get-product-bycategory', [PageController::class, 'getCategoryById'])->name('get-product-bycategory');
-Route::get('/get-colors-by-provider', [PageController::class, 'getColorsByProvider'])->name('get-colors-by-provider');
-Route::post('/admin-add-form', [PageController::class, 'postProductAdd']);	
-Route::post('/admin-product-delete/{id}', [PageController::class, 'postProductDelete'])->name('admin-product-delete');	
-Route::get('/get-products-infor', [PageController::class, 'getUpdateProductInfor'])->name('get-products-infor');
-Route::post('/admin-edit',[PageController::class, 'postProductEdit'])->name('admin-edit');
 
 
-Route::get('/addOPr',[PageController::class, 'getaddOPr'])->name('addOPr');
-Route::post('/addOPrr',[PageController::class, 'addOPr'])->name('addOPrr');
-Route::get('/editOPr/{idOPr}',[PageController::class, 'geteditOPr'])->name('geteditOPr');
-Route::post('/editOPr',[PageController::class, 'posteditOPr'])->name('editOPr');
-Route::post('/deleteOPr/{idOPr}',[PageController::class, 'deleteOPr'])->name('deleteOPr');
-Route::get('/originalproduct',[PageController::class, 'getoriginalproduct'])->name('originalproduct');
-Route::get('/get-category-infor', [PageController::class, 'getCategoryInfor'])->name('get-category-infor');
 
-Route::get('/shop',[PageController::class, 'getshop'])->name('shop');
-Route::post('/shop',[PageController::class, 'shop']);
-Route::get('/list-shop',[PageController::class, 'getshop'])->name('list-shop');
+
+
+// Route::get('/shop',[PageController::class, 'getshop'])->name('shop');
+// Route::post('/shop',[PageController::class, 'shop']);
+
 // Route::post('/list-shop',[PageController::class, 'addshop'])->name('addshop');
-Route::post('/delete-shop/{idshop}', [PageController::class, 'deleteshop'])->name('delete-shop');
-Route::get('/addshop',[PageController::class, 'getaddshop'])->name('addshop');
-Route::post('/addshop',[PageController::class, 'addshop']);
 
-Route::get('/updateAdminshop',[PageController::class, 'getupdateAdminshop'])->name('updateAdminshop');
-Route::post('/updateAdminshop',[PageController::class, 'updateAdminshop']);
+// Route::get('/addshop',[PageController::class, 'getaddshop'])->name('addshop');
+
+
+// Route::get('/updateAdminshop',[PageController::class, 'getupdateAdminshop'])->name('updateAdminshop');
+
 
 Route::get('/forsalepage',[PageController::class, 'getforsalepage'])->name('forsalepage');
 Route::post('/forsalepage',[PageController::class, 'forsalepage']);
@@ -102,10 +136,7 @@ Route::post('/personal-product-delete/{id}', [PageController::class, 'PersinalPa
 Route::get('/likePr',[PageController::class, 'getlikePr'])->name('getlikePr');
 Route::post('/likePr/{idProduct}',[PageController::class, 'likePr'])->name('likePr');
 Route::post('/deletelikePr/{idProduct}', [PageController::class, 'deletelikePr'])->name('deletelikePr');
-Route::get('/providermanagement',[PageController::class, 'providermanagement'])->name('providermanagement');
-Route::post('/providermanagement',[PageController::class, 'providerAdd'])->name('providermanagement');
-Route::post('/editprovideradmin',[PageController::class, 'providerEdit'])->name('editprovideradmin');
-Route::post('/deleteprovideradmin/{idProvider}',[PageController::class, 'providerDelete'])->name('deleteprovideradmin');
+
 
 Route::get('/designproductmanagement',[PageController::class, 'designproductmanagement'])->name('designproductmanagement');
 Route::post('/brower/{idDesignProducts}',[PageController::class, 'browerDesign'])->name('brower');

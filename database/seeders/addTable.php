@@ -3608,31 +3608,66 @@ class addTable extends Seeder
 
         ]);
         \DB::table('image_Pr')->insert([
-            ['idProduct' => '1','image1'=>'pr13.jpg','image2'=>'pr14.jpg','image3'=>'pr15.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '2','image1'=>'pr23.jpg','image2'=>'pr24.jpg','image3'=>'pr25.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '3','image1'=>'pr33.jpg','image2'=>'pr34.jpg','image3'=>'pr35.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '4','image1'=>'pr43.jpg','image2'=>'pr44.jpg','image3'=>'pr45.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '1','imageProduct'=>'pr13.jpg'],
+            ['idProduct' => '1','imageProduct'=>'pr14.jpg'],
+            ['idProduct' => '1','imageProduct'=>'pr15.jpg'],
+           
+            ['idProduct' => '2','imageProduct'=>'pr23.jpg'],
+            ['idProduct' => '2','imageProduct'=>'pr24.jpg'],
+            ['idProduct' => '2','imageProduct'=>'pr25.jpg'],
             
-            ['idProduct' => '5','image1'=>'pr53.jpg','image2'=>'pr54.jpg','image3'=>'pr55.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '3','imageProduct'=>'pr33.jpg'],
+            ['idProduct' => '3','imageProduct'=>'pr34.jpg'],
+            ['idProduct' => '3','imageProduct'=>'pr35.jpg'],
 
-            ['idProduct' => '6','image1'=>'pr63.jpg','image2'=>'pr64.jpg','image3'=>'pr65.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '4','imageProduct'=>'pr43.jpg'],
+            ['idProduct' => '4','imageProduct'=>'pr44.jpg'],
+            ['idProduct' => '4','imageProduct'=>'pr45.jpg'],
+            
+            ['idProduct' => '5','imageProduct'=>'pr53.jpg'],
+            ['idProduct' => '5','imageProduct'=>'pr54.jpg'],
+            ['idProduct' => '5','imageProduct'=>'pr55.jpg'],
 
-            ['idProduct' => '7','image1'=>'pr73.jpg','image2'=>'','image3'=>'','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '8','image1'=>'pr83.jpg','image2'=>'','image3'=>'','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '6','imageProduct'=>'pr63.jpg'],
+            ['idProduct' => '6','imageProduct'=>'pr64.jpg'],
+            ['idProduct' => '6','imageProduct'=>'pr65.jpg'],
+
+            ['idProduct' => '7','imageProduct'=>'pr73.jpg'],
             
-            ['idProduct' => '9','image1'=>'pr93.jpg','image2'=>'','image3'=>'','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '10','image1'=>'pr103.jpg','image2'=>'pr104.jpg','image3'=>'','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '11','image1'=>'pr113.jpg','image2'=>'pr114.jpg','image3'=>'pr115.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '12','image1'=>'pr123.jpg','image2'=>'pr124.jpg','image3'=>'pr125.jpg','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '8','imageProduct'=>'pr83.jpg'],
             
-            ['idProduct' => '13','image1'=>'pr133.jpg','image2'=>'','image3'=>'','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '9','imageProduct'=>'pr93.jpg'],
             
-            ['idProduct' => '14','image1'=>'pr143.jpg','image2'=>'pr144.jpg','image3'=>'pr145.jpg','image4'=>'pr146.jpg','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '15','image1'=>'pr153.jpg','image2'=>'','image3'=>'','image4'=>'','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '10','imageProduct'=>'pr103.jpg'],
+            ['idProduct' => '10','imageProduct'=>'pr104.jpg'],
             
-            ['idProduct' => '16','image1'=>'pr163.jpg','image2'=>'pr164.jpg','image3'=>'pr165.jpg','image4'=>'pr166.jpg','image5'=>'','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
-            ['idProduct' => '17','image1'=>'pr172.jpg','image2'=>'pr173.jpg','image3'=>'pr174.jpg','image4'=>'pr175.jpg','image5'=>'pr176.jpg','image6'=>'','image7'=>'','image8'=>'','image9'=>'','image10'=>'',],
+            ['idProduct' => '11','imageProduct'=>'pr113.jpg'],
+            ['idProduct' => '11','imageProduct'=>'pr114.jpg'],
+            ['idProduct' => '11','imageProduct'=>'pr115.jpg'],
+
+            ['idProduct' => '12','imageProduct'=>'pr123.jpg'],
+            ['idProduct' => '12','imageProduct'=>'pr124.jpg'],
+            ['idProduct' => '12','imageProduct'=>'pr125.jpg'],
             
+            ['idProduct' => '13','imageProduct'=>'pr133.jpg'],
+            
+            ['idProduct' => '14','imageProduct'=>'pr143.jpg'],
+            ['idProduct' => '14','imageProduct'=>'pr144.jpg'],
+            ['idProduct' => '14','imageProduct'=>'pr145.jpg'],
+            ['idProduct' => '14','imageProduct'=>'pr146.jpg'],
+
+            ['idProduct' => '15','imageProduct'=>'pr153.jpg'],
+            
+            ['idProduct' => '16','imageProduct'=>'pr163.jpg'],
+            ['idProduct' => '16','imageProduct'=>'pr164.jpg'],
+            ['idProduct' => '16','imageProduct'=>'pr165.jpg'],
+            ['idProduct' => '16','imageProduct'=>'pr166.jpg'],
+            
+            ['idProduct' => '17','imageProduct'=>'pr172.jpg'],
+            ['idProduct' => '17','imageProduct'=>'pr173.jpg'],
+            ['idProduct' => '17','imageProduct'=>'pr174.jpg'],
+            ['idProduct' => '17','imageProduct'=>'pr175.jpg'],
+            ['idProduct' => '17','imageProduct'=>'pr176.jpg'],            
 
         ]);
         \DB::table('SavePr')->insert([

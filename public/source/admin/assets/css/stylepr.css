@@ -179,6 +179,11 @@ div.relative{
             border: 1px solid rgb(207, 206, 206);
             box-shadow: 5px 5px rgb(243, 243, 243);
         }
+        .main-containerdesignpr{
+            width: 100%;
+            border: 1px solid rgb(207, 206, 206);
+            box-shadow: 5px 5px rgb(243, 243, 243);
+        }
         #buttons-box {
             display: flex;
             align-items: center;
@@ -186,7 +191,6 @@ div.relative{
             box-sizing: border-box;
         }
         button {
-            padding: 10px;
             margin: 5px;
             cursor: pointer;
         }

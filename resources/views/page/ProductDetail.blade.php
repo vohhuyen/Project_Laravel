@@ -4,79 +4,46 @@
     <div class="Product_detail grid">
       <div class="dis-flex-all">
         <div class="image_bar disnone-xs">
-        @if(!empty($images->image1))
-       <img src="source/imageOPr/{{$images->image1}}"><br>
-       @endif
-       @if(!empty($images->image2))
-          <img src="source/imageOPr/{{$images->image2}}"><br>
-          @endif
-          @if(!empty($images->image3))
-          <img src="source/imageOPr/{{$images->image3}}">
-          @endif
-          @if(!empty($images->image4))
-          <img src="source/imageOPr/{{$images->image4}}">
-          @endif
-          @if(!empty($images->image5))
-          <img src="source/imageOPr/{{$images->image5}}">
-          @endif
-          @if(!empty($images->image6))
-          <img src="source/imageOPr/{{$images->image6}}">
-          @endif
-          @if(!empty($images->image7))
-          <img src="source/imageOPr/{{$images->image7}}">
-          @endif
-          @if(!empty($images->image8))
-          <img src="source/imageOPr/{{$images->image8}}">
-          @endif
-          @if(!empty($images->image9))
-          <img src="source/imageOPr/{{$images->image9}}">
-          @endif
-          @if(!empty($images->image10))
-          <img src="source/imageOPr/{{$images->image10}}">
-          @endif
-
+          <div class="chev ms-5 ps-2">
+            <i class="fa-solid fa-chevron-up icon-chev"></i>
+          </div>
+          <div class="small-img">
+            <img src="source/imageOPr/{{$productinfor->imagePr}}" onclick="showImg(this.src)">
+          </div>
+          @foreach($images as $image)
+          <div class="small-img">
+            <img src="source/imageOPr/{{$image->imageProduct}}" onclick="showImg(this.src)"><br>
+          </div>
+          @endforeach
+          <div class="chev1 ms-5 ps-2">
+            <i class="fa-solid fa-chevron-up fa-rotate-180 icon-chev"></i>
+          </div>
         </div>
         <div class="image_Detail_Pr">
           <img src="source/imageOPr/{{$productinfor->imagePr}}">
         </div>
         <div class="image_bar dis-flex-xs">
-        @if(!empty($images->image1))
-       <img src="source/imageOPr/{{$images->image1}}"><br>
-       @endif
-       @if(!empty($images->image2))
-          <img src="source/imageOPr/{{$images->image2}}"><br>
-          @endif
-          @if(!empty($images->image3))
-          <img src="source/imageOPr/{{$images->image3}}">
-          @endif
-          @if(!empty($images->image4))
-          <img src="source/imageOPr/{{$images->image4}}">
-          @endif
-          @if(!empty($images->image5))
-          <img src="source/imageOPr/{{$images->image5}}">
-          @endif
-          @if(!empty($images->image6))
-          <img src="source/imageOPr/{{$images->image6}}">
-          @endif
-          @if(!empty($images->image7))
-          <img src="source/imageOPr/{{$images->image7}}">
-          @endif
-          @if(!empty($images->image8))
-          <img src="source/imageOPr/{{$images->image8}}">
-          @endif
-          @if(!empty($images->image9))
-          <img src="source/imageOPr/{{$images->image9}}">
-          @endif
-          @if(!empty($images->image10))
-          <img src="source/imageOPr/{{$images->image10}}">
-          @endif
+          <div class="chev ms-5 ps-2">
+            <i class="fa-solid fa-chevron-up icon-chev"></i>
+          </div>
+          <div class="small-img">
+            <img src="source/imageOPr/{{$productinfor->imagePr}}" onclick="showImg(this.src)">
+          </div>
+          @foreach($images as $image)
+          <div class="small-img">
+            <img src="source/imageOPr/{{$image->imageProduct}}" onclick="showImg(this.src)"><br>
+          </div>
+          @endforeach
+          <div class="chev1 ms-5 ps-2">
+            <i class="fa-solid fa-chevron-up fa-rotate-180 icon-chev"></i>
+          </div>
         </div>
       </div>
       <div class="infor_Detail_Pr">
         <b class="name_Deatil_Pr" >{{ $productinfor->namePr }} </b>
         <p class="namedesign_DPr">
           Designed by 
-          <a href="#"  class="text-info">{{ $productinfor->nameShop }}</a>
+          <a href="#"  class="text-danger">{{ $productinfor->nameShop }}</a>
         </p>
         <b class="price_DPr">${{$productinfor->pricePr }}</b>
 
@@ -88,7 +55,7 @@
           </div>
           <form action="{{ route('add-to-cart', $productinfor->idProduct) }}">
           @csrf
-          <div class="chooseSizePr">
+          <div class="chooseSizePr" id="chooseSizePr">
               <b>Choose size:</b><br>
               <div class="sizeDetailPr">
                 @foreach ($NameSizes as $fieldName => $NameSize)
@@ -103,15 +70,15 @@
         <div class="Slimfit_Detail_Pr">
           <b>Slim fit</b>
           <p>|</p>
-          <a href="#">Size table</a>
+          <a id="sizeTableLink">Size table</a>
         </div>
-        <button type="submit" class="btn-add-cart_DPr"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>
+        <button type="submit" id="addToCartBtn" class="btn-add-cart_DPr"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>
 </form>
         <div class="Other_Pr_Infor">
           <div class="d-flex">
             <i class="fa-solid fa-truck-fast"></i>
-            <b>Shipping time: </b>
-            <p>International Standard Oct. 23 - Oct. 28</p>
+            <b>Shipping: </b>
+            <p>International Standard</p>
           </div>
           <div class="d-flex">
             <i class="fa-sharp fa-solid fa-clock-rotate-left"></i>
@@ -122,14 +89,12 @@
             <i class="fa-solid fa-p"></i>
             <b>Customer reviews</b>
             <p class="evalue_DPr">
+            @for($i = 0; $i < intval($productinfor->evalue); $i++)
               <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+            @endfor
             </p>
             <b>{{ $productinfor->evalue}}</b>
-            <p>(66 review)</p>
+            <p>({{ $reviews}} comment)</p>
           </div>
         </div>
       </div>
@@ -157,7 +122,7 @@
             </ul>
           </div>
           <div class="inf_pr-item-image1">
-            <img src="source/image/PRINT-removebg-preview.png" class="img-infor-pr1" alt="">
+            <img src="source/img-project/imprintrutgon.png" class="img-infor-pr1" alt="">
             <div class="box-product-detail">
               <b>Custom-printed for you</b>
               <div class="d-flex my-2 ms-5">
@@ -166,11 +131,11 @@
               </div>
               <div class="d-flex my-2 ms-5">
                 <div class="rounded-circle"><i class="fa-solid fa-layer-group"></i></div>
-                <p>Huge variety of products to customize</p>
+                <p class="ms-5 ps-3">Huge variety of products to customize</p>
               </div>
               <div class="d-flex my-2 ms-5">
                 <div class="rounded-circle"><i class="fa-sharp fa-solid fa-clock-rotate-left"></i></div>
-                <p>Reliable shipping and easy returns</p>
+                <p class="ms-5 ps-3">Reliable shipping and easy returns</p>
               </div>
             </div>
           </div>
@@ -180,7 +145,7 @@
       <div class="cart_separate"></div>
 
       <!-- inf 2 -->
-      <div class="infor_product-item">
+      <div class="infor_product-item" id="sizeTableSection">
         <div class="infor_product-item-name">
           <b>Size table</b>
           <button class="btn-minus" id="btn-minus2" data-toggle="collapse" data-target="#myCollapsePrDetail2" aria-expanded="false" aria-controls="myCollapsePrDetail2"><i class="fa-solid fa-plus"></i></button>
@@ -306,7 +271,7 @@
             <span class="evalue_DPr">
               <i class="fa-solid fa-star">{{$evalue}}</i>
             </span>
-            <span>{{ $reviews}} reviews</span>
+            <span>({{ $reviews}}) reviews</span>
           </div>
           <button class="btn-minus" id="btn-minus3" data-toggle="collapse" data-target="#myCollapse3" aria-expanded="false" aria-controls="myCollapse3"><i class="fa-solid fa-plus"></i></button>
         </div>
@@ -315,14 +280,12 @@
           <div class="item_cmt">
             <div class="item_cmt-header">
               <span class="evalue_DPr">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+                @for($i = 0; $i < intval($comment->evalue); $i++)
+                  <i class="fa-solid fa-star"></i>
+                @endfor
               </span>
-              <span><b>Color:</b> black</span>
-              <span><b>Size: </b> L </span>
+              <!-- <span><b>Color:</b> </span>
+              <span><b>Size: </b>  </span> -->
             </div>
             <div class="item_cmt-body">
               <p>{{$comment->cmt}}
@@ -344,7 +307,7 @@
         <div class="infor_product-item-content4 collapse"  id="myCollapse4" >
           <div class="d-block">
             <div class="d-flex">
-              <img src="source/imageOPr/{{$productinfor->imageDesign}}" class="img-design-detail" alt="">
+              <img src="source/imageOPr/{{$productinfor->imageDesign}}" style="border: 1px solid grey" class="img-design-detail" alt="">
               <div class="name_design-detail">
                 <p>DESIGN</p>
                 <b>{{$productinfor->nameDesign}}</b><br>
@@ -370,16 +333,16 @@
           <div class="column col-xl-2">
            <div class="product_img">
            @if(Session::has('user'))
-           <form method="POST" action="{{ route('likePr',$other->idProduct) }}" enctype="multipart/form-data">
+           <form method="POST" action="{{ route('likePr',$other->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
             @csrf
-                   <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+                   <button type="submit"><i class="product_icon fa-regular fa-heart" style="margin-top: -10px;"></i></button>
             </form>
             @endif
                    <a href="product-detail/{{$other->idProduct}}">
                     <img class="first-img" src="source/imageOPr/{{$other->imagePr}}" alt="phone"></a>
                 </div>
-                <a href="product-detail/{{$other->idProduct}}"><div class="product_name">
-                    <span><b>{{ $other->namePr }}</b>...</span>
+                <a href="product-detail/{{$other->idProduct}}" class="product_namePrDetail"><div class="product_name">
+                    <span><b>{{ $other->namePr }}</b></span>
                 </div></a>
                 <p>{{ $other->nameShop }}</p>
                 <div class="product_price">
@@ -403,22 +366,22 @@
         <div class="row justify-content-center w-100">
           @foreach($otherproducts as $product )
             <div class="column col-xl-2 alsolikeImg1">
-              <div class="product_img">
+              <div class="product_imgPrDetail">
                 @if(Session::has('user'))
-                  <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data">
+                  <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
                     @csrf
-                   <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+                   <button type="submit"><i class="fa-regular fa-heart product_iconPrDetail product_icon"></i></button>
                   </form>
                 @endif
                 <a href="product-detail/{{$product->idProduct}}">
                 <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
               </div>
-              <a href="product-detail/{{$product->idProduct}}">
+              <a href="product-detail/{{$product->idProduct}}" class="product_namePrDetail">
                 <div class="product_name">
-                  <span><b>{{ $product->namePr }}</b>...</span>
+                  <span><b>{{ $product->namePr }}</b></span>
                 </div>
               </a>
-              <p>{{ $product->nameShop }}</p>
+              <p style="font-size: 1.3rem">{{ $product->nameShop }}</p>
               <div class="product_price">
                 <b class="price">{{ $product->pricePr }}</b>
               </div>
@@ -431,6 +394,69 @@
       </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const smallImages = document.querySelectorAll('.small-img');
+    const chevronUp = document.querySelector('.chev');
+    const chevronDown = document.querySelector('.chev1');
+    const bigImage = document.querySelector('.image_Detail_Pr img');
+
+    let currentIndex = 0;
+
+    // Function to show images based on currentIndex
+    function showImages() {
+        smallImages.forEach((img, index) => {
+            if (index >= currentIndex && index < currentIndex + 4) {
+                img.classList.add('show');
+            } else {
+                img.classList.remove('show');
+            }
+        });
+    }
+    // Initial display
+    showImages();
+    // Event listener for chevron up
+    chevronUp.addEventListener('click', function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            showImages();
+        }
+    });
+    // Event listener for chevron down
+    chevronDown.addEventListener('click', function () {
+    if (currentIndex < smallImages.length - 4) {
+        currentIndex++;
+        showImages();
+    }
+});
+    // Event listener for clicking on small images
+    smallImages.forEach((img) => {
+        img.addEventListener('click', function () {
+            const src = this.querySelector('img').src;
+            bigImage.src = src;
+        });
+    });
+    });
+</script>
+<script>
+    // Sự kiện click cho thẻ <a> với id="sizeTableLink"
+    document.getElementById('sizeTableLink').addEventListener('click', function (event) {
+        // Ngăn chặn hành động mặc định của thẻ <a>
+        event.preventDefault();
+
+        // Mở collapse trước khi cuộn đến
+        var collapseElement = document.getElementById('myCollapsePrDetail2');
+        var isCollapsed = collapseElement.classList.contains('collapse');
+        if (isCollapsed) {
+            // Mở collapse nếu đang đóng
+            collapseElement.classList.remove('collapse');
+        }
+
+        // Cuộn đến phần có id="sizeTableSection"
+        document.getElementById('sizeTableSection').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
 <script>
     function selectSize(fieldName) {
         // Bỏ chọn tất cả các ô radio
@@ -441,7 +467,23 @@
         // Chọn ô radio tương ứng
         document.getElementById(fieldName).checked = true;
     }
-
+   
+    document.addEventListener("DOMContentLoaded", function () {
+        var sizeInputs = document.querySelectorAll('input[name="selectedSize"]');
+      
+        sizeInputs.forEach(function (input) {
+            input.addEventListener("change", function () {
+                var selectedSize = document.querySelector('input[name="selectedSize"]:checked');
+                var addToCartBtn = document.getElementById('addToCartBtn');
+                var divChooseSize = document.getElementById('chooseSizePr');
+                if (selectedSize) {
+                    addToCartBtn.disabled = false;
+                } else {
+                    addToCartBtn.disabled = true;
+                }
+            });
+        });   
+    });
 
     
     document.addEventListener('DOMContentLoaded', function () {

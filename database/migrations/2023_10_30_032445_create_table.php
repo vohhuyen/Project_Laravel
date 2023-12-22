@@ -223,16 +223,7 @@ return new class extends Migration
         });
         Schema::create('image_Pr', function(Blueprint $imagePr){
             $imagePr->integer('idProduct')->unsigned()->comment('tham chiếu từ idproduct');
-            $imagePr->string('image1')->nullable($value = true);
-            $imagePr->string('image2')->nullable($value = true);
-            $imagePr->string('image3')->nullable($value = true);
-            $imagePr->string('image4')->nullable($value = true);
-            $imagePr->string('image5')->nullable($value = true);
-            $imagePr->string('image6')->nullable($value = true);
-            $imagePr->string('image7')->nullable($value = true);
-            $imagePr->string('image8')->nullable($value = true);
-            $imagePr->string('image9')->nullable($value = true);
-            $imagePr->string('image10')->nullable($value = true);
+            $imagePr->string('imageProduct');
             $imagePr->foreign('idProduct')->references('idProduct')->on('Products');
             $imagePr->timestamps();
         });

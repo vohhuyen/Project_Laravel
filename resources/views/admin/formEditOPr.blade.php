@@ -28,9 +28,9 @@
 <body class="grid">
     <div class="content">
         <div class="text-center">
-            <b id="title">Add Original Product</b>
+            <b id="title">Edit Original Product</b>
         </div>
-        <form action="editOPr" method="post" enctype="multipart/form-data"class="row gridoriginalproduct" onsubmit="saveImagesToDatabase(event)">
+        <form action="{{route('editOPrr')}}" method="post" enctype="multipart/form-data"class="row gridoriginalproduct">
         @csrf
             <div class="input1 col-6">
                 <div class="form-group mb-3">
@@ -58,6 +58,7 @@
                     <label for="image" >Chọn Hình Ảnh đại diện cho sản phẩm gốc: </label>
                     <input type="file" id="inputImage" name="inputImage" onchange="displayFileName()" value="{{$originalproducts->image}}" accept="image/*" class="input"  required >
                     <span id="selectedFileName">{{$originalproducts->image}}</span>
+                    <input type="text" name="inputImage1" value="{{$originalproducts->image}}" hidden>
                 </div>
                 
             </div>
