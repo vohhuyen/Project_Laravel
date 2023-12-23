@@ -40,6 +40,7 @@ use App\Models\Provider;
 use App\Models\OriginalProductDetail;
 use App\Models\categoryPr;
 use App\Models\Product;
+use App\Models\idProduct ;
 use App\Models\Cart;
 use App\Models\categoryPrDetail;
 use App\Models\ImageOPr;

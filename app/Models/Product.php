@@ -9,7 +9,7 @@ use App\Models\Provider;
 class Product extends Model
 {
     use HasFactory;
-    protected $table = "products";
+    protected $table = "Products";
     protected $primaryKey = 'idProduct';
     public function providers(){
         return $this->belongsTo(Product::class, 'idProvider', 'idProvider');
