@@ -55,37 +55,9 @@ class PageController extends Controller
     
     return view('page.home', compact('products','shop'));
     }
-    public function getIndexLogin()
-    {
+    public function getIndexLogin(){
         return view('page.login');
     }
-     
-
-
-    // public function Login(Request $request)
-    // {
-    //     $login = [
-    //         'email' => $request->input('email'),
-    //         'password' => $request->input('pw')
-    //     ];
-
-    //     $request->validate([
-    //         'email' => 'required',
-    //         'pw' => 'required',
-    //     ]);
-
-
-    //     if (Auth::attempt($login)) {
-    //         $user = Auth::user();
-    //         Session::put('user', $user);
-    //         return redirect('index')->with('status', 'Successfully');
-    //     } else {
-
-    //         return redirect('login')->with('status', 'Invalid credentials');
-    //     }
-
-    // }
-    
     public function login(Request $request) {
         $request->validate([
             'email' => 'required|email',
@@ -94,12 +66,7 @@ class PageController extends Controller
             'email.required' => 'Email is required.',
             'email.email' => 'Invalid email format.',
             'pw.required' => 'Password is required.',
-        ]);
-
-        // Your login logic here
-
-        return redirect()->route('home');
-    
+        ]); 
         $login = [
             'email' => $request->input('email'),
             'password' => $request->input('pw'),
@@ -107,12 +74,9 @@ class PageController extends Controller
         if (Auth::attempt($login)) {
             $loggedInUser = auth()->user();
             Session::put('user', $loggedInUser);
-            // Truy vấn database để lấy thông tin user với email tương ứng
             $user = Users::where('Email', $loggedInUser->Email)->first();
-            // Kiểm tra xem người dùng có tồn tại không và có thuộc tính 'role' không
             if ($user && isset($user->role)) {
                 if($user->lock== 1){
-                // Kiểm tra và xử lý vai trò
                     if ($user->role == 1) {
                         return redirect('index');
                     } elseif ($user->role == 2) {
@@ -121,15 +85,37 @@ class PageController extends Controller
                     else{
                         return redirect('login')->with('status', 'invalid credentials');
                     }
+                }
+                else {
+                    return redirect('login')->with('status', 'Your account has been locked');
+                }     
+            } else {
+                return redirect('login')->with('status', 'invalid credentials');
             }
-            else {
-                return redirect('login')->with('status', 'Your account has been locked');
-            }
-                  
-        } else {
-            return redirect('login')->with('status', 'User not found in the database or invalid credentials');
+        }
+        else{
+            return redirect('login')->with('status', 'invalid credentials');
         }
     }
+    public function Logout(){
+        Session::forget('user');
+        Session::forget('cart');
+        return redirect('index');
+    }
+    public function getIndexCreateAccount(){
+        return view('page.createAccount');
+    }
+    public function createAccount(Request $request){
+        $input = $request->validate([
+            'Name' => 'required|string',
+            'Email' => 'required|email|unique:users',
+            'password' => 'required',
+            'c_password' => 'required|same:password'
+        ]);
+        $input['password'] = bcrypt($input['password']);
+        Users::create($input);
+
+        return redirect()->route('login')->with('stt', 'Account registration successful, please login');
     }
 
     public function lockup($idUser) {
@@ -185,41 +171,6 @@ class PageController extends Controller
             
         }
     }
-
-
-    public function Logout()
-    {
-        Session::forget('user');
-        Session::forget('cart');
-        return redirect('index');
-    }
-    public function getIndexCreateAccount()
-    {
-        return view('page.createAccount');
-    }
-    public function createAccount(Request $request)
-    {
-        $input = $request->validate([
-            'Name' => 'string',
-            'Email' => 'email|unique:users',
-            'password' => 'required',
-            'c_password' => 'required|same:password'
-        ]);
-        $input['password'] = bcrypt($input['password']);
-        User::create($input);
-
-        $input['password'] = Hash::make($input['password']);
-        Users::create($input);
-
-        
-        echo '
-            <script>
-                alert("thanh cong.vui long dang nhap.");
-                window.location.assign("login");
-            </script>
-        ';
-    }
-
     
 
     public function createShop(Request $request){

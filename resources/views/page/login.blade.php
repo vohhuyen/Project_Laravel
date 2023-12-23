@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="source/css/SIGNIN_UP.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
     <link rel="stylesheet" href="source/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
      <!-- Form without bootstrap  -->
@@ -21,20 +29,21 @@
                     <div class="auth-external-container">
                         <div class="auth-external-list">
                             <ul>
-                                <li><a href="#"><i class="fa-brands fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#error"><i class="fa-brands fa-google"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#error"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#error"><i class="fa-brands fa-twitter"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#error"><i class="fa-brands fa-linkedin-in"></i></a></li>
                             </ul>
                         </div>
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
 
-                    <!-- @if(session('status'))
-                    <div class="alert alert-danger">
-                     {{ session('status') }}
-                 </div>
-                    @endif -->
+                    @if(session('stt'))
+                    <div class="alert_error1">
+                    <i class="fa-solid fa-circle-check"></i>
+                  {{ session('stt')}}
+                  </div>
+                    @endif
                     @if(session('status'))
                     <div class="alert_error">
                   <i class="fa-solid fa-circle-exclamation"></i>
@@ -46,21 +55,21 @@
                 <div class="input-icon  @error('email') is-invalid @enderror">
                 <input type="email" class="auth-form-input   @error('email')alert-danger @enderror" placeholder="Email" id="email" name="email">
                 @error('email')
-                @if($message == 'The email field is required.')
-                <div class="alert alert-danger" style="margin-top: -10px;">Required</div>          
+                @if($message == 'Email is required.')
+                <div style="margin-top: -15px; color: #fe5454; margin-bottom: 15px;">Required</div>          
                 @endif
                 @enderror
                 </div> 
                 <div class="input-icon  @error('pw') is-invalid @enderror">
-                <input type="password" class="auth-form-input  @error('pw')alert-danger @enderror" placeholder="Password" id="pw" name="pw">
+                <input type="password" id="passwordInput" class="auth-form-input  @error('pw')alert-danger @enderror" placeholder="Password" id="pw" name="pw">
                 @error('pw')
-                @if($message == 'The pw field is required.')
-                <div class="alert alert-danger"style="margin-top: -10px;">Required</div>
+                @if($message == 'Password is required.')
+                <div style="margin-top: -15px; color: #fe5454; margin-bottom: 15px;">Required</div>
                 @endif
                 @enderror
-                <i class="fa fa-eye show-password"></i>
+                <i class="fa fa-eye show-password" onclick="togglePasswordVisibility()"></i>
                 </div>
-                <label class="btn active">
+                <label class="active">
                 <input type="checkbox" name='email1' checked>
                 <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
                 <span> Remember password.</span>
@@ -71,7 +80,7 @@
                 </div>
                 </form>
                     <div class="auth-forgot-password">
-                        <a href="#">Forgot Password</a>
+                        <a data-toggle="modal" data-target="#error">Forgot Password</a>
                     </div>
                 </div>
             </div>
@@ -162,5 +171,25 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="error" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h4>Sorry ! <span style="color: #fe5454">ImPrint</span> team has not yet developed this functionality <i class="fa-solid fa-heart" style="color: #fe5454;"></i></h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script>
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById("passwordInput");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    }
+  </script>

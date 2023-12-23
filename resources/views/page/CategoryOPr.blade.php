@@ -1,5 +1,5 @@
-@extends('masterOPr')
-@section('contentOPr')
+@extends('masterPr')
+@section('contentPr')
   <div class="content">
   @foreach($categoryOPr as $cateopr)
     <div class="category my-5">

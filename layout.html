@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .main-container {
+            height: 800px;
+          background-color: #f5f5f5;
+        }
+  
+        .container1 {
+            max-width: 300px;
+        }
+
+        .container2 {
+            max-width: 1600px;
+        }
+
+        .main-container2 {
+            margin-left: 50px;
+            margin-top: 30px;
+            width: 1000px;
+            height: 650px;
+        }
+
+        .profile {
+            justify-content: right;
+            width: 150px;
+            height: 100px;
+        }
+
+        .list {
+            height: 500px;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .main-list1 {
+            background-color: white;
+            width: 1000px;
+            height: 65px;
+        }
+
+        .main-list2 {
+            background-color: #d5d5d5;
+            width: 1000px;
+            height: 50px;
+        }
+
+        .main-list3 {
+            background-color: white;
+            width: 1000px;
+            height: 500px;
+        }
+
+        .vertical-line {
+            width: 0.5px;
+            height: 25px;
+            background-color: rgb(201, 201, 201);
+        }
+
+        .line {
+            width: 920px;
+            margin-left: 30px;
+            border: 0.2px solid rgb(201, 201, 201);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container d-flex">
+        <div class="container1">
+            <div class="d-flex">
+                <div class="profile mt-5">
+                    <img src="images.png" alt="Image" width="50px" height="50px" style="margin-left: 90px">
+                </div>
+                <div class="profile-infor mt-5">
+                    <b>thanh_huyen11</b>
+                    <p style="color: grey;"><i class="fa-solid fa-pen" style="color: grey;"></i> Sửa Hồ Sơ</p>
+                </div>
+            </div>
+            <div class="list" style="margin-left: 100px;">
+                <div class="list1">
+                    <p><i class="fa-brands fa-salesforce" style="color: #fe5454;"></i> Ngày 15 Sale giữa tháng</p>
+                </div>
+                <div class="list2">
+                    <p><i class="fa-solid fa-user" style="color: #062b9a;"></i> Tài Khoản Của Tôi</p>
+                </div>
+                <div class="list3">
+                    <p><i class="fa-solid fa-table" style="color: #062b9a;"></i> Đơn Mua</p>
+                </div>
+                <div class="list4">
+                    <p><i class="fa-solid fa-bell" style="color: #fe5454;"></i> Thông Báo</p>
+                </div>
+                <div class="list5">
+                    <p><i class="fa-solid fa-ticket" style="color: #fe5454;"></i> Kho Voucher</p>
+                </div>
+                <div class="list6">
+                    <p><i class="fa-solid fa-coins" style="color: #e7d90a;"></i> Xu</p>
+                </div>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="main-container2">
+                <div class="main-list1 d-flex">
+                    <div class="main-list-all1 m-lg-4"> Tất cả</div>
+                    <div class="main-list-all2 m-lg-4"> Chờ thanh toán</div>
+                    <div class="main-list-all3 m-lg-4"> Vận chuyển</div>
+                    <div class="main-list-all4 m-lg-4"> Chờ giao hàng(1)</div>
+                    <div class="main-list-all5 m-lg-4"> Hoàn thành</div>
+                    <div class="main-list-all6 m-lg-4"> Đã huỷ</div>
+                    <div class="main-list-all7 m-lg-4"> Trả hàng/Hoàn tiền</div>
+                </div>
+                <div class="main-list2 mt-3 d-flex">
+                    <i class="fa-solid fa-magnifying-glass m-lg-3" style="color: #a1a1a1;;"></i>
+                    <p style="color: #7c7b7b;margin-top: 10px;">Bạn có thể tìm kiếm theo tên Shop, ID đơn hàng hoặc Tên
+                        Sản phẩm</p>
+                </div>
+                <div class="main-list3 mt-3">
+                    <div class="store1 d-flex">
+                        <div class="store1-all1 text-white mt-4"
+                            style="width: 55px;height: 20px;background-color: #fe5454;font-size: 10px;margin-left: 30px;border-radius: 5%;">
+                            <p class="m-lg-1"> Yêu thích+</p>
+                        </div>
+                        <div class="store1-all2" style="margin-top: 21px;margin-left: 10px;">
+                            <b>Mê Game Store</b>
+                        </div>
+                        <div class="store1-all3 text-white mt-4 d-flex"
+                            style="width: 45px;height: 20px;background-color: #fe5454;font-size: 10px;margin-left: 10px;border-radius: 5%;">
+                            <i class="fa-brands fa-rocketchat"
+                                style="color: #ffffff;margin-top: 5px;margin-left: 5px;"></i>
+                            <p style="margin-top: 3px;margin-left: 4px;"> Chat</p>
+                        </div>
+                        <div class="store1-all4 text-white mt-4 d-flex"
+                            style="width: 70px;height: 20px;font-size: 10px;margin-left: 10px;border-radius: 5%;border: 1px solid rgb(207, 207, 207);">
+                            <i class="fa-solid fa-shop" style="color: #b0b0b0;margin-top: 4px;margin-left: 2px;"></i>
+                            <p style="margin-top: 1px;margin-left: 4px;color: #9b9b9b;"> Xem shop</p>
+                        </div>
+                        <div class="store1-all5 text-white mt-4 d-flex"
+                            style="width: 250px;height: 20px;font-size: 14px;margin-left: 200px">
+                            <i class="fa-solid fa-truck-fast" style="color: #26aa99;margin-top: 5px;"></i>
+                            <p style="margin-top: 1px;margin-left: 4px;color: #26aa99;"> Đơn hàng đã được giao thành
+                                công</p>
+                        </div>
+                        <div class="store1-all6" style="margin-top: 23px;">
+                            <i class="fa-regular fa-circle-question" style="color: #050505;"></i>
+                        </div>
+                        <div class="vertical-line" style="margin-left: 7px;margin-top: 22px;"></div>
+                        <div class="store1-all7 mt-4">
+                            <p style="margin-left: 20px;color: #fe5454;">HOÀN THÀNH</p>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="store2 d-flex mt-3">
+                        <div class="store2-all1" style="margin-left: 30px">
+                            <img src="9c24734047392b37c226065d572cbd5a_tn.jpg" alt="" width="90px">
+                        </div>
+                        <div class="store2-all2" style="margin-left: 10px">
+                            <p style="font-size: 18px">Móc khoá hình Red Dead Redemption 2,Grand Theft Auto V</p>
+                            <p style="font-size: 16px;color: gray;margin-top:-12px;">Phân loại hàng: GTA V</p>
+                            <p style="font-size: 14px;margin-top: -12px">x1</p>
+                        </div>
+                        <div class="store2-all3" style="margin-left: 280px;margin-top: 30px;">
+                            ₫29.000
+                        </div>
+                    </div>
+                    <div class="line mt-3"></div>
+                    <div class="store2 d-flex mt-3">
+                        <div class="store2-all1" style="margin-left: 30px">
+                            <img src="baf92887253a66b895fe4d9b5d8c40ed_tn.jpg" alt="" width="90px">
+                        </div>
+                        <div class="store2-all2" style="margin-left: 10px">
+                            <p style="font-size: 18px">Móc khoá hình Red Dead Redemption 2,Grand Theft Auto V</p>
+                            <p style="font-size: 16px;color: gray;margin-top:-12px;">Phân loại hàng: Red Dead</p>
+                            <p style="font-size: 14px;margin-top: -12px">x1</p>
+                        </div>
+                        <div class="store2-all3" style="margin-left: 280px;margin-top: 30px;">
+                            ₫39.000
+                        </div>
+                    </div>
+                    <div class="line mt-3"></div>
+                    <div class="store4 d-flex">
+                        <div class="store4-all1 d-flex" style="font-size: 12px;margin-left: 30px;margin-top: 100px;">
+                            <p style="color: gray;">Đánh giá sản phẩm trước 14-01-2024</p>
+                            <p style="margin-left: 5px;color: #fb3030;">Đánh giá ngay và nhận 200 Xu</p>
+                        </div>
+                        <div class="store4-all2">
+                            <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
+                                <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
+                                <div class="list-store1" style="margin-left: 7px;">Thành tiền: </div>
+                                <div class="list-store1" style="font-size: 20px;margin-left: 18px;color: #fe5454;">
+                                    ₫84.500</div>
+                            </div>
+                            <div class="store4-all-list2 d-flex" style="margin-left: 80px;margin-top: 35px">
+                                <div class="assess1 text-white"
+                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                    <p style="margin-left: 38px;margin-top: 10px;">Đánh Giá</p>
+                                </div>
+                                <div class="assess2"
+                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                    <p style="font-size: 15px;margin-left: 13px;margin-top: 6px;">Yêu Cầu Trả Hàng/Hoàn
+                                        Tiền</p>
+                                </div>
+                                <div class="assess2"
+                                    style="width: 80px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                    <p style="font-size: 15px;margin-left: 10px;margin-top: 6px;">Thêm <i
+                                            class="fa-solid fa-chevron-up fa-rotate-180" style="color: #5a5959;"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

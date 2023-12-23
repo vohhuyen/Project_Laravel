@@ -1,5 +1,5 @@
-@extends('masterOPr')
-@section('contentOPr')
+@extends('masterPr')
+@section('contentPr')
 
 <div class="grid mt-5 pt-5">
         <div class="d-flex justify-content-between">
