@@ -124,6 +124,9 @@
                             <input type="submit" value="Reset" id="resetFilterBtn" class="sidebar_btn">
                         </div>
                     </div >
+                    @php
+        $savedProductIds = Session::has('user') ? $save->pluck('idProduct')->toArray() : [];
+    @endphp
                     <div id="products" class="row-listproduct row">
                         @if(isset($product) && count($product) > 0)
                         @foreach($product as $pr)
@@ -133,15 +136,22 @@
                                 <a href="product-detail/{{$pr->idProduct}}" class="product_namePr"><p class="product_namePr">{{$pr->namePr}}</p></a>
                                 <p class="name-design">By: {{$pr->nameShop}}</p>
                                 <p class="description">{{$pr->descriptionDesign}}</p>
-                                <div class="d-flex justify-content-between">
+                                <div class="d-flex">
                                     <b class="product_price ">${{$pr->pricePr}}</b>
                                         <div class="image-249-parent">
-                                            @if(Session::has('user'))
-                                            <form method="POST" action="{{ route('likePr',$pr->idProduct) }}" enctype="multipart/form-data">
-                                                @csrf
-                                                    <button type="submit"> <i class="fa-regular fa-heart"></i></button>
+                                        @if(Session::has('user'))
+                                            @if(in_array($pr->idProduct, $savedProductIds))
+                                                <form method="POST" action="{{ route('deletelikePr', $pr->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
+                                                    @csrf
+                                                    <button type="submit" style="border: none; background-color: white; margin-left: 140px;"><i class="fa-solid fa-heart" style="color: red;"></i></button>
                                                 </form>
-                                                @endif
+                                            @else
+                                                <form method="POST" action="{{ route('likePr', $pr->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
+                                                    @csrf
+                                                    <button type="submit" style="border: none; background-color: white; margin-left: 140px;"><i class="fa-regular fa-heart"></i></button>
+                                                </form>
+                                            @endif
+                                        @endif
                                         </div>
                                 </div>
                             </div>

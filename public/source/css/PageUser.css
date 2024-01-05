@@ -24,15 +24,18 @@
     height: 100px;
 }
 
-.list {
+.listpu {
     height: 500px;
+    text-align: start;
 }
 
 .profile img {
     border-radius: 50%;
     overflow: hidden;
 }
-
+.m-lg-4{
+    cursor: pointer;
+}
 .main-list1 {
     background-color: white;
     width: 1000px;

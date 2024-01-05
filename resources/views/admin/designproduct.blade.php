@@ -23,14 +23,13 @@
                         <div class="d-flex">
                             <form action="{{route('brower',$designs->idDesignProducts)}}" method="post">
                                 @csrf
-                                <button type="submit" class="mx-2 my-2" id="accept-button">Browser</button>
+                                <button type="submit" class="mx-2 my-2 py-4 px-3" id="accept-button">Browser</button>
                             </form>
-                            <button class="mx-2 my-2" data-toggle="modal" data-target="#btncreateMail" id="reject-button">Do not browse</button>
+                            <button class="mx-2 my-2" data-toggle="modal" data-target="#btncreateMail{{$designs->idDesignProducts}}" id="reject-button">Do not browse</button>
                         </div>
                     </div>
                     
-
-                    <div class="modal fade" id="btncreateMail" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="btncreateMail{{$designs->idDesignProducts}}" tabindex="-1" role="dialog"
                         aria-labelledby="btn1Title"aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -49,7 +48,7 @@
                                         <div class="form-group">
                                             <label for="note">Email shop:</label>
                                             <br>
-                                            @foreach($user as $users)
+                                            @foreach($user as $users)                                            
                                             @if($users->idUser == $designs->idShop)
                                             <input type="text" value="{{$users->Email}}" class="inputAddUser" name="Mailshop" readonly>
                                             @endif
@@ -73,7 +72,6 @@
                             </div>
                         </div>
                     </div>
-
 
 
 

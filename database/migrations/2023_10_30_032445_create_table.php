@@ -95,6 +95,7 @@ return new class extends Migration
             $OriginalProducts->mediumText('descriptionOPr');
             $OriginalProducts->mediumText('aboutOPr');
             $OriginalProducts->string('image');
+            $OriginalProducts->integer('preview')->unsigned();
             $OriginalProducts->foreign('idCategoryOPrDetail')->references('idCategoryOPrDetail')->on('category_OPr_Detail');
             $OriginalProducts->timestamps();
         });

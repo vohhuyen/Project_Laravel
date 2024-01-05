@@ -38,17 +38,35 @@
                 @endif
             </div>
             <h1 class="title">All Design from {{ $shop->nameShop }}</h1>
-          
+            @php
+        $savedProductIds = Session::has('user') ? $save->pluck('idProduct')->toArray() : [];
+    @endphp
             <div class="row w-100 justify-content-between">
            @foreach($product as $product)
                 <div class="column col-xl-2">
                     <div class="product_img">
-                        <i class="product_icon fa-regular fa-heart"></i>
-                        <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone">
+                    @if(Session::has('user'))
+                    @if(in_array($product->idProduct, $savedProductIds))
+                        <form method="POST" action="{{ route('deletelikePr', $product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
+                            @csrf
+                            <button type="submit"><i class="product_icon fa-solid fa-heart" style="color: red;"></i></button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ route('likePr', $product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
+                            @csrf
+                            <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+                        </form>
+                    @endif
+                @endif
+                        <a href="product-detail/{{$product->idProduct}}">
+                            <img class="first-img" src="source/imageOPr/{{$product->imagePr}}" alt="phone">
+                        </a>
                     </div>
+                    <a href="product-detail/{{$product->idProduct}}" style="text-decoration: none;">
                     <div class="product_name">
                         <span>{{ $product->namePr }}</span>
                     </div>
+                    </a>
                     <p class="description_Pr mb-0">{{ $product->descriptionDesign }}</p>
                     <div class="product_price d-block">
                         <b class="price">$ {{ $product->pricePr }}</b>
@@ -128,6 +146,21 @@
                     </div>
                 </div>
             </div>
+            @endforeach
+            @foreach($design as $design)
+                <div class="column col-xl-2">
+                    <div class="product_img">
+                        <img class="first-img" src="source/imageOPr/{{$design->imagePr}}" alt="phone">
+                    </div>
+                    <div class="product_name">
+                        <span>{{ $design->namePr }}</span>
+                    </div>
+                    <p class="description_Pr mb-0">{{ $design->descriptionDesign }}</p>
+                    <div class="product_price d-block">
+                        <b class="price">$ {{ $design->pricePr }}</b>
+                    </div>
+                    <button class="btn-login" style="width: 100%; font-size: 1.5rem;">Product is awaiting approval</button>
+                </div>
             @endforeach
 
                 <div class="column col-xl-2"></div>

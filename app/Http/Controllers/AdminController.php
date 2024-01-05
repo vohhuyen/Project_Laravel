@@ -27,6 +27,10 @@ use App\Models\ImageOPr;
 use App\Models\CareIntruction;
 use App\Models\KeyFeature;
 use App\Models\sizeguide;
+use App\Models\DesignProduct;
+use App\Jobs\SendMail;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class AdminController extends Controller
 {
@@ -672,5 +676,103 @@ class AdminController extends Controller
         $originalproducts = OriginalProduct::where('idOPr', $idOPr);
         $originalproducts->delete();
         return  redirect()->route('originalproduct');
+    }
+
+    // Management design product 
+    public function designproductmanagement(){
+        $design = DB::table('DesignProducts')
+        ->join('Shop', 'Shop.idShop', '=','DesignProducts.idShop')
+        ->join('Providers', 'Providers.idProvider','=','DesignProducts.idProvider')
+        ->join('Color', 'Color.idColor', '=','DesignProducts.ColorPr')
+        ->join('category_Pr_Detail', 'category_Pr_Detail.idCategoryPrDetail', '=','DesignProducts.idCategoryPrDetail')
+        ->select('DesignProducts.*','Shop.*','Providers.*','Color.*','category_Pr_Detail.*')
+        ->get();
+        $user = Users::all();
+        return view('admin.designproduct', compact('design', 'user'));
+    }
+    public function browerDesign($idDesignProducts){
+        $design = DesignProduct::where('idDesignProducts',$idDesignProducts)->first();
+
+        if($design->role == 0){
+            $product = new Product;
+            $product->idOPrDetail = $design->idOPrDetail;
+            $product->idShop = $design->idShop;
+            $product->idCategoryPrDetail = $design->idCategoryPrDetail;
+            $product->idProvider = $design->idProvider;
+            $product->imagePr = $design->imagePr;
+            $product->namePr = $design->namePr;
+            $product->pricePr = $design->pricePr;
+            $product->colorPr = $design->colorPr;
+            $product->imageDesign = $design->imageDesign;
+            $product->nameDesign = $design->nameDesign;
+            $product->descriptionDesign = $design->descriptionDesign;
+            $product->note = $design->note;
+            $product->save();
+            $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
+            $design->delete();
+        }
+        else{
+            $products = Product::where('idProduct', $design->role);
+            $products->delete();
+            $product = new Product;
+            $product->idOPrDetail = $design->idOPrDetail;
+            $product->idShop = $design->idShop;
+            $product->idCategoryPrDetail = $design->idCategoryPrDetail;
+            $product->idProvider = $design->idProvider;
+            $product->imagePr = $design->imagePr;
+            $product->namePr = $design->namePr;
+            $product->pricePr = $design->pricePr;
+            $product->colorPr = $design->colorPr;
+            $product->imageDesign = $design->imageDesign;
+            $product->nameDesign = $design->nameDesign;
+            $product->descriptionDesign = $design->descriptionDesign;
+            $product->note = $design->note;
+            $product->save();
+            $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
+            $design->delete();
+        }
+        return back();
+    }
+    public function cancelDesign(Request $req){
+        $nameDesign = $req->input('nameDesign');
+        $Mail = $req->input('Mailshop');
+        $user = Users::where('Email', $Mail)->first();
+        $shop = Shop::where('idShop',$user->idUser)->first();
+        $reasons = $req->input('reasons');
+        $message = [
+            'dear' => 'Dear '.$shop->nameShop.' store,',
+            'type' => 'First and foremost, we would like to express our deep gratitude for your collaboration and valuable design contributions to ImPrint. However, it is with regret that we must inform you that your design named '.$nameDesign.' can no longer be accepted.',
+            'reasons' => 'After thorough review, we have determined that this design '.$reasons.'. This decision does not reflect the quality of your work or creativity, but is solely related to specific criteria that we are required to follow.',
+            'thanks' => 'We have complete faith in '.$shop->nameShop.' ability and relentless creativity, and we hope that your store will continue to provide us with unique and meaningful designs in the future. For any contributions or inquiries, please feel free to contact us via email at TeamImPrint2004@gmail.com.',
+            'content' => 'We value every effort and cooperation from '.$shop->nameShop.' and look forward to continuing this working relationship in the future.',
+        ];
+        SendMail::dispatch($message, $Mail)->delay(now()->addMinute(1));
+        $product = $req->input('idDesignProducts');
+        $products = DesignProduct::where('idDesignProducts', $product);
+        $products->delete();
+        return back();
+    }
+
+
+    // Accept order 
+    public function browerOrder(){
+        $order = DB::table('Order')->where('Order.received',  0)
+        ->join('OrderDetail','OrderDetail.idOrder', '=','Order.idOrder')
+        ->join('Products', 'Products.idProduct', '=', 'OrderDetail.idProduct')
+        ->select('Order.*', 'OrderDetail.*', 'Products.*')
+        ->get();
+        return view('admin.browerOrder', compact('order'));
+    }
+    public function acceptOrder($idOrder){
+        $order = Order::where('idOrder', $idOrder);
+        $received = 1;
+        $order->update(['received' => $received]);
+        return back();
+    }
+    public function cancelOrder($idOrder){
+        $order = Order::where('idOrder', $idOrder);
+        $received = 4;
+        $order->update(['received' => $received]);
+        return back();
     }
 }

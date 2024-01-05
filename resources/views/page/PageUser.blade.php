@@ -7,7 +7,7 @@
                     <b>thanh_huyen11</b>
                 </div>
             </div>
-            <div class="list">
+            <div class="listpu">
                 <div class="list2 my-3">
                     <p><i class="fa-solid fa-user" style="color: #062b9a;"></i> My account </p>
                 </div>
@@ -25,13 +25,13 @@
         <div class="container2">
             <div class="main-container2">
                 <div class="main-list1 d-flex">
-                    <div class="m-lg-4"> Tất cả</div>
-                    <div class="m-lg-4"> Chờ shop duyet don</div>
-                    <div class="m-lg-4"> Chuan bi hang</div>
-                    <div class="m-lg-4"> giao hàng</div>
-                    <div class="m-lg-4"> Hoàn thành</div>
-                    <div class="m-lg-4"> Đã huỷ</div>
-                    <div class="m-lg-4"> Trả hàng/Hoàn tiền</div>
+                    <div class="m-lg-4"> All</div>
+                    <div class="m-lg-4"> Wait for the shop to complete</div>
+                    <div class="m-lg-4"> Preparing goods</div>
+                    <div class="m-lg-4"> delivery</div>
+                    <div class="m-lg-4"> Complete</div>
+                    <div class="m-lg-4"> Canceled</div>
+                    <div class="m-lg-4"> Return/Refund</div>
                 </div>
                 @php $currentProviderId = null; @endphp
                 @foreach($order as $item)
@@ -40,7 +40,7 @@
                 <div class="content-list content-list1 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -65,8 +65,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -80,19 +80,57 @@
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -102,7 +140,7 @@
                 <div class="content-list list content-list2 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -127,8 +165,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -138,23 +176,61 @@
                     @endif
                     @endforeach
                     <div class="linepageuser mt-3"></div>
-                    <div class="store4 d-flex justify-content-end">
+                        <div class="store4 d-flex justify-content-end">
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -164,7 +240,7 @@
                 <div class="content-list list content-list3 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -189,8 +265,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -204,19 +280,57 @@
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -226,7 +340,7 @@
                 <div class="content-list list content-list4 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -251,8 +365,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -266,19 +380,57 @@
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -288,7 +440,7 @@
                 <div class="content-list list content-list5 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -313,8 +465,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -328,19 +480,57 @@
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -350,7 +540,7 @@
                 <div class="content-list list content-list6 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -375,8 +565,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -390,19 +580,57 @@
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -412,7 +640,7 @@
                 <div class="content-list list content-list7 main-list3 mt-3 px-4 py-4">
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div>
-                            <b>Mê Game Store</b>
+                            <b>{{$item->Name}}</b>
                         </div>
                         <div>
                             @if($item->received == 0)
@@ -437,8 +665,8 @@
                             <img class="me-3" src="source/imageOPr/{{$orders->imagePr}}" alt="" width="90px">
                             <div class="store2-all2">
                                 <p>{{$orders->namePr}}</p>
-                                <p style="font-size: 16px;color: gray;margin-top:-12px;">{{$orders->classify}}</p>
-                                <p style="font-size: 14px;margin-top: -12px">{{$orders->quantity}}</p>
+                                <p style="font-size: 16px;color: gray;margin-top:-12px;">classify: {{$orders->classify}}</p>
+                                <p style="font-size: 14px;margin-top: -12px">quantity: {{$orders->quantity}}</p>
                             </div>
                         </div>
                         <div class="store2-all3">
@@ -452,19 +680,57 @@
                         <div class="store4-all2">
                             <div class="store4-all-list1 d-flex mt-4" style="margin-left: 350px;">
                                 <div class="list-store1"><i class="fa-brands fa-css3" style="color: #fe5454;"></i></div>
-                                <div class="list-store1" >Thành tiền: </div>
+                                <div class="list-store1" >total amount: </div>
                                 <div class="list-store1 ms-3" style="color: #fe5454;">
                                 {{$item->totalPrice}}</div>
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
-                                <div class="assess1 text-white d-flex justify-content-center align-items-center"
-                                    style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
-                                    <p>Mua lai</p>
-                                </div>
-                                <div class="assess2 d-flex justify-content-center align-items-center"
-                                    style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
-                                    <p>Danh gia</p>
-                                </div>
+                                @if($item->received == 0)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 1)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Cancel order</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 2)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Received</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @elseif($item->received == 3)
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Evaluate</p>
+                                    </div>
+                                @else
+                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                        style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
+                                        <p>Repurchase</p>
+                                    </div>
+                                    <div class="assess2 d-flex justify-content-center align-items-center"
+                                        style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
+                                        <p>Contact the manufacturer</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

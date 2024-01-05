@@ -41,10 +41,10 @@
                         <div class="sp-list2-all2 d-flex w-100">
                             <b class="w-50">{{ $item['nameprovider']['Name'] }}</b>
                             <div class=" d-flex w-50">
-                                <span class="sp-list1-all2"><p>Đơn giá</p></span>
-                                <span class="sp-list1-all2"><p>Số lượng</p></span>
+                                <span class="sp-list1-all2"><p>Unit price</p></span>
+                                <span class="sp-list1-all2"><p>Quantity</p></span>
                                 <span class="sp-list1-all2"><p>Design by</p></span>
-                                <span class="sp-list1-all2"><p>Thành tiền</p></span>
+                                <span class="sp-list1-all2"><p>total amount</p></span>
                             </div>
                         </div>
                         @foreach ($product_cart as $id => $items)
@@ -73,10 +73,10 @@
                                 </div>
                             </div>
                             <div class="d-flex w-50">
-                                <span class="sp-list3-all4">{{$items['item']['pricePr']}}</span>
+                                <span class="sp-list3-all4">${{$items['item']['pricePr']}}</span>
                                 <span class="sp-list3-all5">{{$items['qty']}}</span>
                                 <span class="sp-list3-all5">{{$items['nameshop']['nameShop']}}</span>
-                                <span class="sp-list3-all6 text-sp-11">{{$items['pricePr']}}</span>
+                                <span class="sp-list3-all6 ">${{$items['pricePr']}}</span>
                             </div>
                         </div>
                         @endif
@@ -87,27 +87,27 @@
                 <div class="cart-infor1 d-flex">
                     <div class="cart-infor-message d-flex">
                         <div class="cart-infor-message1">
-                            <p>Lời nhắn:</p>
+                            <p>Note:</p>
                         </div>
                         <div class="cart-infor-message2">
-                            <input name="note{{$item['nameprovider']['idProvider']}}" placeholder="Lưu ý cho người bán...">
+                            <textarea style="width: 100%;" name="note{{$item['nameprovider']['idProvider']}}" placeholder="Note to manufacturer..."></textarea>
                         </div>
                     </div>
                     <div class="cart-infor-shipping">
                         <div class="cart-shipping-detail1 d-flex">
                             <div class="shipping-payment">
-                                <p>Đơn vị vận chuyển:</p>
+                                <p>Shipping unit:</p>
                             </div>
                             <div class="shipping-payment1">
                                 <div class="ship1">
                                     <p>{{ $item['nameprovider']['Name'] }}</p>
                                 </div>
                                 <div class="ship2">
-                                    <p>Thời gian chuẩn bị đơn hàng: {{$productTime}} days</p>
+                                    <p>Order preparation time: {{$productTime}} days</p>
                                 </div>
                             </div>
                             <div class="shipping-payment3 text-sp-11">
-                                <p>$ {{$maxShippingCost}}</p>
+                                <p>${{$maxShippingCost}}</p>
                             </div>
                         </div>
                     </div>
@@ -116,14 +116,14 @@
                 </div>
                 <div class="d-flex">
                     <div class="cart-detail1">
-                        <p>Tổng số tiền ({{$count}} sản phẩm):</p>
+                        <p>The total amount ({{$count}} product):</p>
                     </div>
                     @php
                         $total = $total + $totalPrice;
                         $totalPrice += $maxShippingCost;
                     @endphp
-                    <div class="cart-detail2 text-sp-11">
-                        <p>{{$totalPrice}}</p>
+                    <div class="cart-detail2">
+                        <p>${{$totalPrice}}</p>
                     </div>
                 </div>
             </div>
@@ -135,49 +135,49 @@
         <div class="container1">
             <div class="payment-detail1 d-flex">
                 <div class="payment1">
-                    <p>Phương thức thanh toán</p>
+                    <p>Payment methods</p>
                 </div>
                 <div class="payment5">
-                    <p>Thanh toán khi nhận hàng</p>
+                    <p>Payment on delivery</p>
                 </div>
             </div>
             <div class="dotted-line mt-4 sp-line14"></div>
             <div class="payment-detail3">
                 <div class="d-flex">
                     <div class="text-sp-4">
-                        <p>Tổng tiền hàng</p>
+                        <p>Total cost of goods: </p>
                     </div>
                     <div class="text-sp-5">
-                        <p>{{$total}}</p>
+                        <p>$ {{$total}}</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="text-sp-6">
-                        <p>Phí vận chuyển</p>
+                        <p>Transport fee: </p>
                     </div>
                     <div class="text-sp-7">
-                        <p>{{$ship}}</p>
+                        <p>$ {{$ship}}</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="text-sp-6">
-                        <p>Tổng thanh toán</p>
+                        <p>Total payment: </p>
                     </div>
                     <div class="text-sp-11">
-                        <p>{{$totalPayment}}</p>
+                        <p>$ {{$totalPayment}}</p>
                     </div>
                 </div>
             </div>
             <div class="dotted-line mt-2 sp-line15"></div>
             <div class="payment-detail4 d-flex mt-4">
                 <div class="text-sp-12">
-                    <p>Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo</p>
+                    <p>Clicking "Place Order" means you agree to abide by the</p>
                 </div>
                 <div class="text-sp-13">
-                    <p>Điều khoản Paint</p>
+                    <p>ImPrint terms</p>
                 </div>
-                <div class="text-sp-14">
-                    <button type="submit">Đặt hàng</button>
+                <div >
+                    <button type="submit" class="text-sp-14">Order</button>
                 </div>
             </div>
         </div>

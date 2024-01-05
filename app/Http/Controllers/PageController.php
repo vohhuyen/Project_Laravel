@@ -9,49 +9,65 @@ use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-// use App\Models\categoryPr;
-// use App\Models\Provider;
-// use App\Models\Shop;
-// use App\Models\DetailSize;
-// use App\Models\Product;
-// use App\Models\Comment;
-// use App\Models\size;
-
-use App\Models\Users;
-use App\Models\User;
-use App\Models\Color;
-use App\Models\Category_pr;
-use App\Models\Nameproduct;
-use App\Models\originalproducts;
+use App\Models\categoryPr;
+use App\Models\Provider;
 use App\Models\Shop;
-use App\Models\DesignProduct;
-use App\Jobs\SendMail;
-use App\Models\idUser;
-use App\Models\SavePr;
+use App\Models\DetailSize;
+use App\Models\Product;
 use App\Models\Comment;
 use App\Models\size;
-use App\Models\DetailSize;
-use App\Models\sizeguide;
-use App\Models\inputkf;
-use App\Models\inputci;
+use App\Models\Cart;
+use App\Models\OriginalProductDetail;
+use App\Models\DetailProvider;
 use App\Models\categoryOPr;
 use App\Models\categoryOPrDetail;
 use App\Models\OriginalProduct;
-use App\Models\DetailProvider;
-use App\Models\Provider;
-use App\Models\OriginalProductDetail;
-use App\Models\categoryPr;
-use App\Models\Product;
-use App\Models\Cart;
 use App\Models\categoryPrDetail;
-use App\Models\ImageOPr;
-use App\Models\KeyFeature;
-use App\Models\CareIntruction;
+use App\Models\DesignProduct;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\SavePr;
 
 class PageController extends Controller
 {
+    public function search(Request $request){
+        $query = $request->input('query');
+        $product= Product::where('namePr','like', '%' . $query . '%')->paginate(16);
+        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
+        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
+        $provider = Provider::all();
+        // dd($category);
+        return view('page.Product', compact('product','category','provider'));
+    }
+    
+    public function getlikePr(){
+        $idUser = Session::get('user.idUser');
+        $product = SavePr::where('idSavePr',$idUser)->get();
+        $LPC = SavePr::where('idSavePr',$idUser)->count();
+        return view('page.likePr', compact('product','LPC'));
+    }
+    public function likePr($idProduct){
+        $idUser = Session::get('user.idUser');
+        $product = Product::where('idProduct',$idProduct)->first();
+        $savePr = new SavePr;
+        $savePr->idSavePr = $idUser;
+        $savePr->idProduct = $idProduct;
+        $savePr->namePr = $product->namePr;
+        $savePr->pricePr = $product->pricePr;
+        $savePr->imagePr = $product->imagePr;
+        $savePr->save();
+        return redirect()->back();
+
+    }
+    public function deletelikePr($idProduct){
+        $savePr = SavePr::where('idProduct', $idProduct);
+        if (!$savePr) {
+            return back()->with('error', 'User not found');
+        }
+        $savePr->delete();
+        return redirect()->back()->with('success', 'User deleted successfully');
+    } 
+
     public function getProductFromCategory($idCategoryPrDetail){
         $product = DB::table('products')->where('idCategoryPrDetail',$idCategoryPrDetail)->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
         $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
@@ -62,8 +78,46 @@ class PageController extends Controller
     public function getIndex(){		
         $shop = Shop::all();
         $products = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);
-        
-        return view('page.home', compact('products','shop'));
+        $idUser = Session::get('user.idUser');
+        $save = SavePr::where('idSavePr',$idUser)->get();
+        return view('page.home', compact('products','shop','save'));
+    }
+    public function createShop(Request $request){
+        $input = $request->validate([
+            'nameShop' => 'unique:Shop',
+        ]);
+
+        $shop = new Shop();	
+
+        if ($request->hasFile('avatar')) {							
+            $fileavatar = $request->file('avatar');							
+            $fileNameAvatar = $fileavatar->getClientOriginalName('avatar');							
+            $fileavatar->move('image', $fileNameAvatar);							
+        }							
+        $file_name_avatar = null;							
+        if ($request->file('avatar') != null) {							
+            $file_name_avatar = $request->file('avatar')->getClientOriginalName();							
+        }
+
+        if ($request->hasFile('coverImage')) {							
+            $filecoverimage = $request->file('coverImage');							
+            $fileNameCoverImage = $filecoverimage->getClientOriginalName('coverImage');							
+            $filecoverimage->move('image', $fileNameCoverImage);							
+        }							
+        $file_name_cover_image = null;							
+        if ($request->file('coverImage') != null) {							
+            $file_name_cover_image = $request->file('coverImage')->getClientOriginalName();							
+        }
+        $idUser = Session::get('user.idUser');										
+        $shop->nameShop = $request->name;							
+        $shop->avataShop = $file_name_avatar;
+        $shop->coverImageShop = $file_name_cover_image;							
+        $shop->descriptionShop = $request->description;
+        $shop->locationShop = $request->location;
+        $shop->idShop = $idUser;													
+        $shop->save();							
+        return back();							
+
     }
 
     public function getIndexProduct(){
@@ -71,8 +125,9 @@ class PageController extends Controller
         // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
         $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
         $provider = Provider::all();
-        // dd($category);
-        return view('page.Product', compact('product','category','provider'));
+        $idUser = Session::get('user.idUser');
+        $save = SavePr::where('idSavePr',$idUser)->get();
+        return view('page.Product', compact('product','category','provider','save'));
     }
     public function filterProduct($idCategoryPrDetail){
         $filteredProducts = DB::table('products')
@@ -96,8 +151,7 @@ class PageController extends Controller
         return response()->json($filterLocation);
     }
 
-    public function getIndexProductDetail($idProduct)
-    {
+    public function getIndexProductDetail($idProduct){
         $productinfor = DB::table('Products')
             ->where('Products.idProduct', '=', $idProduct)
             ->join('Shop', 'Shop.idShop', '=', 'Products.idShop')
@@ -152,49 +206,66 @@ class PageController extends Controller
 
     }
 
-
+    public function getIndexCart(){
+        $cart = null;
     
-
-
-    
-    public function createShop(Request $request){
-        $input = $request->validate([
-            'nameShop' => 'unique:Shop',
+        if(Session('cart')){
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+        }
+        
+        return view('page.Cart')->with([
+            'cart' => Session::get('cart'),
+            'product_cart' => $cart ? $cart->items : null,
+            'totalPrice' => $cart ? $cart->totalPrice : null,
+            'totalQty' => $cart ? $cart->totalQty : null
         ]);
-
-        $shop = new Shop();	
-
-        if ($request->hasFile('avatar')) {							
-            $fileavatar = $request->file('avatar');							
-            $fileNameAvatar = $fileavatar->getClientOriginalName('avatar');							
-            $fileavatar->move('image', $fileNameAvatar);							
-        }							
-        $file_name_avatar = null;							
-        if ($request->file('avatar') != null) {							
-            $file_name_avatar = $request->file('avatar')->getClientOriginalName();							
-        }
-
-        if ($request->hasFile('coverImage')) {							
-            $filecoverimage = $request->file('coverImage');							
-            $fileNameCoverImage = $filecoverimage->getClientOriginalName('coverImage');							
-            $filecoverimage->move('image', $fileNameCoverImage);							
-        }							
-        $file_name_cover_image = null;							
-        if ($request->file('coverImage') != null) {							
-            $file_name_cover_image = $request->file('coverImage')->getClientOriginalName();							
-        }
-        $idUser = Session::get('user.idUser');										
-        $shop->nameShop = $request->name;							
-        $shop->avataShop = $file_name_avatar;
-        $shop->coverImageShop = $file_name_cover_image;							
-        $shop->descriptionShop = $request->description;
-        $shop->locationShop = $request->location;
-        $shop->idShop = $idUser;													
-        $shop->save();							
-        return redirect('index');							
-
     }
-
+    public function getAddToCart(Request $req, $idProduct){																			
+        if (Session::has('user')) {																			
+            if (Product::find($idProduct)) {
+                if($req->filled('selectedSize')){																			
+                    $product = Product::find($idProduct);																			
+                    $oldCart = Session('cart') ? Session::get('cart') : null;
+                    $size = $req->input('selectedSize');
+                    $shop = Shop::where('idShop', $product->idShop)->first();
+                    $provider = Provider::where('idProvider', $product->idProvider)->first();
+                    $OPrDetail = OriginalProductDetail::where('idOPrDetail', $product->idOPrDetail)->first();
+                    $detailProvider = DetailProvider::where('idprovider', $product->idProvider)->where('idOPr', $OPrDetail->idOPr)->first();																			
+                    $cart = new Cart($oldCart);																			
+                    $cart->addcart($product, $idProduct, $size, $shop, $provider, $detailProvider);																			
+                    $req->session()->put('cart', $cart);																			
+                    return redirect()->back();	
+                }
+                else{
+                    return  back()->with('error', 'phải chọn size');
+                }																		
+            } else {																			
+                return '<script>alert("Không tìm thấy sản phẩm này.");window.location.assign("/");</script>';																			
+            }																			
+        } else {																			
+            return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
+        }																			
+    }	
+    public function increaseQuantity($productId, $size){
+        $cart = new Cart(session()->get('cart'));
+        $cart->increaseQuantity($productId, $size);
+        session()->put('cart', $cart);
+        return redirect()->route('cart');
+    }
+    public function decreaseQuantity($productId,  $size){   
+        $cart = new Cart(session()->get('cart'));
+        $cart->decreaseQuantity($productId,  $size);
+        session()->put('cart', $cart);
+        return redirect()->route('cart');
+    }
+    public function DeleteItemCart($productId,  $size){
+        $cart = new Cart(session()->get('cart'));
+        $cart->deleteItem($productId,  $size);
+        session()->put('cart', $cart);
+        return redirect()->route('cart');
+    }
+    
     public function getIndexCategoryOPr(){
         $startingId = 10;
         $categoryOPr = categoryOPr::where('idCategoryOPr', '>=', $startingId)->limit(5)->get();
@@ -203,11 +274,7 @@ class PageController extends Controller
         $idoprdetail = categoryOPrDetail::pluck('idCategoryOPrDetail');
         $originalProduct = OriginalProduct::whereIn('idCategoryOPrDetail', $idoprdetail)->get();
         return view('page.CategoryOPr', compact('categoryOPr', 'categoryOPrDetail', 'originalProduct'));
-
     }
-
-
-
     public function getIndexOPrDetail($idOPr){
         $pro = DB::table('OriginalProducts')
             ->join('OriginalProductsDetail', function ($join) use ($idOPr) {
@@ -221,6 +288,15 @@ class PageController extends Controller
             ->join('image_OPr', 'OriginalProductsDetail.idOPrDetail', '=', 'image_OPr.idOPrDetail')
             ->select('OriginalProducts.*','image_OPr.*','CareInstruction.*') 
             ->first();
+
+        $imageOPr = DB::table('OriginalProducts')
+            ->join('OriginalProductsDetail', function ($join) use ($idOPr) {
+                $join->on('OriginalProductsDetail.idOPr', '=', 'OriginalProducts.idOPr')
+                    ->where('OriginalProductsDetail.idOPr', '=', $idOPr);
+            })
+            ->join('image_OPr', 'OriginalProductsDetail.idOPrDetail', '=', 'image_OPr.idOPrDetail')
+            ->select('image_OPr.*') 
+            ->get();
 
         $infor = DB::table('KeyFeatures')->where('KeyFeatures.idOPr', '=', $idOPr)->select('KeyFeatures.*') ->get();
     
@@ -304,20 +380,9 @@ class PageController extends Controller
                     ->where('nameOPr', 'LIKE', '%' . $lastChar . '%');
             })->limit(10)
             ->get();
-        return view('page.OPrDetail', compact('pro', 'infor','sizewidth','sizelength','sizesleeveLength','provider','colorProvider',
+        return view('page.OPrDetail', compact('pro', 'imageOPr' , 'infor','sizewidth','sizelength','sizesleeveLength','provider','colorProvider',
         'colorall','Color','pricePrmax','pricePrmin','shippingmin','shippingmax','AvgPrTime','printArea', 'alsoLike','provider1'));
     }
-
-   
-    
-   
-
-
-    
-    public function getadduser(){		
-    	return view('adduser');	
-    }
-
 
     public function getIndexDesign($idProvider, $idOPr){
         $idUser = Session::get('user.idUser');
@@ -339,43 +404,48 @@ class PageController extends Controller
         // dd($colorProvider);
         return view('page.Design', compact('pro','colorProvider','find','provider','detail','shop'));
     }
-    public function getIndexFormPostPr(Request $request)
-    {
-        $imageData = $request->json('image');
-        $Design = $request->json('result');
-        $detailValue = $request->json('detailValue');
-        $providerValue = $request->json('providerValue');
+    public function getIndexFormPostPr(Request $request){
+        $idshop = Session::get('user');
+        $shop = Shop::where('idShop', $idshop->idUser)->first();
+        if($shop != null){
+            $imageData = $request->json('image');
+            $Design = $request->json('result');
+            $detailValue = $request->json('detailValue');
+            $providerValue = $request->json('providerValue');
 
-        $imageData = str_replace('data:image/png;base64,', '', $imageData);
-        $Design = str_replace('data:image/png;base64,', '', $Design);
+            $imageData = str_replace('data:image/png;base64,', '', $imageData);
+            $Design = str_replace('data:image/png;base64,', '', $Design);
 
-        $imageData = str_replace(' ', '+', $imageData);
-        $Design = str_replace(' ', '+', $Design);
+            $imageData = str_replace(' ', '+', $imageData);
+            $Design = str_replace(' ', '+', $Design);
 
-        $imageBinary = base64_decode($imageData);
-        $imageB = base64_decode($Design);
+            $imageBinary = base64_decode($imageData);
+            $imageB = base64_decode($Design);
 
-        // Generate unique filenames
-        $newFileName = $this->generateUniqueFilename('merge', 'png');
-        $newFileNameDesign = $this->generateUniqueFilename('design', 'png');
+            // Generate unique filenames
+            $newFileName = $this->generateUniqueFilename('merge', 'png');
+            $newFileNameDesign = $this->generateUniqueFilename('design', 'png');
 
-        $path = public_path('source/imageOPr/' . $newFileName);
-        $pathDesign = public_path('source/imageOPr/' . $newFileNameDesign);
+            $path = public_path('source/imageOPr/' . $newFileName);
+            $pathDesign = public_path('source/imageOPr/' . $newFileNameDesign);
 
-        file_put_contents($path, $imageBinary);
-        file_put_contents($pathDesign, $imageB);
-
-        return response()->json([
-            'success' => true,
-            'image' => $newFileName,
-            'result' => $newFileNameDesign,
-            'detailValue' => $detailValue,
-            'providerValue' => $providerValue,
-        ]);
+            file_put_contents($path, $imageBinary);
+            file_put_contents($pathDesign, $imageB);
+            return response()->json([
+                'success' => true,
+                'image' => $newFileName,
+                'result' => $newFileNameDesign,
+                'detailValue' => $detailValue,
+                'providerValue' => $providerValue,
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
-
-    private function generateUniqueFilename($prefix, $extension)
-    {
+    private function generateUniqueFilename($prefix, $extension){
         $filename = $prefix . '_' . uniqid() . '.' . $extension;
         // Check if the filename already exists, generate a new one if it does
         while (file_exists(public_path('source/imageOPr/' . $filename))) {
@@ -430,124 +500,15 @@ class PageController extends Controller
         return redirect()->route('index');
     }
 
-
-
-
-
-    
-    public function getIndexCart(){
-        // if(Session('cart')){
-        //     $oldCart = Session::get('cart');
-        //     $cart = new Cart($oldCart);
-        // }
-        // return view('page.Cart')->with(['cart' => Session::get('cart'),
-        //     'product_cart' => $cart->items,
-        //     'totalPrice' => $cart->totalPrice,
-        //     'totalQty' => $cart->totalQty
-        // ]);
-
-        $cart = null;  // Khởi tạo biến $cart
-    
-        if(Session('cart')){
-            $oldCart = Session::get('cart');
-            $cart = new Cart($oldCart);
-        }
-        
-        return view('page.Cart')->with([
-            'cart' => Session::get('cart'),
-            'product_cart' => $cart ? $cart->items : null,
-            'totalPrice' => $cart ? $cart->totalPrice : null,
-            'totalQty' => $cart ? $cart->totalQty : null
-        ]);
-    }
-    public function getAddToCart(Request $req, $idProduct){																			
-        if (Session::has('user')) {																			
-            if (Product::find($idProduct)) {
-                if($req->filled('selectedSize')){																			
-                    $product = Product::find($idProduct);																			
-                    $oldCart = Session('cart') ? Session::get('cart') : null;
-                    $size = $req->input('selectedSize');
-                    $shop = Shop::where('idShop', $product->idShop)->first();
-                    $provider = Provider::where('idProvider', $product->idProvider)->first();
-                    $OPrDetail = OriginalProductDetail::where('idOPrDetail', $product->idOPrDetail)->first();
-                    $detailProvider = DetailProvider::where('idprovider', $product->idProvider)->where('idOPr', $OPrDetail->idOPr)->first();																			
-                    $cart = new Cart($oldCart);																			
-                    $cart->addcart($product, $idProduct, $size, $shop, $provider, $detailProvider);																			
-                    $req->session()->put('cart', $cart);																			
-                    return redirect()->back();	
-                }
-                else{
-                    return  back()->with('error', 'phải chọn size');
-                }																		
-            } else {																			
-                return '<script>alert("Không tìm thấy sản phẩm này.");window.location.assign("/");</script>';																			
-            }																			
-        } else {																			
-            return '<script>alert("Vui lòng đăng nhập để sử dụng chức năng này.");window.location.assign("/login");</script>';																			
-        }																			
-    }	
-    public function increaseQuantity($productId)
-    {
-        $cart = new Cart(session()->get('cart'));
-        $cart->increaseQuantity($productId);
-        session()->put('cart', $cart);
-        return redirect()->route('cart');
-    }
-    public function decreaseQuantity($productId)
-    {   
-        $cart = new Cart(session()->get('cart'));
-        $cart->decreaseQuantity($productId);
-        session()->put('cart', $cart);
-        return redirect()->route('cart');
-    }
-    public function DeleteItemCart($idProduct){
-        $cart = new Cart(session()->get('cart'));
-        $cart->deleteItem($idProduct);
-        session()->put('cart', $cart);
-        return redirect()->route('cart');
-    }
-    
-
-   
-
-    
-
-
-
-    // bai cua Hieu
-       
-// ------------------------------------------------Quản lý Shop-------------------------------------------------------
-    
-
-
-
-    public function getforsalepage()
-    {
-        $Products = Product::all();
-        $category_opr_detail=CategoryOPrDetail::all();
-        $color=Color::all();    
-        return view('page.forsalepage',compact('Products','category_opr_detail','color'));	
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $product= Product::where('namePr','like', '%' . $query . '%')->paginate(16);
-        // $category = DB::table('category_Pr')->join('category_Pr_Detail','category_Pr_Detail.idCategoryPr','=','category_Pr.idCategoryPr')->select('category_Pr.idCategoryPr as idpr','category_Pr.*','category_Pr_Detail.idCategoryPr as idprdetail','category_Pr_Detail.*')->get();
-        $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
-        $provider = Provider::all();
-        // dd($category);
-        return view('page.Product', compact('product','category','provider'));
-    }
-    public function getPersionalPage($idShop)
-    {
+    public function getPersionalPage($idShop){
         $shop = Shop::where('idShop',$idShop)->first();
         $product = Product::where('idShop',$idShop)->get();
-  
-        return view('page.PersionalPage', compact('product','shop'));
+        $design = DesignProduct::where('idShop',$idShop)->get();
+        $idUser = Session::get('user.idUser');
+        $save = SavePr::where('idSavePr',$idUser)->get();
+        return view('page.PersionalPage', compact('product','shop', 'design','save'));
     }
-    public function PersinalPageProductDelete($id)
-        {
+    public function PersinalPageProductDelete($id){
         $product = Product::find($id);
         $product->delete();
         return back();
@@ -577,121 +538,14 @@ class PageController extends Controller
         $DesignProducts->save();
         return back();
     }
-    public function getlikePr()
-    {
-        $idUser = Session::get('user.idUser');
-        $product = SavePr::where('idSavePr',$idUser)->get();
-        $LPC = SavePr::where('idSavePr',$idUser)->count();
-    return view('page.likePr', compact('product','LPC'));
-    }
-    public function likePr($idProduct)
-    {
-        $idUser = Session::get('user.idUser');
-        $product = Product::where('idProduct',$idProduct)->first();
-        $savePr = new SavePr;
-        $savePr->idSavePr = $idUser;
-        $savePr->idProduct = $idProduct;
-        $savePr->namePr = $product->namePr;
-        $savePr->pricePr = $product->pricePr;
-        $savePr->imagePr = $product->imagePr;
-        $savePr->save();
-        return redirect()->back();
 
-    }
-    public function deletelikePr($idProduct)
-    {
-        // Tìm sản phẩm yêu thích cần xóa trong cơ sở dữ liệu
-        $savePr = SavePr::where('idProduct', $idProduct);
-        // Nếu không tìm thấy người dùng, trả về thông báo lỗi
-        if (!$savePr) {
-            return back()->with('error', 'User not found');
-        }
-
-        // Xóa người dùng khỏi cơ sở dữ liệu
-        $savePr->delete();
-
-        return redirect()->route('getlikePr')->with('success', 'User deleted successfully');
-    }
-    
-    
-     public function designproductmanagement(){
-        $design = DB::table('DesignProducts')
-        ->join('Shop', 'Shop.idShop', '=','DesignProducts.idShop')
-        ->join('Providers', 'Providers.idProvider','=','DesignProducts.idProvider')
-        ->join('Color', 'Color.idColor', '=','DesignProducts.ColorPr')
-        ->join('category_Pr_Detail', 'category_Pr_Detail.idCategoryPrDetail', '=','DesignProducts.idCategoryPrDetail')
-        ->select('DesignProducts.*','Shop.*','Providers.*','Color.*','category_Pr_Detail.*')
-        ->get();
-        $user = Users::all();
-        return view('admin.designproduct', compact('design', 'user'));
-     }
-    public function browerDesign($idDesignProducts){
-        $design = DesignProduct::where('idDesignProducts',$idDesignProducts)->first();
-
-        if($design->role == 0){
-            $product = new Product;
-            $product->idOPrDetail = $design->idOPrDetail;
-            $product->idShop = $design->idShop;
-            $product->idCategoryPrDetail = $design->idCategoryPrDetail;
-            $product->idProvider = $design->idProvider;
-            $product->imagePr = $design->imagePr;
-            $product->namePr = $design->namePr;
-            $product->pricePr = $design->pricePr;
-            $product->colorPr = $design->colorPr;
-            $product->imageDesign = $design->imageDesign;
-            $product->nameDesign = $design->nameDesign;
-            $product->descriptionDesign = $design->descriptionDesign;
-            $product->note = $design->note;
-            $product->save();
-            $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
-            $design->delete();
-        }
-        else{
-            $products = Product::where('idProduct', $design->role);
-            $products->delete();
-            $product = new Product;
-            $product->idOPrDetail = $design->idOPrDetail;
-            $product->idShop = $design->idShop;
-            $product->idCategoryPrDetail = $design->idCategoryPrDetail;
-            $product->idProvider = $design->idProvider;
-            $product->imagePr = $design->imagePr;
-            $product->namePr = $design->namePr;
-            $product->pricePr = $design->pricePr;
-            $product->colorPr = $design->colorPr;
-            $product->imageDesign = $design->imageDesign;
-            $product->nameDesign = $design->nameDesign;
-            $product->descriptionDesign = $design->descriptionDesign;
-            $product->note = $design->note;
-            $product->save();
-            $design = DesignProduct::where('idDesignProducts',$idDesignProducts);
-            $design->delete();
-        }
-        return back();
-    }
-    public function cancelDesign(Request $req)
-    {
-        $nameDesign = $req->input('nameDesign');
-        $Mail = $req->input('Mailshop');
-        $user = Users::where('Email', $Mail)->first();
-        $reasons = $req->input('reasons');
-        $message = [
-            'type' => 'ImPrint thong bao thiet ke '.$nameDesign.' cua ban da bi huy',
-            'thanks' => 'Cam on ' . $user->Name . ' da su dung tinh nang cua trang web.',
-            'reasons' => $reasons,
-            'content' => 'Hy vong ban se su dung lai tinh nang nay vao mot ngay gan nhat',
-        ];
-        SendMail::dispatch($message, $Mail)->delay(now()->addMinute(1));
-        $product = $req->input('idDesignProducts');
-        $products = DesignProduct::where('idDesignProducts', $product);
-        $products->delete();
-        return back();
-    }
     public function getIndexPageUser(){
         $user = Session::get('user');
         $order = DB::table('Order')->where('Order.idUser',  $user->idUser)
         ->join('OrderDetail','OrderDetail.idOrder', '=','Order.idOrder')
         ->join('Products', 'Products.idProduct', '=', 'OrderDetail.idProduct')
-        ->select('Order.*', 'OrderDetail.*', 'Products.*')
+        ->join('Providers', 'Providers.idProvider', '=','Order.idProvider')
+        ->select('Order.*', 'OrderDetail.*', 'Products.*','Providers.*')
         ->get();
         return view('page.PageUser', compact('order'));
     }
@@ -707,8 +561,7 @@ class PageController extends Controller
             return redirect('index');														
         }														
     }
-    public function postCheckout(Request $req)													
-    {													
+    public function postCheckout(Request $req){													
         $cart = Session::get('cart');
         $user = Session::get('user');
         $product_cart = $cart->items;													
@@ -773,25 +626,5 @@ class PageController extends Controller
         }														                                           
         Session::forget('cart');													
         return redirect('index');
-    }												
-    public function browerOrder(){
-        $order = DB::table('Order')->where('Order.received',  0)
-        ->join('OrderDetail','OrderDetail.idOrder', '=','Order.idOrder')
-        ->join('Products', 'Products.idProduct', '=', 'OrderDetail.idProduct')
-        ->select('Order.*', 'OrderDetail.*', 'Products.*')
-        ->get();
-        return view('admin.browerOrder', compact('order'));
-    }
-    public function acceptOrder($idOrder){
-        $order = Order::where('idOrder', $idOrder);
-        $received = 1;
-        $order->update(['received' => $received]);
-        return back();
-    }
-    public function cancelOrder($idOrder){
-        $order = Order::where('idOrder', $idOrder);
-        $received = 4;
-        $order->update(['received' => $received]);
-        return back();
-    }
+    }	
 }   

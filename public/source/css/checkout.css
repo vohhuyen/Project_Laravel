@@ -13,7 +13,7 @@
 }
 .sp-list1-all2 {
     color: grey;
-    margin-left: 80px;
+    margin-left: 60px;
 }
 .sp-list2-all2 {
     padding: 10px 0px;
@@ -36,18 +36,20 @@
     margin-top: 10px;
 }
 .sp-list3-all4 {
-    margin-left: 50px;
+    margin-left: 30px;
     margin-top: 20px;
 }
 
 .sp-list3-all5 {
-    margin-left: 110px;
+    margin-left: 90px;
     margin-top: 20px;
 }
 
 .sp-list3-all6 {
-    margin-left: 230px;
+    margin-left: 80px;
     margin-top: 20px;
+    color: #fe5454;
+    font-weight: 500;
 }
 
 .sp-list4-all1 {
@@ -146,11 +148,13 @@
 }
 
 .cart-detail1 {
-    margin-left: 870px;
+    margin-left: 690px;
 }
 
 .cart-detail2 {
-    margin-left: 50px;
+    margin-left: 150px;
+    color: #fe5454;
+    font-weight: 500;
 }
 
 .list1 {
@@ -347,15 +351,6 @@
     width: 1200px;
     margin-top: -20px;
 }
-
-.cart-detail1 {
-    margin-left: 870px;
-}
-
-.cart-detail2 {
-    margin-left: 50px;
-}
-
 .payment1 {
     margin-left: 48px;
     margin-top: 20px;
@@ -442,7 +437,7 @@
 }
 
 .text-sp-5 {
-    margin-left: 120px;
+    margin-left: 100px;
 }
 
 .text-sp-6 {
@@ -450,7 +445,7 @@
 }
 
 .text-sp-7 {
-    margin-left: 120px;
+    margin-left: 140px;
 }
 
 .text-sp-8 {
@@ -466,7 +461,7 @@
 }
 
 .text-sp-11 {
-    margin-left: 100px;
+    margin-left: 130px;
     color: #fe5454;
     font-weight: 500;
 }

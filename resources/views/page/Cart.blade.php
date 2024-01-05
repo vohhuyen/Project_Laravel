@@ -8,7 +8,7 @@
                 <b class="title">YOUR CART</b>
               </li>
               <li>
-                <span class="title_item">@if(Session::has('cart')){{Session('cart')->totalQty}}@else Trong @endif products</span>
+                <span class="title_item">@if(Session::has('cart')){{Session('cart')->totalQty}}@else 0 @endif products</span>
               </li>
               <li class="navbar-separate3"></li>
             </ul>
@@ -24,22 +24,23 @@
                 <tr class="section_article-item" id="cart-item{{$product['item']['id']}}">
                     <td class="img_item"><img src="source/imageOPr/{{$product['item']['imagePr']}}" alt="product" /></td>
                     <td class="infor_item">
-                      <b class="namePr">{{$product['item']['namePr']}}</b>
-                      <p class="if_item">Size {{$product['size']}}</p>
+                      <b class="namePr">{{$product['item']['namePr']}}</b><br>
+                      <b class="if_item">Size: {{$product['size']}}</b>
                       <div class="if_item"><b>Design by: </b> {{$product['nameshop']['nameShop']}}</div>
                       <div class="if_item"><b>Provided by: </b> {{$product['nameprovider']['Name']}}</div>
                     </td>
-                    <form action="{{ route('decrease-quantity', $product['item']['idProduct']) }}" method="post" style="display:inline;">
+                    <td class="price2"><p>$ {{$product['item']['pricePr']}}</p></td>
+                    <form action="{{ route('decrease-quantity', ['productId' => $product['item']['idProduct'], 'size' => $product['size']])}}" method="post" style="display:inline;">
             @csrf
                     <td><button type="submit" class="button_item1">-</button></td>
 </form>
                     <td><div class="quantity_item">{{$product['qty']}}</div></td>
-                    <form action="{{ route('increase-quantity', $product['item']['idProduct']) }}" method="post" style="display:inline;">
+                    <form action="{{ route('increase-quantity', ['productId' => $product['item']['idProduct'], 'size' => $product['size']]) }}" method="post" style="display:inline;">
             @csrf
                     <td><button type="submit" class="button_item2">+</button></td>
 </form>
-                    <td class="price1"><p>$ {{$product['item']['pricePr']}}</p></td>
-                    <form action="{{ route('delete-item', $product['item']['idProduct']) }}" method="post" style="display:inline;">
+                    <td class="price1"><p>$ {{$product['pricePr']}}</p></td>
+                    <form action="{{ route('delete-item', ['productId' => $product['item']['idProduct'], 'size' => $product['size']]) }}" method="post" style="display:inline;">
             @csrf
                     <td class="button"><button class="delete"><p class="fa-light fa-x"></p></button></td>
 </form>
@@ -49,7 +50,10 @@
               </tbody>
             </table>
           </div>
+          
           <div class="cart_separate1"></div>
+          <button class="buttoncheckout"><a href="{{route('indexcheckout')}}">Checkout</a></button>
         </div>
+        
       </section>
 @endsection

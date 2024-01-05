@@ -1,7 +1,25 @@
 
 window.onload = function () {
   'use strict';
-  
+  const images = document.querySelectorAll('.imageOPr');
+  let imgEle1 = images[0];
+  imgEle1.style.display = 'block';
+
+  window.showImage = function (colorId) {
+      images.forEach(img => {
+          img.style.display = img.getAttribute('data-index') === colorId.toString() ? 'block' : 'none';
+          if (img.style.display === 'block') {
+              imgEle1 = img;
+          }
+      });
+  };
+  const buttons = document.querySelectorAll('.btn-show-imageOPr');
+  buttons.forEach(button => {
+      button.addEventListener('click', function () {
+          showImage(this.getAttribute('data-index'));
+      });
+  });
+
   var Cropper = window.Cropper;
   var URL = window.URL || window.webkitURL;
   var container = document.querySelector('.img-container');
@@ -135,6 +153,12 @@ window.onload = function () {
         window.location.href = '/getformPr?image=' + encodeURIComponent(data.image) + '&result=' + encodeURIComponent(data.result) + '&detailValue=' + data.detailValue + '&providerValue=' + data.providerValue;
       } else {
           console.log('Something went wrong.');
+          var divbtn = document.getElementById('btncreate');
+          var textbtn = document.getElementById('textbtn');
+          var textbt = document.getElementById('textbt');
+          divbtn.style.backgroundColor = "#fe5454";
+          textbtn.style.color = "white";
+          textbt.style.color = "white";
       }
     })
     .catch(error => {
@@ -231,7 +255,7 @@ window.onload = function () {
 
           break;
       }
-
+      
       result = cropper[data.method](data.option, data.secondOption);
 
       switch (data.method) {
@@ -271,8 +295,7 @@ window.onload = function () {
 
           case 'merge':
           if (result) {
-            // Bootstrap's Modal
-              let imgEle1 = document.querySelector(".imageanhchinh");
+              // let imgEle1 = document.querySelector(".imageanhchinh");
               let imgEle2 = result;
               let resEle = document.querySelector(".resultmerge");
               var context = resEle.getContext("2d");
@@ -285,18 +308,17 @@ window.onload = function () {
               const newWidth2 = myElement.clientWidth; 
               const newHeight2 = myElement.clientHeight; 
 
-              // Đặt kích thước mới cho context
-              resEle.width = newWidth1 + newWidth2; // Đặt tổng chiều rộng mới
-              resEle.height = Math.max(newHeight1, newHeight2); // Chọn chiều cao lớn nhất
+              resEle.width = newWidth1 + newWidth2;
+              resEle.height = Math.max(newHeight1, newHeight2);
 
               const centerX = (newWidth1 - newWidth2) / 2;
               const centerY = (resEle.height - newHeight2) / 2 -27;
 
               context.globalAlpha = 1.0;
-              context.drawImage(imgEle1, 0, 0, newWidth1, newHeight1); // Vẽ imgEle1 với kích thước mới
+              context.drawImage(imgEle1, 0, 0, newWidth1, newHeight1);
 
               context.globalAlpha = 0.99;
-              context.drawImage(imgEle2, centerX, centerY, newWidth2, newHeight2); // Vẽ imgEle2 với kích thước mới
+              context.drawImage(imgEle2, centerX, centerY, newWidth2, newHeight2);
 
               var img = resEle.toDataURL("image/png");
               var result = imgEle2.toDataURL("image/png");

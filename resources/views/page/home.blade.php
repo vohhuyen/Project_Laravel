@@ -52,17 +52,26 @@
     </div>
     <div class="bestseller grid">
         <h1>BESTSELLER</h1>
-        
+        @php
+        $savedProductIds = Session::has('user') ? $save->pluck('idProduct')->toArray() : [];
+    @endphp
         <div class="row justify-content-center w-100 row">
         @foreach($products as $product )
             <div class="columnhomepage col-lg-2">
            <div class="product_img">
-           @if(Session::has('user'))
-           <form method="POST" action="{{ route('likePr',$product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
-            @csrf
-                   <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
-            </form>
-            @endif
+                @if(Session::has('user'))
+                    @if(in_array($product->idProduct, $savedProductIds))
+                        <form method="POST" action="{{ route('deletelikePr', $product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
+                            @csrf
+                            <button type="submit"><i class="product_icon fa-solid fa-heart" style="color: red;"></i></button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ route('likePr', $product->idProduct) }}" enctype="multipart/form-data" style="width: 0px; height: 0px;">
+                            @csrf
+                            <button type="submit"><i class="product_icon fa-regular fa-heart"></i></button>
+                        </form>
+                    @endif
+                @endif
                    <a href="product-detail/{{$product->idProduct}}">
                     <img class="first-imghome" src="source/imageOPr/{{$product->imagePr}}" alt="phone"></a>
                 </div>

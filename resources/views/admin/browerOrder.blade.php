@@ -23,10 +23,10 @@
                             <tr>
                                 <th>Image Product</th>
                                 <th>Name</th>
-                                <th>don gia</th>
-                                <th>phan loai</th>
-                                <th>so luong</th>
-                                <th>Thanh tien</th>
+                                <th>Unit price</th>
+                                <th>classify</th>
+                                <th>Quantity</th>
+                                <th>total amount</th>
                             </tr>
                         </thead>
                         <tbody> 

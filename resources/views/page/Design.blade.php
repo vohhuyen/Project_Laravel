@@ -25,7 +25,7 @@
   <div class="content mt-2">
     <div class="headerDesign d-flex justify-content-between">
       <div class="d-flex">
-        <a  href="#">
+        <a  href="opr-detail/{{$pro->idOPr}}">
           <button class="btn-back">
             <i class="fa-solid fa-arrow-left-long"></i>
             <span>Back to original product</span>
@@ -36,14 +36,68 @@
           <p>By {{$provider->Name}} • USD {{$detail->priceOPr}}</p>
         </div>
       </div>
-      <button class="mx-3 btn-back mb-1">
-        <i class="fa-solid fa-store icon-store"></i>
+      
         @if(Session::has('user'))
+        @if($shop != null)
+        <button class="mx-3 btn-back mb-1">
+        <i class="fa-solid fa-store icon-store"></i>
         <span>{{$shop->nameShop}}</span>
-        @else 
-        <span>Create Shop</span>
+        </button>
+        @else
+        <button class="mx-3 btn-back mb-1" id="btncreate" data-toggle="modal" data-target="#btncreateshop">
+        <i id="textbtn" class="fa-solid fa-store icon-store"></i>
+        <span id="textbt">Create Shop</span>
+        </button>
         @endif
-      </button>
+        @else
+        <button class="mx-3 btn-back mb-1" id="btncreate" data-toggle="modal" data-target="#btncreateshop">
+        <i id="textbtn" class="fa-solid fa-store icon-store"></i>
+        <span id="textbt">Create Shop</span>
+        </button>
+        @endif
+     
+      <div class="modal fade" id="btncreateshop" tabindex="-1" role="dialog" aria-labelledby="btncreateshop" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Create Shop</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                  @include('error')
+                      <form action="{{ route('createShop') }}" method="post" class="login-form w-100" enctype="multipart/form-data">
+                      @csrf
+                          <div class="form-group">
+                              <label for='avatar'>Name shop</label>
+                              <input type="text" class="auth-form-input w-100" placeholder="Name" id="name" name="name">
+                          </div>
+                          <div class="form-group">
+                              <label for='avatar'>Description shop</label>
+                              <input type="area" class="auth-form-input w-100" placeholder="Description" id="description" name="description" required>
+                          </div>
+                          <div class="form-group">
+                              <label for='avatar'>Location shop</label>
+                              <input type="text" class="auth-form-input w-100" placeholder="Location" id="location" name="location" required>
+                          </div>
+                          <div class="form-group">						
+                              <label for='avatar'>Avatar shop</label>						
+                              <input type="file" class="auth-form-input w-100" name="avatar" id="avatar" required>						
+                          </div>
+                          <div class="form-group">						
+                              <label for='coverImage'>Cover image shop</label>						
+                              <input type="file" class="auth-form-input w-100" name="coverImage" id="coverImage" required>						
+                          </div>	
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+                              <button type="submit" class="btn btn-danger">Save</button>	
+                          </div>				
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
     <div class="d-flex">
       <div class="col-md-6">
@@ -59,15 +113,30 @@
         <div class="docs-preview clearfix bg-pr"> 
         @foreach($colorProvider as $color)
                 @if($color->idOPr == $find && $color->role == 1)
-          <img src="source/imageOPr/{{$color->imageOPr}}" data-detail="{{$color->idOPrDetail}}" data-provider="{{$provider->idProvider}}" style="display: none" class="rounded-top imageOPr" data-index="{{$color->idColor}}" alt="image Product">
+          <img src="source/imageOPr/{{$color->imageOPr}}" data-detail="{{$color->idOPrDetail}}" data-provider="{{$provider->idProvider}}" style="display: none" class="rounded-top imageOPr imageanhchinh" data-index="{{$color->idColor}}" alt="image Product">
           @endif
         @endforeach
-          <div class="d-flex justify-content-center">
-            <div class="img-preview preview-lg" id="preview"></div>
+          <div class="d-flex justify-content-center" data-preview="{{$pro->preview}}">
+            @if($pro->preview == 1)
+              <div class="img-preview preview-lg" id="preview"></div>
+            @elseif($pro->preview == 2)
+              <div class="img-preview preview-md" id="preview"></div>
+            @elseif($pro->preview == 3)
+              <div class="img-preview preview-sm" id="preview"></div>
+            @elseif($pro->preview == 4)
+              <div class="img-preview preview-xs" id="preview"></div>
+            @elseif($pro->preview == 5)
+              <div class="img-preview preview-sm" id="preview" style="top: 310px;"></div>
+            @elseif($pro->preview == 6)
+              <div class="img-preview preview-md" id="preview" style="top: 310px;"></div>
+            @elseif($pro->preview == 7)
+              <div class="img-preview preview-lg" id="preview" style="top: 310px;"></div>
+            @elseif($pro->preview == 8)
+              <div class="img-preview preview-md" id="preview" style="top: 235px; margin-left: 20px;"></div>
+            @else
+              <div class="img-preview preview-lg" id="preview"></div>
+            @endif
           </div>
-          <!-- <div class="img-preview preview-md"></div>
-          <div class="img-preview preview-sm"></div>
-          <div class="img-preview preview-xs"></div> -->
         </div>
       </div>
     </div>
@@ -200,7 +269,7 @@
           </button>
           <button type="button" class="btn btn-color merge" data-method="merge" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
             <span class="docs-tooltip" data-toggle="tooltip" title="maxWidth: 4096, maxHeight: 4096 ">
-              Click here
+              Done
             </span>
           </button>
         </div>
@@ -234,10 +303,10 @@
             Zoom to 100%
           </span>
         </button>
-        <div class="row d-flex">
+        <!-- <div class="row d-flex">
               <button class="col-5 mx-2 btn-main btn btn-color">Add Cart</button>
               <button class="col-5 mx-2 btn-main btn btn-color">Done</button>
-            </div>
+            </div> -->
         <!-- <textarea class="form-control" id="putData" placeholder="Get data to here or set data with this value"></textarea> -->
       </div><!-- /.docs-buttons -->
       <div class="col-md-5 docs-toggles">
@@ -312,45 +381,15 @@
       </div>
     </div>
   </div>
-
-  @foreach($colorProvider as $color)
-    @if($color->idOPr == $find && $color->role == 1)
-  <img class="imageanhchinh d-none" src="source/imageOPr/{{$color->imageOPr}}" data-detail="{{$color->idOPrDetail}}" data-provider="{{$provider->idProvider}}" data-index="{{$color->idColor}}" class="rounded-top imageOPr"  alt="image Product"/>
-    @endif
-  @endforeach
   <canvas class="resultmerge d-none" id="resultmerge"></canvas>
   <br/>
   <!-- Scripts -->
-  
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="https://fengyuanchen.github.io/shared/google-analytics.js" crossorigin="anonymous"></script>
   <script src="source/docs/js/cropper.js"></script>
   <script src="source/docs/js/main.js"></script>
-  <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const images = document.querySelectorAll('.imageOPr');
-            const buttons = document.querySelectorAll('.btn-show-imageOPr');
 
-            // Hiển thị ảnh đầu tiên mặc định
-            images[0].style.display = 'block';
-
-            // Hàm hiển thị ảnh tương ứng với nút được bấm
-            function showImage(color) {
-                // Ẩn tất cả ảnh
-                images.forEach(img => img.style.display = 'none');
-
-                // Hiển thị ảnh tương ứng
-                images[color].style.display = 'block';
-            }
-
-            // Gắn sự kiện click cho từng nút
-            buttons.forEach((button, color) => {
-                button.addEventListener('click', function () {
-                    showImage(color);
-                });
-            });
-      });
-    </script>
 </body>
 </html>

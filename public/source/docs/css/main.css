@@ -59,11 +59,12 @@
   height: 500px;
   width: 500px;
   margin: 0 auto;
+  padding-left: 2px;
 }
 #preview{
   position: absolute;
   z-index: 1;
-  top: 160px;
+  top: 160px; 
   /* left: 185px; */
 }
 
@@ -217,19 +218,19 @@ label.btn {
 }
 
 .preview-md {
+  height: 6rem;
+  width: 11.5rem;
+}
+
+.preview-sm {
   height: 4.5rem;
   width: 8rem;
 }
 
-.preview-sm {
-  height: 2.25rem;
-  width: 4rem;
-}
-
 .preview-xs {
-  height: 1.125rem;
+  height: 2.25rem;
   margin-right: 0;
-  width: 2rem;
+  width: 4rem;
 }
 
 .docs-data > .input-group {

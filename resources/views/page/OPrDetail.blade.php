@@ -8,80 +8,11 @@
                 <div class="chev">
                     <i class="fa-solid fa-chevron-up icon-chev"></i>
                 </div>
+                @foreach($imageOPr as $image)
                 <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
+                    <img class="img1" src="source/imageOPr/{{$image->imageOPr}}" oneclick="showImg(this.src)">
                 </div>
-                @if(!empty($pro->image2))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image3))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image4))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->imageOPr}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image5))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image5}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image6))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image6}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image7))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image7}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image8))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image8}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image9))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image9}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image10))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image10}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image11))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image11}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image12))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image12}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image13))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image13}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image14))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image14}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                @if(!empty($pro->image15))
-                <div class="small-img">
-                    <img class="img1" src="source/imageOPr/{{$pro->image15}}" oneclick="showImg(this.src)">
-                </div>
-                @endif
-                
+                @endforeach
                 <div class="chev1">
                     <i class="fa-solid fa-chevron-up fa-rotate-180 icon-chev"></i>
                 </div>
@@ -364,6 +295,7 @@
                                     <td>{{$sizewidth->size5XL}}</td>
                                   </tr>
                                   <tr>
+                                  @if(isset($sizelength))
                                     <th class="size"> Length, in</th>
                                     <td>{{$sizelength->S}}</td>
                                     <td>{{$sizelength->M}}</td>
@@ -373,8 +305,10 @@
                                     <td>{{$sizelength->size3XL}}</td>
                                     <td>{{$sizelength->size4XL}}</td>
                                     <td>{{$sizelength->size5XL}}</td>
+                                    @endif
                                   </tr>
                                   <tr>
+                                    @if(isset($sizesleeveLength))
                                     <th class="size">Sleeve length from center back, in</th>
                                     <td>{{$sizesleeveLength->S}}</td>
                                     <td>{{$sizesleeveLength->M}}</td>
@@ -384,6 +318,7 @@
                                     <td>{{$sizesleeveLength->size3XL}}</td>
                                     <td>{{$sizesleeveLength->size4XL}}</td>
                                     <td>{{$sizesleeveLength->size5XL}}</td>
+                                    @endif
                                   </tr>
                     </table>
                 </div>

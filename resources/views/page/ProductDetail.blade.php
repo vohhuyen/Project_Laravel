@@ -325,7 +325,7 @@
       <div class="cart_separate"></div>
     </div>
     <div class="Other_design">
-      <b>More designs from tshirtcare</b>
+      <b>More designs from {{ $productinfor->nameShop }}</b>
       <div class="d-flex align-items-center w-100 justify-content-center">
         <i class="fa-solid fa-chevron-left icon-chevron"></i>
         <div class="row justify-content-center w-100">
@@ -354,7 +354,7 @@
         <i class="fa-solid fa-chevron-right icon-chevron"></i>
       </div>
       <div class="text-center">
-        <button class="btn-showshop">All designs from tshirtcare</button>
+        <a href="{{route('PersionalPage',$productinfor->idShop)}}"><button class="btn-showshop">All designs from {{ $productinfor->nameShop }}</button></a>
       </div>
     </div>
     <div class="Other_design">
@@ -404,7 +404,6 @@
 
     let currentIndex = 0;
 
-    // Function to show images based on currentIndex
     function showImages() {
         smallImages.forEach((img, index) => {
             if (index >= currentIndex && index < currentIndex + 4) {
@@ -414,22 +413,19 @@
             }
         });
     }
-    // Initial display
     showImages();
-    // Event listener for chevron up
     chevronUp.addEventListener('click', function () {
         if (currentIndex > 0) {
             currentIndex--;
             showImages();
         }
     });
-    // Event listener for chevron down
     chevronDown.addEventListener('click', function () {
     if (currentIndex < smallImages.length - 4) {
         currentIndex++;
         showImages();
     }
-});
+    });
     // Event listener for clicking on small images
     smallImages.forEach((img) => {
         img.addEventListener('click', function () {
@@ -440,50 +436,47 @@
     });
 </script>
 <script>
-    // Sự kiện click cho thẻ <a> với id="sizeTableLink"
     document.getElementById('sizeTableLink').addEventListener('click', function (event) {
-        // Ngăn chặn hành động mặc định của thẻ <a>
         event.preventDefault();
-
-        // Mở collapse trước khi cuộn đến
         var collapseElement = document.getElementById('myCollapsePrDetail2');
         var isCollapsed = collapseElement.classList.contains('collapse');
         if (isCollapsed) {
-            // Mở collapse nếu đang đóng
             collapseElement.classList.remove('collapse');
         }
-
-        // Cuộn đến phần có id="sizeTableSection"
         document.getElementById('sizeTableSection').scrollIntoView({ behavior: 'smooth' });
     });
 </script>
 <script>
     function selectSize(fieldName) {
-        // Bỏ chọn tất cả các ô radio
-        document.querySelectorAll('input[name="selectedSize"]').forEach(function (radio) {
-            radio.checked = false;
-        });
-
-        // Chọn ô radio tương ứng
-        document.getElementById(fieldName).checked = true;
-    }
-   
-    document.addEventListener("DOMContentLoaded", function () {
-        var sizeInputs = document.querySelectorAll('input[name="selectedSize"]');
-      
-        sizeInputs.forEach(function (input) {
-            input.addEventListener("change", function () {
-                var selectedSize = document.querySelector('input[name="selectedSize"]:checked');
-                var addToCartBtn = document.getElementById('addToCartBtn');
-                var divChooseSize = document.getElementById('chooseSizePr');
-                if (selectedSize) {
-                    addToCartBtn.disabled = false;
-                } else {
-                    addToCartBtn.disabled = true;
-                }
-            });
-        });   
+    document.querySelectorAll('input[name="selectedSize"]').forEach(function (radio) {
+        radio.checked = false;
     });
+    document.getElementById(fieldName).checked = true;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var sizeInputs = document.querySelectorAll('input[name="selectedSize"]');
+    var addToCartBtn = document.getElementById('addToCartBtn');
+    var divChooseSize = document.getElementById('chooseSizePr');
+    divChooseSize.style.backgroundColor = "white";
+    sizeInputs.forEach(function (input) {
+        input.addEventListener("change", function () {
+            divChooseSize.style.backgroundColor = "white";
+        });
+    });
+    addToCartBtn.addEventListener("click", function (event) {
+        var selectedSize = document.querySelector('input[name="selectedSize"]:checked');
+        if (!selectedSize) {
+            event.preventDefault();
+            divChooseSize.style.backgroundColor = "#fe545440";
+        } else {
+          divChooseSize.style.backgroundColor = "white";
+        }
+    });
+});
+
+
+
 
     
     document.addEventListener('DOMContentLoaded', function () {
@@ -507,11 +500,9 @@
     document.querySelector('.chevleft').addEventListener('click', function () {
         updateIndex(-1);
     });
-
     document.querySelector('.chevright').addEventListener('click', function () {
         updateIndex(1);
     });
-
     showItems();
     });
 </script>

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="source/admin/assets/css/addOPr.css">
     <link rel="stylesheet" href="source/css/main.css">
-    <title>Tạo Product</title>
+    <title>ImPrint</title>
+    <base href="{{asset('')}}"></base>
+    <link rel="shortcut icon" type="image/png" href="source/admin/assets/images/logos/imprintrutgon.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Latest compiled and minified CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,12 +30,12 @@
   </style>
 </head>
 <body>
-  <div class="grid">
-    <h1 class="title">Tạo Product</h1>
-    <div class="d-flex"style="display:center">
-      <img src="image/{{$shop->avataShop}}" alt="" style="width: 15%;height: 35%;">
-      <h4><b><a href="#" class="text-danger">{{$shop->nameShop}}</a></b></h4>        
-    </div>
+  <div class="grid" style="background-color: #3333">
+    <h1 class="title text-center pb-5 pt-3"><b>ADD PRODUCT</b></h1>
+    <!-- <div class="d-flex"style="display:center">
+      <img src="image/{{$shop->avataShop}}" alt="avata" style="width: 50px;height: 50px; border-radius: 50%;">
+      <h3 class="mt-4 ms-3"><b class="text-danger mt-2">{{$shop->nameShop}}</b></h3>        
+    </div> -->
     <form action="{{route('addDesignProduct',  ['idShop' => $shop->idShop, 'idProvider' => $provider->idProvider])}}" method="post" enctype="multipart/form-data" class="row gridoriginalproduct">
       @csrf
       <div class="input1 col-6">
@@ -43,20 +45,24 @@
         @else
           <p>{{ $error ?? 'No image available.' }}</p>
         @endif
+
+        <div class="color_DPr d-block ms-3 ps-5">
+            <p><b>{{$detail->nameOPr}}</b> products are provided by <b>{{$provider->Name}}</b> has <b>{{$detail->NameColor}}</b> color </p><input type="text" name="idOPr" value="{{$detail->idOPr}}" hidden>
+            <p></p><input type="text" name="idColor" value="{{$detail->idColor}}" hidden>
+          </div>
       </div>
       <div class="input2 col-6" style="display:center">
         <div class="d-flex">
+        <div>
           @if (isset($imageDesign))
+            <label for="aboutOPr">Image design :</label><br>
             <img src="source/imageOPr/{{ $imageDesign }}" alt="Merged Image" style="width: 160px; height: 90px;">
             <input type="hidden" name="imageDesign"  value="{{$imageDesign}}" accept="image/*">
             @else
             <p>{{ $error ?? 'No image available.' }}</p>
+          
           @endif
-          <div class="color_DPr d-block">
-            <b>Ten sản phẩm :{{$detail->nameOPr}}</b><br><input type="text" name="idOPr" value="{{$detail->idOPr}}" hidden>
-            <b>Loại sản phẩm :{{$detail->nameCategoryOPrDetail}}</b><br>
-            <b>provider: {{$provider->Name}} - Color:{{$detail->NameColor}}</b><br><input type="text" name="idColor" value="{{$detail->idColor}}" hidden>
-          </div>
+        </div>
         </div>
         <div class="form-group">
           <label for="supplier">Categories:</label>
@@ -80,9 +86,9 @@
         <label for="aboutOPr">Note:</label>
         <textarea id="aboutOPr" name="NoteDesign" class="input" onfocus="this.style.outline='2px solid tomato';" onblur="this.style.outline='none';"required ></textarea>
         <br>
-        <div class="buttons col-12">
-        <button class="save" >Cancel</button>
-        <button type="submit" class="save" >post</button>
+        <div class="buttons col-12 text-end mt-3 mb-5">
+        <button class="save px-3">Cancel</button>
+        <button type="submit" class="save me-5 px-3" >post</button>
       </div>
       </div>
       </div>
