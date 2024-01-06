@@ -107,8 +107,12 @@
                                 <span class="caret"></span></button>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a data-toggle="modal" data-target="#error"><i class="fa-solid fa-list-check mx-2"></i> Order</a></li>
-                                <li data-toggle="modal" data-target="#btncreateshop"><a><i class="fa-solid fa-store mx-2"></i> Your shop</a></li>
+                                <li><a href="{{ route('page-user') }}"><i class="fa-solid fa-list-check mx-2"></i> Order</a></li>
+                                @if($shop == null)
+                                <li data-toggle="modal" data-target="#btncreateshop"><a><i class="fa-solid fa-store mx-2"></i> Create shop</a></li>
+                                @else
+                                <li><a href="{{ route('PersionalPage', Session('user')->idUser) }}"><i class="fa-solid fa-store mx-2"></i> Your shop</a></li>
+                                @endif
                                 <li><a data-toggle="modal" data-target="#error"><i class="fa-solid fa-chart-column mx-2"></i> Revenue</a></li>
                             </ul>
                         <!-- </a> -->

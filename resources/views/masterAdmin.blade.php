@@ -36,7 +36,7 @@
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" aria-expanded="false">
                 <span class="spani">
                   <i class="fa-solid fa-house"></i>
                 </span>
@@ -44,7 +44,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./user.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('list-user')}}" aria-expanded="false">
                 <span class="spani">
                   <i class="fa-solid fa-user"></i>
                 </span>
@@ -52,31 +52,15 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./product.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('list-shop')}}" aria-expanded="false">
                 <span class="spani">
-                  <i class="fa-solid fa-layer-group"></i>
+                  <i class="fa-solid fa-user"></i>
                 </span>
-                <span class="hide-menu"> Product Management</span>
+                <span class="hide-menu">Shop Management</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./originalPr.html" aria-expanded="false">
-                <span class="spani">
-                  <i class="fa-solid fa-database"></i>
-                </span>
-                <span class="hide-menu">Original Product Management</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./product-waiting.html" aria-expanded="false">
-                <span class="spani">
-                  <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="hide-menu">Product Awaiting Approval</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./provider.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('providermanagement')}}" aria-expanded="false">
                 <span class="spani">
                   <i class="fa-solid fa-user-tie"></i>
                 </span>
@@ -84,31 +68,39 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./banner.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('admin-product')}}" aria-expanded="false">
                 <span class="spani">
-                  <i class="fa-solid fa-pager"></i>
+                  <i class="fa-solid fa-layer-group"></i>
                 </span>
-                <span class="hide-menu"> Banner Management</span>
+                <span class="hide-menu"> Product Management</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./intro.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('originalproduct')}}" aria-expanded="false">
                 <span class="spani">
-                  <i class="fa-solid fa-photo-film"></i>
+                  <i class="fa-solid fa-database"></i>
                 </span>
-                <span class="hide-menu"> Intro Management</span>
+                <span class="hide-menu">Original Product Management</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./categoryPr.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('designproductmanagement')}}" aria-expanded="false">
+                <span class="spani">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="hide-menu">Product Awaiting Approval</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{route('browerOrder')}}" aria-expanded="false">
                 <span class="spani">
                   <i class="fa-solid fa-folder-tree"></i>
                 </span>
-                <span class="hide-menu">Product Categories</span>
+                <span class="hide-menu">Order</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./web-analysic.html" aria-expanded="false">
+              <a class="sidebar-link" aria-expanded="false">
                 <span class="spani">
                   <i class="fa-solid fa-chart-line"></i>
                 </span>

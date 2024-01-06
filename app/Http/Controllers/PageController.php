@@ -72,15 +72,16 @@ class PageController extends Controller
         $product = DB::table('products')->where('idCategoryPrDetail',$idCategoryPrDetail)->join('Shop', 'Shop.idShop', '=','products.idShop')->paginate(16);
         $category = categoryPr::with('category_Pr_Detail')->where('idCategoryPr', '>=', 5)->get();
         $provider = Provider::all();
-
         return view('page.Product', compact('product','category','provider'));
     }
     public function getIndex(){		
-        $shop = Shop::all();
+        $shop1 = Shop::all();
         $products = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);
         $idUser = Session::get('user.idUser');
         $save = SavePr::where('idSavePr',$idUser)->get();
-        return view('page.home', compact('products','shop','save'));
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
+        return view('page.home', compact('products','shop1','save','shop'));
     }
     public function createShop(Request $request){
         $input = $request->validate([
@@ -127,7 +128,8 @@ class PageController extends Controller
         $provider = Provider::all();
         $idUser = Session::get('user.idUser');
         $save = SavePr::where('idSavePr',$idUser)->get();
-        return view('page.Product', compact('product','category','provider','save'));
+        $shop = Shop::where('idShop',$idUser)->first();
+        return view('page.Product', compact('product','category','provider','save','shop'));
     }
     public function filterProduct($idCategoryPrDetail){
         $filteredProducts = DB::table('products')
@@ -152,6 +154,8 @@ class PageController extends Controller
     }
 
     public function getIndexProductDetail($idProduct){
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
         $productinfor = DB::table('Products')
             ->where('Products.idProduct', '=', $idProduct)
             ->join('Shop', 'Shop.idShop', '=', 'Products.idShop')
@@ -202,13 +206,14 @@ class PageController extends Controller
         $evalue = comment::where('idProduct',$idProduct )->avg('evalue');
         $otherProductShop = Product::where('idShop', $productinfor->idShop)->get();
         $otherproducts = DB::table('products')->join('Shop', 'Shop.idShop', '=','products.idShop')->select('products.*','shop.*')->paginate(10);               
-        return view('page.ProductDetail', compact('productinfor', 'images','DetailSize','NameSizes','opr', 'sizewidth','sizelength','sizesleeveLength','comment','reviews','evalue','otherProductShop', 'otherproducts'));
+        return view('page.ProductDetail', compact('productinfor', 'images','DetailSize','NameSizes','opr', 'sizewidth','sizelength','sizesleeveLength','comment','reviews','evalue','otherProductShop', 'otherproducts','shop'));
 
     }
 
     public function getIndexCart(){
         $cart = null;
-    
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
         if(Session('cart')){
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
@@ -218,7 +223,8 @@ class PageController extends Controller
             'cart' => Session::get('cart'),
             'product_cart' => $cart ? $cart->items : null,
             'totalPrice' => $cart ? $cart->totalPrice : null,
-            'totalQty' => $cart ? $cart->totalQty : null
+            'totalQty' => $cart ? $cart->totalQty : null,
+            'shop' => $shop
         ]);
     }
     public function getAddToCart(Request $req, $idProduct){																			
@@ -273,9 +279,13 @@ class PageController extends Controller
         $categoryOPrDetail = categoryOPrDetail::whereIn('idCategoryOPr', $ids)->get();
         $idoprdetail = categoryOPrDetail::pluck('idCategoryOPrDetail');
         $originalProduct = OriginalProduct::whereIn('idCategoryOPrDetail', $idoprdetail)->get();
-        return view('page.CategoryOPr', compact('categoryOPr', 'categoryOPrDetail', 'originalProduct'));
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
+        return view('page.CategoryOPr', compact('categoryOPr', 'categoryOPrDetail', 'originalProduct','shop'));
     }
     public function getIndexOPrDetail($idOPr){
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
         $pro = DB::table('OriginalProducts')
             ->join('OriginalProductsDetail', function ($join) use ($idOPr) {
                 $join->on('OriginalProductsDetail.idOPr', '=', 'OriginalProducts.idOPr')
@@ -381,7 +391,7 @@ class PageController extends Controller
             })->limit(10)
             ->get();
         return view('page.OPrDetail', compact('pro', 'imageOPr' , 'infor','sizewidth','sizelength','sizesleeveLength','provider','colorProvider',
-        'colorall','Color','pricePrmax','pricePrmin','shippingmin','shippingmax','AvgPrTime','printArea', 'alsoLike','provider1'));
+        'colorall','Color','pricePrmax','pricePrmin','shippingmin','shippingmax','AvgPrTime','printArea', 'alsoLike','provider1','shop'));
     }
 
     public function getIndexDesign($idProvider, $idOPr){
@@ -501,12 +511,14 @@ class PageController extends Controller
     }
 
     public function getPersionalPage($idShop){
-        $shop = Shop::where('idShop',$idShop)->first();
+        $shop1 = Shop::where('idShop',$idShop)->first();
         $product = Product::where('idShop',$idShop)->get();
         $design = DesignProduct::where('idShop',$idShop)->get();
         $idUser = Session::get('user.idUser');
         $save = SavePr::where('idSavePr',$idUser)->get();
-        return view('page.PersionalPage', compact('product','shop', 'design','save'));
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
+        return view('page.PersionalPage', compact('product','shop1', 'design','save', 'shop'));
     }
     public function PersinalPageProductDelete($id){
         $product = Product::find($id);
@@ -541,13 +553,15 @@ class PageController extends Controller
 
     public function getIndexPageUser(){
         $user = Session::get('user');
+        $idUser = Session::get('user.idUser');
+        $shop = Shop::where('idShop',$idUser)->first();
         $order = DB::table('Order')->where('Order.idUser',  $user->idUser)
         ->join('OrderDetail','OrderDetail.idOrder', '=','Order.idOrder')
         ->join('Products', 'Products.idProduct', '=', 'OrderDetail.idProduct')
         ->join('Providers', 'Providers.idProvider', '=','Order.idProvider')
         ->select('Order.*', 'OrderDetail.*', 'Products.*','Providers.*')
         ->get();
-        return view('page.PageUser', compact('order'));
+        return view('page.PageUser', compact('order','shop'));
     }
     public function getIndexCheckout(){
         if (Session::has('cart')) {														

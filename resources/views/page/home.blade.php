@@ -94,7 +94,7 @@
             <div class="chevleft">
                 <i class="fa-solid fa-circle-chevron-left"></i>
             </div>
-            @foreach($shop as $sh )
+            @foreach($shop1 as $sh )
             <div class="col_artist">
                 <img class="cover-img" src="image/{{$sh->coverImageShop}}" alt="backgroundAV">
                 <div class="avatar">

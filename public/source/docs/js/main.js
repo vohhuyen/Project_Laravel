@@ -19,7 +19,7 @@ window.onload = function () {
           showImage(this.getAttribute('data-index'));
       });
   });
-
+  
   var Cropper = window.Cropper;
   var URL = window.URL || window.webkitURL;
   var container = document.querySelector('.img-container');
@@ -33,6 +33,7 @@ window.onload = function () {
   var dataRotate = document.getElementById('dataRotate');
   var dataScaleX = document.getElementById('dataScaleX');
   var dataScaleY = document.getElementById('dataScaleY');
+  
   var options = {
     aspectRatio: 16 / 9,
     preview: '.img-preview',
@@ -295,7 +296,10 @@ window.onload = function () {
 
           case 'merge':
           if (result) {
-              // let imgEle1 = document.querySelector(".imageanhchinh");
+            var element = document.getElementById('data-preview');
+            var dataPreview = element.getAttribute('data-preview');
+            console.log(dataPreview);
+            if(dataPreview == 1 || dataPreview == 2 || dataPreview == 3 || dataPreview == 4){
               let imgEle2 = result;
               let resEle = document.querySelector(".resultmerge");
               var context = resEle.getContext("2d");
@@ -320,13 +324,107 @@ window.onload = function () {
               context.globalAlpha = 0.99;
               context.drawImage(imgEle2, centerX, centerY, newWidth2, newHeight2);
 
+              const cutWidth = 500;
+              const cutHeight = resEle.height;
+
+              var newCanvas = document.createElement('canvas');
+              var ctx = newCanvas.getContext('2d');
+              newCanvas.width = cutWidth;
+              newCanvas.height = cutHeight;
+
+              ctx.drawImage(resEle, 0, 0, cutWidth, cutHeight, 0, 0, cutWidth, cutHeight);
+
+              var img = newCanvas.toDataURL("image/png");
+              var result = imgEle2.toDataURL("image/png");
+              const detailValue = imgEle1.getAttribute('data-detail');
+              const providerValue = imgEle1.getAttribute('data-provider');
+              sendImageToServer(img, result, detailValue, providerValue);
+            }
+            else if(dataPreview == 5 || dataPreview == 6 || dataPreview == 7){
+              let imgEle2 = result;
+              let resEle = document.querySelector(".resultmerge");
+              var context = resEle.getContext("2d");
+
+              var myElement = document.getElementById('preview');
+
+              
+              const newWidth1 = 500;
+              const newHeight1 = 500; 
+              const newWidth2 = myElement.clientWidth; 
+              const newHeight2 = myElement.clientHeight; 
+
+              resEle.width = newWidth1 + newWidth2;
+              resEle.height = Math.max(newHeight1, newHeight2);
+
+              const centerX = (newWidth1 - newWidth2) / 2;
+              const centerY = (resEle.height - newHeight2) / 2 + 100;
+
+              context.globalAlpha = 1.0;
+              context.drawImage(imgEle1, 0, 0, newWidth1, newHeight1);
+
+              context.globalAlpha = 0.99;
+              context.drawImage(imgEle2, centerX, centerY, newWidth2, newHeight2);
+
+              const cutWidth = 500;
+              const cutHeight = resEle.height;
+
+              var newCanvas = document.createElement('canvas');
+              var ctx = newCanvas.getContext('2d');
+              newCanvas.width = cutWidth;
+              newCanvas.height = cutHeight;
+
+              ctx.drawImage(resEle, 0, 0, cutWidth, cutHeight, 0, 0, cutWidth, cutHeight);
+
               var img = resEle.toDataURL("image/png");
               var result = imgEle2.toDataURL("image/png");
               const detailValue = imgEle1.getAttribute('data-detail');
               const providerValue = imgEle1.getAttribute('data-provider');
-              // console.log(detailValue);
-              // console.log(providerValue);
               sendImageToServer(img, result, detailValue, providerValue);
+            }
+            else if(dataPreview == 8){
+              let imgEle2 = result;
+              let resEle = document.querySelector(".resultmerge");
+              var context = resEle.getContext("2d");
+
+              var myElement = document.getElementById('preview');
+
+  
+              const newWidth1 = 500;
+              const newHeight1 = 500; 
+              const newWidth2 = myElement.clientWidth; 
+              const newHeight2 = myElement.clientHeight; 
+
+              resEle.width = newWidth1 + newWidth2;
+              resEle.height = Math.max(newHeight1, newHeight2);
+
+              const centerX = (newWidth1 - newWidth2) / 2;
+              const centerY = (resEle.height - newHeight2) / 2 + 40;
+
+              context.globalAlpha = 1.0;
+              context.drawImage(imgEle1, 0, 0, newWidth1, newHeight1);
+
+              context.globalAlpha = 0.99;
+              context.drawImage(imgEle2, centerX, centerY, newWidth2, newHeight2);
+
+              const cutWidth = 500;
+              const cutHeight = resEle.height;
+
+              var newCanvas = document.createElement('canvas');
+              var ctx = newCanvas.getContext('2d');
+              newCanvas.width = cutWidth;
+              newCanvas.height = cutHeight;
+
+              ctx.drawImage(resEle, 0, 0, cutWidth, cutHeight, 0, 0, cutWidth, cutHeight);
+
+              var img = resEle.toDataURL("image/png");
+              var result = imgEle2.toDataURL("image/png");
+              const detailValue = imgEle1.getAttribute('data-detail');
+              const providerValue = imgEle1.getAttribute('data-provider');
+              sendImageToServer(img, result, detailValue, providerValue);
+            }
+            else{
+              alert('something wrong !');
+            }
           }
           break;
       }

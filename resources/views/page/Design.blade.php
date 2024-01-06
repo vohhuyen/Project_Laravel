@@ -11,7 +11,8 @@
     var baseUrl = '{{ url("/") }}';
   </script>
    <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Design</title>
+   <title>ImPrint | Design</title>
+  <link rel="shortcut icon" type="image/png" href="source/admin/assets/images/logos/imprintrutgon.png" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="source/docs/css/cropper.css">
@@ -116,7 +117,7 @@
           <img src="source/imageOPr/{{$color->imageOPr}}" data-detail="{{$color->idOPrDetail}}" data-provider="{{$provider->idProvider}}" style="display: none" class="rounded-top imageOPr imageanhchinh" data-index="{{$color->idColor}}" alt="image Product">
           @endif
         @endforeach
-          <div class="d-flex justify-content-center" data-preview="{{$pro->preview}}">
+          <div class="d-flex justify-content-center" data-preview="{{$pro->preview}}" id="data-preview">
             @if($pro->preview == 1)
               <div class="img-preview preview-lg" id="preview"></div>
             @elseif($pro->preview == 2)

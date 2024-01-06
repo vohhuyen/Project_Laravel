@@ -21,7 +21,7 @@ Route::get('/likePr',[PageController::class, 'getlikePr'])->name('getlikePr');
 Route::post('/likePr/{idProduct}',[PageController::class, 'likePr'])->name('likePr');
 Route::post('/deletelikePr/{idProduct}', [PageController::class, 'deletelikePr'])->name('deletelikePr');
 
-Route::get('/index',[PageController::class, 'getIndex'])->name('index');
+Route::get('/',[PageController::class, 'getIndex'])->name('index');
 Route::post('/createShop',[PageController::class, 'createShop'])->name('createShop');
 Route::get('/categoryPr/{idCategoryPrDetail}', [PageController::class, 'getProductFromCategory'])->name('categoryPr');
 
