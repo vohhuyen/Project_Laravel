@@ -94,6 +94,7 @@ Route::post('/personal-product-delete/{id}', [PageController::class, 'PersinalPa
 Route::post('/updateProductPP',[PageController::class, 'updateProductPP'])->name('updateProductPP');
 
 Route::get('/page-user', [PageController::class, 'getIndexPageUser'])->name('page-user');
+Route::post('/cancel/{id}',[PageController::class, 'cancelOrder'])->name('cancel');
 Route::get('/indexcheckout', [PageController::class, 'getIndexCheckout'])->name('indexcheckout');
 Route::post('/postcheckout', [PageController::class, 'postCheckout'])->name('postcheckout');
 

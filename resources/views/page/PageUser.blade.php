@@ -86,19 +86,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
@@ -186,19 +192,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
@@ -286,19 +298,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
@@ -386,19 +404,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
@@ -486,19 +510,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
@@ -586,19 +616,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
@@ -686,19 +722,25 @@
                             </div>
                             <div class="store4-all-list2 d-flex mt-3 justify-content-end">
                                 @if($item->received == 0)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>
                                     </div>
                                 @elseif($item->received == 1)
-                                    <div class="assess1 text-white d-flex justify-content-center align-items-center"
+                                    <form action="{{route('cancel', $item->idOrder)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="assess1 text-white d-flex justify-content-center align-items-center"
                                         style="width: 150px;height: 45px;background-color: #fe5454;border-radius: 3%;">
                                         <p>Cancel order</p>
-                                    </div>
+                                    </button>
+                                </form>
                                     <div class="assess2 d-flex justify-content-center align-items-center"
                                         style="width: 220px;border-radius: 2%;margin-left: 10px;border: 0.5px solid rgb(213, 213, 213);">
                                         <p>Contact the manufacturer</p>

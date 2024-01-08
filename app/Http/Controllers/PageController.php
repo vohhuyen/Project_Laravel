@@ -562,6 +562,12 @@ class PageController extends Controller
         ->get();
         return view('page.PageUser', compact('order','shop'));
     }
+    public function cancelOrder($idOrder){
+        $order = Order::where('idOrder', $idOrder);
+        $received = 4;
+        $order->update(['received' => $received]);
+        return back();
+    }
     public function getIndexCheckout(){
         if (Session::has('cart')) {														
             $oldCart = Session::get('cart');														
