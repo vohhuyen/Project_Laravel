@@ -15,8 +15,8 @@
            
                 <div class="infor_design">
                
-                    <b class="name_design my-2">{{ $shop->nameShop }}</b>
-                    <p class="location_design my-2"><i class="fa-solid fa-location-dot"></i>{{ $shop->locationShop }} </p>
+                    <b class="name_design my-2">{{ $shop1->nameShop }}</b>
+                    <p class="location_design my-2"><i class="fa-solid fa-location-dot"></i>{{ $shop1->locationShop }} </p>
                     <p class="icon-link my-2">
                         <i class="fa-brands fa-twitter mx-1"></i>
                         <i class="fa-brands fa-facebook mx-1"></i>
@@ -29,7 +29,7 @@
                     </p>
                
                 </div>
-                @if(Session::has('user') && Session::get('user')->idUser == $shop->idShop)
+                @if(Session::has('user') && Session::get('user')->idUser == $shop1->idShop)
                 <div class="btn-right">
                     <button class="bg-danger-subtle"><b>Create</b></button>
                     <br>
@@ -37,7 +37,7 @@
                 </div>
                 @endif
             </div>
-            <h1 class="title">All Design from {{ $shop->nameShop }}</h1>
+            <h1 class="title">All Design from {{ $shop1->nameShop }}</h1>
             @php
         $savedProductIds = Session::has('user') ? $save->pluck('idProduct')->toArray() : [];
     @endphp
@@ -70,7 +70,7 @@
                     <p class="description_Pr mb-0">{{ $product->descriptionDesign }}</p>
                     <div class="product_price d-block">
                         <b class="price">$ {{ $product->pricePr }}</b>
-                        @if(Session::has('user') && Session::get('user')->idUser == $shop->idShop)
+                        @if(Session::has('user') && Session::get('user')->idUser == $shop1->idShop)
                         <div class="d-flex">
                             <button data-toggle="modal" data-target="#btnupdate{{ $product->idProduct }}" class="btn-login" style="background-color: white; color: black; border:1px solid grey;">Update</button>
                             <form role="form" action="{{ route('personal-product-delete', $product->idProduct) }}" method="post">
@@ -147,6 +147,7 @@
                 </div>
             </div>
             @endforeach
+            @if(Session::has('user') && Session::get('user')->idUser == $shop1->idShop)
             @foreach($design as $design)
                 <div class="column col-xl-2">
                     <div class="product_img">
@@ -162,7 +163,7 @@
                     <button class="btn-login" style="width: 100%; font-size: 1.5rem;">Product is awaiting approval</button>
                 </div>
             @endforeach
-
+            @endif
                 <div class="column col-xl-2"></div>
                 <div class="column col-xl-2"></div>
                 <div class="column col-xl-2"></div>

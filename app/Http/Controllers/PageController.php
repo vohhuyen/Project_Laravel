@@ -516,7 +516,6 @@ class PageController extends Controller
         $design = DesignProduct::where('idShop',$idShop)->get();
         $idUser = Session::get('user.idUser');
         $save = SavePr::where('idSavePr',$idUser)->get();
-        $idUser = Session::get('user.idUser');
         $shop = Shop::where('idShop',$idUser)->first();
         return view('page.PersionalPage', compact('product','shop1', 'design','save', 'shop'));
     }
@@ -641,4 +640,52 @@ class PageController extends Controller
         Session::forget('cart');													
         return redirect('index');
     }	
+
+    public function AnaPerPage() {
+        $idUser = Session::get('user.idUser');
+        $orderdetails = OrderDetail::where('idShop',$idUser)->get();
+        $total = 0;
+        $pending = 0;
+        $paid = 0;
+        $balance = 0;
+        foreach($orderdetails as $orderdetail){
+            $total = $total + ($orderdetail->pricePr * $orderdetail->quantity) - ($orderdetail->priceOPr * $orderdetail->quantity);
+            $orders = Order::where('idOrder', $orderdetail->idOrder)->first();
+            if($orders->received == 7){
+                $paid = $paid + ($orderdetail->pricePr * $orderdetail->quantity) - ($orderdetail->priceOPr * $orderdetail->quantity);
+            }
+            if($orders->received == 6){
+                $pending = $pending + ($orderdetail->pricePr * $orderdetail->quantity) - ($orderdetail->priceOPr * $orderdetail->quantity);
+            }
+        }
+        $balance = $total - $paid;
+
+        $all = 0;
+        $ship = 0;
+        $completed = 0;
+        $cancel = 0;
+        $return = 0;
+        foreach($orderdetails as $orderdetail){
+            $all = $all + 1;
+            $orders = Order::where('idOrder', $orderdetail->idOrder)->first();
+            if($orders->received == 0 || $orders->received == 1 || $orders->received == 2){
+                $ship = $ship + 1;
+            }
+            elseif($orders->received == 3){
+                $completed = $completed +1;
+            }
+            elseif($orders->received == 4){
+                $cancel = $cancel+1;
+            }
+            elseif($orders->received == 5){
+                $return = $return+1;
+            }
+            else{
+
+            }
+        }
+        $balance = $total - $paid;
+        $data = [$cancel, $ship, $completed, $return];
+        return view('page.anaPerPage', compact('data', 'total', 'pending','paid','balance','all','ship','completed','cancel','return'));
+    }
 }   

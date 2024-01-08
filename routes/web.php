@@ -100,3 +100,5 @@ Route::post('/postcheckout', [PageController::class, 'postCheckout'])->name('pos
 Route::get('/browerOrder', [AdminController::class, 'browerOrder'])->name('browerOrder');
 Route::post('/acceptOrder/{idOrder}', [AdminController::class, 'acceptOrder'])->name('acceptOrder');
 Route::post('/cancelOrder/{idOrder}', [AdminController::class, 'cancelOrder'])->name('cancelOrder');
+
+Route::get('/analysic', [PageController::class, 'AnaPerPage'])->name('analysic');

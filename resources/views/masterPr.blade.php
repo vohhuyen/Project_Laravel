@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="source/css/Category-OPr.css">
     <link rel="stylesheet" href="source/docs/css/cropper.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     @include('headerPr')
